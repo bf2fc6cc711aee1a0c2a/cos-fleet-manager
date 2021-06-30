@@ -45,7 +45,6 @@ OCM_MOCK_MODE ?= emulate-server
 JWKS_URL ?= "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/certs"
 MAS_SSO_BASE_URL ?="https://identity.api.stage.openshift.com"
 MAS_SSO_REALM ?="rhoas"
-ENABLE_CONNECTORS ?= true
 VAULT_KIND ?= tmp
 
 GO := go
@@ -84,54 +83,6 @@ ifeq (, $(shell which $(LOCAL_BIN_PATH)/gotestsum 2> /dev/null))
 	mkdir -p ${LOCAL_BIN_PATH} ;\
 	$(GO) build -o ${LOCAL_BIN_PATH}/gotestsum gotest.tools/gotestsum ;\
 	rm -rf $$GOTESTSUM_TMP_DIR ;\
-	}
-endif
-
-MOQ ?= ${LOCAL_BIN_PATH}/moq
-moq:
-ifeq (, $(shell which ${LOCAL_BIN_PATH}/moq 2> /dev/null))
-	@{ \
-	set -e ;\
-	MOQ_TMP_DIR=$$(mktemp -d) ;\
-	cd $$MOQ_TMP_DIR ;\
-	$(GO) mod init tmp ;\
-	$(GO) get -d github.com/matryer/moq@v0.2.1 ;\
-	mkdir -p ${LOCAL_BIN_PATH} ;\
-	$(GO) build -o ${LOCAL_BIN_PATH}/moq github.com/matryer/moq ;\
-	rm -rf $$MOQ_TMP_DIR ;\
-	}
-endif
-
-GOBINDATA ?= ${LOCAL_BIN_PATH}/go-bindata
-go-bindata:
-ifeq (, $(shell which ${LOCAL_BIN_PATH}/go-bindata 2> /dev/null))
-	@{ \
-	set -e ;\
-	GOBINDATA_TMP_DIR=$$(mktemp -d) ;\
-	cd $$GOBINDATA_TMP_DIR ;\
-	$(GO) mod init tmp ;\
-	$(GO) get -d github.com/go-bindata/go-bindata/v3/...@v3.1.3 ;\
-	mkdir -p ${LOCAL_BIN_PATH} ;\
-	$(GO) build -o ${LOCAL_BIN_PATH}/go-bindata github.com/go-bindata/go-bindata/v3/go-bindata ;\
-	rm -rf $$GOBINDATA_TMP_DIR ;\
-	}
-endif
-
-OPENAPI_GENERATOR ?= ${LOCAL_BIN_PATH}/openapi-generator
-NPM ?= "$(shell which npm)"
-openapi-generator:
-ifeq (, $(shell which ${NPM} 2> /dev/null))
-	@echo "npm is not available please install it to be able to install openapi-generator"
-	exit 1
-endif
-ifeq (, $(shell which ${LOCAL_BIN_PATH}/openapi-generator 2> /dev/null))
-	@{ \
-	set -e ;\
-	mkdir -p ${LOCAL_BIN_PATH} ;\
-	mkdir -p ${LOCAL_BIN_PATH}/openapi-generator-installation ;\
-	cd ${LOCAL_BIN_PATH} ;\
-	${NPM} install --prefix ${LOCAL_BIN_PATH}/openapi-generator-installation @openapitools/openapi-generator-cli@cli-4.3.1 ;\
-	ln -s openapi-generator-installation/node_modules/.bin/openapi-generator openapi-generator ;\
 	}
 endif
 
@@ -178,14 +129,8 @@ help:
 	@echo "make binary               	compile binaries"
 	@echo "make install              	compile binaries and install in GOPATH bin"
 	@echo "make run                  	run the application"
-	@echo "make run/docs             	run swagger and host the api spec"
 	@echo "make test                 	run unit tests"
-	@echo "make test/integration     	run integration tests"
-	@echo "make test/performance      run performance tests"
 	@echo "make code/fix             	format files"
-	@echo "make generate             	generate go and openapi modules"
-	@echo "make openapi/generate     	generate openapi modules"
-	@echo "make openapi/validate     	validate openapi schema"
 	@echo "make image                	build docker image"
 	@echo "make push                 	push docker image"
 	@echo "make project              	create and use the cos-fleet-manager project"
@@ -214,20 +159,14 @@ endif
 .PHONY: check-gopath
 
 # Verifies that source passes standard checks.
-# Also verifies that the OpenAPI spec is correct.
-verify: check-gopath openapi/validate
-	$(GO) vet \
-		./cmd/... \
-		./pkg/... \
-		./internal/... \
-		./test/...
+verify: check-gopath
+	$(GO) vet ./...
 .PHONY: verify
 
 # Runs our linter to verify that everything is following best practices
 # Requires golangci-lint to be installed @ $(go env GOPATH)/bin/golangci-lint
-lint: golangci-lint
-	$(GOLANGCI_LINT) run \
-		./cmd/...
+lint: golangci-lint verify
+	$(GOLANGCI_LINT) run ./...
 .PHONY: lint
 
 # Build binaries
@@ -237,9 +176,14 @@ binary: lint
 .PHONY: binary
 
 # Install
-install: verify lint
+install: lint
 	$(GO) install ./cmd/cos-fleet-manager
 .PHONY: install
+
+run: install
+	cos-fleet-manager migrate
+	cos-fleet-manager serve --public-host-url=${PUBLIC_HOST_URL}
+.PHONY: run
 
 # Runs the unit tests.
 #
@@ -253,69 +197,11 @@ test: gotestsum
 		$(shell go list ./... | grep -v /test)
 .PHONY: test
 
-# Precompile everything required for development/test.
-test/prepare:
-	$(GO) test -i ./internal/kafka/test/integration/... -i ./internal/connector/test/integration/...
-.PHONY: test/prepare
-
-# Runs the integration tests.
-#
-# Args:
-#   TESTFLAGS: Flags to pass to `go test`. The `-v` argument is always passed.
-#
-# Example:
-#   make test/integration
-#   make test/integration TESTFLAGS="-run TestAccounts"     acts as TestAccounts* and run TestAccountsGet, TestAccountsPost, etc.
-#   make test/integration TESTFLAGS="-run TestAccountsGet"  runs TestAccountsGet
-#   make test/integration TESTFLAGS="-short"                skips long-run tests
-test/integration: test/prepare gotestsum
-	$(GOTESTSUM) --junitfile reports/integraton-tests.xml --format $(TEST_SUMMARY_FORMAT) -- -p 1 -ldflags -s -v -timeout $(TEST_TIMEOUT) -count=1 $(TESTFLAGS) \
-			 ./internal/kafka/test/integration/... ./internal/connector/test/integration/...
-.PHONY: test/integration
-
 # remove OSD cluster after running tests against real OCM
 # requires OCM_OFFLINE_TOKEN env var exported
 test/cluster/cleanup:
 	./scripts/cleanup_test_cluster.sh
 .PHONY: test/cluster/cleanup
-
-# generate files
-generate: moq openapi/generate
-	$(GO) generate ./...
-	$(GO) mod vendor
-	$(MOQ) -out ./pkg/client/keycloak/gocloak_moq.go -pkg keycloak vendor/github.com/Nerzal/gocloak/v8 GoCloak:GoCloakMock
-.PHONY: generate
-
-# validate the openapi schema
-openapi/validate: openapi-generator
-	$(OPENAPI_GENERATOR) validate -i openapi/cos-fleet-manager.yaml
-	$(OPENAPI_GENERATOR) validate -i openapi/cos-fleet-manager-private.yaml
-	$(OPENAPI_GENERATOR) validate -i openapi/connector_mgmt.yaml
-.PHONY: openapi/validate
-
-# generate the openapi schema and data/generated/openapi/openapi.go
-openapi/generate: go-bindata openapi-generator
-	rm -rf internal/kafka/internal/api/public
-	rm -rf internal/kafka/internal/api/private
-	rm -rf internal/connector/internal/api/public
-	rm -rf internal/connector/internal/api/private
-	$(OPENAPI_GENERATOR) generate -i openapi/cos-fleet-manager.yaml -g go -o internal/kafka/internal/api/public --package-name public -t openapi/templates --ignore-file-override ./.openapi-generator-ignore
-	$(OPENAPI_GENERATOR) validate -i openapi/cos-fleet-manager.yaml
-	$(OPENAPI_GENERATOR) generate -i openapi/cos-fleet-manager-private.yaml -g go -o internal/kafka/internal/api/private --package-name private -t openapi/templates --ignore-file-override ./.openapi-generator-ignore
-	$(OPENAPI_GENERATOR) validate -i openapi/cos-fleet-manager-private.yaml
-	$(OPENAPI_GENERATOR) generate -i openapi/connector_mgmt.yaml -g go -o internal/connector/internal/api/public --package-name public -t openapi/templates --ignore-file-override ./.openapi-generator-ignore
-	$(OPENAPI_GENERATOR) validate -i openapi/connector_mgmt.yaml
-	$(OPENAPI_GENERATOR) generate -i openapi/connector_mgmt-private.yaml -g go -o internal/connector/internal/api/private --package-name private -t openapi/templates --ignore-file-override ./.openapi-generator-ignore
-	$(OPENAPI_GENERATOR) validate -i openapi/connector_mgmt-private.yaml
-	$(GOBINDATA) -o ./internal/kafka/internal/generated/bindata.go -pkg generated -mode 420 -modtime 1 -prefix ./openapi/ ./openapi
-	$(GOBINDATA) -o ./internal/connector/internal/generated/bindata.go -pkg generated -mode 420 -modtime 1 -prefix ./internal/connector/internal/api/public/api ./internal/connector/internal/api/public/api
-	$(GOFMT) -w internal/kafka/internal/api/public
-	$(GOFMT) -w internal/kafka/internal/api/private
-	$(GOFMT) -w internal/kafka/internal/generated
-	$(GOFMT) -w internal/connector/internal/api/public
-	$(GOFMT) -w internal/connector/internal/api/private
-	$(GOFMT) -w internal/connector/internal/generated
-.PHONY: openapi/generate
 
 # clean up code and dependencies
 code/fix:
@@ -323,10 +209,6 @@ code/fix:
 	@$(GOFMT) -w `find . -type f -name '*.go' -not -path "./vendor/*"`
 .PHONY: code/fix
 
-run: install
-	cos-fleet-manager migrate
-	cos-fleet-manager serve --public-host-url=${PUBLIC_HOST_URL}
-.PHONY: run
 
 # Run Swagger and host the api docs
 run/docs:
@@ -521,7 +403,6 @@ deploy: deploy/db
 		-p ROUTE53_SECRET_ACCESS_KEY="$(ROUTE53_SECRET_ACCESS_KEY)" \
 		-p VAULT_ACCESS_KEY="$(VAULT_ACCESS_KEY)" \
 		-p VAULT_SECRET_ACCESS_KEY="$(VAULT_SECRET_ACCESS_KEY)" \
-		-p DATABASE_HOST="$(shell oc get service/cos-fleet-manager-db -o jsonpath="{.spec.clusterIP}")" \
 		| oc apply -f - -n $(NAMESPACE)
 	@oc apply -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
 	@oc apply -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE)
@@ -539,7 +420,6 @@ deploy: deploy/db
 		-p OSD_IDP_MAS_SSO_REALM="$(OSD_IDP_MAS_SSO_REALM)" \
 		-p ALLOW_ANY_REGISTERED_USERS="$(ALLOW_ANY_REGISTERED_USERS)" \
 		-p VAULT_KIND=$(VAULT_KIND) \
-		-p ENABLE_CONNECTORS=$(ENABLE_CONNECTORS) \
 		-p SERVICE_PUBLIC_HOST_URL="$(SERVICE_PUBLIC_HOST_URL)" \
 		-p REPLICAS="$(REPLICAS)" \
 		| oc apply -f - -n $(NAMESPACE)

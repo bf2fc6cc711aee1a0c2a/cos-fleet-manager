@@ -82,11 +82,6 @@ parameters:
   description: Enable HTTPS rather than HTTP
   value: "true"
 
-- name: ENABLE_CONNECTORS
-  displayName: Enable Connectors API
-  description: Enable the connectors API
-  value: "false"
-
 - name: API_SERVER_BINDADDRESS
   displayName: API Server Bindaddress
   description: API server bind adddress
@@ -515,7 +510,7 @@ objects:
             - --db-port-file=/secrets/rds/db.port
             - --db-sslmode=${DB_SSLMODE}
             - --db-user-file=/secrets/rds/db.user
-            - --enable-connectors=${ENABLE_CONNECTORS}
+            - --enable-connectors=true
             - --enable-db-debug=${ENABLE_DB_DEBUG}
             - --enable-deny-list=${ENABLE_DENY_LIST}
             - --enable-health-check-https=${ENABLE_HTTPS}
