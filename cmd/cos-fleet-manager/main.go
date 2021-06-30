@@ -2,8 +2,6 @@ package main
 
 import (
 	"flag"
-	"github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager/cmd/kas-fleet-manager/migrate"
-	"github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager/cmd/kas-fleet-manager/serve"
 	"github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager/pkg/environments"
 	"github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager/pkg/providers/connector"
 	"github.com/golang/glog"
@@ -40,10 +38,6 @@ func main() {
 	env.MustInvoke(func(subcommands []*cobra.Command) {
 
 		// All subcommands under root
-		rootCmd.AddCommand(
-			migrate.NewMigrateCommand(env),
-			serve.NewServeCommand(env),
-		)
 		rootCmd.AddCommand(subcommands...)
 
 		if err := rootCmd.Execute(); err != nil {
