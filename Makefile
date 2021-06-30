@@ -109,7 +109,7 @@ endif
 # Enable Go modules:
 export GO111MODULE=on
 export GOPROXY=https://proxy.golang.org
-export GOPRIVATE=gitlab.cee.redhat.com
+export GOPRIVATE=gitlab.cee.redhat.com,github.com/bf2fc6cc711aee1a0c2a
 
 ifndef SERVER_URL
 	SERVER_URL:=http://localhost:8000
@@ -179,6 +179,11 @@ binary: lint
 install: lint
 	$(GO) install ./cmd/cos-fleet-manager
 .PHONY: install
+
+# bumps the kas-fleet-manager dependency.
+bump-kfm: 
+	$(GO) get -u github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager@main
+.PHONY: bump-kfm
 
 run:
 	$(GO) run ./cmd/cos-fleet-manager -- serve --public-host-url=${PUBLIC_HOST_URL}
