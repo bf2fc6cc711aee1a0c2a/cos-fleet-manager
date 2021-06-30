@@ -180,9 +180,8 @@ install: lint
 	$(GO) install ./cmd/cos-fleet-manager
 .PHONY: install
 
-run: install
-	cos-fleet-manager migrate
-	cos-fleet-manager serve --public-host-url=${PUBLIC_HOST_URL}
+run:
+	$(GO) run ./cmd/cos-fleet-manager -- serve --public-host-url=${PUBLIC_HOST_URL}
 .PHONY: run
 
 # Runs the unit tests.
@@ -197,45 +196,11 @@ test: gotestsum
 		$(shell go list ./... | grep -v /test)
 .PHONY: test
 
-# remove OSD cluster after running tests against real OCM
-# requires OCM_OFFLINE_TOKEN env var exported
-test/cluster/cleanup:
-	./scripts/cleanup_test_cluster.sh
-.PHONY: test/cluster/cleanup
-
 # clean up code and dependencies
 code/fix:
 	@$(GO) mod tidy
 	@$(GOFMT) -w `find . -type f -name '*.go' -not -path "./vendor/*"`
 .PHONY: code/fix
-
-
-# Run Swagger and host the api docs
-run/docs:
-	@echo "Please open http://localhost/"
-	docker run -u $(shell id -u) --rm --name swagger_ui_docs -d -p 80:8080 -e URLS="[ \
-		{ url: \"./openapi/cos-fleet-manager.yaml\", name: \"Public API\" },\
-		{ url: \"./openapi/connector_mgmt.yaml\", name: \"Connector Management API\"},\
-		{ url: \"./openapi/managed-services-api-deprecated.yaml\", name: \"Deprecated Public API\" }, {url: \"./openapi/cos-fleet-manager-private.yaml\", name: \"Private API\"}]"\
-		  -v $(PWD)/openapi/:/usr/share/nginx/html/openapi:Z swaggerapi/swagger-ui
-.PHONY: run/docs
-
-# Remove Swagger container
-run/docs/teardown:
-	docker container stop swagger_ui_docs
-	docker container rm swagger_ui_docs
-.PHONY: run/docs/teardown
-
-cos-fleet-catalog-camel/setup:
-	docker run --name cos-fleet-catalog-camel --rm -d -p 9091:8080 quay.io/lburgazzoli/ccs:latest
-	mkdir -p config/connector-types
-	echo -n "http://localhost:9091" > config/connector-types/cos-fleet-catalog-camel
-.PHONY: cos-fleet-catalog-camel/setup
-
-cos-fleet-catalog-camel/teardown:
-	docker stop cos-fleet-catalog-camel
-	rm config/connector-types/cos-fleet-catalog-camel
-.PHONY: cos-fleet-catalog-camel/teardown
 
 db/setup:
 	docker network create cos-fleet-manager-network || true
@@ -266,11 +231,6 @@ db/login:
 		/bin/bash -c \
 		"PGPASSWORD=$(shell cat secrets/db.password) psql -d $(shell cat secrets/db.name) -U $(shell cat secrets/db.user)"
 .PHONY: db/login
-
-db/generate/insert/cluster:
-	@read -r id external_id provider region multi_az<<<"$(shell ocm get /api/clusters_mgmt/v1/clusters/${CLUSTER_ID} | jq '.id, .external_id, .cloud_provider.id, .region.id, .multi_az' | tr -d \" | xargs -n2 echo)";\
-	echo -e "Run this command in your database:\n\nINSERT INTO clusters (id, created_at, updated_at, cloud_provider, cluster_id, external_id, multi_az, region, status, provider_type) VALUES ('"$$id"', current_timestamp, current_timestamp, '"$$provider"', '"$$id"', '"$$external_id"', "$$multi_az", '"$$region"', 'cluster_provisioned', 'ocm');";
-.PHONY: db/generate/insert/cluster
 
 # Login to docker
 docker/login:
@@ -338,16 +298,6 @@ keycloak/setup:
 	@echo -n "$(OSD_IDP_MAS_SSO_CLIENT_SECRET)" > secrets/osd-idp-keycloak-service.clientSecret
 .PHONY:keycloak/setup
 
-# Setup for the kafka broker certificate
-kafkacert/setup:
-	@echo -n "$(KAFKA_TLS_CERT)" > secrets/kafka-tls.crt
-	@echo -n "$(KAFKA_TLS_KEY)" > secrets/kafka-tls.key
-.PHONY:kafkacert/setup
-
-observatorium/setup:
-	@echo -n "$(OBSERVATORIUM_CONFIG_ACCESS_TOKEN)" > secrets/observability-config-access.token;
-.PHONY:observatorium/setup
-
 # OCM login
 ocm/login:
 	@ocm login --url="$(SERVER_URL)" --token="$(OCM_OFFLINE_TOKEN)"
@@ -374,7 +324,7 @@ deploy/project:
 # deploy the postgres database required by the service to an OpenShift cluster
 deploy/db:
 	oc process -f ./templates/db-template.yml | oc apply -f - -n $(NAMESPACE)
-#	@time timeout --foreground 3m bash -c "until oc get pods | grep cos-fleet-manager-db | grep -v deploy | grep -q Running; do echo 'database is not ready yet'; sleep 10; done"
+	@time timeout --foreground 3m bash -c "until oc get pods | grep cos-fleet-manager-db | grep -v deploy | grep -q Running; do echo 'database is not ready yet'; sleep 10; done"
 .PHONY: deploy/db
 
 # deploy service via templates to an OpenShift cluster
@@ -403,6 +353,7 @@ deploy: deploy/db
 		-p ROUTE53_SECRET_ACCESS_KEY="$(ROUTE53_SECRET_ACCESS_KEY)" \
 		-p VAULT_ACCESS_KEY="$(VAULT_ACCESS_KEY)" \
 		-p VAULT_SECRET_ACCESS_KEY="$(VAULT_SECRET_ACCESS_KEY)" \
+		-p DATABASE_HOST="$(shell oc get service/cos-fleet-manager-db -o jsonpath="{.spec.clusterIP}")" \
 		| oc apply -f - -n $(NAMESPACE)
 	@oc apply -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
 	@oc apply -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE)
@@ -441,13 +392,4 @@ undeploy:
 		-p IMAGE_REPOSITORY=$(IMAGE_REPOSITORY) \
 		| oc delete -f - -n $(NAMESPACE)
 .PHONY: undeploy
-
-docs/generate/mermaid:
-	@for f in $(shell ls $(DOCS_DIR)/mermaid-diagrams-source/*.mmd); do \
-		echo Generating diagram for `basename $${f}`; \
-		docker run -it -v $(DOCS_DIR)/mermaid-diagrams-source:/data -v $(DOCS_DIR)/images:/output minlag/mermaid-cli -i /data/`basename $${f}` -o /output/`basename $${f} .mmd`.png; \
-	done
-.PHONY: docs/generate/mermaid
-  
-# TODO CRC Deployment stuff
 

@@ -36,18 +36,27 @@ make aws/setup
 ## Running the Service locally
 Please make sure you have followed all of the prerequisites above first.
 
-1. Compile the binary
-```
-make binary
-```
-2. Clean up and Creating the database
+1. Setup git to use your GitHub Personal Access token so that the go compiler 
+   can download go modules that in private GitHub repositories.
+
+    ```
+   git config --global url."https://${username}:${access_token}@github.com".insteadOf "https://github.com"
+    ```
+
+   
+2. Compile the binary
+   ```
+   make binary
+   ```
+   
+3. Clean up and Creating the database
     - If you have db already created execute
     ```
     make db/teardown
     ```
     - Create database tables
     ```
-    make db/setup && make db/migrate
+    make db/setup && sleep 1 && make db/migrate
     ```
     - Optional - Verify tables and records are created
     ```
@@ -55,16 +64,19 @@ make binary
     ```
     ```
     # List all the tables
-    serviceapitests# \dt
-                       List of relations
-    Schema |        Name        | Type  |       Owner
-    --------+--------------------+-------+-------------------
-    public | clusters           | table | cos_fleet_manager
-    public | connector_clusters | table | cos_fleet_manager
-    public | connectors         | table | cos_fleet_manager
-    public | kafka_requests     | table | cos_fleet_manager
-    public | leader_leases      | table | cos_fleet_manager
-    public | migrations         | table | cos_fleet_manager
+    cos-fleet-manager=# \dt
+                             List of relations
+     Schema |             Name              | Type  |       Owner       
+    --------+-------------------------------+-------+-------------------
+     public | connector_clusters            | table | cos-fleet-manager
+     public | connector_deployment_statuses | table | cos-fleet-manager
+     public | connector_deployments         | table | cos-fleet-manager
+     public | connector_migrations          | table | cos-fleet-manager
+     public | connector_shard_metadata      | table | cos-fleet-manager
+     public | connector_statuses            | table | cos-fleet-manager
+     public | connectors                    | table | cos-fleet-manager
+     public | leader_leases                 | table | cos-fleet-manager
+    (8 rows)
     ```
 
 3. Start the service
@@ -72,10 +84,10 @@ make binary
     ./cos-fleet-manager serve
     ```
     >**NOTE**: The service has numerous feature flags which can be used to enable/disable certain features of the service. Please see the [feature flag](./docs/feature-flags.md) documentation for more information.
+
 4. Verify the local service is working
     ```
-    curl -H "Authorization: Bearer $(ocm token)" http://localhost:8000/api/connector_mgmt/v1/kafka_connectors
-   {"kind":"KafkaRequestList","page":1,"size":0,"total":0,"items":[]}
+    curl http://localhost:8000/api/connector_mgmt/v1/openapi
     ```
 
 ## Running the Service on an OpenShift cluster
