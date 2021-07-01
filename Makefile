@@ -183,10 +183,13 @@ install: lint
 # bumps the kas-fleet-manager dependency.
 bump-kfm: 
 	$(GO) get -u github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager@main
+	$(GO) mod tidy
 .PHONY: bump-kfm
 
+
+PUBLIC_HOST_URL ?= http://localhost:8000
 run:
-	$(GO) run ./cmd/cos-fleet-manager -- serve --public-host-url=${PUBLIC_HOST_URL}
+	$(GO) run ./cmd/cos-fleet-manager serve --public-host-url=${PUBLIC_HOST_URL}
 .PHONY: run
 
 # Runs the unit tests.
