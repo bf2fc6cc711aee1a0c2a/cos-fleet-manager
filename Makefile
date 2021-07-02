@@ -186,6 +186,18 @@ bump-kfm:
 	$(GO) mod tidy
 .PHONY: bump-kfm
 
+# Modify the go.mod to allow you to develop against a local copy of the kas-fleet-manager
+add-local-kfm:
+	echo "replace github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager => ../kas-fleet-manager" >> go.mod
+	$(GO) mod tidy
+.PHONY: add-replace-kfm
+# Modify the go.mod to allow you build against checked in version of kas-fleet-manager
+rm-local-kfm:
+	sed -i 's:replace github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager => ../kas-fleet-manager::g' go.mod
+	$(GO) mod tidy
+.PHONY: rm-replace-kfm
+
+
 
 PUBLIC_HOST_URL ?= http://localhost:8000
 run:

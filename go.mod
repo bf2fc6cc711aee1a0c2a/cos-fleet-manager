@@ -8,6 +8,3 @@ require (
 	github.com/onsi/gomega v1.10.1
 	github.com/spf13/cobra v1.1.1
 )
-
-// uncomment if you want to build against a locally modified version of the kas-fleet-manager
-// replace github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager => ../kas-fleet-manager
