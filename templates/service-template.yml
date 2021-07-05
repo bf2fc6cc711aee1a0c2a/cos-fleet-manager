@@ -514,6 +514,7 @@ objects:
             - --enable-deny-list=${ENABLE_DENY_LIST}
             - --enable-health-check-https=${ENABLE_HTTPS}
             - --enable-https=${ENABLE_HTTPS}
+            - --enable-graphql=true
             - --enable-instance-limit-control=${ENABLE_INSTANCE_LIMIT_CONTROL}
             - --enable-jwt=${ENABLE_JWT}
             - --enable-metrics-https=${ENABLE_METRICS_HTTPS}

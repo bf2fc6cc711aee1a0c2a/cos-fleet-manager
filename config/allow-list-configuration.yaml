@@ -18,6 +18,9 @@ allowed_service_accounts:
     max_allowed_instances: 1
   - username: testuser3@example.com
     max_allowed_instances: 1
+  - username: hchirino_kafka_supporting
+    max_allowed_instances: 1
+
 
 # A list of allowed users per organisation (see structure below). The list current contains known organisations - add yours if it is missing.
 # - "id": is the organisation id

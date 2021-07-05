@@ -344,7 +344,6 @@ deploy/project:
 # deploy the postgres database required by the service to an OpenShift cluster
 deploy/db:
 	oc process -f ./templates/db-template.yml | oc apply -f - -n $(NAMESPACE)
-	@time timeout --foreground 3m bash -c "until oc get pods | grep cos-fleet-manager-db | grep -v deploy | grep -q Running; do echo 'database is not ready yet'; sleep 10; done"
 .PHONY: deploy/db
 
 # deploy service via templates to an OpenShift cluster
@@ -357,6 +356,7 @@ deploy: MAS_SSO_REALM ?= "rhoas"
 deploy: OSD_IDP_MAS_SSO_REALM ?= "rhoas-kafka-sre"
 deploy: SERVICE_PUBLIC_HOST_URL ?= "https://api.openshift.com"
 deploy: REPLICAS ?= "1"
+deploy: ENABLE_DB_DEBUG ?= "false"
 deploy: deploy/db
 	@oc process -f ./templates/secrets-template.yml \
 		-p OCM_SERVICE_CLIENT_ID="$(OCM_SERVICE_CLIENT_ID)" \
@@ -373,7 +373,6 @@ deploy: deploy/db
 		-p ROUTE53_SECRET_ACCESS_KEY="$(ROUTE53_SECRET_ACCESS_KEY)" \
 		-p VAULT_ACCESS_KEY="$(VAULT_ACCESS_KEY)" \
 		-p VAULT_SECRET_ACCESS_KEY="$(VAULT_SECRET_ACCESS_KEY)" \
-		-p DATABASE_HOST="$(shell oc get service/cos-fleet-manager-db -o jsonpath="{.spec.clusterIP}")" \
 		| oc apply -f - -n $(NAMESPACE)
 	@oc apply -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
 	@oc apply -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE)
@@ -383,6 +382,7 @@ deploy: deploy/db
 		-p IMAGE_REPOSITORY=$(IMAGE_REPOSITORY) \
 		-p IMAGE_TAG=$(IMAGE_TAG) \
 		-p ENABLE_OCM_MOCK=$(ENABLE_OCM_MOCK) \
+		-p ENABLE_DB_DEBUG="$(ENABLE_DB_DEBUG)" \
 		-p OCM_MOCK_MODE=$(OCM_MOCK_MODE) \
 		-p OCM_URL="$(OCM_URL)" \
 		-p JWKS_URL="$(JWKS_URL)" \

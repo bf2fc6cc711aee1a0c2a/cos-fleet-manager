@@ -19,7 +19,7 @@ func main() {
 		glog.Infof("Unable to set logtostderr to true")
 	}
 
-	env, err := environments.NewEnv(environments.GetEnvironmentStrFromEnv(), connector.ConfigProviders(false))
+	env, err := environments.New(environments.GetEnvironmentStrFromEnv(), connector.ConfigProviders(false))
 	if err != nil {
 		glog.Fatalf("error initializing: %v", err)
 	}
