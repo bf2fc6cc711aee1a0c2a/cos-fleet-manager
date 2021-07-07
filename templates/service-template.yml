@@ -456,6 +456,10 @@ objects:
               mountPath: /secrets/service
             - name: rds
               mountPath: /secrets/rds
+            env:
+              - name: "OCM_ENV"
+                value: "${ENVIRONMENT}"
+            workingDir: /
             command:
             - /usr/local/bin/cos-fleet-manager
             - migrate
@@ -514,7 +518,7 @@ objects:
             - --enable-deny-list=${ENABLE_DENY_LIST}
             - --enable-health-check-https=${ENABLE_HTTPS}
             - --enable-https=${ENABLE_HTTPS}
-            - --enable-graphql=true
+            - --graphql-api-url=https://localhost:8000
             - --enable-instance-limit-control=${ENABLE_INSTANCE_LIMIT_CONTROL}
             - --enable-jwt=${ENABLE_JWT}
             - --enable-metrics-https=${ENABLE_METRICS_HTTPS}
