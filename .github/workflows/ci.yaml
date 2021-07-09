@@ -66,8 +66,8 @@ jobs:
         image: postgres:11
         env:
           POSTGRES_PASSWORD: foobar-bizz-buzz
-          POSTGRES_USER: cos_fleet_manager
-          POSTGRES_DB: serviceapitests
+          POSTGRES_USER: cos-fleet-manager
+          POSTGRES_DB: cos-fleet-manager
         ports:
           - 5432:5432
         # Set health checks to wait until postgres has started
