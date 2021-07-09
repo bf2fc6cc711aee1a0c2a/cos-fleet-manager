@@ -299,6 +299,10 @@ test/run: image/build/test
 	docker run -u $(shell id -u) --net=host -p 9876:9876 -i "$(test_image)"
 .PHONY: test/run
 
+# TODO add integration tests
+test/integration:
+.PHONY: test/integration
+
 # Setup for AWS credentials
 aws/setup:
 	@echo -n "$(AWS_ACCOUNT_ID)" > secrets/aws.accountid
