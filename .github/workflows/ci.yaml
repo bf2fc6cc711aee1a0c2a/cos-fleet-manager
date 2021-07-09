@@ -1,4 +1,4 @@
-# This runs checks to verify if code is properly formated and that tests (unit and integration against a mocked environment) are passing.
+# This runs checks to verify if code is properly formatted and that tests (unit and integration against a mocked environment) are passing.
 name: Lint & Test
 
 on:
@@ -54,6 +54,8 @@ env:
   # So that OCM secrets are initialised
   DOCKER_PR_CHECK: true
   TEST_TIMEOUT: 30m
+  # private module path prefixes
+  GOPRIVATE: github.com/bf2fc6cc711aee1a0c2a/*
 
 jobs:
   lint-test:
@@ -84,6 +86,10 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: "1.15"
+      - name: Configure git for private modules
+        env:
+          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: git config --global url."https://chirino:${TOKEN}@github.com".insteadOf "https://github.com"
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
       - name: Cache go module
@@ -106,10 +112,9 @@ jobs:
       - name: Build and publish image to quay.io
         if: github.event_name == 'push'
         env:
-          QUAY_USER_NAME: ${{ secrets.QUAY_BF2_USERNAME }}
-          QUAY_USER_PASSWORD: ${{ secrets.QUAY_BF2_PASSWORD }}
-          QUAY_ORG_NAME: "bf2fc6cc711aee1a0c2a82e312df7f2e6b37baa12bd9b1f2fd752e260d93a6f8144ac730947f25caa2bfe6ad0f410da360940ee6d28d6c1688d3822c4055650e"
+          QUAY_USER_NAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_USER_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+          QUAY_ORG_NAME: ${{ secrets.QUAY_ORG_NAME }}
         run: |
           chmod +x ./build_deploy.sh
           ./build_deploy.sh
-
