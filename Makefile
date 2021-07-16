@@ -379,7 +379,7 @@ deploy: deploy/db
 		-p VAULT_SECRET_ACCESS_KEY="$(VAULT_SECRET_ACCESS_KEY)" \
 		| oc apply -f - -n $(NAMESPACE)
 	@oc apply -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
-	@oc apply -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE)
+	@oc create -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE) || true
 	@oc process -f ./templates/service-template.yml \
 		-p ENVIRONMENT="$(OCM_ENV)" \
 		-p IMAGE_REGISTRY=$(IMAGE_REGISTRY) \
