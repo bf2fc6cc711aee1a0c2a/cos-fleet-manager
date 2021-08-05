@@ -387,6 +387,8 @@ objects:
       name: cos-fleet-manager
       labels:
         app: cos-fleet-manager
+    imagePullSecrets:
+      - name: cos-pull-secret
   - kind: Deployment
     apiVersion: apps/v1
     metadata:

@@ -94,7 +94,7 @@ make \
   DOCKER_CONFIG="${DOCKER_CONFIG}" \
   QUAY_USER="${QUAY_USER}" \
   QUAY_TOKEN="${QUAY_TOKEN}" \
-  version="${BRANCH}" \
+  version="latest" \
   external_image_registry="quay.io" \
   internal_image_registry="quay.io" \
   image_repository="$QUAY_ORG/cos-fleet-manager" \
