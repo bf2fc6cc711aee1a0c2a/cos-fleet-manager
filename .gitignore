@@ -77,3 +77,6 @@ vendor
 
 # docker files
 .docker
+
+# Output folder
+/output
