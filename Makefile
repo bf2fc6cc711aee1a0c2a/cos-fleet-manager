@@ -28,11 +28,13 @@ image_tag:=$(version)
 
 # In the development environment we are pushing the image directly to the image
 # registry inside the development cluster. That registry has a different name
-# when it is accessed from outside the cluster and when it is acessed from
+# when it is accessed from outside the cluster and when it is accessed from
 # inside the cluster. We need the external name to push the image, and the
 # internal name to pull it.
 external_image_registry:=default-route-openshift-image-registry.apps-crc.testing
 internal_image_registry:=image-registry.openshift-image-registry.svc:5000
+
+image_registry:=quay.io
 
 # Test image name that will be used for PR checks
 test_image:=test/cos-fleet-manager
@@ -351,7 +353,7 @@ deploy/db:
 .PHONY: deploy/db
 
 # deploy service via templates to an OpenShift cluster
-deploy: IMAGE_REGISTRY ?= $(internal_image_registry)
+deploy: IMAGE_REGISTRY ?= $(image_registry)
 deploy: IMAGE_REPOSITORY ?= $(image_repository)
 deploy: IMAGE_TAG ?= $(image_tag)
 deploy: OCM_URL ?= "https://api.stage.openshift.com"

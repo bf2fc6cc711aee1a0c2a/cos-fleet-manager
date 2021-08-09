@@ -2,6 +2,18 @@
 name: Lint & Test / Build & Deploy
 
 on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths-ignore:
+      - '*.md'
+      - 'build_deploy.sh'
+      - '.github/*.md'
+      - '.github/workflows/openapi_update.yaml'
+      - '.github/CODEOWNERS'
+      - 'templates/**'
+      - '.openapi-generator-ignore'
+      - 'docs/**'
+
   push:
     branches:
       - main
@@ -45,7 +57,7 @@ env:
 
 jobs:
   lint-test:
-    name: "Lint & Test"
+    name: "Lint & Test / Build & Deploy"
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -98,23 +110,26 @@ jobs:
       - name: Build and publish image to quay.io
         if: github.event_name == 'push'
         env:
-          QUAY_USER_NAME: bf2fc6cc711aee1a0c2a82e312df7f2e6b37baa12bd9b1f2fd752e260d93a6f8144ac730947f25caa2bfe6ad0f410da360940ee6d28d6c1688d3822c4055650e+push
-          QUAY_USER_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
-          QUAY_ORG_NAME: bf2fc6cc711aee1a0c2a82e312df7f2e6b37baa12bd9b1f2fd752e260d93a6f8144ac730947f25caa2bfe6ad0f410da360940ee6d28d6c1688d3822c4055650e
+          QUAY_USER_NAME: ${{secrets.IMAGE_REPO_USERNAME}}
+          QUAY_USER_PASSWORD: ${{ secrets.IMAGE_REPO_PASSWORD }}
+          QUAY_ORG_NAME: ${{secrets.IMAGE_REPO_NAMESPACE}}
         run: |
           chmod +x ./build_deploy.sh
           ./build_deploy.sh
       - name: Log in and set context
+        if: github.event_name == 'push'
         uses: redhat-actions/oc-login@v1
         with:
           openshift_server_url: ${{ secrets.K8S_CLUSTER_DEV }}
           openshift_token: ${{ secrets.K8S_CLUSTER_DEV_TOKEN }}
           insecure_skip_tls_verify: false
-          namespace: ${{ env.K8S_CLUSTER_DEV_NAMESPACE }}
+          namespace: ${{ secrets.K8S_CLUSTER_DEV_NAMESPACE }}
       - name: Deploy to DEV OCP cluster
+        if: github.event_name == 'push'
+        env:
+          IMAGE_REPOSITORY: "${{ secrets.IMAGE_REPO_NAMESPACE }}/cos-fleet-manager"
+          IMAGE_TAG: ${{ secrets.IMAGE_TAG }}
+          IMAGE_REGISTRY: "quay.io"
+          NAMESPACE: ${{ secrets.K8S_CLUSTER_DEV_NAMESPACE }}
         run: >
-          cd templates ;
-          for f in $(db-template.yml service-template.yml) ; do
-            echo "Deploying templates/${f}..." ;
-            oc process -f $f | oc apply --namespace ${{ secrets.K8S_CLUSTER_DEV_NAMESPACE }} -f - ;
-          done
+          make deploy
