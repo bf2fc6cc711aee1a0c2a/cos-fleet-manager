@@ -131,6 +131,6 @@ jobs:
           IMAGE_TAG: ${{ secrets.IMAGE_TAG }}
           IMAGE_REGISTRY: "quay.io"
           NAMESPACE: ${{ secrets.K8S_CLUSTER_DEV_NAMESPACE }}
-        run: >
+        run: |
           make deploy
           oc rollout restart deployment/cos-fleet-manager
