@@ -133,3 +133,4 @@ jobs:
           NAMESPACE: ${{ secrets.K8S_CLUSTER_DEV_NAMESPACE }}
         run: >
           make deploy
+          oc rollout restart deployment/cos-fleet-manager
