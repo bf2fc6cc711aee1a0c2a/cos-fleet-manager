@@ -458,7 +458,7 @@ objects:
           initContainers:
           - name: migration
             image: ${IMAGE_REGISTRY}/${IMAGE_REPOSITORY}:${IMAGE_TAG}
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             volumeMounts:
             - name: service
               mountPath: /secrets/service
@@ -481,7 +481,7 @@ objects:
           containers:
           - name: service
             image: ${IMAGE_REGISTRY}/${IMAGE_REPOSITORY}:${IMAGE_TAG}
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             volumeMounts:
             - name: tls
               mountPath: /secrets/tls
