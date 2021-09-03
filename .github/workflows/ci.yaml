@@ -10,7 +10,6 @@ on:
       - '.github/*.md'
       - '.github/workflows/openapi_update.yaml'
       - '.github/CODEOWNERS'
-      - 'templates/**'
       - '.openapi-generator-ignore'
       - 'docs/**'
 
@@ -108,7 +107,7 @@ jobs:
           export PATH=${PATH}:$GOPATH/bin
           make verify binary test test/integration
       - name: Build and publish image to quay.io
-        if: github.event_name == 'push'
+#        if: github.event_name == 'push'
         env:
           QUAY_USER_NAME: ${{secrets.IMAGE_REPO_USERNAME}}
           QUAY_USER_PASSWORD: ${{ secrets.IMAGE_REPO_PASSWORD }}
@@ -125,7 +124,7 @@ jobs:
           insecure_skip_tls_verify: false
           namespace: ${{ secrets.K8S_CLUSTER_DEV_NAMESPACE }}
       - name: Deploy to DEV OCP cluster
-        if: github.event_name == 'push'
+#        if: github.event_name == 'push'
         env:
           IMAGE_REPOSITORY: "${{ secrets.IMAGE_REPO_NAMESPACE }}/cos-fleet-manager"
           IMAGE_TAG: ${{ secrets.IMAGE_TAG }}

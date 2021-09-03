@@ -534,7 +534,6 @@ objects:
             - --enable-https=${ENABLE_HTTPS}
             - --graphql-api-url=https://localhost:8000
             - --enable-instance-limit-control=${ENABLE_INSTANCE_LIMIT_CONTROL}
-            - --enable-jwt=${ENABLE_JWT}
             - --enable-metrics-https=${ENABLE_METRICS_HTTPS}
             - --enable-ocm-mock=${ENABLE_OCM_MOCK}
             - --enable-sentry-debug=${ENABLE_SENTRY_DEBUG}
