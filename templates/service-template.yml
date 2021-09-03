@@ -72,11 +72,6 @@ parameters:
   description: Number of replicas of the service to run.
   value: "3"
 
-- name: ENABLE_JWT
-  displayName: Enable JWT
-  description: Enable JWT authentication validation
-  value: "true"
-
 - name: ENABLE_HTTPS
   displayName: Enable HTTPS
   description: Enable HTTPS rather than HTTP
