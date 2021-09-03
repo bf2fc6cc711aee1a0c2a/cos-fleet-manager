@@ -72,11 +72,6 @@ parameters:
   description: Number of replicas of the service to run.
   value: "3"
 
-- name: ENABLE_JWT
-  displayName: Enable JWT
-  description: Enable JWT authentication validation
-  value: "true"
-
 - name: ENABLE_HTTPS
   displayName: Enable HTTPS
   description: Enable HTTPS rather than HTTP
@@ -534,7 +529,6 @@ objects:
             - --enable-https=${ENABLE_HTTPS}
             - --graphql-api-url=https://localhost:8000
             - --enable-instance-limit-control=${ENABLE_INSTANCE_LIMIT_CONTROL}
-            - --enable-jwt=${ENABLE_JWT}
             - --enable-metrics-https=${ENABLE_METRICS_HTTPS}
             - --enable-ocm-mock=${ENABLE_OCM_MOCK}
             - --enable-sentry-debug=${ENABLE_SENTRY_DEBUG}
