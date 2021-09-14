@@ -138,6 +138,7 @@ jobs:
           OCM_SERVICE_TOKEN: ${{ secrets.OCM_SERVICE_TOKEN }}
           VAULT_ACCESS_KEY: ${{ secrets.VAULT_ACCESS_KEY }}
           VAULT_SECRET_ACCESS_KEY: ${{ secrets.VAULT_SECRET_ACCESS_KEY }}
+          SERVICE_PUBLIC_HOST_URL: ${{ secrets.SERVICE_PUBLIC_HOST_URL }}
         run: |
           make deploy
           oc rollout restart deployment/cos-fleet-manager
