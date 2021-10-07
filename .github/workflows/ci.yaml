@@ -136,6 +136,7 @@ jobs:
           MAS_SSO_CLIENT_SECRET: ${{ secrets.MAS_SSO_CLIENT_SECRET }}
           MAS_SSO_CRT: ${{ secrets.MAS_SSO_CRT }}
           OCM_SERVICE_TOKEN: ${{ secrets.OCM_SERVICE_TOKEN }}
+          VAULT_KIND: "aws"
           VAULT_ACCESS_KEY: ${{ secrets.VAULT_ACCESS_KEY }}
           VAULT_SECRET_ACCESS_KEY: ${{ secrets.VAULT_SECRET_ACCESS_KEY }}
           SERVICE_PUBLIC_HOST_URL: ${{ secrets.SERVICE_PUBLIC_HOST_URL }}
