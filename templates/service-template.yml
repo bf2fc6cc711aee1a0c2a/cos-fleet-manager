@@ -435,6 +435,9 @@ objects:
           - name: connector-catalog-camel-nosql
             configMap:
               name: connector-catalog-camel-nosql
+          - name: connector-catalog-camel-storage
+            configMap:
+              name: connector-catalog-camel-storage
           - name: connector-catalog-debezium-mongodb
             configMap:
               name: connector-catalog-debezium-mongodb
@@ -499,6 +502,8 @@ objects:
               mountPath: /config/connector-catalog/camel-social
             - name: connector-catalog-camel-nosql
               mountPath: /config/connector-catalog/camel-nosql
+            - name: connector-catalog-camel-storage
+              mountPath: /config/connector-catalog/camel-storage
             - name: connector-catalog-debezium-mongodb
               mountPath: /config/connector-catalog/debezium-mongodb
             - name: connector-catalog-debezium-mysql
@@ -519,6 +524,7 @@ objects:
             - --connector-catalog=/config/connector-catalog/camel-social
             - --connector-catalog=/config/connector-catalog/camel-sql
             - --connector-catalog=/config/connector-catalog/camel-nosql
+            - --connector-catalog=/config/connector-catalog/camel-storage
             - --connector-catalog=/config/connector-catalog/debezium-mongodb
             - --connector-catalog=/config/connector-catalog/debezium-mysql
             - --connector-catalog=/config/connector-catalog/debezium-postgres
