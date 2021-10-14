@@ -37,6 +37,13 @@ metadata:
 kind: ConfigMap
 apiVersion: v1
 metadata:
+  name: connector-catalog-camel-storage
+  annotations:
+    qontract.recycle: "true"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
   name: connector-catalog-debezium-mongodb
   annotations:
     qontract.recycle: "true"
