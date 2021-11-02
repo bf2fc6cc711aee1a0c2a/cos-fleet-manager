@@ -9,6 +9,13 @@ metadata:
 kind: ConfigMap
 apiVersion: v1
 metadata:
+  name: connector-catalog-camel-azure
+  annotations:
+    qontract.recycle: "true"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
   name: connector-catalog-camel-misc
   annotations:
     qontract.recycle: "true"
