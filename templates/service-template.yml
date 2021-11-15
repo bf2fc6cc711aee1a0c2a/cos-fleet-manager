@@ -323,6 +323,10 @@ parameters:
   description: The type of vault to use to store secrets
   value: tmp
 
+- name: KEYCLOAK_CLIENT_EXPIRE
+  description: Whether or not to tag Keycloak created Client to expire in 2 hours (useful for cleaning up after integrations tests)
+  value: "false""
+
 objects:
   - kind: ConfigMap
     apiVersion: v1
@@ -596,6 +600,7 @@ objects:
             - --vault-kind=${VAULT_KIND}
             - --vault-secret-access-key-file=/secrets/service/vault.secretaccesskey
             - -v=${GLOG_V}
+            - --keycloak-client-expire=${KEYCLOAK_CLIENT_EXPIRE}
             resources:
               requests:
                 cpu: ${CPU_REQUEST}
