@@ -325,7 +325,7 @@ parameters:
 
 - name: KEYCLOAK_CLIENT_EXPIRE
   description: Whether or not to tag Keycloak created Client to expire in 2 hours (useful for cleaning up after integrations tests)
-  value: "false""
+  value: "false"
 
 objects:
   - kind: ConfigMap
