@@ -430,6 +430,9 @@ objects:
           - name: connector-catalog-camel-azure
             configMap:
               name: connector-catalog-camel-azure
+          - name: connector-catalog-camel-gcp
+            configMap:
+              name: connector-catalog-camel-gcp
           - name: connector-catalog-camel-misc
             configMap:
               name: connector-catalog-camel-misc
@@ -503,6 +506,8 @@ objects:
               mountPath: /config/connector-catalog/camel-aws
             - name: connector-catalog-camel-azure
               mountPath: /config/connector-catalog/camel-azure
+            - name: connector-catalog-camel-gcp
+              mountPath: /config/connector-catalog/camel-gcp
             - name: connector-catalog-camel-misc
               mountPath: /config/connector-catalog/camel-misc
             - name: connector-catalog-camel-sql
@@ -530,6 +535,7 @@ objects:
             - --api-server-bindaddress=${API_SERVER_BINDADDRESS}
             - --connector-catalog=/config/connector-catalog/camel-aws
             - --connector-catalog=/config/connector-catalog/camel-azure
+            - --connector-catalog=/config/connector-catalog/camel-gcp
             - --connector-catalog=/config/connector-catalog/camel-misc
             - --connector-catalog=/config/connector-catalog/camel-social
             - --connector-catalog=/config/connector-catalog/camel-sql
