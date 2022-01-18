@@ -30,8 +30,8 @@
 /coverage
 
 # Ignore built binaries
-/cod-fleet-manager
-cmd/cod-fleet-manager/cod-fleet-manager
+/cos-fleet-manager
+cmd/cos-fleet-manager/cos-fleet-manager
 
 # Ignore generated templates
 /templates/*-template.json
