@@ -30,8 +30,8 @@
 /coverage
 
 # Ignore built binaries
-/cos-fleet-manager
-cmd/cos-fleet-manager/cos-fleet-manager
+/cod-fleet-manager
+cmd/cod-fleet-manager/cod-fleet-manager
 
 # Ignore generated templates
 /templates/*-template.json
@@ -43,6 +43,7 @@ cmd/cos-fleet-manager/cos-fleet-manager
 .idea/
 
 # Ignore secret files
+/secrets/db.ca_cert
 /secrets/aws.*
 /secrets/vault.*
 /secrets/ocm-service.*
@@ -53,18 +54,18 @@ cmd/cos-fleet-manager/cos-fleet-manager
 /secrets/observability-config-access.token
 /secrets/image-pull.dockerconfigjson
 /secrets/osd-idp-keycloak-service.*
+/secrets/rhsso-logs.*
+/secrets/rhsso-metrics.*
 
 # cluster details (used for testing)
 /internal/kafka/test/integration/test_cluster.json
 
-# test reports
-/reports/*.xml
+# integration test's results
+/data/results/*
+!/data/results/.keep
 
 # Docker template
 Dockerfile_integration_tests
-
-# admin api reports
-test/performance/admin-api/reports/admin_api*
 
 # local bin directory
 bin
@@ -78,5 +79,5 @@ vendor
 # docker files
 .docker
 
-# Output folder
-/output
+#reports dir
+reports/
