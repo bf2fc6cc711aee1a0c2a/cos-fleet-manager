@@ -80,10 +80,10 @@ jobs:
         uses: n1hility/cancel-previous-runs@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set up Go 1.15
+      - name: Set up Go 1.16
         uses: actions/setup-go@v2
         with:
-          go-version: "1.15"
+          go-version: "1.16"
       - name: Configure git for private modules
         env:
           TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
@@ -136,8 +136,10 @@ jobs:
           MAS_SSO_CLIENT_SECRET: ${{ secrets.MAS_SSO_CLIENT_SECRET }}
           MAS_SSO_CRT: ${{ secrets.MAS_SSO_CRT }}
           OCM_SERVICE_TOKEN: ${{ secrets.OCM_SERVICE_TOKEN }}
+          VAULT_KIND: "aws"
           VAULT_ACCESS_KEY: ${{ secrets.VAULT_ACCESS_KEY }}
           VAULT_SECRET_ACCESS_KEY: ${{ secrets.VAULT_SECRET_ACCESS_KEY }}
+          SERVICE_PUBLIC_HOST_URL: ${{ secrets.SERVICE_PUBLIC_HOST_URL }}
         run: |
           make deploy
           oc rollout restart deployment/cos-fleet-manager

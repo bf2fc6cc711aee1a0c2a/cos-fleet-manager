@@ -9,6 +9,20 @@ metadata:
 kind: ConfigMap
 apiVersion: v1
 metadata:
+  name: connector-catalog-camel-azure
+  annotations:
+    qontract.recycle: "true"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: connector-catalog-camel-gcp
+  annotations:
+    qontract.recycle: "true"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
   name: connector-catalog-camel-misc
   annotations:
     qontract.recycle: "true"
@@ -23,7 +37,21 @@ metadata:
 kind: ConfigMap
 apiVersion: v1
 metadata:
+  name: connector-catalog-camel-social
+  annotations:
+    qontract.recycle: "true"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
   name: connector-catalog-camel-nosql
+  annotations:
+    qontract.recycle: "true"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: connector-catalog-camel-storage
   annotations:
     qontract.recycle: "true"
 ---

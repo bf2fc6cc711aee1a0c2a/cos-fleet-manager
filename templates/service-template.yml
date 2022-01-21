@@ -323,6 +323,10 @@ parameters:
   description: The type of vault to use to store secrets
   value: tmp
 
+- name: KEYCLOAK_CLIENT_EXPIRE
+  description: Whether or not to tag Keycloak created Client to expire in 2 hours (useful for cleaning up after integrations tests)
+  value: "false"
+
 objects:
   - kind: ConfigMap
     apiVersion: v1
@@ -423,15 +427,27 @@ objects:
           - name: connector-catalog-camel-aws
             configMap:
               name: connector-catalog-camel-aws
+          - name: connector-catalog-camel-azure
+            configMap:
+              name: connector-catalog-camel-azure
+          - name: connector-catalog-camel-gcp
+            configMap:
+              name: connector-catalog-camel-gcp
           - name: connector-catalog-camel-misc
             configMap:
               name: connector-catalog-camel-misc
+          - name: connector-catalog-camel-social
+            configMap:
+              name: connector-catalog-camel-social
           - name: connector-catalog-camel-sql
             configMap:
               name: connector-catalog-camel-sql
           - name: connector-catalog-camel-nosql
             configMap:
               name: connector-catalog-camel-nosql
+          - name: connector-catalog-camel-storage
+            configMap:
+              name: connector-catalog-camel-storage
           - name: connector-catalog-debezium-mongodb
             configMap:
               name: connector-catalog-debezium-mongodb
@@ -488,12 +504,20 @@ objects:
               mountPath: /config
             - name: connector-catalog-camel-aws
               mountPath: /config/connector-catalog/camel-aws
+            - name: connector-catalog-camel-azure
+              mountPath: /config/connector-catalog/camel-azure
+            - name: connector-catalog-camel-gcp
+              mountPath: /config/connector-catalog/camel-gcp
             - name: connector-catalog-camel-misc
               mountPath: /config/connector-catalog/camel-misc
             - name: connector-catalog-camel-sql
               mountPath: /config/connector-catalog/camel-sql
+            - name: connector-catalog-camel-social
+              mountPath: /config/connector-catalog/camel-social
             - name: connector-catalog-camel-nosql
               mountPath: /config/connector-catalog/camel-nosql
+            - name: connector-catalog-camel-storage
+              mountPath: /config/connector-catalog/camel-storage
             - name: connector-catalog-debezium-mongodb
               mountPath: /config/connector-catalog/debezium-mongodb
             - name: connector-catalog-debezium-mysql
@@ -510,9 +534,13 @@ objects:
             - --alsologtostderr
             - --api-server-bindaddress=${API_SERVER_BINDADDRESS}
             - --connector-catalog=/config/connector-catalog/camel-aws
+            - --connector-catalog=/config/connector-catalog/camel-azure
+            - --connector-catalog=/config/connector-catalog/camel-gcp
             - --connector-catalog=/config/connector-catalog/camel-misc
+            - --connector-catalog=/config/connector-catalog/camel-social
             - --connector-catalog=/config/connector-catalog/camel-sql
             - --connector-catalog=/config/connector-catalog/camel-nosql
+            - --connector-catalog=/config/connector-catalog/camel-storage
             - --connector-catalog=/config/connector-catalog/debezium-mongodb
             - --connector-catalog=/config/connector-catalog/debezium-mysql
             - --connector-catalog=/config/connector-catalog/debezium-postgres
@@ -578,6 +606,7 @@ objects:
             - --vault-kind=${VAULT_KIND}
             - --vault-secret-access-key-file=/secrets/service/vault.secretaccesskey
             - -v=${GLOG_V}
+            - --keycloak-client-expire=${KEYCLOAK_CLIENT_EXPIRE}
             resources:
               requests:
                 cpu: ${CPU_REQUEST}
