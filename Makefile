@@ -137,14 +137,15 @@ help:
 	@echo "make push                 	push docker image"
 	@echo "make project              	create and use the cos-fleet-manager project"
 	@echo "make clean                	delete temporary generated files"
-	@echo "make setup/git/hooks      	setup git hooks"
-	@echo "make keycloak/setup     	    setup mas sso clientId, clientSecret & crt"
-	@echo "make kafkacert/setup     	    setup the kafka certificate used for Kafka Brokers"
-	@echo "make observatorium/setup"       setup observatorium secret used by CI
+	@echo "make setup/git/hooks		setup git hooks"
+	@echo "make keycloak/setup		setup mas sso clientId, clientSecret & crt"
+	@echo "make kafkacert/setup		setup the kafka certificate used for Kafka Brokers"
+	@echo "make observatorium/setup"	setup observatorium secret used by CI
 	@echo "make docker/login/internal	login to an openshift cluster image registry"
-	@echo "make image/build/push/internal  build and push image to an openshift cluster image registry."
+	@echo "make image/build/push/internal   build and push image to an openshift cluster image registry."
 	@echo "make deploy               	deploy the service via templates to an openshift cluster"
 	@echo "make undeploy             	remove the service deployments from an openshift cluster"
+	@echo "make bump-kfm			bump the kas-fleet-manager dependency"
 	@echo "$(fake)"
 .PHONY: help
 
