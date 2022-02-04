@@ -53,7 +53,8 @@ env:
   DOCKER_PR_CHECK: true
   TEST_TIMEOUT: 30m
   # private module path prefixes
-  GOPRIVATE: github.com/bf2fc6cc711aee1a0c2a/*
+  GOPROXY: https://proxy.golang.org
+  GOPRIVATE: gitlab.cee.redhat.com,github.com/bf2fc6cc711aee1a0c2a
 
 jobs:
   lint-test:
