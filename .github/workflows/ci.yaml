@@ -52,9 +52,6 @@ env:
   # So that OCM secrets are initialised
   DOCKER_PR_CHECK: true
   TEST_TIMEOUT: 30m
-  # private module path prefixes
-  GOPROXY: https://proxy.golang.org
-  GOPRIVATE: gitlab.cee.redhat.com,github.com/bf2fc6cc711aee1a0c2a
 
 jobs:
   lint-test:
@@ -101,7 +98,7 @@ jobs:
       #      ${{ runner.os }}-go-
       - name: Run Migration Script
         run: |
-          go env
+          make goenv
           make db/migrate
       - name: Setup tests secrets
         run: |

@@ -111,7 +111,7 @@ endif
 # Enable Go modules:
 export GO111MODULE=on
 export GOPROXY=https://proxy.golang.org
-export GOPRIVATE=gitlab.cee.redhat.com,github.com/bf2fc6cc711aee1a0c2a
+export GOPRIVATE=github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager
 
 ifndef SERVER_URL
 	SERVER_URL:=http://localhost:8000
@@ -160,6 +160,10 @@ ifndef GOPATH
 	$(error GOPATH is not set)
 endif
 .PHONY: check-gopath
+
+goenv: 
+	$(GO) env
+.PHONY: goenv
 
 # Verifies that source passes standard checks.
 verify: check-gopath
