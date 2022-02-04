@@ -23,8 +23,9 @@ jobs:
         run: |
           git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
       - name: "Build Binary" 
-        env:
-          OCM_ENV: integration
         run: |
+          export OCM_ENV=integration
+          export GOPATH=$(go env GOPATH)
+          export PATH=${PATH}:$GOPATH/bin
           make goenv
           make binary
