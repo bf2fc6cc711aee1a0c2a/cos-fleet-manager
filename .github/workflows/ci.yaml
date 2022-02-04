@@ -96,7 +96,7 @@ jobs:
           TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           TOKEN_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
         run: |
-          git config --local url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
+          git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "git://github"
           git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
       - name: Run Migration Script
         run: |
