@@ -52,8 +52,6 @@ env:
   # So that OCM secrets are initialised
   DOCKER_PR_CHECK: true
   TEST_TIMEOUT: 30m
-  # private module path prefixes
-  GOPRIVATE: github.com/bf2fc6cc711aee1a0c2a/*
 
 jobs:
   lint-test:
@@ -87,7 +85,9 @@ jobs:
       - name: Configure git for private modules
         env:
           TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        run: git config --global url."https://bf2robot:${TOKEN}@github.com".insteadOf "https://github.com"
+          TOKEN_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
+        run: |
+          git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
       - name: Cache go module
