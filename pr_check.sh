@@ -68,3 +68,4 @@ fi
 docker login -u "${QUAY_USER}" -p "${QUAY_TOKEN}" quay.io
 docker build -t "$IMAGE_NAME" -f Dockerfile_integration_tests .
 docker run -i "$IMAGE_NAME"
+
