@@ -5,16 +5,49 @@ Connector Service Fleet Manager
 A service for provisioning and managing fleets of connector instances.
 
 ## Prerequisites
-* [Golang 1.15+](https://golang.org/dl/)
+* [Golang 1.16+](https://golang.org/dl/)
 * [Docker](https://docs.docker.com/get-docker/) - to create database
 * [ocm cli](https://github.com/openshift-online/ocm-cli/releases) - ocm command line tool
+* [Node.js v12.20+](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-There are a number of prerequisites required for running cos-fleet-manager due to its interaction with external services. All of the below are required to run cos-fleet-manager locally.
+## Quick setup for integrations tests
 
-### Data Plane OSD cluster setup
+> All of the steps bellow should be done in [kas-fleet-manager](https://github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager) project. This project is for build purposes only. 
+
+1. If you haven't already, open an internal MR asking for the necessary access, similar to [this one](https://gitlab.cee.redhat.com/service/app-interface/-/merge_requests/30178/diffs).
+2. [Generate a personal token](https://github.com/settings/tokens) for your own GitHub user with the `repo` access and save it somewhere safe.
+3. Setup Keycloak Cert
+    ```
+    echo "" | openssl s_client -servername identity.api.stage.openshift.com -connect identity.api.stage.openshift.com:443 -prexit 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p' > secrets/keycloak-service.crt
+    ```
+4. Setup MAS SSO Client ID and Secret
+    ```
+    make keycloak/setup MAS_SSO_CLIENT_ID=<mas_sso_client_id> MAS_SSO_CLIENT_SECRET=<mas_sso_client_secret>
+    ```
+   > Values for the above variables can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/MK-Control-Plane-CI/integration-tests). Log in using the Github token created earlier.
+5. Touch 3 files just to mock them
+   ```
+   touch secrets/ocm-service.clientId
+   touch secrets/ocm-service.clientSecret
+   touch secrets/ocm-service.token
+   ```
+6. Set up database
+    ```
+    OCM_ENV=integration make db/setup
+    ```
+7. Run integration tests
+    ```
+    OCM_ENV=integration make test/integration/connector
+    ```
+8. Tear down test database (Optional)
+    ```
+    OCM_ENV=integration make db/teardown
+    ```
+   
+## Data Plane OSD cluster setup
 cos-fleet-manager can be started without a dataplane OSD cluster, however, no connectors will be placed or provisioned. To setup a data plane OSD cluster, please follow the [todo](#todo) guide.
 
-### Populating Configuration
+## Populating Configuration
 1. Retrieve your ocm-offline-token from https://qaprodauth.cloud.redhat.com/openshift/token and save it to `secrets/ocm-service.token` 
 2. Setup AWS configuration
 ```
