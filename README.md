@@ -10,9 +10,9 @@ A service for provisioning and managing fleets of connector instances.
 * [ocm cli](https://github.com/openshift-online/ocm-cli/releases) - ocm command line tool
 * [Node.js v12.20+](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-## Quick setup for integrations tests
+## Setup for integrations tests
 
-> All of the steps bellow should be done in [kas-fleet-manager](https://github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager) project. This project is for build purposes only. 
+> All of the steps for integration tests should be done in [kas-fleet-manager](https://github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager) project. This project is for build or running the service. 
 
 1. If you haven't already, open an internal MR asking for the necessary access, similar to [this one](https://gitlab.cee.redhat.com/service/app-interface/-/merge_requests/30178/diffs).
 2. [Generate a personal token](https://github.com/settings/tokens) for your own GitHub user with the `repo` access and save it somewhere safe.
@@ -43,60 +43,49 @@ A service for provisioning and managing fleets of connector instances.
     ```
     OCM_ENV=integration make db/teardown
     ```
-   
-## Data Plane OSD cluster setup
-cos-fleet-manager can be started without a dataplane OSD cluster, however, no connectors will be placed or provisioned. To setup a data plane OSD cluster, please follow the [todo](#todo) guide.
 
-## Populating Configuration
-1. Retrieve your ocm-offline-token from https://qaprodauth.cloud.redhat.com/openshift/token and save it to `secrets/ocm-service.token` 
-2. Setup AWS configuration
-```
-make aws/setup
-```
-3. Setup MAS SSO configuration
-    - keycloak cert
+## Setup for running the Service locally
+
+> Steps may seem similar to the previous ones, but in this case all the steps for building and running the service should be done in this project, cos-fleet-manager.
+
+1. If you haven't already, open an internal MR asking for the necessary access, similar to [this one](https://gitlab.cee.redhat.com/service/app-interface/-/merge_requests/30178/diffs).
+2. [Generate a personal token](https://github.com/settings/tokens) for your own GitHub user with the `repo` access and save it somewhere safe.
+3. Setup Keycloak Cert
     ```
     echo "" | openssl s_client -servername identity.api.stage.openshift.com -connect identity.api.stage.openshift.com:443 -prexit 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p' > secrets/keycloak-service.crt
     ```
-    - mas sso client id & client secret
+4. Setup MAS SSO Client ID and Secret
     ```
-    make keycloak/setup MAS_SSO_CLIENT_ID=<mas_sso_client_id> MAS_SSO_CLIENT_SECRET=<mas_sso_client_secret> OSD_IDP_MAS_SSO_CLIENT_ID=<osd_idp_mas_sso_client_id> OSD_IDP_MAS_SSO_CLIENT_SECRET=<osd_idp_mas_sso_client_secret>
+    make keycloak/setup MAS_SSO_CLIENT_ID=<mas_sso_client_id> MAS_SSO_CLIENT_SECRET=<mas_sso_client_secret>
     ```
-    > Values can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/managed-service-api/integration-tests).
-4. Setup the image pull secret
-    - Image pull secret for RHOAS can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services/show/quay-org-accounts/rhoas/robots/rhoas-pull), copy the content for the `config.json` key and paste it to `secrets/image-pull.dockerconfigjson` file.
-
-## Running the Service locally
-Please make sure you have followed all of the prerequisites above first.
-
-1. Setup git to use your GitHub Personal Access token so that the go compiler 
-   can download go modules that in private GitHub repositories.
-
+   > Values for the above variables can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/MK-Control-Plane-CI/integration-tests). Log in using the Github token created earlier.
+5. Touch files just to mock them
+   ```
+   touch secrets/ocm-service.clientId
+   touch secrets/ocm-service.clientSecret
+   touch secrets/ocm-service.token
+   touch secrets/osd-idp-keycloak-service.clientSecret
+   touch secrets/osd-idp-keycloak-service.clientId
+   ```
+6. Setup git to use your GitHub Personal Access token so that the go compiler can download go modules in private GitHub repositories.
     ```
    git config --global url."https://${username}:${access_token}@github.com".insteadOf "https://github.com"
     ```
-
-   
-2. Compile the binary
+   **Note:** You may also use the [GitHub CLI](https://cli.github.com/manual/gh_auth) to set this up.
+7. Compile the binary
    ```
    make binary
    ```
-   
-3. Clean up and Creating the database
-    - If you have db already created execute
-    ```
-    make db/teardown
-    ```
-    - Create database tables
+8. Set up database
     ```
     make db/setup && sleep 1 && make db/migrate
     ```
-    - Optional - Verify tables and records are created
+9. (Optional) Verify tables and records are created
     ```
     make db/login
     ```
     ```
-    # List all the tables
+    # List all the tables with the "\dt" command
     cos-fleet-manager=# \dt
                              List of relations
      Schema |             Name              | Type  |       Owner       
@@ -109,19 +98,43 @@ Please make sure you have followed all of the prerequisites above first.
      public | connector_statuses            | table | cos-fleet-manager
      public | connectors                    | table | cos-fleet-manager
      public | leader_leases                 | table | cos-fleet-manager
-    (8 rows)
-    ```
-
-3. Start the service
+    (8 rows)   
+   ```
+10. Start the service
     ```
     ./cos-fleet-manager serve
     ```
-    >**NOTE**: The service has numerous feature flags which can be used to enable/disable certain features of the service. Please see the [feature flag](./docs/feature-flags.md) documentation for more information.
-
-4. Verify the local service is working
+   >**NOTE**: The service has numerous feature flags which can be used to enable/disable certain features of the service. Please see the [feature flag](https://github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager/blob/main/docs/feature-flags.md) documentation for more information. Be aware many of those properties may only apply to the kas-fleet-manager.
+11. Verify the local service is working
     ```
     curl http://localhost:8000/api/connector_mgmt/v1/openapi
     ```
+12 (Optional) Tear down database
+   ```
+   make db/teardown
+   ```
+
+### Setting up a local connector catalog
+At this point the service is running, but that are no connectors available to create. You have to point the application to a directory with the connector definitions so they are available.
+1. Clone the [cos-fleet-catalog-camel](https://github.com/bf2fc6cc711aee1a0c2a/cos-fleet-catalog-camel) project
+2. Do a `mvn clean package`
+3. Connectors schemas will be generated inside `cos-fleet-catalog-camel/etc/connectors/<category name>`
+4. Go back to the cos-fleet-manager and run with all the connectors that were generated:
+```
+./cos-fleet-manager serve \
+--connector-catalog=../cos-fleet-catalog-camel/etc/connectors/connector-catalog-camel-aws \
+--connector-catalog=../cos-fleet-catalog-camel/etc/connectors/connector-catalog-camel-azure \
+--connector-catalog=../cos-fleet-catalog-camel/etc/connectors/connector-catalog-camel-gcp \
+--connector-catalog=../cos-fleet-catalog-camel/etc/connectors/connector-catalog-camel-misc \
+--connector-catalog=../cos-fleet-catalog-camel/etc/connectors/connector-catalog-camel-nosql \
+--connector-catalog=../cos-fleet-catalog-camel/etc/connectors/connector-catalog-camel-social \
+--connector-catalog=../cos-fleet-catalog-camel/etc/connectors/connector-catalog-camel-sql \
+--connector-catalog=../cos-fleet-catalog-camel/etc/connectors/connector-catalog-camel-storage
+``` 
+5. You may provide more connectors from other catalogs, like [Debezium](https://github.com/bf2fc6cc711aee1a0c2a/cos-fleet-catalog-debezium).
+
+## Data Plane OSD cluster setup
+cos-fleet-manager can be started without a dataplane OSD cluster, however, no connectors will be placed or provisioned. To setup your dataplane, see [cos-fleetshard](https://github.com/bf2fc6cc711aee1a0c2a/cos-fleetshard).
 
 ## Running the Service on an OpenShift cluster
 ### Build and Push the Image to the OpenShift Image Registry
@@ -202,6 +215,7 @@ with the service (i.e. cluster creation/scaling, Kafka creation, Errors list, et
 To use these commands, run `make binary` to create the `./cos-fleet-manager` CLI.
 
 Run `./cos-fleet-manager -h` for information on the additional commands.
+
 ## Environments
 
 The service can be run in a number of different environments. Environments are essentially bespoke
@@ -228,7 +242,7 @@ See the [contributing guide](CONTRIBUTING.md) for general guidelines.
 make test
 ```
 
-### Running integration tests
+### Running integration tests against a real OCM environment
 
 Integration tests can be executed against a real or "emulated" OCM environment. Executing against
 an emulated environment can be useful to get fast feedback as OpenShift clusters will not actually
@@ -260,6 +274,3 @@ make db/teardown
 
 ### Running performance tests
 See this [README](./test/performance/README.md) for more info about performance tests
-
-## Additional documentation:
-* todo
