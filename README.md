@@ -136,6 +136,11 @@ At this point the service is running, but that are no connectors available to cr
 ## Data Plane OSD cluster setup
 cos-fleet-manager can be started without a dataplane OSD cluster, however, no connectors will be placed or provisioned. To setup your dataplane, see [cos-fleetshard](https://github.com/bf2fc6cc711aee1a0c2a/cos-fleetshard).
 
+>**NOTE**: For all of the tools from the cos-fleetshard to work correctly it is necessary to add the `public-host-url` flag to run the fleet-manager.
+>```
+>./cos-fleet-manager serve --public-host-url=$COS_BASE_PATH
+>```
+
 ## Running the Service on an OpenShift cluster
 ### Build and Push the Image to the OpenShift Image Registry
 Login to the OpenShift internal image registry
