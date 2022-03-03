@@ -47,21 +47,19 @@ LINK="${GOPATH}/src/github.com/bf2fc6cc711aee1a0c2a/cos-fleet-manager"
 # print go version
 go version  
 
+# print docker version
+docker -v
+
 mkdir -p "$(dirname "${LINK}")"
 ln -sf "${PWD}" "${LINK}"
 cd "${LINK}"
 
-# Log in to the image registry:
-if [ -z "${QUAY_USER}" ]; then
-  echo "The quay.io push user name hasn't been provided."
-  echo "Make sure to set the QUAY_USER_NAME environment variable."
-  exit 1
-fi
-if [ -z "${QUAY_TOKEN}" ]; then
-  echo "The quay.io push token hasn't been provided."
-  echo "Make sure to set the QUAY_USER_PASSWORD environment variable."
-  exit 1
-fi
+for v in QUAY_USER QUAY_TOKEN GIT_USER GIT_TOKEN; do
+  if [ -z "${!v}" ]; then
+    echo "Make sure to set the ${v} environment variable."
+    exit 1
+  fi
+done
 
 # Set up the docker config directory
 mkdir -p "${DOCKER_CONFIG}"
@@ -83,6 +81,8 @@ make \
   DOCKER_CONFIG="${DOCKER_CONFIG}" \
   QUAY_USER="${QUAY_USER}" \
   QUAY_TOKEN="${QUAY_TOKEN}" \
+  GIT_USER="${GIT_USER}" \
+  GIT_BRANCH="${GIT_TOKEN}" \
   version="${VERSION}" \
   external_image_registry="quay.io" \
   internal_image_registry="quay.io" \
@@ -94,6 +94,8 @@ make \
   DOCKER_CONFIG="${DOCKER_CONFIG}" \
   QUAY_USER="${QUAY_USER}" \
   QUAY_TOKEN="${QUAY_TOKEN}" \
+  GIT_USER="${GIT_USER}" \
+  GIT_BRANCH="${GIT_TOKEN}" \
   version="latest" \
   external_image_registry="quay.io" \
   internal_image_registry="quay.io" \

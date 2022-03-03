@@ -148,6 +148,11 @@ help:
 	@echo "$(fake)"
 .PHONY: help
 
+# Configure git for private modules
+setup/git/private:
+	git config --global url."https://${GIT_USER}:${GIT_TOKEN}@github.com".insteadOf "https://github.com"
+.PHONY: setup/git/private
+
 # Set git hook path to .githooks/
 .PHONY: setup/git/hooks
 setup/git/hooks:
@@ -173,7 +178,7 @@ lint: golangci-lint verify
 
 # Build binaries
 # NOTE it may be necessary to use CGO_ENABLED=0 for backwards compatibility with centos7 if not using centos7
-binary:
+binary: setup/git/private
 	$(GO) build ./cmd/cos-fleet-manager
 .PHONY: binary
 

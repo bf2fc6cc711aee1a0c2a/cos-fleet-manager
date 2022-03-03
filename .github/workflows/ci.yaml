@@ -113,6 +113,8 @@ jobs:
           QUAY_USER_NAME: ${{secrets.IMAGE_REPO_USERNAME}}
           QUAY_USER_PASSWORD: ${{ secrets.IMAGE_REPO_PASSWORD }}
           QUAY_ORG_NAME: ${{secrets.IMAGE_REPO_NAMESPACE}}
+          GIT_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GIT_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
         run: |
           chmod +x ./build_deploy.sh
           ./build_deploy.sh
@@ -140,6 +142,8 @@ jobs:
           VAULT_ACCESS_KEY: ${{ secrets.VAULT_ACCESS_KEY }}
           VAULT_SECRET_ACCESS_KEY: ${{ secrets.VAULT_SECRET_ACCESS_KEY }}
           SERVICE_PUBLIC_HOST_URL: ${{ secrets.SERVICE_PUBLIC_HOST_URL }}
+          GIT_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GIT_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
         run: |
           make deploy
           oc rollout restart deployment/cos-fleet-manager
