@@ -572,7 +572,6 @@ objects:
             - --enable-deny-list=${ENABLE_DENY_LIST}
             - --enable-health-check-https=${ENABLE_HTTPS}
             - --enable-https=${ENABLE_HTTPS}
-            - --graphql-api-url=https://localhost:8000
             - --enable-instance-limit-control=${ENABLE_INSTANCE_LIMIT_CONTROL}
             - --enable-metrics-https=${ENABLE_METRICS_HTTPS}
             - --enable-ocm-mock=${ENABLE_OCM_MOCK}
