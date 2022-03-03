@@ -111,7 +111,7 @@ endif
 # Enable Go modules:
 export GO111MODULE=on
 export GOPROXY=https://proxy.golang.org
-export GOPRIVATE=gitlab.cee.redhat.com,github.com/bf2fc6cc711aee1a0c2a
+export GOPRIVATE=gitlab.cee.redhat.com
 
 ifndef SERVER_URL
 	SERVER_URL:=http://localhost:8000
@@ -173,7 +173,7 @@ lint: golangci-lint verify
 
 # Build binaries
 # NOTE it may be necessary to use CGO_ENABLED=0 for backwards compatibility with centos7 if not using centos7
-binary: lint
+binary:
 	$(GO) build ./cmd/cos-fleet-manager
 .PHONY: binary
 
