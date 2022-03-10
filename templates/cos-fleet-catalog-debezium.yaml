@@ -7,897 +7,900 @@ metadata:
     openshift.io/display-name: Cos Fleet Manager Connector Catalog for Debezium
     description: List of available debezium connectors and metadata
 objects:
-  - apiVersion: v1
-    data:
-      debezium-mongodb-1.9.0.Alpha2.json: |-
-        {
-          "connector_type" : {
-            "id" : "debezium-mongodb-1.9.0.Alpha2",
-            "kind" : "ConnectorType",
-            "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mongodb-1.9.0.Alpha2",
-            "name" : "Debezium MongoDB Connector",
-            "version" : "1.9.0.Alpha2",
-            "channels" : [ "stable" ],
-            "description" : null,
-            "labels" : [ "source", "debezium", "mongodb", "1.9.0.Alpha2" ],
-            "capabilities" : [ "data_shape" ],
-            "icon_href" : "http://example.com/images/debezium-mongodb-1.9.0.Alpha2.png",
-            "schema" : {
-              "title" : "Debezium MongoDB Connector",
-              "required" : [ "mongodb.name" ],
-              "type" : "object",
-              "properties" : {
-                "mongodb.name" : {
-                  "title" : "Namespace",
-                  "description" : "Unique name that identifies the MongoDB replica set or cluster and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct MongoDB installation should have a separate namespace and monitored by at most one Debezium connector.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "mongodb.name",
-                  "x-category" : "CONNECTION"
-                },
-                "mongodb.hosts" : {
-                  "format" : "list,regex",
-                  "title" : "Hosts",
-                  "description" : "The hostname and port pairs (in the form 'host' or 'host:port') of the MongoDB server(s) in the replica set.",
-                  "type" : "string",
-                  "x-name" : "mongodb.hosts",
-                  "x-category" : "CONNECTION"
-                },
-                "mongodb.user" : {
-                  "title" : "User",
-                  "description" : "Database user for connecting to MongoDB, if necessary.",
-                  "type" : "string",
-                  "x-name" : "mongodb.user",
-                  "x-category" : "CONNECTION"
-                },
-                "mongodb.password" : {
-                  "title" : "Password",
-                  "description" : "Password to be used when connecting to MongoDB, if necessary.",
-                  "oneOf" : [ {
-                    "format" : "password",
-                    "description" : "Password of the database user to be used when connecting to the database.",
-                    "type" : "string"
-                  }, {
-                    "description" : "An opaque reference to the password.",
-                    "type" : "object",
-                    "properties" : { },
-                    "additionalProperties" : true
-                  } ],
-                  "x-name" : "mongodb.password",
-                  "x-category" : "CONNECTION"
-                },
-                "mongodb.authsource" : {
-                  "title" : "Credentials Database",
-                  "description" : "Database containing user credentials.",
-                  "default" : "admin",
-                  "type" : "string",
-                  "x-name" : "mongodb.authsource",
-                  "x-category" : "CONNECTION_ADVANCED"
-                },
-                "database.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Databases",
-                  "description" : "A comma-separated list of regular expressions that match the database names for which changes are to be captured",
-                  "type" : "string",
-                  "x-name" : "database.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "database.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Databases",
-                  "description" : "A comma-separated list of regular expressions that match the database names for which changes are to be excluded",
-                  "type" : "string",
-                  "x-name" : "database.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "collection.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Collections",
-                  "description" : "A comma-separated list of regular expressions that match the collection names for which changes are to be captured",
-                  "type" : "string",
-                  "x-name" : "collection.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "collection.exclude.list" : {
-                  "description" : "A comma-separated list of regular expressions that match the collection names for which changes are to be excluded",
-                  "type" : "string",
-                  "x-name" : "collection.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "field.exclude.list" : {
-                  "title" : "Exclude Fields",
-                  "description" : "A comma-separated list of the fully-qualified names of fields that should be excluded from change event message values",
-                  "type" : "string",
-                  "x-name" : "field.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "snapshot.mode" : {
-                  "title" : "Snapshot mode",
-                  "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'initial' (the default) to specify the connector should always perform an initial sync when required; 'never' to specify the connector should never perform an initial sync ",
-                  "default" : "initial",
-                  "enum" : [ "never", "initial" ],
-                  "type" : "string",
-                  "x-name" : "snapshot.mode",
-                  "x-category" : "CONNECTOR_SNAPSHOT"
-                },
-                "query.fetch.size" : {
-                  "format" : "int32",
-                  "title" : "Query fetch size",
-                  "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
-                  "default" : 0,
-                  "type" : "integer",
-                  "x-name" : "query.fetch.size",
-                  "x-category" : "ADVANCED"
-                },
-                "max.batch.size" : {
-                  "format" : "int32",
-                  "title" : "Change event batch size",
-                  "description" : "Maximum size of each batch of source records. Defaults to 2048.",
-                  "default" : 2048,
-                  "type" : "integer",
-                  "x-name" : "max.batch.size",
-                  "x-category" : "ADVANCED"
-                },
-                "max.queue.size" : {
-                  "format" : "int32",
-                  "title" : "Change event buffer size",
-                  "description" : "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
-                  "default" : 8192,
-                  "type" : "integer",
-                  "x-name" : "max.queue.size",
-                  "x-category" : "ADVANCED"
-                },
-                "data_shape" : {
-                  "type" : "object",
-                  "additionalProperties" : false,
-                  "properties" : {
-                    "key" : {
-                      "title" : "Kafka Message Key Format",
-                      "description" : "The serialization format for the Kafka message key.",
-                      "x-name" : "data_shape.key",
-                      "x-category" : "CONNECTOR",
-                      "$ref" : "#/$defs/serializer"
-                    },
-                    "value" : {
-                      "title" : "Kafka Message Value Format",
-                      "description" : "The serialization format for the Kafka message value.",
-                      "x-name" : "data_shape.value",
-                      "x-category" : "CONNECTOR",
-                      "$ref" : "#/$defs/serializer"
-                    }
-                  }
-                }
+-
+  apiVersion: v1
+  data:
+    debezium-mongodb-1.9.0.Alpha2.json: |-
+      {
+        "connector_type" : {
+          "id" : "debezium-mongodb-1.9.0.Alpha2",
+          "kind" : "ConnectorType",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mongodb-1.9.0.Alpha2",
+          "name" : "Debezium MongoDB Connector",
+          "version" : "1.9.0.Alpha2",
+          "channels" : [ "stable" ],
+          "description" : null,
+          "labels" : [ "source", "debezium", "mongodb", "1.9.0.Alpha2" ],
+          "capabilities" : [ "data_shape" ],
+          "icon_href" : "http://example.com/images/debezium-mongodb-1.9.0.Alpha2.png",
+          "schema" : {
+            "title" : "Debezium MongoDB Connector",
+            "required" : [ "mongodb.name" ],
+            "type" : "object",
+            "properties" : {
+              "mongodb.name" : {
+                "title" : "Namespace",
+                "description" : "Unique name that identifies the MongoDB replica set or cluster and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct MongoDB installation should have a separate namespace and monitored by at most one Debezium connector.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "mongodb.name",
+                "x-category" : "CONNECTION"
               },
-              "additionalProperties" : true,
-              "x-connector-id" : "mongodb",
-              "x-version" : "1.9.0.Alpha2",
-              "x-className" : "io.debezium.connector.mongodb.MongoDbConnector",
-              "$defs" : {
-                "serializer" : {
-                  "type" : "string",
-                  "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
-                  "default" : "JSON"
-                }
-              }
-            }
-          },
-          "channels" : {
-            "stable" : {
-              "revision" : 4,
-              "shard_metadata" : {
-                "operators" : [ {
-                  "type" : "debezium-connector-operator",
-                  "version" : "[1.0.0,2.0.0)"
-                } ],
-                "connector_type" : "source",
-                "connector_class" : "io.debezium.connector.mongodb.MongoDbConnector",
-                "container_image" : "quay.io/rhoas/cos-connector-debezium-mongodb@sha256:d762988cad64037ded02183d4a86c8bb6af35dfd6e04e282d86210ec05536425"
-              }
-            }
-          }
-        }
-    kind: ConfigMap
-    metadata:
-      creationTimestamp: null
-      name: connector-catalog-debezium-mongodb
-  - apiVersion: v1
-    data:
-      debezium-mysql-1.9.0.Alpha2.json: |-
-        {
-          "connector_type" : {
-            "id" : "debezium-mysql-1.9.0.Alpha2",
-            "kind" : "ConnectorType",
-            "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mysql-1.9.0.Alpha2",
-            "name" : "Debezium MySQL Connector",
-            "version" : "1.9.0.Alpha2",
-            "channels" : [ "stable" ],
-            "description" : null,
-            "labels" : [ "source", "debezium", "mysql", "1.9.0.Alpha2" ],
-            "capabilities" : [ "data_shape" ],
-            "icon_href" : "http://example.com/images/debezium-mysql-1.9.0.Alpha2.png",
-            "schema" : {
-              "title" : "Debezium MySQL Connector",
-              "required" : [ "database.hostname", "database.user", "database.server.name", "database.server.id" ],
-              "type" : "object",
-              "properties" : {
-                "database.server.name" : {
-                  "title" : "Namespace",
-                  "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.server.name",
-                  "x-category" : "CONNECTION"
-                },
-                "database.server.id" : {
-                  "format" : "int64",
-                  "title" : "Cluster ID",
-                  "description" : "A numeric ID of this database client, which must be unique across all currently-running database processes in the cluster. This connector joins the MySQL database cluster as another server (with this unique ID) so it can read the binlog. By default, a random number is generated between 5400 and 6400.",
-                  "default" : 6327,
-                  "type" : "integer",
-                  "nullable" : false,
-                  "x-name" : "database.server.id",
-                  "x-category" : "CONNECTION"
-                },
-                "database.hostname" : {
-                  "title" : "Hostname",
-                  "description" : "Resolvable hostname or IP address of the database server.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.hostname",
-                  "x-category" : "CONNECTION"
-                },
-                "database.port" : {
-                  "format" : "int32",
-                  "title" : "Port",
-                  "description" : "Port of the database server.",
-                  "default" : 3306,
-                  "type" : "integer",
-                  "x-name" : "database.port",
-                  "x-category" : "CONNECTION"
-                },
-                "database.user" : {
-                  "title" : "User",
-                  "description" : "Name of the database user to be used when connecting to the database.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.user",
-                  "x-category" : "CONNECTION"
-                },
-                "database.password" : {
-                  "title" : "Password",
+              "mongodb.hosts" : {
+                "format" : "list,regex",
+                "title" : "Hosts",
+                "description" : "The hostname and port pairs (in the form 'host' or 'host:port') of the MongoDB server(s) in the replica set.",
+                "type" : "string",
+                "x-name" : "mongodb.hosts",
+                "x-category" : "CONNECTION"
+              },
+              "mongodb.user" : {
+                "title" : "User",
+                "description" : "Database user for connecting to MongoDB, if necessary.",
+                "type" : "string",
+                "x-name" : "mongodb.user",
+                "x-category" : "CONNECTION"
+              },
+              "mongodb.password" : {
+                "title" : "Password",
+                "description" : "Password to be used when connecting to MongoDB, if necessary.",
+                "oneOf" : [ {
+                  "format" : "password",
                   "description" : "Password of the database user to be used when connecting to the database.",
-                  "oneOf" : [ {
-                    "format" : "password",
-                    "description" : "Password of the database user to be used when connecting to the database.",
-                    "type" : "string"
-                  }, {
-                    "description" : "An opaque reference to the password.",
-                    "type" : "object",
-                    "properties" : { },
-                    "additionalProperties" : true
-                  } ],
-                  "x-name" : "database.password",
-                  "x-category" : "CONNECTION"
-                },
-                "database.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Databases",
-                  "description" : "The databases for which changes are to be captured",
-                  "type" : "string",
-                  "x-name" : "database.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "database.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Databases",
-                  "description" : "A comma-separated list of regular expressions that match database names to be excluded from monitoring",
-                  "type" : "string",
-                  "x-name" : "database.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "table.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Tables",
-                  "description" : "The tables for which changes are to be captured",
-                  "type" : "string",
-                  "x-name" : "table.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "table.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Tables",
-                  "description" : "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
-                  "type" : "string",
-                  "x-name" : "table.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "column.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Columns",
-                  "description" : "Regular expressions matching columns to include in change events",
-                  "type" : "string",
-                  "x-name" : "column.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "column.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Columns",
-                  "description" : "Regular expressions matching columns to exclude from change events",
-                  "type" : "string",
-                  "x-name" : "column.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "snapshot.mode" : {
-                  "title" : "Snapshot mode",
-                  "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'when_needed' to specify that the connector run a snapshot upon startup whenever it deems it necessary; 'schema_only' to only take a snapshot of the schema (table structures) but no actual data; 'initial' (the default) to specify the connector can run a snapshot only when no offsets are available for the logical server name; 'initial_only' same as 'initial' except the connector should stop after completing the snapshot and before it would normally read the binlog; and'never' to specify the connector should never run a snapshot and that upon first startup the connector should read from the beginning of the binlog. The 'never' mode should be used with care, and only when the binlog is known to contain all history.",
-                  "default" : "initial",
-                  "enum" : [ "never", "initial_only", "when_needed", "initial", "schema_only", "schema_only_recovery" ],
-                  "type" : "string",
-                  "x-name" : "snapshot.mode",
-                  "x-category" : "CONNECTOR_SNAPSHOT"
-                },
-                "decimal.handling.mode" : {
-                  "title" : "Decimal Handling",
-                  "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
-                  "default" : "precise",
-                  "enum" : [ "string", "double", "precise" ],
-                  "type" : "string",
-                  "x-name" : "decimal.handling.mode",
-                  "x-category" : "CONNECTOR"
-                },
-                "message.key.columns" : {
-                  "title" : "Columns PK mapping",
-                  "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
-                  "type" : "string",
-                  "x-name" : "message.key.columns",
-                  "x-category" : "CONNECTOR_ADVANCED"
-                },
-                "query.fetch.size" : {
-                  "format" : "int32",
-                  "title" : "Query fetch size",
-                  "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
-                  "default" : 0,
-                  "type" : "integer",
-                  "x-name" : "query.fetch.size",
-                  "x-category" : "ADVANCED"
-                },
-                "max.batch.size" : {
-                  "format" : "int32",
-                  "title" : "Change event batch size",
-                  "description" : "Maximum size of each batch of source records. Defaults to 2048.",
-                  "default" : 2048,
-                  "type" : "integer",
-                  "x-name" : "max.batch.size",
-                  "x-category" : "ADVANCED"
-                },
-                "max.queue.size" : {
-                  "format" : "int32",
-                  "title" : "Change event buffer size",
-                  "description" : "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
-                  "default" : 8192,
-                  "type" : "integer",
-                  "x-name" : "max.queue.size",
-                  "x-category" : "ADVANCED"
-                },
-                "data_shape" : {
+                  "type" : "string"
+                }, {
+                  "description" : "An opaque reference to the password.",
                   "type" : "object",
-                  "additionalProperties" : false,
-                  "properties" : {
-                    "key" : {
-                      "title" : "Kafka Message Key Format",
-                      "description" : "The serialization format for the Kafka message key.",
-                      "x-name" : "data_shape.key",
-                      "x-category" : "CONNECTOR",
-                      "$ref" : "#/$defs/serializer"
-                    },
-                    "value" : {
-                      "title" : "Kafka Message Value Format",
-                      "description" : "The serialization format for the Kafka message value.",
-                      "x-name" : "data_shape.value",
-                      "x-category" : "CONNECTOR",
-                      "$ref" : "#/$defs/serializer"
-                    }
+                  "properties" : { },
+                  "additionalProperties" : true
+                } ],
+                "x-name" : "mongodb.password",
+                "x-category" : "CONNECTION"
+              },
+              "mongodb.authsource" : {
+                "title" : "Credentials Database",
+                "description" : "Database containing user credentials.",
+                "default" : "admin",
+                "type" : "string",
+                "x-name" : "mongodb.authsource",
+                "x-category" : "CONNECTION_ADVANCED"
+              },
+              "database.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Databases",
+                "description" : "A comma-separated list of regular expressions that match the database names for which changes are to be captured",
+                "type" : "string",
+                "x-name" : "database.include.list",
+                "x-category" : "FILTERS"
+              },
+              "database.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Databases",
+                "description" : "A comma-separated list of regular expressions that match the database names for which changes are to be excluded",
+                "type" : "string",
+                "x-name" : "database.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "collection.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Collections",
+                "description" : "A comma-separated list of regular expressions that match the collection names for which changes are to be captured",
+                "type" : "string",
+                "x-name" : "collection.include.list",
+                "x-category" : "FILTERS"
+              },
+              "collection.exclude.list" : {
+                "description" : "A comma-separated list of regular expressions that match the collection names for which changes are to be excluded",
+                "type" : "string",
+                "x-name" : "collection.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "field.exclude.list" : {
+                "title" : "Exclude Fields",
+                "description" : "A comma-separated list of the fully-qualified names of fields that should be excluded from change event message values",
+                "type" : "string",
+                "x-name" : "field.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "snapshot.mode" : {
+                "title" : "Snapshot mode",
+                "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'initial' (the default) to specify the connector should always perform an initial sync when required; 'never' to specify the connector should never perform an initial sync ",
+                "default" : "initial",
+                "enum" : [ "never", "initial" ],
+                "type" : "string",
+                "x-name" : "snapshot.mode",
+                "x-category" : "CONNECTOR_SNAPSHOT"
+              },
+              "query.fetch.size" : {
+                "format" : "int32",
+                "title" : "Query fetch size",
+                "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
+                "default" : 0,
+                "type" : "integer",
+                "x-name" : "query.fetch.size",
+                "x-category" : "ADVANCED"
+              },
+              "max.batch.size" : {
+                "format" : "int32",
+                "title" : "Change event batch size",
+                "description" : "Maximum size of each batch of source records. Defaults to 2048.",
+                "default" : 2048,
+                "type" : "integer",
+                "x-name" : "max.batch.size",
+                "x-category" : "ADVANCED"
+              },
+              "max.queue.size" : {
+                "format" : "int32",
+                "title" : "Change event buffer size",
+                "description" : "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
+                "default" : 8192,
+                "type" : "integer",
+                "x-name" : "max.queue.size",
+                "x-category" : "ADVANCED"
+              },
+              "data_shape" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "key" : {
+                    "title" : "Kafka Message Key Format",
+                    "description" : "The serialization format for the Kafka message key.",
+                    "x-name" : "data_shape.key",
+                    "x-category" : "CONNECTOR",
+                    "$ref" : "#/$defs/serializer"
+                  },
+                  "value" : {
+                    "title" : "Kafka Message Value Format",
+                    "description" : "The serialization format for the Kafka message value.",
+                    "x-name" : "data_shape.value",
+                    "x-category" : "CONNECTOR",
+                    "$ref" : "#/$defs/serializer"
                   }
                 }
-              },
-              "additionalProperties" : true,
-              "x-connector-id" : "mysql",
-              "x-version" : "1.9.0.Alpha2",
-              "x-className" : "io.debezium.connector.mysql.MySqlConnector",
-              "$defs" : {
-                "serializer" : {
-                  "type" : "string",
-                  "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
-                  "default" : "JSON"
-                }
               }
-            }
-          },
-          "channels" : {
-            "stable" : {
-              "revision" : 4,
-              "shard_metadata" : {
-                "operators" : [ {
-                  "type" : "debezium-connector-operator",
-                  "version" : "[1.0.0,2.0.0)"
-                } ],
-                "connector_type" : "source",
-                "connector_class" : "io.debezium.connector.mysql.MySqlConnector",
-                "container_image" : "quay.io/rhoas/cos-connector-debezium-mysql@sha256:7ac245041861abe49e1dbc1fd4b3559aa9c25f5f8a29091839fe8dcb2d6accba"
+            },
+            "additionalProperties" : true,
+            "x-connector-id" : "mongodb",
+            "x-version" : "1.9.0.Alpha2",
+            "x-className" : "io.debezium.connector.mongodb.MongoDbConnector",
+            "$defs" : {
+              "serializer" : {
+                "type" : "string",
+                "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
+                "default" : "JSON"
               }
             }
           }
+        },
+        "channels" : {
+          "stable" : {
+            "revision" : 4,
+            "shard_metadata" : {
+              "operators" : [ {
+                "type" : "debezium-connector-operator",
+                "version" : "[1.0.0,2.0.0)"
+              } ],
+              "connector_type" : "source",
+              "connector_class" : "io.debezium.connector.mongodb.MongoDbConnector",
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-mongodb@sha256:d762988cad64037ded02183d4a86c8bb6af35dfd6e04e282d86210ec05536425"
+            }
+          }
         }
-    kind: ConfigMap
-    metadata:
-      creationTimestamp: null
-      name: connector-catalog-debezium-mysql
-  - apiVersion: v1
-    data:
-      debezium-postgres-1.9.0.Alpha2.json: |-
-        {
-          "this":"that",
-          "connector_type" : {
-            "id" : "debezium-postgres-1.9.0.Alpha2",
-            "kind" : "ConnectorType",
-            "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-postgres-1.9.0.Alpha2",
-            "name" : "Debezium PostgreSQL Connector",
-            "version" : "1.9.0.Alpha2",
-            "channels" : [ "stable" ],
-            "description" : null,
-            "labels" : [ "source", "debezium", "postgres", "1.9.0.Alpha2" ],
-            "capabilities" : [ "data_shape" ],
-            "icon_href" : "http://example.com/images/debezium-postgres-1.9.0.Alpha2.png",
-            "schema" : {
-              "title" : "Debezium PostgreSQL Connector",
-              "required" : [ "database.server.name", "database.hostname", "database.user", "database.dbname" ],
-              "type" : "object",
-              "properties" : {
-                "database.server.name" : {
-                  "title" : "Namespace",
-                  "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.server.name",
-                  "x-category" : "CONNECTION"
-                },
-                "database.hostname" : {
-                  "title" : "Hostname",
-                  "description" : "Resolvable hostname or IP address of the database server.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.hostname",
-                  "x-category" : "CONNECTION"
-                },
-                "database.port" : {
-                  "format" : "int32",
-                  "title" : "Port",
-                  "description" : "Port of the database server.",
-                  "default" : 5432,
-                  "type" : "integer",
-                  "x-name" : "database.port",
-                  "x-category" : "CONNECTION"
-                },
-                "database.user" : {
-                  "title" : "User",
-                  "description" : "Name of the database user to be used when connecting to the database.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.user",
-                  "x-category" : "CONNECTION"
-                },
-                "database.password" : {
-                  "title" : "Password",
+      }
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    name: connector-catalog-debezium-mongodb
+-
+  apiVersion: v1
+  data:
+    debezium-mysql-1.9.0.Alpha2.json: |-
+      {
+        "connector_type" : {
+          "id" : "debezium-mysql-1.9.0.Alpha2",
+          "kind" : "ConnectorType",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mysql-1.9.0.Alpha2",
+          "name" : "Debezium MySQL Connector",
+          "version" : "1.9.0.Alpha2",
+          "channels" : [ "stable" ],
+          "description" : null,
+          "labels" : [ "source", "debezium", "mysql", "1.9.0.Alpha2" ],
+          "capabilities" : [ "data_shape" ],
+          "icon_href" : "http://example.com/images/debezium-mysql-1.9.0.Alpha2.png",
+          "schema" : {
+            "title" : "Debezium MySQL Connector",
+            "required" : [ "database.hostname", "database.user", "database.server.name", "database.server.id" ],
+            "type" : "object",
+            "properties" : {
+              "database.server.name" : {
+                "title" : "Namespace",
+                "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.server.name",
+                "x-category" : "CONNECTION"
+              },
+              "database.server.id" : {
+                "format" : "int64",
+                "title" : "Cluster ID",
+                "description" : "A numeric ID of this database client, which must be unique across all currently-running database processes in the cluster. This connector joins the MySQL database cluster as another server (with this unique ID) so it can read the binlog. By default, a random number is generated between 5400 and 6400.",
+                "default" : 6327,
+                "type" : "integer",
+                "nullable" : false,
+                "x-name" : "database.server.id",
+                "x-category" : "CONNECTION"
+              },
+              "database.hostname" : {
+                "title" : "Hostname",
+                "description" : "Resolvable hostname or IP address of the database server.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.hostname",
+                "x-category" : "CONNECTION"
+              },
+              "database.port" : {
+                "format" : "int32",
+                "title" : "Port",
+                "description" : "Port of the database server.",
+                "default" : 3306,
+                "type" : "integer",
+                "x-name" : "database.port",
+                "x-category" : "CONNECTION"
+              },
+              "database.user" : {
+                "title" : "User",
+                "description" : "Name of the database user to be used when connecting to the database.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.user",
+                "x-category" : "CONNECTION"
+              },
+              "database.password" : {
+                "title" : "Password",
+                "description" : "Password of the database user to be used when connecting to the database.",
+                "oneOf" : [ {
+                  "format" : "password",
                   "description" : "Password of the database user to be used when connecting to the database.",
-                  "oneOf" : [ {
-                    "format" : "password",
-                    "description" : "Password of the database user to be used when connecting to the database.",
-                    "type" : "string"
-                  }, {
-                    "description" : "An opaque reference to the password.",
-                    "type" : "object",
-                    "properties" : { },
-                    "additionalProperties" : true
-                  } ],
-                  "x-name" : "database.password",
-                  "x-category" : "CONNECTION"
-                },
-                "database.dbname" : {
-                  "title" : "Database",
-                  "description" : "The name of the database from which the connector should capture changes",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.dbname",
-                  "x-category" : "CONNECTION"
-                },
-                "slot.name" : {
-                  "title" : "Slot",
-                  "description" : "The name of the Postgres logical decoding slot created for streaming changes from a plugin.Defaults to 'debezium",
-                  "default" : "debezium",
-                  "type" : "string",
-                  "x-name" : "slot.name",
-                  "x-category" : "CONNECTION_ADVANCED_REPLICATION"
-                },
-                "publication.name" : {
-                  "title" : "Publication",
-                  "description" : "The name of the Postgres 10+ publication used for streaming changes from a plugin.Defaults to 'dbz_publication'",
-                  "default" : "dbz_publication",
-                  "type" : "string",
-                  "x-name" : "publication.name",
-                  "x-category" : "CONNECTION_ADVANCED_REPLICATION"
-                },
-                "publication.autocreate.mode" : {
-                  "title" : "Publication Auto Create Mode",
-                  "description" : "Applies only when streaming changes using pgoutput.Determine how creation of a publication should work, the default is all_tables.DISABLED - The connector will not attempt to create a publication at all. The expectation is that the user has created the publication up-front. If the publication isn't found to exist upon startup, the connector will throw an exception and stop.ALL_TABLES - If no publication exists, the connector will create a new publication for all tables. Note this requires that the configured user has access. If the publication already exists, it will be used. i.e CREATE PUBLICATION <publication_name> FOR ALL TABLES;FILTERED - If no publication exists, the connector will create a new publication for all those tables matchingthe current filter configuration (see table/database include/exclude list properties). If the publication already exists, it will be used. i.e CREATE PUBLICATION <publication_name> FOR TABLE <tbl1, tbl2, etc>",
-                  "default" : "all_tables",
-                  "enum" : [ "filtered", "disabled", "all_tables" ],
-                  "type" : "string",
-                  "x-name" : "publication.autocreate.mode",
-                  "x-category" : "CONNECTION_ADVANCED_REPLICATION"
-                },
-                "schema.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Schemas",
-                  "description" : "The schemas for which events should be captured",
-                  "type" : "string",
-                  "x-name" : "schema.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "schema.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Schemas",
-                  "description" : "The schemas for which events must not be captured",
-                  "type" : "string",
-                  "x-name" : "schema.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "table.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Tables",
-                  "description" : "The tables for which changes are to be captured",
-                  "type" : "string",
-                  "x-name" : "table.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "table.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Tables",
-                  "description" : "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
-                  "type" : "string",
-                  "x-name" : "table.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "column.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Columns",
-                  "description" : "Regular expressions matching columns to include in change events",
-                  "type" : "string",
-                  "x-name" : "column.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "column.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Columns",
-                  "description" : "Regular expressions matching columns to exclude from change events",
-                  "type" : "string",
-                  "x-name" : "column.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "snapshot.mode" : {
-                  "title" : "Snapshot mode",
-                  "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'always' to specify that the connector run a snapshot each time it starts up; 'initial' (the default) to specify the connector can run a snapshot only when no offsets are available for the logical server name; 'initial_only' same as 'initial' except the connector should stop after completing the snapshot and before it would normally start emitting changes;'never' to specify the connector should never run a snapshot and that upon first startup the connector should read from the last position (LSN) recorded by the server; and'exported' deprecated, use 'initial' instead; 'custom' to specify a custom class with 'snapshot.custom_class' which will be loaded and used to determine the snapshot, see docs for more details.",
-                  "default" : "initial",
-                  "enum" : [ "always", "exported", "never", "initial_only", "initial", "custom" ],
-                  "type" : "string",
-                  "x-name" : "snapshot.mode",
-                  "x-category" : "CONNECTOR_SNAPSHOT"
-                },
-                "decimal.handling.mode" : {
-                  "title" : "Decimal Handling",
-                  "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
-                  "default" : "precise",
-                  "enum" : [ "string", "double", "precise" ],
-                  "type" : "string",
-                  "x-name" : "decimal.handling.mode",
-                  "x-category" : "CONNECTOR"
-                },
-                "message.key.columns" : {
-                  "title" : "Columns PK mapping",
-                  "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
-                  "type" : "string",
-                  "x-name" : "message.key.columns",
-                  "x-category" : "CONNECTOR_ADVANCED"
-                },
-                "query.fetch.size" : {
-                  "format" : "int32",
-                  "title" : "Query fetch size",
-                  "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
-                  "default" : 0,
-                  "type" : "integer",
-                  "x-name" : "query.fetch.size",
-                  "x-category" : "ADVANCED"
-                },
-                "max.batch.size" : {
-                  "format" : "int32",
-                  "title" : "Change event batch size",
-                  "description" : "Maximum size of each batch of source records. Defaults to 2048.",
-                  "default" : 2048,
-                  "type" : "integer",
-                  "x-name" : "max.batch.size",
-                  "x-category" : "ADVANCED"
-                },
-                "max.queue.size" : {
-                  "format" : "int32",
-                  "title" : "Change event buffer size",
-                  "description" : "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
-                  "default" : 8192,
-                  "type" : "integer",
-                  "x-name" : "max.queue.size",
-                  "x-category" : "ADVANCED"
-                },
-                "data_shape" : {
+                  "type" : "string"
+                }, {
+                  "description" : "An opaque reference to the password.",
                   "type" : "object",
-                  "additionalProperties" : false,
-                  "properties" : {
-                    "key" : {
-                      "title" : "Kafka Message Key Format",
-                      "description" : "The serialization format for the Kafka message key.",
-                      "x-name" : "data_shape.key",
-                      "x-category" : "CONNECTOR",
-                      "$ref" : "#/$defs/serializer"
-                    },
-                    "value" : {
-                      "title" : "Kafka Message Value Format",
-                      "description" : "The serialization format for the Kafka message value.",
-                      "x-name" : "data_shape.value",
-                      "x-category" : "CONNECTOR",
-                      "$ref" : "#/$defs/serializer"
-                    }
+                  "properties" : { },
+                  "additionalProperties" : true
+                } ],
+                "x-name" : "database.password",
+                "x-category" : "CONNECTION"
+              },
+              "database.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Databases",
+                "description" : "The databases for which changes are to be captured",
+                "type" : "string",
+                "x-name" : "database.include.list",
+                "x-category" : "FILTERS"
+              },
+              "database.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Databases",
+                "description" : "A comma-separated list of regular expressions that match database names to be excluded from monitoring",
+                "type" : "string",
+                "x-name" : "database.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "table.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Tables",
+                "description" : "The tables for which changes are to be captured",
+                "type" : "string",
+                "x-name" : "table.include.list",
+                "x-category" : "FILTERS"
+              },
+              "table.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Tables",
+                "description" : "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
+                "type" : "string",
+                "x-name" : "table.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "column.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Columns",
+                "description" : "Regular expressions matching columns to include in change events",
+                "type" : "string",
+                "x-name" : "column.include.list",
+                "x-category" : "FILTERS"
+              },
+              "column.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Columns",
+                "description" : "Regular expressions matching columns to exclude from change events",
+                "type" : "string",
+                "x-name" : "column.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "snapshot.mode" : {
+                "title" : "Snapshot mode",
+                "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'when_needed' to specify that the connector run a snapshot upon startup whenever it deems it necessary; 'schema_only' to only take a snapshot of the schema (table structures) but no actual data; 'initial' (the default) to specify the connector can run a snapshot only when no offsets are available for the logical server name; 'initial_only' same as 'initial' except the connector should stop after completing the snapshot and before it would normally read the binlog; and'never' to specify the connector should never run a snapshot and that upon first startup the connector should read from the beginning of the binlog. The 'never' mode should be used with care, and only when the binlog is known to contain all history.",
+                "default" : "initial",
+                "enum" : [ "never", "initial_only", "when_needed", "initial", "schema_only", "schema_only_recovery" ],
+                "type" : "string",
+                "x-name" : "snapshot.mode",
+                "x-category" : "CONNECTOR_SNAPSHOT"
+              },
+              "decimal.handling.mode" : {
+                "title" : "Decimal Handling",
+                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
+                "default" : "precise",
+                "enum" : [ "string", "double", "precise" ],
+                "type" : "string",
+                "x-name" : "decimal.handling.mode",
+                "x-category" : "CONNECTOR"
+              },
+              "message.key.columns" : {
+                "title" : "Columns PK mapping",
+                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+                "type" : "string",
+                "x-name" : "message.key.columns",
+                "x-category" : "CONNECTOR_ADVANCED"
+              },
+              "query.fetch.size" : {
+                "format" : "int32",
+                "title" : "Query fetch size",
+                "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
+                "default" : 0,
+                "type" : "integer",
+                "x-name" : "query.fetch.size",
+                "x-category" : "ADVANCED"
+              },
+              "max.batch.size" : {
+                "format" : "int32",
+                "title" : "Change event batch size",
+                "description" : "Maximum size of each batch of source records. Defaults to 2048.",
+                "default" : 2048,
+                "type" : "integer",
+                "x-name" : "max.batch.size",
+                "x-category" : "ADVANCED"
+              },
+              "max.queue.size" : {
+                "format" : "int32",
+                "title" : "Change event buffer size",
+                "description" : "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
+                "default" : 8192,
+                "type" : "integer",
+                "x-name" : "max.queue.size",
+                "x-category" : "ADVANCED"
+              },
+              "data_shape" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "key" : {
+                    "title" : "Kafka Message Key Format",
+                    "description" : "The serialization format for the Kafka message key.",
+                    "x-name" : "data_shape.key",
+                    "x-category" : "CONNECTOR",
+                    "$ref" : "#/$defs/serializer"
+                  },
+                  "value" : {
+                    "title" : "Kafka Message Value Format",
+                    "description" : "The serialization format for the Kafka message value.",
+                    "x-name" : "data_shape.value",
+                    "x-category" : "CONNECTOR",
+                    "$ref" : "#/$defs/serializer"
                   }
                 }
-              },
-              "additionalProperties" : true,
-              "x-connector-id" : "postgres",
-              "x-version" : "1.9.0.Alpha2",
-              "x-className" : "io.debezium.connector.postgresql.PostgresConnector",
-              "$defs" : {
-                "serializer" : {
-                  "type" : "string",
-                  "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
-                  "default" : "JSON"
-                }
               }
-            }
-          },
-          "channels" : {
-            "stable" : {
-              "revision" : 4,
-              "shard_metadata" : {
-                "operators" : [ {
-                  "type" : "debezium-connector-operator",
-                  "version" : "[1.0.0,2.0.0)"
-                } ],
-                "connector_type" : "source",
-                "connector_class" : "io.debezium.connector.postgresql.PostgresConnector",
-                "container_image" : "quay.io/rhoas/cos-connector-debezium-postgres@sha256:b67d0ef4d4638bd5b6e71e2ccc30d5f7d5f74738db94dae53504077de7df5cff"
+            },
+            "additionalProperties" : true,
+            "x-connector-id" : "mysql",
+            "x-version" : "1.9.0.Alpha2",
+            "x-className" : "io.debezium.connector.mysql.MySqlConnector",
+            "$defs" : {
+              "serializer" : {
+                "type" : "string",
+                "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
+                "default" : "JSON"
               }
             }
           }
+        },
+        "channels" : {
+          "stable" : {
+            "revision" : 4,
+            "shard_metadata" : {
+              "operators" : [ {
+                "type" : "debezium-connector-operator",
+                "version" : "[1.0.0,2.0.0)"
+              } ],
+              "connector_type" : "source",
+              "connector_class" : "io.debezium.connector.mysql.MySqlConnector",
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-mysql@sha256:7ac245041861abe49e1dbc1fd4b3559aa9c25f5f8a29091839fe8dcb2d6accba"
+            }
+          }
         }
-    kind: ConfigMap
-    metadata:
-      creationTimestamp: null
-      name: connector-catalog-debezium-postgres
-  - apiVersion: v1
-    data:
-      debezium-sqlserver-1.9.0.Alpha2.json: |-
-        {
-          "connector_type" : {
-            "id" : "debezium-sqlserver-1.9.0.Alpha2",
-            "kind" : "ConnectorType",
-            "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-sqlserver-1.9.0.Alpha2",
-            "name" : "Debezium SqlSever Connector",
-            "version" : "1.9.0.Alpha2",
-            "channels" : [ "stable" ],
-            "description" : null,
-            "labels" : [ "source", "debezium", "sqlserver", "1.9.0.Alpha2" ],
-            "capabilities" : [ "data_shape" ],
-            "icon_href" : "http://example.com/images/debezium-sqlserver-1.9.0.Alpha2.png",
-            "schema" : {
-              "title" : "Debezium SqlSever Connector",
-              "required" : [ "database.server.name", "database.dbname", "database.hostname" ],
-              "type" : "object",
-              "properties" : {
-                "database.server.name" : {
-                  "title" : "Namespace",
-                  "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.server.name",
-                  "x-category" : "CONNECTION"
-                },
-                "database.hostname" : {
-                  "title" : "Hostname",
-                  "description" : "Resolvable hostname or IP address of the database server.",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.hostname",
-                  "x-category" : "CONNECTION"
-                },
-                "database.port" : {
-                  "format" : "int32",
-                  "title" : "Port",
-                  "description" : "Port of the database server.",
-                  "default" : 1433,
-                  "type" : "integer",
-                  "x-name" : "database.port",
-                  "x-category" : "CONNECTION"
-                },
-                "database.user" : {
-                  "title" : "User",
-                  "description" : "Name of the database user to be used when connecting to the database.",
-                  "type" : "string",
-                  "x-name" : "database.user",
-                  "x-category" : "CONNECTION"
-                },
-                "database.password" : {
-                  "title" : "Password",
+      }
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    name: connector-catalog-debezium-mysql
+-
+  apiVersion: v1
+  data:
+    debezium-postgres-1.9.0.Alpha2.json: |-
+      {
+        "connector_type" : {
+          "id" : "debezium-postgres-1.9.0.Alpha2",
+          "kind" : "ConnectorType",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-postgres-1.9.0.Alpha2",
+          "name" : "Debezium PostgreSQL Connector",
+          "version" : "1.9.0.Alpha2",
+          "channels" : [ "stable" ],
+          "description" : null,
+          "labels" : [ "source", "debezium", "postgres", "1.9.0.Alpha2" ],
+          "capabilities" : [ "data_shape" ],
+          "icon_href" : "http://example.com/images/debezium-postgres-1.9.0.Alpha2.png",
+          "schema" : {
+            "title" : "Debezium PostgreSQL Connector",
+            "required" : [ "database.server.name", "database.hostname", "database.user", "database.dbname" ],
+            "type" : "object",
+            "properties" : {
+              "database.server.name" : {
+                "title" : "Namespace",
+                "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.server.name",
+                "x-category" : "CONNECTION"
+              },
+              "database.hostname" : {
+                "title" : "Hostname",
+                "description" : "Resolvable hostname or IP address of the database server.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.hostname",
+                "x-category" : "CONNECTION"
+              },
+              "database.port" : {
+                "format" : "int32",
+                "title" : "Port",
+                "description" : "Port of the database server.",
+                "default" : 5432,
+                "type" : "integer",
+                "x-name" : "database.port",
+                "x-category" : "CONNECTION"
+              },
+              "database.user" : {
+                "title" : "User",
+                "description" : "Name of the database user to be used when connecting to the database.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.user",
+                "x-category" : "CONNECTION"
+              },
+              "database.password" : {
+                "title" : "Password",
+                "description" : "Password of the database user to be used when connecting to the database.",
+                "oneOf" : [ {
+                  "format" : "password",
                   "description" : "Password of the database user to be used when connecting to the database.",
-                  "oneOf" : [ {
-                    "format" : "password",
-                    "description" : "Password of the database user to be used when connecting to the database.",
-                    "type" : "string"
-                  }, {
-                    "description" : "An opaque reference to the password.",
-                    "type" : "object",
-                    "properties" : { },
-                    "additionalProperties" : true
-                  } ],
-                  "x-name" : "database.password",
-                  "x-category" : "CONNECTION"
-                },
-                "database.dbname" : {
-                  "title" : "Database",
-                  "description" : "The name of the database from which the connector should capture changes",
-                  "type" : "string",
-                  "nullable" : false,
-                  "x-name" : "database.dbname",
-                  "x-category" : "CONNECTION"
-                },
-                "table.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Tables",
-                  "description" : "The tables for which changes are to be captured",
-                  "type" : "string",
-                  "x-name" : "table.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "table.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Tables",
-                  "description" : "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
-                  "type" : "string",
-                  "x-name" : "table.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "column.include.list" : {
-                  "format" : "list,regex",
-                  "title" : "Include Columns",
-                  "description" : "Regular expressions matching columns to include in change events",
-                  "type" : "string",
-                  "x-name" : "column.include.list",
-                  "x-category" : "FILTERS"
-                },
-                "column.exclude.list" : {
-                  "format" : "list,regex",
-                  "title" : "Exclude Columns",
-                  "description" : "Regular expressions matching columns to exclude from change events",
-                  "type" : "string",
-                  "x-name" : "column.exclude.list",
-                  "x-category" : "FILTERS"
-                },
-                "snapshot.mode" : {
-                  "title" : "Snapshot mode",
-                  "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'initial' (the default) to specify the connector should run a snapshot only when no offsets are available for the logical server name; 'schema_only' to specify the connector should run a snapshot of the schema when no offsets are available for the logical server name. ",
-                  "default" : "initial",
-                  "enum" : [ "initial_only", "initial", "schema_only" ],
-                  "type" : "string",
-                  "x-name" : "snapshot.mode",
-                  "x-category" : "CONNECTOR_SNAPSHOT"
-                },
-                "decimal.handling.mode" : {
-                  "title" : "Decimal Handling",
-                  "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
-                  "default" : "precise",
-                  "enum" : [ "string", "double", "precise" ],
-                  "type" : "string",
-                  "x-name" : "decimal.handling.mode",
-                  "x-category" : "CONNECTOR"
-                },
-                "message.key.columns" : {
-                  "title" : "Columns PK mapping",
-                  "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
-                  "type" : "string",
-                  "x-name" : "message.key.columns",
-                  "x-category" : "CONNECTOR_ADVANCED"
-                },
-                "query.fetch.size" : {
-                  "format" : "int32",
-                  "title" : "Query fetch size",
-                  "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
-                  "default" : 0,
-                  "type" : "integer",
-                  "x-name" : "query.fetch.size",
-                  "x-category" : "ADVANCED"
-                },
-                "max.batch.size" : {
-                  "format" : "int32",
-                  "title" : "Change event batch size",
-                  "description" : "Maximum size of each batch of source records. Defaults to 2048.",
-                  "default" : 2048,
-                  "type" : "integer",
-                  "x-name" : "max.batch.size",
-                  "x-category" : "ADVANCED"
-                },
-                "max.queue.size" : {
-                  "format" : "int32",
-                  "title" : "Change event buffer size",
-                  "description" : "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
-                  "default" : 8192,
-                  "type" : "integer",
-                  "x-name" : "max.queue.size",
-                  "x-category" : "ADVANCED"
-                },
-                "data_shape" : {
+                  "type" : "string"
+                }, {
+                  "description" : "An opaque reference to the password.",
                   "type" : "object",
-                  "additionalProperties" : false,
-                  "properties" : {
-                    "key" : {
-                      "title" : "Kafka Message Key Format",
-                      "description" : "The serialization format for the Kafka message key.",
-                      "x-name" : "data_shape.key",
-                      "x-category" : "CONNECTOR",
-                      "$ref" : "#/$defs/serializer"
-                    },
-                    "value" : {
-                      "title" : "Kafka Message Value Format",
-                      "description" : "The serialization format for the Kafka message value.",
-                      "x-name" : "data_shape.value",
-                      "x-category" : "CONNECTOR",
-                      "$ref" : "#/$defs/serializer"
-                    }
+                  "properties" : { },
+                  "additionalProperties" : true
+                } ],
+                "x-name" : "database.password",
+                "x-category" : "CONNECTION"
+              },
+              "database.dbname" : {
+                "title" : "Database",
+                "description" : "The name of the database from which the connector should capture changes",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.dbname",
+                "x-category" : "CONNECTION"
+              },
+              "slot.name" : {
+                "title" : "Slot",
+                "description" : "The name of the Postgres logical decoding slot created for streaming changes from a plugin.Defaults to 'debezium",
+                "default" : "debezium",
+                "type" : "string",
+                "x-name" : "slot.name",
+                "x-category" : "CONNECTION_ADVANCED_REPLICATION"
+              },
+              "publication.name" : {
+                "title" : "Publication",
+                "description" : "The name of the Postgres 10+ publication used for streaming changes from a plugin.Defaults to 'dbz_publication'",
+                "default" : "dbz_publication",
+                "type" : "string",
+                "x-name" : "publication.name",
+                "x-category" : "CONNECTION_ADVANCED_REPLICATION"
+              },
+              "publication.autocreate.mode" : {
+                "title" : "Publication Auto Create Mode",
+                "description" : "Applies only when streaming changes using pgoutput.Determine how creation of a publication should work, the default is all_tables.DISABLED - The connector will not attempt to create a publication at all. The expectation is that the user has created the publication up-front. If the publication isn't found to exist upon startup, the connector will throw an exception and stop.ALL_TABLES - If no publication exists, the connector will create a new publication for all tables. Note this requires that the configured user has access. If the publication already exists, it will be used. i.e CREATE PUBLICATION <publication_name> FOR ALL TABLES;FILTERED - If no publication exists, the connector will create a new publication for all those tables matchingthe current filter configuration (see table/database include/exclude list properties). If the publication already exists, it will be used. i.e CREATE PUBLICATION <publication_name> FOR TABLE <tbl1, tbl2, etc>",
+                "default" : "all_tables",
+                "enum" : [ "filtered", "disabled", "all_tables" ],
+                "type" : "string",
+                "x-name" : "publication.autocreate.mode",
+                "x-category" : "CONNECTION_ADVANCED_REPLICATION"
+              },
+              "schema.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Schemas",
+                "description" : "The schemas for which events should be captured",
+                "type" : "string",
+                "x-name" : "schema.include.list",
+                "x-category" : "FILTERS"
+              },
+              "schema.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Schemas",
+                "description" : "The schemas for which events must not be captured",
+                "type" : "string",
+                "x-name" : "schema.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "table.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Tables",
+                "description" : "The tables for which changes are to be captured",
+                "type" : "string",
+                "x-name" : "table.include.list",
+                "x-category" : "FILTERS"
+              },
+              "table.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Tables",
+                "description" : "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
+                "type" : "string",
+                "x-name" : "table.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "column.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Columns",
+                "description" : "Regular expressions matching columns to include in change events",
+                "type" : "string",
+                "x-name" : "column.include.list",
+                "x-category" : "FILTERS"
+              },
+              "column.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Columns",
+                "description" : "Regular expressions matching columns to exclude from change events",
+                "type" : "string",
+                "x-name" : "column.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "snapshot.mode" : {
+                "title" : "Snapshot mode",
+                "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'always' to specify that the connector run a snapshot each time it starts up; 'initial' (the default) to specify the connector can run a snapshot only when no offsets are available for the logical server name; 'initial_only' same as 'initial' except the connector should stop after completing the snapshot and before it would normally start emitting changes;'never' to specify the connector should never run a snapshot and that upon first startup the connector should read from the last position (LSN) recorded by the server; and'exported' deprecated, use 'initial' instead; 'custom' to specify a custom class with 'snapshot.custom_class' which will be loaded and used to determine the snapshot, see docs for more details.",
+                "default" : "initial",
+                "enum" : [ "always", "exported", "never", "initial_only", "initial", "custom" ],
+                "type" : "string",
+                "x-name" : "snapshot.mode",
+                "x-category" : "CONNECTOR_SNAPSHOT"
+              },
+              "decimal.handling.mode" : {
+                "title" : "Decimal Handling",
+                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
+                "default" : "precise",
+                "enum" : [ "string", "double", "precise" ],
+                "type" : "string",
+                "x-name" : "decimal.handling.mode",
+                "x-category" : "CONNECTOR"
+              },
+              "message.key.columns" : {
+                "title" : "Columns PK mapping",
+                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+                "type" : "string",
+                "x-name" : "message.key.columns",
+                "x-category" : "CONNECTOR_ADVANCED"
+              },
+              "query.fetch.size" : {
+                "format" : "int32",
+                "title" : "Query fetch size",
+                "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
+                "default" : 0,
+                "type" : "integer",
+                "x-name" : "query.fetch.size",
+                "x-category" : "ADVANCED"
+              },
+              "max.batch.size" : {
+                "format" : "int32",
+                "title" : "Change event batch size",
+                "description" : "Maximum size of each batch of source records. Defaults to 2048.",
+                "default" : 2048,
+                "type" : "integer",
+                "x-name" : "max.batch.size",
+                "x-category" : "ADVANCED"
+              },
+              "max.queue.size" : {
+                "format" : "int32",
+                "title" : "Change event buffer size",
+                "description" : "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
+                "default" : 8192,
+                "type" : "integer",
+                "x-name" : "max.queue.size",
+                "x-category" : "ADVANCED"
+              },
+              "data_shape" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "key" : {
+                    "title" : "Kafka Message Key Format",
+                    "description" : "The serialization format for the Kafka message key.",
+                    "x-name" : "data_shape.key",
+                    "x-category" : "CONNECTOR",
+                    "$ref" : "#/$defs/serializer"
+                  },
+                  "value" : {
+                    "title" : "Kafka Message Value Format",
+                    "description" : "The serialization format for the Kafka message value.",
+                    "x-name" : "data_shape.value",
+                    "x-category" : "CONNECTOR",
+                    "$ref" : "#/$defs/serializer"
                   }
                 }
-              },
-              "additionalProperties" : true,
-              "x-connector-id" : "sqlserver",
-              "x-version" : "1.9.0.Alpha2",
-              "x-className" : "io.debezium.connector.sqlserver.SqlServerConnector",
-              "$defs" : {
-                "serializer" : {
-                  "type" : "string",
-                  "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
-                  "default" : "JSON"
-                }
               }
-            }
-          },
-          "channels" : {
-            "stable" : {
-              "revision" : 2,
-              "shard_metadata" : {
-                "operators" : [ {
-                  "type" : "debezium-connector-operator",
-                  "version" : "[1.0.0,2.0.0)"
-                } ],
-                "connector_type" : "source",
-                "connector_class" : "io.debezium.connector.sqlserver.SqlServerConnector",
-                "container_image" : "quay.io/rhoas/cos-connector-debezium-sqlserver@sha256:eec3042ae553d8222a9c187c1f71b29dc3e9da7fce2a8256b798c8e395d06c14"
+            },
+            "additionalProperties" : true,
+            "x-connector-id" : "postgres",
+            "x-version" : "1.9.0.Alpha2",
+            "x-className" : "io.debezium.connector.postgresql.PostgresConnector",
+            "$defs" : {
+              "serializer" : {
+                "type" : "string",
+                "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
+                "default" : "JSON"
               }
             }
           }
+        },
+        "channels" : {
+          "stable" : {
+            "revision" : 4,
+            "shard_metadata" : {
+              "operators" : [ {
+                "type" : "debezium-connector-operator",
+                "version" : "[1.0.0,2.0.0)"
+              } ],
+              "connector_type" : "source",
+              "connector_class" : "io.debezium.connector.postgresql.PostgresConnector",
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-postgres@sha256:b67d0ef4d4638bd5b6e71e2ccc30d5f7d5f74738db94dae53504077de7df5cff"
+            }
+          }
         }
-    kind: ConfigMap
-    metadata:
-      creationTimestamp: null
-      name: connector-catalog-debezium-sqlserver
+      }
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    name: connector-catalog-debezium-postgres
+-
+  apiVersion: v1
+  data:
+    debezium-sqlserver-1.9.0.Alpha2.json: |-
+      {
+        "connector_type" : {
+          "id" : "debezium-sqlserver-1.9.0.Alpha2",
+          "kind" : "ConnectorType",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-sqlserver-1.9.0.Alpha2",
+          "name" : "Debezium SqlSever Connector",
+          "version" : "1.9.0.Alpha2",
+          "channels" : [ "stable" ],
+          "description" : null,
+          "labels" : [ "source", "debezium", "sqlserver", "1.9.0.Alpha2" ],
+          "capabilities" : [ "data_shape" ],
+          "icon_href" : "http://example.com/images/debezium-sqlserver-1.9.0.Alpha2.png",
+          "schema" : {
+            "title" : "Debezium SqlSever Connector",
+            "required" : [ "database.server.name", "database.dbname", "database.hostname" ],
+            "type" : "object",
+            "properties" : {
+              "database.server.name" : {
+                "title" : "Namespace",
+                "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.server.name",
+                "x-category" : "CONNECTION"
+              },
+              "database.hostname" : {
+                "title" : "Hostname",
+                "description" : "Resolvable hostname or IP address of the database server.",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.hostname",
+                "x-category" : "CONNECTION"
+              },
+              "database.port" : {
+                "format" : "int32",
+                "title" : "Port",
+                "description" : "Port of the database server.",
+                "default" : 1433,
+                "type" : "integer",
+                "x-name" : "database.port",
+                "x-category" : "CONNECTION"
+              },
+              "database.user" : {
+                "title" : "User",
+                "description" : "Name of the database user to be used when connecting to the database.",
+                "type" : "string",
+                "x-name" : "database.user",
+                "x-category" : "CONNECTION"
+              },
+              "database.password" : {
+                "title" : "Password",
+                "description" : "Password of the database user to be used when connecting to the database.",
+                "oneOf" : [ {
+                  "format" : "password",
+                  "description" : "Password of the database user to be used when connecting to the database.",
+                  "type" : "string"
+                }, {
+                  "description" : "An opaque reference to the password.",
+                  "type" : "object",
+                  "properties" : { },
+                  "additionalProperties" : true
+                } ],
+                "x-name" : "database.password",
+                "x-category" : "CONNECTION"
+              },
+              "database.dbname" : {
+                "title" : "Database",
+                "description" : "The name of the database from which the connector should capture changes",
+                "type" : "string",
+                "nullable" : false,
+                "x-name" : "database.dbname",
+                "x-category" : "CONNECTION"
+              },
+              "table.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Tables",
+                "description" : "The tables for which changes are to be captured",
+                "type" : "string",
+                "x-name" : "table.include.list",
+                "x-category" : "FILTERS"
+              },
+              "table.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Tables",
+                "description" : "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
+                "type" : "string",
+                "x-name" : "table.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "column.include.list" : {
+                "format" : "list,regex",
+                "title" : "Include Columns",
+                "description" : "Regular expressions matching columns to include in change events",
+                "type" : "string",
+                "x-name" : "column.include.list",
+                "x-category" : "FILTERS"
+              },
+              "column.exclude.list" : {
+                "format" : "list,regex",
+                "title" : "Exclude Columns",
+                "description" : "Regular expressions matching columns to exclude from change events",
+                "type" : "string",
+                "x-name" : "column.exclude.list",
+                "x-category" : "FILTERS"
+              },
+              "snapshot.mode" : {
+                "title" : "Snapshot mode",
+                "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'initial' (the default) to specify the connector should run a snapshot only when no offsets are available for the logical server name; 'schema_only' to specify the connector should run a snapshot of the schema when no offsets are available for the logical server name. ",
+                "default" : "initial",
+                "enum" : [ "initial_only", "initial", "schema_only" ],
+                "type" : "string",
+                "x-name" : "snapshot.mode",
+                "x-category" : "CONNECTOR_SNAPSHOT"
+              },
+              "decimal.handling.mode" : {
+                "title" : "Decimal Handling",
+                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
+                "default" : "precise",
+                "enum" : [ "string", "double", "precise" ],
+                "type" : "string",
+                "x-name" : "decimal.handling.mode",
+                "x-category" : "CONNECTOR"
+              },
+              "message.key.columns" : {
+                "title" : "Columns PK mapping",
+                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+                "type" : "string",
+                "x-name" : "message.key.columns",
+                "x-category" : "CONNECTOR_ADVANCED"
+              },
+              "query.fetch.size" : {
+                "format" : "int32",
+                "title" : "Query fetch size",
+                "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
+                "default" : 0,
+                "type" : "integer",
+                "x-name" : "query.fetch.size",
+                "x-category" : "ADVANCED"
+              },
+              "max.batch.size" : {
+                "format" : "int32",
+                "title" : "Change event batch size",
+                "description" : "Maximum size of each batch of source records. Defaults to 2048.",
+                "default" : 2048,
+                "type" : "integer",
+                "x-name" : "max.batch.size",
+                "x-category" : "ADVANCED"
+              },
+              "max.queue.size" : {
+                "format" : "int32",
+                "title" : "Change event buffer size",
+                "description" : "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
+                "default" : 8192,
+                "type" : "integer",
+                "x-name" : "max.queue.size",
+                "x-category" : "ADVANCED"
+              },
+              "data_shape" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "key" : {
+                    "title" : "Kafka Message Key Format",
+                    "description" : "The serialization format for the Kafka message key.",
+                    "x-name" : "data_shape.key",
+                    "x-category" : "CONNECTOR",
+                    "$ref" : "#/$defs/serializer"
+                  },
+                  "value" : {
+                    "title" : "Kafka Message Value Format",
+                    "description" : "The serialization format for the Kafka message value.",
+                    "x-name" : "data_shape.value",
+                    "x-category" : "CONNECTOR",
+                    "$ref" : "#/$defs/serializer"
+                  }
+                }
+              }
+            },
+            "additionalProperties" : true,
+            "x-connector-id" : "sqlserver",
+            "x-version" : "1.9.0.Alpha2",
+            "x-className" : "io.debezium.connector.sqlserver.SqlServerConnector",
+            "$defs" : {
+              "serializer" : {
+                "type" : "string",
+                "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
+                "default" : "JSON"
+              }
+            }
+          }
+        },
+        "channels" : {
+          "stable" : {
+            "revision" : 2,
+            "shard_metadata" : {
+              "operators" : [ {
+                "type" : "debezium-connector-operator",
+                "version" : "[1.0.0,2.0.0)"
+              } ],
+              "connector_type" : "source",
+              "connector_class" : "io.debezium.connector.sqlserver.SqlServerConnector",
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-sqlserver@sha256:eec3042ae553d8222a9c187c1f71b29dc3e9da7fce2a8256b798c8e395d06c14"
+            }
+          }
+        }
+      }
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    name: connector-catalog-debezium-sqlserver
