@@ -622,7 +622,6 @@ objects:
             - --vault-kind=${VAULT_KIND}
             - --vault-secret-access-key-file=/secrets/service/vault.secretaccesskey
             - -v=${GLOG_V}
-            - --keycloak-client-expire=${KEYCLOAK_CLIENT_EXPIRE}
             resources:
               requests:
                 cpu: ${CPU_REQUEST}
