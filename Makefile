@@ -48,6 +48,10 @@ JWKS_URL ?= "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-
 MAS_SSO_BASE_URL ?="https://identity.api.stage.openshift.com"
 MAS_SSO_REALM ?="rhoas"
 VAULT_KIND ?= tmp
+CONNECTOR_DISABLE_CASCADE_DELETE ?= "false"
+CONNECTOR_EVAL_DURATION ?= "48h"
+CONNECTOR_NAMESPACE_LIFECYCLE_API ?= "false"
+CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE ?= "evaluation-profile"
 
 GO := go
 GOFMT := gofmt
@@ -381,6 +385,7 @@ deploy: deploy/db
 		-p VAULT_SECRET_ACCESS_KEY="$(VAULT_SECRET_ACCESS_KEY)" \
 		| oc apply -f - -n $(NAMESPACE)
 	@oc apply -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
+	@oc apply -f ./templates/connectors-quota-configmap.yml -n $(NAMESPACE)
 	@oc create -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE) || true
 	@oc process -f ./templates/service-template.yml \
 		-p ENVIRONMENT="$(OCM_ENV)" \
@@ -397,6 +402,11 @@ deploy: deploy/db
 		-p OSD_IDP_MAS_SSO_REALM="$(OSD_IDP_MAS_SSO_REALM)" \
 		-p ALLOW_ANY_REGISTERED_USERS="$(ALLOW_ANY_REGISTERED_USERS)" \
 		-p VAULT_KIND=$(VAULT_KIND) \
+		-p CONNECTOR_EVAL_ORGANIZATIONS=$(CONNECTOR_EVAL_ORGANIZATIONS) \
+		-p CONNECTOR_DISABLE_CASCADE_DELETE=$(CONNECTOR_DISABLE_CASCADE_DELETE) \
+		-p CONNECTOR_EVAL_DURATION=$(CONNECTOR_EVAL_DURATION) \
+		-p CONNECTOR_NAMESPACE_LIFECYCLE_API=$(CONNECTOR_NAMESPACE_LIFECYCLE_API) \
+		-p CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE=$(CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE) \
 		-p SERVICE_PUBLIC_HOST_URL="$(SERVICE_PUBLIC_HOST_URL)" \
 		-p REPLICAS="$(REPLICAS)" \
 		| oc apply -f - -n $(NAMESPACE)
@@ -413,9 +423,9 @@ undeploy:
 	@-oc process -f ./templates/secrets-template.yml | oc delete -f - -n $(NAMESPACE)
 	@-oc process -f ./templates/route-template.yml | oc delete -f - -n $(NAMESPACE)
 	@-oc delete -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
+	@-oc delete -f ./templates/connectors-quota-configmap.yml -n $(NAMESPACE)
 	@-oc process -f ./templates/service-template.yml \
 		-p IMAGE_REGISTRY=$(IMAGE_REGISTRY) \
 		-p IMAGE_REPOSITORY=$(IMAGE_REPOSITORY) \
 		| oc delete -f - -n $(NAMESPACE)
 .PHONY: undeploy
-
