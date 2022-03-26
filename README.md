@@ -195,6 +195,11 @@ make deploy OCM_SERVICE_TOKEN=<offline-token> IMAGE_TAG=<image-tag>
 - `OBSERVATORIUM_SERVICE_TOKEN`: Token for observatorium service.
 - `MAS_SSO_BASE_URL`: MAS SSO base url.
 - `MAS_SSO_REALM`: MAS SSO realm url.
+- `CONNECTOR_DISABLE_CASCADE_DELETE`: Disable cascade delete of connectors, leaving them in unassigned state instead
+- `CONNECTOR_EVAL_DURATION`: Connector evaluation namespace expiry duration in Golang duration format, default is 48h
+- `CONNECTOR_EVAL_ORGANIZATIONS`: Organization IDs for clusters to be used to create evaluation namespaces
+- `CONNECTOR_NAMESPACE_LIFECYCLE_API`: Enable support for public APIs to create and delete non-evaluation namespaces
+- `CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE`: Name of quota profile for evaluation namespaces
 - `ALLOW_ANY_REGISTERED_USERS`: Enable to allow any registered users against redhat.com to access the service.
 - `STRIMZI_OPERATOR_ADDON_ID`: The id of the Strimzi operator addon.
 

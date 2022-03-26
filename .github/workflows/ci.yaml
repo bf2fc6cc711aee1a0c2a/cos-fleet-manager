@@ -140,6 +140,7 @@ jobs:
           VAULT_ACCESS_KEY: ${{ secrets.VAULT_ACCESS_KEY }}
           VAULT_SECRET_ACCESS_KEY: ${{ secrets.VAULT_SECRET_ACCESS_KEY }}
           SERVICE_PUBLIC_HOST_URL: ${{ secrets.SERVICE_PUBLIC_HOST_URL }}
+          CONNECTOR_EVAL_ORGANIZATIONS: ${{ secrets.CONNECTOR_EVAL_ORGANIZATIONS }}
         run: |
           make deploy
           oc rollout restart deployment/cos-fleet-manager
