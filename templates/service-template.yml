@@ -16,7 +16,7 @@ parameters:
 
 - name: ENVIRONMENT
   displayName: Environment
-  description: Which Kafka Service Fleet Manager environment to use for this deployment
+  description: Which Connector Service Fleet Manager environment to use for this deployment
   value: production
 
 - name: IMAGE_REGISTRY
@@ -327,6 +327,31 @@ parameters:
   description: Whether or not to tag Keycloak created Client to expire in 2 hours (useful for cleaning up after integrations tests)
   value: "false"
 
+- name: CONNECTOR_DISABLE_CASCADE_DELETE
+  displayName: Disable Connector Cascade Delete
+  description: Disable cascade delete of connectors, leaving them in unassigned state instead
+  value: "false"
+
+- name: CONNECTOR_EVAL_DURATION
+  displayName: Evaluation Duration
+  description: Connector evaluation namespace expiry duration in Golang duration format, default is 48h
+  value: "48h"
+
+- name: CONNECTOR_EVAL_ORGANIZATIONS
+  displayName: Evaluation Organization IDs List
+  description: Organization IDs for clusters to be used to create evaluation namespaces
+  required: true
+
+- name: CONNECTOR_NAMESPACE_LIFECYCLE_API
+  displayName: Namespace Lifecycle API
+  description: Enable support for public APIs to create and delete non-evaluation namespaces
+  value: "false"
+
+- name: CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE
+  displayName: Evaluation Namespace Quota Profile Name
+  description: Name of quota profile for evaluation namespaces
+  value: "evaluation-profile"
+
 objects:
   - kind: ConfigMap
     apiVersion: v1
@@ -424,6 +449,9 @@ objects:
           - name: cos-fleet-manager
             configMap:
               name: cos-fleet-manager
+          - name: connectors-quota-configuration
+            configMap:
+              name: connectors-quota-configuration
           - name: connector-catalog-camel-aws
             configMap:
               name: connector-catalog-camel-aws
@@ -512,6 +540,8 @@ objects:
               mountPath: /secrets/rds
             - name: cos-fleet-manager
               mountPath: /config
+            - name: connectors-quota-configuration
+              mountPath: /config/connectors-quota
             - name: connector-catalog-camel-aws
               mountPath: /config/connector-catalog/camel-aws
             - name: connector-catalog-camel-azure
@@ -560,6 +590,12 @@ objects:
             - --connector-catalog=/config/connector-catalog/debezium-mongodb
             - --connector-catalog=/config/connector-catalog/debezium-mysql
             - --connector-catalog=/config/connector-catalog/debezium-postgres
+            - --connector-disable-cascade-delete=${CONNECTOR_DISABLE_CASCADE_DELETE}
+            - --connector-eval-duration=${CONNECTOR_EVAL_DURATION}
+            - --connector-eval-organizations=${CONNECTOR_EVAL_ORGANIZATIONS}
+            - --connector-namespace-lifecycle-api=${CONNECTOR_NAMESPACE_LIFECYCLE_API}
+            - --connectors-eval-namespace-quota-profile=${CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE}
+            - --connectors-quota-config-file=/config/connectors-quota/connectors-quota-configuration.yaml
             - --db-host-file=/secrets/rds/db.host
             - --db-port-file=/secrets/rds/db.port
             - --db-user-file=/secrets/rds/db.user
