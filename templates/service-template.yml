@@ -327,9 +327,9 @@ parameters:
   description: Whether or not to tag Keycloak created Client to expire in 2 hours (useful for cleaning up after integrations tests)
   value: "false"
 
-- name: CONNECTOR_DISABLE_CASCADE_DELETE
+- name: CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS
   displayName: Disable Connector Cascade Delete
-  description: Disable cascade delete of connectors, leaving them in unassigned state instead
+  description: Enable support for 'unassigned' state for connectors
   value: "false"
 
 - name: CONNECTOR_EVAL_DURATION
@@ -590,7 +590,7 @@ objects:
             - --connector-catalog=/config/connector-catalog/debezium-mongodb
             - --connector-catalog=/config/connector-catalog/debezium-mysql
             - --connector-catalog=/config/connector-catalog/debezium-postgres
-            - --connector-disable-cascade-delete=${CONNECTOR_DISABLE_CASCADE_DELETE}
+            - --connector-enable-unassigned-connectors=${CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS}
             - --connector-eval-duration=${CONNECTOR_EVAL_DURATION}
             - --connector-eval-organizations=${CONNECTOR_EVAL_ORGANIZATIONS}
             - --connector-namespace-lifecycle-api=${CONNECTOR_NAMESPACE_LIFECYCLE_API}
