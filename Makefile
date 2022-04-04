@@ -385,7 +385,7 @@ deploy: deploy/db
 		-p VAULT_SECRET_ACCESS_KEY="$(VAULT_SECRET_ACCESS_KEY)" \
 		| oc apply -f - -n $(NAMESPACE)
 	@oc apply -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
-	@oc apply -f ./templates/connectors-quota-configmap.yml -n $(NAMESPACE)
+	@oc process -f ./templates/connectors-quota-configuration.yml | oc apply -f - -n $(NAMESPACE)
 	@oc create -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE) || true
 	@oc process -f ./templates/service-template.yml \
 		-p ENVIRONMENT="$(OCM_ENV)" \
@@ -423,7 +423,7 @@ undeploy:
 	@-oc process -f ./templates/secrets-template.yml | oc delete -f - -n $(NAMESPACE)
 	@-oc process -f ./templates/route-template.yml | oc delete -f - -n $(NAMESPACE)
 	@-oc delete -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
-	@-oc delete -f ./templates/connectors-quota-configmap.yml -n $(NAMESPACE)
+	@-oc process -f ./templates/connectors-quota-configuration.yml | oc delete -f - -n $(NAMESPACE)
 	@-oc process -f ./templates/service-template.yml \
 		-p IMAGE_REGISTRY=$(IMAGE_REGISTRY) \
 		-p IMAGE_REPOSITORY=$(IMAGE_REPOSITORY) \
