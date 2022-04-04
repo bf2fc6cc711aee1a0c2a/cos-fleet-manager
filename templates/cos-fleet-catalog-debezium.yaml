@@ -67,6 +67,14 @@ objects:
                 "x-name" : "mongodb.password",
                 "x-category" : "CONNECTION"
               },
+              "mongodb.ssl.enabled" : {
+                "title" : "Enable SSL connection to MongoDB",
+                "description" : "Should connector use SSL to connect to MongoDB instances",
+                "default" : false,
+                "type" : "boolean",
+                "x-name" : "mongodb.ssl.enabled",
+                "x-category" : "CONNECTION_ADVANCED_SSL"
+              },
               "mongodb.authsource" : {
                 "title" : "Credentials Database",
                 "description" : "Database containing user credentials.",
@@ -176,7 +184,7 @@ objects:
             "$defs" : {
               "serializer" : {
                 "type" : "string",
-                "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
+                "enum" : [ "JSON", "AVRO", "JSON without schema" ],
                 "default" : "JSON"
               }
             }
@@ -409,7 +417,7 @@ objects:
             "$defs" : {
               "serializer" : {
                 "type" : "string",
-                "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
+                "enum" : [ "JSON", "AVRO", "JSON without schema" ],
                 "default" : "JSON"
               }
             }
@@ -665,7 +673,7 @@ objects:
             "$defs" : {
               "serializer" : {
                 "type" : "string",
-                "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
+                "enum" : [ "JSON", "AVRO", "JSON without schema" ],
                 "default" : "JSON"
               }
             }
@@ -879,7 +887,7 @@ objects:
             "$defs" : {
               "serializer" : {
                 "type" : "string",
-                "enum" : [ "JSON", "AVRO", "JSON_WITHOUT_SCHEMA" ],
+                "enum" : [ "JSON", "AVRO", "JSON without schema" ],
                 "default" : "JSON"
               }
             }
