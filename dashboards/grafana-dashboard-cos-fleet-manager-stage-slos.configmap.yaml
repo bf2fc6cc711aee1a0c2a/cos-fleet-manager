@@ -1103,7 +1103,7 @@ data:
       },
       "timezone": "",
       "title": "COS Fleet Manager SLOs",
-      "uid": "Tbw1EgoMz",
+      "uid": "zbx1Eg0Mz",
       "version": 1
     }
 kind: ConfigMap
