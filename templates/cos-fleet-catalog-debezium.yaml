@@ -184,7 +184,7 @@ objects:
             "$defs" : {
               "serializer" : {
                 "type" : "string",
-                "enum" : [ "JSON", "AVRO", "JSON without schema" ],
+                "enum" : [ "JSON", "JSON without schema" ],
                 "default" : "JSON"
               }
             }
@@ -417,7 +417,7 @@ objects:
             "$defs" : {
               "serializer" : {
                 "type" : "string",
-                "enum" : [ "JSON", "AVRO", "JSON without schema" ],
+                "enum" : [ "JSON", "JSON without schema" ],
                 "default" : "JSON"
               }
             }
@@ -673,7 +673,7 @@ objects:
             "$defs" : {
               "serializer" : {
                 "type" : "string",
-                "enum" : [ "JSON", "AVRO", "JSON without schema" ],
+                "enum" : [ "JSON", "JSON without schema" ],
                 "default" : "JSON"
               }
             }
@@ -887,7 +887,7 @@ objects:
             "$defs" : {
               "serializer" : {
                 "type" : "string",
-                "enum" : [ "JSON", "AVRO", "JSON without schema" ],
+                "enum" : [ "JSON", "JSON without schema" ],
                 "default" : "JSON"
               }
             }
