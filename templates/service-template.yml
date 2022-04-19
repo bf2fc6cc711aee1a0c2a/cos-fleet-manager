@@ -491,6 +491,9 @@ objects:
           - name: connector-catalog-debezium-postgres
             configMap:
               name: connector-catalog-debezium-postgres
+          - name: connector-catalog-debezium-sqlserver
+            configMap:
+              name: connector-catalog-debezium-sqlserver
           - name: envoy-config
             configMap:
               name: cos-fleet-manager-envoy-config
