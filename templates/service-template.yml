@@ -571,6 +571,8 @@ objects:
               mountPath: /config/connector-catalog/debezium-mysql
             - name: connector-catalog-debezium-postgres
               mountPath: /config/connector-catalog/debezium-postgres
+            - name: connector-catalog-debezium-sqlserver
+              mountPath: /config/connector-catalog/debezium-sqlserver
             env:
               - name: "OCM_ENV"
                 value: "${ENVIRONMENT}"
@@ -593,6 +595,7 @@ objects:
             - --connector-catalog=/config/connector-catalog/debezium-mongodb
             - --connector-catalog=/config/connector-catalog/debezium-mysql
             - --connector-catalog=/config/connector-catalog/debezium-postgres
+            - --connector-catalog=/config/connector-catalog/debezium-sqlserver
             - --connector-enable-unassigned-connectors=${CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS}
             - --connector-eval-duration=${CONNECTOR_EVAL_DURATION}
             - --connector-eval-organizations=${CONNECTOR_EVAL_ORGANIZATIONS}
