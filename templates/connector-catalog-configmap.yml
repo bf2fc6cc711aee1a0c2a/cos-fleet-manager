@@ -75,3 +75,10 @@ metadata:
   name: connector-catalog-debezium-postgres
   annotations:
     qontract.recycle: "true"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: connector-catalog-debezium-sqlserver
+  annotations:
+    qontract.recycle: "true"
