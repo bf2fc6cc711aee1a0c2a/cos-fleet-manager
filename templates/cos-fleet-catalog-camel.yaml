@@ -17,11 +17,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-cloudwatch:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-cloudwatch:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -50,12 +50,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS Cloudwatch Sink",
+          "description" : "Amazon CloudWatch Metrics sink",
           "icon_href" : "TODO",
           "id" : "aws_cloudwatch_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS Cloudwatch Sink",
+          "name" : "Amazon CloudWatch Metrics sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -282,11 +282,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -315,12 +315,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS DynamoDB Sink",
+          "description" : "Amazon DynamoDB sink",
           "icon_href" : "TODO",
           "id" : "aws_ddb_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS DynamoDB Sink",
+          "name" : "Amazon DynamoDB sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -560,11 +560,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb-streams:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb-streams:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -593,12 +593,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS DynamoDB Streams Source",
+          "description" : "Amazon DynamoDB source",
           "icon_href" : "TODO",
           "id" : "aws_ddb_streams_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "AWS DynamoDB Streams Source",
+          "name" : "Amazon DynamoDB source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -838,11 +838,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -871,12 +871,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS Kinesis Sink",
+          "description" : "Amazon Kinesis sink",
           "icon_href" : "TODO",
           "id" : "aws_kinesis_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS Kinesis Sink",
+          "name" : "Amazon Kinesis sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -1118,11 +1118,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1151,12 +1151,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS Kinesis Source",
+          "description" : "Amazon Kinesis source",
           "icon_href" : "TODO",
           "id" : "aws_kinesis_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "AWS Kinesis Source",
+          "name" : "Amazon Kinesis source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -1398,11 +1398,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-lambda:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-lambda:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1431,12 +1431,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS Lambda Sink",
+          "description" : "Amazon Lambda sink",
           "icon_href" : "TODO",
           "id" : "aws_lambda_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS Lambda Sink",
+          "name" : "Amazon Lambda sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -1655,8 +1655,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1685,12 +1685,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS S3 Sink",
+          "description" : "Amazon S3 sink",
           "icon_href" : "TODO",
           "id" : "aws_s3_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS S3 Sink",
+          "name" : "Amazon S3 sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -1931,8 +1931,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1961,12 +1961,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS S3 Source",
+          "description" : "Amazon S3 source",
           "icon_href" : "TODO",
           "id" : "aws_s3_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "AWS S3 Source",
+          "name" : "Amazon S3 source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -2223,11 +2223,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ses:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ses:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2256,12 +2256,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS SES Sink",
+          "description" : "Amazon Simple Email Service sink",
           "icon_href" : "TODO",
           "id" : "aws_ses_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS SES Sink",
+          "name" : "Amazon Simple Email Service sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -2478,11 +2478,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sns:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sns:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2511,12 +2511,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS SNS Sink",
+          "description" : "Amazon Simple Notification Service sink",
           "icon_href" : "TODO",
           "id" : "aws_sns_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS SNS Sink",
+          "name" : "Amazon Simple Notification Service sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -2752,8 +2752,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2782,12 +2782,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS SQS Sink",
+          "description" : "Amazon Simple Queue Service sink",
           "icon_href" : "TODO",
           "id" : "aws_sqs_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS SQS Sink",
+          "name" : "Amazon Simple Queue Service sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -3036,8 +3036,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3066,12 +3066,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS SQS Source",
+          "description" : "Amazon Simple Queue Service source",
           "icon_href" : "TODO",
           "id" : "aws_sqs_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "AWS SQS Source",
+          "name" : "Amazon Simple Queue Service source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -3338,8 +3338,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob-changefeed:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob-changefeed:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3368,12 +3368,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Storage Blob Changefeed Source",
+          "description" : "Azure Blob Storage change feed source",
           "icon_href" : "TODO",
           "id" : "azure_storage_blob_changefeed_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Azure Storage Blob Changefeed Source",
+          "name" : "Azure Blob Storage change feed source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -3573,8 +3573,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3603,12 +3603,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Storage Blob Sink",
+          "description" : "Azure Blob Storage sink",
           "icon_href" : "TODO",
           "id" : "azure_storage_blob_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Azure Storage Blob Sink",
+          "name" : "Azure Blob Storage sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -3813,8 +3813,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3843,12 +3843,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Storage Blob Source",
+          "description" : "Azure Blob Storage source",
           "icon_href" : "TODO",
           "id" : "azure_storage_blob_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Azure Storage Blob Source",
+          "name" : "Azure Blob Storage source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -4053,8 +4053,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4083,12 +4083,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Storage Queue Sink",
+          "description" : "Azure Queue Storage sink",
           "icon_href" : "TODO",
           "id" : "azure_storage_queue_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Azure Storage Queue Sink",
+          "name" : "Azure Queue Storage sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -4287,8 +4287,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4317,12 +4317,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Storage Queue Source",
+          "description" : "Azure Queue Storage source",
           "icon_href" : "TODO",
           "id" : "azure_storage_queue_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Azure Storage Queue Source",
+          "name" : "Azure Queue Storage source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -4531,11 +4531,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4564,12 +4564,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Functions Sink",
+          "description" : "Google Cloud Functions sink",
           "icon_href" : "TODO",
           "id" : "google_functions_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Google Cloud Functions Sink",
+          "name" : "Google Cloud Functions sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -4761,11 +4761,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4794,12 +4794,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Pubsub Sink",
+          "description" : "Google Cloud Pub/Sub sink",
           "icon_href" : "TODO",
           "id" : "google_pubsub_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Google Cloud Pubsub Sink",
+          "name" : "Google Cloud Pub/Sub sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -4986,11 +4986,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5019,12 +5019,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Pubsub Source",
+          "description" : "Google Cloud Pub/Sub source",
           "icon_href" : "TODO",
           "id" : "google_pubsub_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Google Cloud Pubsub Source",
+          "name" : "Google Cloud Pub/Sub source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -5229,11 +5229,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5262,12 +5262,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Storage Sink",
+          "description" : "Google Cloud Storage sink",
           "icon_href" : "TODO",
           "id" : "google_storage_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Google Cloud Storage Sink",
+          "name" : "Google Cloud Storage sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -5455,11 +5455,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5488,12 +5488,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Storage Source",
+          "description" : "Google Cloud Storage source",
           "icon_href" : "TODO",
           "id" : "google_storage_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Google Cloud Storage Source",
+          "name" : "Google Cloud Storage source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -5694,11 +5694,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-http:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-http:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5727,12 +5727,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "HTTP Sink",
+          "description" : "HTTP sink",
           "icon_href" : "TODO",
           "id" : "http_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "HTTP Sink",
+          "name" : "HTTP sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -5916,11 +5916,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5949,12 +5949,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "JMS AMQP 1.0 Sink",
+          "description" : "JMS AMQP 1.0 sink",
           "icon_href" : "TODO",
           "id" : "jms_amqp_10_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "JMS AMQP 1.0 Sink",
+          "name" : "JMS AMQP 1.0 sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -6142,11 +6142,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -6175,12 +6175,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "JMS AMQP 1.0 Source",
+          "description" : "JMS AMQP 1.0 source",
           "icon_href" : "TODO",
           "id" : "jms_amqp_10_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "JMS AMQP 1.0 Source",
+          "name" : "JMS AMQP 1.0 source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -6709,11 +6709,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -6742,12 +6742,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "JMS Apache Artemis Source",
+          "description" : "JMS Apache Artemis source",
           "icon_href" : "TODO",
           "id" : "jms_apache_artemis_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "JMS Apache Artemis Source",
+          "name" : "JMS Apache Artemis source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -6942,10 +6942,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-data-generator:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-data-generator:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -6974,12 +6975,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Data Generator Source",
+          "description" : "Data Generator source",
           "icon_href" : "TODO",
           "id" : "data_generator_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Data Generator Source",
+          "name" : "Data Generator source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -7168,10 +7169,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-log:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-log:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -7397,11 +7399,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7430,12 +7432,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Cassandra Sink",
+          "description" : "Apache Cassandra sink",
           "icon_href" : "TODO",
           "id" : "cassandra_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Cassandra Sink",
+          "name" : "Apache Cassandra sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -7661,11 +7663,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7694,12 +7696,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Cassandra Source",
+          "description" : "Apache Cassandra source",
           "icon_href" : "TODO",
           "id" : "cassandra_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Cassandra Source",
+          "name" : "Apache Cassandra source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -7925,11 +7927,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-elasticsearch:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-elasticsearch:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7958,12 +7960,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Elasticsearch Sink",
+          "description" : "Elasticsearch sink",
           "icon_href" : "TODO",
           "id" : "elasticsearch_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Elasticsearch Sink",
+          "name" : "Elasticsearch sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -8178,11 +8180,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8211,12 +8213,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MongoDB Sink",
+          "description" : "MongoDB sink",
           "icon_href" : "TODO",
           "id" : "mongodb_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "MongoDB Sink",
+          "name" : "MongoDB sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -8433,11 +8435,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8466,12 +8468,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MongoDB Source",
+          "description" : "MongoDB source",
           "icon_href" : "TODO",
           "id" : "mongodb_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "MongoDB Source",
+          "name" : "MongoDB source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -8695,11 +8697,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jira:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-jira:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8728,12 +8730,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Jira Source",
+          "description" : "Jira source",
           "icon_href" : "TODO",
           "id" : "jira_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Jira Source",
+          "name" : "Jira source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -8936,11 +8938,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "512m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8969,12 +8971,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Salesforce Source",
+          "description" : "Salesforce source",
           "icon_href" : "TODO",
           "id" : "salesforce_streaming_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Salesforce Streaming Source",
+          "name" : "Salesforce source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -9203,11 +9205,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -9236,12 +9238,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Slack Sink",
+          "description" : "Slack sink",
           "icon_href" : "TODO",
           "id" : "slack_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Slack Sink",
+          "name" : "Slack sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -9447,11 +9449,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "consumes_class" : "com.slack.api.model.Message",
@@ -9481,12 +9483,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Slack Source",
+          "description" : "Slack source",
           "icon_href" : "TODO",
           "id" : "slack_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Slack Source",
+          "name" : "Slack source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -9683,11 +9685,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -9716,12 +9718,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Telegram Sink",
+          "description" : "Telegram sink",
           "icon_href" : "TODO",
           "id" : "telegram_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Telegram Sink",
+          "name" : "Telegram sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -9911,11 +9913,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9944,12 +9946,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Telegram Source",
+          "description" : "Telegram source",
           "icon_href" : "TODO",
           "id" : "telegram_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Telegram Source",
+          "name" : "Telegram source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -10141,11 +10143,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10174,12 +10176,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS Redshift Sink",
+          "description" : "Amazon Redshift sink",
           "icon_href" : "TODO",
           "id" : "aws_redshift_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "AWS Redshift Sink",
+          "name" : "Amazon Redshift sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -10393,11 +10395,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10426,12 +10428,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "AWS Redshift Source",
+          "description" : "Amazon Redshift source",
           "icon_href" : "TODO",
           "id" : "aws_redshift_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "AWS Redshift Source",
+          "name" : "Amazon Redshift source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -10651,11 +10653,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10684,12 +10686,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MariaDB Sink",
+          "description" : "MariaDB sink",
           "icon_href" : "TODO",
           "id" : "mariadb_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "MariaDB Sink",
+          "name" : "MariaDB sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -10903,11 +10905,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10936,12 +10938,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MariaDB Source",
+          "description" : "MariaDB source",
           "icon_href" : "TODO",
           "id" : "mariadb_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "MariaDB Source",
+          "name" : "MariaDB source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -11161,11 +11163,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -11194,12 +11196,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MySQL Sink",
+          "description" : "MySQL sink",
           "icon_href" : "TODO",
           "id" : "mysql_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "MySQL Sink",
+          "name" : "MySQL sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -11413,11 +11415,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -11446,12 +11448,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MySQL Source",
+          "description" : "MySQL source",
           "icon_href" : "TODO",
           "id" : "mysql_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "MySQL Source",
+          "name" : "MySQL source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -11671,11 +11673,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -11704,12 +11706,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "PostgreSQL Sink",
+          "description" : "PostgreSQL sink",
           "icon_href" : "TODO",
           "id" : "postgresql_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "PostgreSQL Sink",
+          "name" : "PostgreSQL sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -11923,11 +11925,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -11956,12 +11958,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "PostgreSQL Source",
+          "description" : "PostgreSQL source",
           "icon_href" : "TODO",
           "id" : "postgresql_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "PostgreSQL Source",
+          "name" : "PostgreSQL source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -12181,11 +12183,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -12214,12 +12216,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "SQL Server Sink",
+          "description" : "SQL Server sink",
           "icon_href" : "TODO",
           "id" : "sqlserver_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "SQL Server Sink",
+          "name" : "SQL Server sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -12433,11 +12435,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -12466,12 +12468,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "SQL Server Source",
+          "description" : "SQL Server source",
           "icon_href" : "TODO",
           "id" : "sqlserver_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "SQL Server Source",
+          "name" : "SQL Server source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -12698,11 +12700,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -12731,12 +12733,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "FTPS Sink",
+          "description" : "FTPS sink",
           "icon_href" : "TODO",
           "id" : "ftps_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "FTPS Sink",
+          "name" : "FTPS sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -12955,11 +12957,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -12988,12 +12990,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "FTPS Source",
+          "description" : "FTPS source",
           "icon_href" : "TODO",
           "id" : "ftps_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "FTPS Source",
+          "name" : "FTPS source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -13218,11 +13220,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -13251,12 +13253,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Minio Sink",
+          "description" : "MinIO sink",
           "icon_href" : "TODO",
           "id" : "minio_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "Minio Sink",
+          "name" : "MinIO sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -13472,11 +13474,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -13505,12 +13507,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Minio Source",
+          "description" : "MinIO source",
           "icon_href" : "TODO",
           "id" : "minio_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "Minio Source",
+          "name" : "MinIO source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -13732,11 +13734,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -13765,12 +13767,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "SFTP Sink",
+          "description" : "SFTP sink",
           "icon_href" : "TODO",
           "id" : "sftp_sink_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "sink" ],
-          "name" : "SFTP Sink",
+          "name" : "SFTP sink",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
@@ -13989,11 +13991,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "256m",
+                "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.18",
-              "connector_revision" : "18",
+              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.19",
+              "connector_revision" : "19",
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -14022,12 +14024,12 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "SFTP Source",
+          "description" : "SFTP source",
           "icon_href" : "TODO",
           "id" : "sftp_source_0.1",
           "kind" : "ConnectorType",
           "labels" : [ "source" ],
-          "name" : "SFTP Source",
+          "name" : "SFTP source",
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
