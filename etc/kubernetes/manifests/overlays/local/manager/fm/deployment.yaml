@@ -1,0 +1,130 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: cos-fleet-manager
+  labels:
+    app: cos-fleet-manager
+spec:
+  selector:
+    matchLabels:
+      app: cos-fleet-manager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cos-fleet-manager
+    spec:
+      serviceAccountName: cos-fleet-manager
+      volumes:
+        # secrets
+        - name: cos-fleet-manager-db
+          secret:
+            secretName: cos-fleet-manager-db
+        - name: cos-fleet-manager-kc
+          secret:
+            secretName: cos-fleet-manager-kc
+        - name: cos-fleet-manager-ocm
+          secret:
+            secretName: cos-fleet-manager-ocm
+        # service config
+        - name: cos-fleet-manager-config
+          configMap:
+            name: cos-fleet-manager-config
+        # catalogs
+        - name: connector-catalog
+          emptyDir: { }
+      initContainers:
+        - name: catalog
+          image: "quay.io/rhoas/cos-fleet-catalog-camel:latest"
+          imagePullPolicy: Never
+          volumeMounts:
+            - mountPath: /config/connector-catalog
+              name: connector-catalog
+          command:
+            - cp
+            - -r
+            - /etc/connectors
+            - /config/connector-catalog/camel
+        - name: migration
+          image: "quay.io/rhoas/cos-fleet-manager:latest"
+          imagePullPolicy: Never
+          volumeMounts:
+            - name: cos-fleet-manager-db
+              mountPath: /secrets/db
+          env:
+            - name: "OCM_ENV"
+              value: "integration"
+          workingDir: /
+          command:
+            - /usr/local/bin/cos-fleet-manager
+            - migrate
+            - --alsologtostderr
+            - --db-host-file=/secrets/db/db.host
+            - --db-port-file=/secrets/db/db.port
+            - --db-user-file=/secrets/db/db.user
+            - --db-password-file=/secrets/db/db.password
+            - --db-name-file=/secrets/db/db.name
+      containers:
+        - name: service
+          image: "quay.io/rhoas/cos-fleet-manager:latest"
+          imagePullPolicy: Never
+          volumeMounts:
+            - name: cos-fleet-manager-db
+              mountPath: /secrets/db
+            - name: cos-fleet-manager-kc
+              mountPath: /secrets/kc
+            - name: cos-fleet-manager-ocm
+              mountPath: /secrets/ocm
+            - name: cos-fleet-manager-config
+              mountPath: /config
+            - name: connector-catalog
+              mountPath: /config/connector-catalog
+          env:
+            - name: "OCM_ENV"
+              value: "integration"
+          workingDir: /
+          command:
+            - /usr/local/bin/cos-fleet-manager
+            - serve
+            - --alsologtostderr
+            - --api-server-bindaddress=:8000
+            - --public-host-url=http://cos-fleet-manager:8000
+            - --db-host-file=/secrets/db/db.host
+            - --db-port-file=/secrets/db/db.port
+            - --db-user-file=/secrets/db/db.user
+            - --db-password-file=/secrets/db/db.password
+            - --db-name-file=/secrets/db/db.name
+            - --self-token-file=/secrets/ocm/ocm-service.token
+            - --ocm-client-id-file=/secrets/ocm/ocm-clientId
+            - --ocm-client-secret-file=/secrets/ocm/ocm-clientSecret
+            - --mas-sso-base-url=http://cos-fleet-manager-kc:8080
+            - --mas-sso-client-id-file=/secrets/kc/keycloak.clientId
+            - --mas-sso-client-secret-file=/secrets/kc/keycloak.clientSecret
+            - --osd-idp-mas-sso-client-id-file=/secrets/kc/keycloak.clientId
+            - --osd-idp-mas-sso-client-secret-file=/secrets/kc/keycloak.clientSecret
+            - --enable-health-check-https=false
+            - --enable-https=false
+            - --enable-deny-list=false
+            - --health-check-server-bindaddress=:8083
+            - --connector-catalog=/config/connector-catalog
+            - -v=10
+          ports:
+            - name: http
+              containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /api/connector_mgmt
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 8083
+              scheme: HTTP
+              httpHeaders:
+                - name: User-Agent
+                  value: Probe
+            initialDelaySeconds: 20
+            periodSeconds: 10
