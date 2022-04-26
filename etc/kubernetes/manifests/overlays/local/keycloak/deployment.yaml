@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cos-fleet-manager-kc
+  labels:
+    app: cos-fleet-manager-kc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cos-fleet-manager-kc
+  template:
+    metadata:
+      labels:
+        app: cos-fleet-manager-kc
+    spec:
+      containers:
+        - name: keycloak
+          image: quay.io/keycloak/keycloak:18.0.0
+          args:
+            - start-dev
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: "admin"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "admin"
+            - name: JAVA_OPTS_APPEND
+              value: "-Dkeycloak.import=/opt/keycloak/data/import/rhoas-realm.json,/opt/keycloak/data/import/rhoas-kafka-sre-realm.json"
+            - name: KC_HOSTNAME
+              value: "cos-fleet-manager-kc"
+            - name: KC_HTTP_RELATIVE_PATH
+              value: "/auth"
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /auth/realms/master
+              port: 8080
+          volumeMounts:
+            - name: rhoas-realms-vol
+              mountPath: /opt/keycloak/data/import
+      volumes:
+        - name: rhoas-realms-vol
+          configMap:
+            defaultMode: 420
+            optional: false
+            name: rhoas-realms

@@ -1,0 +1,13 @@
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: cos-fleet-manager-config
+    files:
+      - data/connectors-quota-configuration.yaml
+      - data/jwks-file.json
+
+resources:
+  - sa.yaml
+  - deployment.yaml
+  - service.yaml

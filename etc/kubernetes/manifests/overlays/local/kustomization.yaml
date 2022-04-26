@@ -1,0 +1,6 @@
+resources:
+  - namespace.yaml
+  - ./keycloak
+  - ./manager
+
+namespace: redhat-openshift-connectors

@@ -273,6 +273,10 @@ image/build: binary
 	docker --config="${DOCKER_CONFIG}" build -t "$(external_image_registry)/$(image_repository):$(image_tag)" .
 .PHONY: image/build
 
+image/build/dev: binary
+	docker --config="${DOCKER_CONFIG}" build -t "quay.io/rhoas/cos-fleet-manager:latest" .
+.PHONY: image/build/dev
+
 # Build and push the image
 image/push: image/build
 	docker --config="${DOCKER_CONFIG}" push "$(external_image_registry)/$(image_repository):$(image_tag)"

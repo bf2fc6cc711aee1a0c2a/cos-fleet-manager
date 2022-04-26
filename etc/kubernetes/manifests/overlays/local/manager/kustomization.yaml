@@ -1,0 +1,24 @@
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: cos-fleet-manager-db
+    literals:
+      - db.host=cos-fleet-manager-db
+      - db.name=cos-fleet-manager
+      - db.user=postgres
+      - db.password=postgres
+      - db.port=5432
+  - name: cos-fleet-manager-kc
+    literals:
+      - keycloak.clientId=kas-fleet-manager
+      - keycloak.clientSecret=kas-fleet-manager
+  - name: cos-fleet-manager-ocm
+    literals:
+      - ocm-service.token=""
+      - ocm-service.clientId=""
+      - ocm-service.clientSecret=""
+
+resources:
+  - db
+  - fm
