@@ -1,7 +1,0 @@
----
-supported_providers:
-  - name: aws
-    default: true
-    regions:
-      - name: us-east-1
-        default: true
