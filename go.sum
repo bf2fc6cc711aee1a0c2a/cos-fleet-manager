@@ -119,8 +119,8 @@ github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24
 github.com/beorn7/perks v1.0.0/go.mod h1:KWe93zE9D1o94FZ5RNwFwVgaQK1VOXiVxmqh+CedLV8=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
-github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20220428135723-b2246e844a48 h1:Qf33JctaVPFRIhjoJ/EkfFA54jMr6tJKbTJWcWzpuTg=
-github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20220428135723-b2246e844a48/go.mod h1:9c9cFNUoKLTBFhk8D+W7mrOpcD5+5cDuVDNirFIn2nM=
+github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20220428183131-bb7118d5c4be h1:307hHq/5W0cPSXmW5aVAcW9XoHYk/3UKVJ3qpqvYMlI=
+github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20220428183131-bb7118d5c4be/go.mod h1:9c9cFNUoKLTBFhk8D+W7mrOpcD5+5cDuVDNirFIn2nM=
 github.com/bgentry/speakeasy v0.1.0/go.mod h1:+zsyZBPWlz7T6j88CTgSN5bM796AkVf0kBD4zp0CCIs=
 github.com/bketelsen/crypt v0.0.3-0.20200106085610-5cbc8cc4026c/go.mod h1:MKsuJmJgSg28kpZDP6UIiPt0e0Oz0kqKNGyRaWEPv84=
 github.com/bketelsen/crypt v0.0.4/go.mod h1:aI6NrJ0pMGgvZKL1iVgXLnfIFJtfV+bKCoqOes/6LfM=
