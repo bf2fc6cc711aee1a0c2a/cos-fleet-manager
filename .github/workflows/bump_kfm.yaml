@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
-name: Bumps K-F-M version
+name: Bump K-F-M version
 jobs:
   createPullRequest:
     runs-on: ubuntu-latest
