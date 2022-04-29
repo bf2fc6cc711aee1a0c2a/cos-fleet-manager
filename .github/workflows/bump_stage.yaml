@@ -1,31 +1,29 @@
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 * * * *'
-name: Bump K-F-M version
+name: Bump stage branch
 jobs:
-  bump-kfm:
-    name: 'Bump K-F-M version'
+  bump-stage:
+    name: 'Bump stage branch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: main
+          ref: stage
       - name: Configure git for private modules
         env:
           TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           TOKEN_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
         run: |
           git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
-      - name: Run make bump-kfm
-        run: make bump-kfm
+      - name: Fast forward merge from main
+        run: git merge --ff-only main
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: 'chore: bumped k-f-m version'
-          title: '[chore] Bump k-f-m version'
-          branch: chore/bump-kfm
+          commit-message: 'chore: bumped stage branch'
+          title: '[chore] Bump stage branch'
+          branch: chore/bump-stage
           delete-branch: true
           body: >
-            Auto generated PR to bump k-f-m version.
+            PR to bump stage branch.
           labels: chore, automated pr
