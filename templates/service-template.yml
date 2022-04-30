@@ -523,7 +523,6 @@ objects:
             - --enable-deny-list=${ENABLE_DENY_LIST}
             - --enable-health-check-https=${ENABLE_HTTPS}
             - --enable-https=${ENABLE_HTTPS}
-            - --enable-instance-limit-control=${ENABLE_INSTANCE_LIMIT_CONTROL}
             - --enable-metrics-https=${ENABLE_METRICS_HTTPS}
             - --enable-ocm-mock=${ENABLE_OCM_MOCK}
             - --enable-sentry-debug=${ENABLE_SENTRY_DEBUG}
