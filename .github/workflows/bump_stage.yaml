@@ -1,0 +1,29 @@
+on:
+  workflow_dispatch:
+name: Bump stage branch
+jobs:
+  bump-stage:
+    name: 'Bump stage branch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: stage
+      - name: Configure git for private modules
+        env:
+          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          TOKEN_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
+        run: |
+          git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
+      - name: Fast forward merge from main
+        run: git merge --ff-only main
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: 'chore: bumped stage branch'
+          title: '[chore] Bump stage branch'
+          branch: chore/bump-stage
+          delete-branch: true
+          body: >
+            PR to bump stage branch.
+          labels: chore, automated pr

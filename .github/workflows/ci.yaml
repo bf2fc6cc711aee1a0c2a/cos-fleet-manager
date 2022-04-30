@@ -8,7 +8,7 @@ on:
       - '*.md'
       - 'build_deploy.sh'
       - '.github/*.md'
-      - '.github/workflows/openapi_update.yaml'
+      - '.github/workflows/*.yaml'
       - '.github/CODEOWNERS'
       - 'templates/**'
       - '.openapi-generator-ignore'
@@ -21,6 +21,7 @@ on:
       - '*.md'
       - 'build_deploy.sh'
       - '.github/*.md'
+      - '.github/workflows/*.yaml'
       - '.github/CODEOWNERS'
       - 'docs/**'
 env:
@@ -131,7 +132,6 @@ jobs:
           IMAGE_TAG: ${{ secrets.IMAGE_TAG }}
           IMAGE_REGISTRY: "quay.io"
           NAMESPACE: ${{ secrets.K8S_CLUSTER_DEV_NAMESPACE }}
-          ALLOW_ANY_REGISTERED_USERS: "true"
           MAS_SSO_CLIENT_ID: ${{ secrets.MAS_SSO_CLIENT_ID }}
           MAS_SSO_CLIENT_SECRET: ${{ secrets.MAS_SSO_CLIENT_SECRET }}
           MAS_SSO_CRT: ${{ secrets.MAS_SSO_CRT }}

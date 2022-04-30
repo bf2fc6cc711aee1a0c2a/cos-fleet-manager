@@ -1,0 +1,31 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+name: Bump K-F-M version
+jobs:
+  bump-kfm:
+    name: 'Bump K-F-M version'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Configure git for private modules
+        env:
+          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          TOKEN_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
+        run: |
+          git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
+      - name: Run make bump-kfm
+        run: make bump-kfm
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: 'chore: bumped k-f-m version'
+          title: '[chore] Bump k-f-m version'
+          branch: chore/bump-kfm
+          delete-branch: true
+          body: >
+            Auto generated PR to bump k-f-m version.
+          labels: chore, automated pr

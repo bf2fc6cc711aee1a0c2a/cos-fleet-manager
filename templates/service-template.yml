@@ -144,11 +144,6 @@ parameters:
   description: Timeout for all Sentry operations
   value: "5s"
 
-- name: SUPPORTED_CLOUD_PROVIDERS
-  displayName: Supported Cloud Providers
-  description: A list of supported cloud providers in a yaml format.
-  value: "[{name: aws, default: true, regions: [{name: us-east-1, default: true}]}]"
-
 - name: OBSERVATORIUM_GATEWAY
   displayName: Observatorium gateway
   description: A URL to an Observatorium instance where observability metrics will sent to.
@@ -186,50 +181,14 @@ parameters:
   displayName: Enable instance limit control
   description: Enable to enforce limits on how much instances a user can create.
   value: "true"
-
-- name: MAX_ALLOWED_INSTANCES
-  displayName: Maximum allowed instances
-  description: The default value of maximum number of instances that can be created by users.
-  value: "1"
-
-- name: MAX_ALLOWED_SERVICE_ACCOUNTS
-  displayName: Maximum allowed service accounts
-  description: The default value of maximum number of service accounts that can be created by users.
-  value: "2"
-
 - name: MAX_LIMIT_FOR_SSO_GET_CLIENTS
   displayName: Max clients fetch by get clients
   description: The default value of maximum number of clients fetch from mas-sso.
   value: "100"
 
-- name: ALLOW_ANY_REGISTERED_USERS
-  displayName: Allow any registered users
-  description: Enable to allow any registered users to access the service.
-  value: "false"
-
-- name: ALLOWED_SERVICE_ACCOUNTS
-  displayName: A list of allowed service accounts
-  description: A list of allowed service accounts that are allowed to access the service without requiring an organisation to do so in a yaml format.
-  value: "[]"
-
-- name: ALLOWED_USERS_PER_ORGANISATION
-  displayName: A list of allowed users per organisation
-  description: A list of allowed users that are allowed to access the service via their organisation in a yaml format.
-  value: "[{id: 13640203, max_allowed_instances: 5, allow_all: true, allowed_users: []}, {id: 12147054, max_allowed_instances: 1, allow_all: true, allowed_users: []}, {id: 13639843, max_allowed_instances: 1, allow_all: true, allowed_users: []}]"
-
 - name: DENIED_USERS
   displayName: A list of denied users given by their usernames
   description: A list of denied users that are not allowed to access the service. A user is identified by its username.
-  value: "[]"
-
-- name: READ_ONLY_USERS
-  displayName: A list of read only users given by their usernames
-  description: A list of read only users. A user is identified by its username.
-  value: "[]"
-
-- name: KAFKA_SRE_USERS
-  displayName: A list of kafka-sre admin users given by their usernames
-  description: A list of kafka-sre admin users. A user is identified by its username.
   value: "[]"
 
 - name: MAS_SSO_DEBUG
@@ -275,46 +234,6 @@ parameters:
   description: The public HTTP host URL of the service
   value: "https://api.openshift.com"
 
-- name: KAFKA_CAPACITY_MAX_CAPACITY
-  displayName: Maximum number of clusters
-  description: Maximum number of allowed kafka clusters
-  value: "1000"
-
-- name: KAFKA_CAPACITY_INGRESS_THROUGHPUT
-  displayName: Kafka ingress throughput
-  description: Ingress throughput configuration for the default Kafka instance type
-  value: "2Mi"
-
-- name: KAFKA_CAPACITY_TOTAL_MAX_CONNECTIONS
-  displayName: Kafka total max connections
-  description: Total max connections configuration for the default Kafka instance type
-  value: "100"
-
-- name: KAFKA_CAPACITY_MAX_DATA_RETENTION_SIZE
-  displayName: Kafka max data retention size
-  description: Data retention size configuration for the default Kafka instance type
-  value: "60Gi"
-
-- name: KAFKA_CAPACITY_MAX_PARTITIONS
-  displayName: Kafka max partitions
-  description: Max partitions configuration for the default Kafka instance type
-  value: "100"
-
-- name: KAFKA_CAPACITY_MAX_DATA_RETENTION_PERIOD
-  displayName: Kafka max data retention period
-  description: Data retention period configuration for the default Kafka instance type
-  value: "P14D"
-
-- name: KAFKA_CAPACITY_MAX_CONNECTION_ATTEMPTS_PER_SEC
-  displayName: Kafka max connection attempts per second
-  description: Max connection attempts per second configuration for the default Kafka instance type
-  value: "100"
-
-- name: CLUSTER_LIST
-  displayName: A list of cluster to be registered in cos fleet manager
-  description: A list of cluster to be registered in cos fleet manager
-  value: "[]"
-
 - name: ENVOY_IMAGE
   description: Envoy image
   value: envoyproxy/envoy:v1.16.1
@@ -322,10 +241,6 @@ parameters:
 - name: VAULT_KIND
   description: The type of vault to use to store secrets
   value: tmp
-
-- name: KEYCLOAK_CLIENT_EXPIRE
-  description: Whether or not to tag Keycloak created Client to expire in 2 hours (useful for cleaning up after integrations tests)
-  value: "false"
 
 - name: CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS
   displayName: Disable Connector Cascade Delete
@@ -360,12 +275,6 @@ objects:
       annotations:
         qontract.recycle: "true"
     data:
-      provider-configuration.yaml: |-
-        supported_providers: ${SUPPORTED_CLOUD_PROVIDERS}
-      allow-list-configuration.yaml: |-
-        allow_any_registered_users: ${ALLOW_ANY_REGISTERED_USERS}
-        allowed_service_accounts: ${ALLOWED_SERVICE_ACCOUNTS}
-        allowed_users_per_organisation: ${ALLOWED_USERS_PER_ORGANISATION}
       deny-list-configuration.yaml: |-
         ${DENIED_USERS}
       jwks-file.json: |-
@@ -614,7 +523,6 @@ objects:
             - --enable-deny-list=${ENABLE_DENY_LIST}
             - --enable-health-check-https=${ENABLE_HTTPS}
             - --enable-https=${ENABLE_HTTPS}
-            - --enable-instance-limit-control=${ENABLE_INSTANCE_LIMIT_CONTROL}
             - --enable-metrics-https=${ENABLE_METRICS_HTTPS}
             - --enable-ocm-mock=${ENABLE_OCM_MOCK}
             - --enable-sentry-debug=${ENABLE_SENTRY_DEBUG}
@@ -631,8 +539,6 @@ objects:
             - --mas-sso-debug=${MAS_SSO_DEBUG}
             - --mas-sso-enable-auth=${MAS_SSO_ENABLE_AUTH}
             - --mas-sso-realm=${MAS_SSO_REALM}
-            - --max-allowed-instances=${MAX_ALLOWED_INSTANCES}
-            - --max-allowed-service-accounts=${MAX_ALLOWED_SERVICE_ACCOUNTS}
             - --max-limit-for-sso-get-clients=${MAX_LIMIT_FOR_SSO_GET_CLIENTS}
             - --metrics-server-bindaddress=${METRICS_SERVER_BINDADDRESS}
 #            - --observability-config-access-token-file=/secrets/service/observability-config-access.token
@@ -653,7 +559,6 @@ objects:
             - --osd-idp-mas-sso-client-id-file=/secrets/service/osd-idp-keycloak-service.clientId
             - --osd-idp-mas-sso-client-secret-file=/secrets/service/osd-idp-keycloak-service.clientSecret
             - --osd-idp-mas-sso-realm=${OSD_IDP_MAS_SSO_REALM}
-#            - --providers-config-file=/config/provider-configuration.yaml
             - --public-host-url=${SERVICE_PUBLIC_HOST_URL}
             - --self-token-file=/secrets/service/ocm-service.token
             - --sentry-key-file=/secrets/service/sentry.key
