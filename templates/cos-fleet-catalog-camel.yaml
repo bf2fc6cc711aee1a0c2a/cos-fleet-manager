@@ -2040,7 +2040,7 @@ objects:
                 "description" : "If it is true, the S3 Object Body will be ignored completely, if it is set to false the S3 Object will be put in the body. Setting this to true, will override any behavior defined by includeBody option.",
                 "type" : "boolean",
                 "default" : false
-              },thanks
+              },
               "aws_use_default_credentials_provider" : {
                 "title" : "Default Credentials Provider",
                 "description" : "Set whether the S3 client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
