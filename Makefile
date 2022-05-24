@@ -356,18 +356,23 @@ deploy/db:
 	oc process -f ./templates/db-template.yml | oc apply -f - -n $(NAMESPACE)
 .PHONY: deploy/db
 
-# deploy service via templates to an OpenShift cluster
-deploy: IMAGE_REGISTRY ?= $(image_registry)
-deploy: IMAGE_REPOSITORY ?= $(image_repository)
-deploy: IMAGE_TAG ?= $(image_tag)
-deploy: OCM_URL ?= "https://api.stage.openshift.com"
-deploy: MAS_SSO_BASE_URL ?= "https://identity.api.stage.openshift.com"
-deploy: MAS_SSO_REALM ?= "rhoas"
-deploy: OSD_IDP_MAS_SSO_REALM ?= "rhoas-kafka-sre"
-deploy: SERVICE_PUBLIC_HOST_URL ?= "https://api.openshift.com"
-deploy: REPLICAS ?= "1"
-deploy: ENABLE_DB_DEBUG ?= "false"
-deploy: deploy/db
+# Deploys an Observatorium token refresher on an OpenShift cluster
+deploy/token-refresher: ISSUER_URL ?= "https://sso.redhat.com/auth/realms/redhat-external"
+deploy/token-refresher: OBSERVATORIUM_TOKEN_REFRESHER_IMAGE ?= "quay.io/rhoas/mk-token-refresher"
+deploy/token-refresher: OBSERVATORIUM_TOKEN_REFRESHER_IMAGE_TAG ?= "latest"
+deploy/token-refresher: OBSERVATORIUM_URL ?= "https://observatorium-mst.api.stage.openshift.com/api/metrics/v1/rhoc"
+deploy/token-refresher:
+	@-oc process -f ./templates/observatorium-token-refresher.yml \
+		-p ISSUER_URL=${ISSUER_URL} \
+		-p OBSERVATORIUM_URL=${OBSERVATORIUM_URL} \
+		-p OBSERVATORIUM_TOKEN_REFRESHER_IMAGE=${OBSERVATORIUM_TOKEN_REFRESHER_IMAGE} \
+		-p OBSERVATORIUM_TOKEN_REFRESHER_IMAGE_TAG=${OBSERVATORIUM_TOKEN_REFRESHER_IMAGE_TAG} \
+		 | oc apply -f - -n $(NAMESPACE)
+.PHONY: deploy/token-refresher
+
+# deploys the secrets required by the service to an OpenShift cluster
+deploy/secrets:
+	@oc get service/cos-fleet-manager-db -n $(NAMESPACE) || (echo "Database is not deployed, please run 'make deploy/db'"; exit 1)
 	@oc process -f ./templates/secrets-template.yml \
 		-p OCM_SERVICE_CLIENT_ID="$(OCM_SERVICE_CLIENT_ID)" \
 		-p OCM_SERVICE_CLIENT_SECRET="$(OCM_SERVICE_CLIENT_SECRET)" \
@@ -383,8 +388,36 @@ deploy: deploy/db
 		-p ROUTE53_SECRET_ACCESS_KEY="$(ROUTE53_SECRET_ACCESS_KEY)" \
 		-p VAULT_ACCESS_KEY="$(VAULT_ACCESS_KEY)" \
 		-p VAULT_SECRET_ACCESS_KEY="$(VAULT_SECRET_ACCESS_KEY)" \
+		-p OBSERVABILITY_RHSSO_LOGS_CLIENT_ID="$(shell ([ -s './secrets/rhsso-logs.clientId' ] && [ -z '${OBSERVABILITY_RHSSO_LOGS_CLIENT_ID}' ]) && cat ./secrets/rhsso-logs.clientId || echo '${OBSERVABILITY_RHSSO_LOGS_CLIENT_ID}')" \
+		-p OBSERVABILITY_RHSSO_LOGS_SECRET="$(shell ([ -s './secrets/rhsso-logs.clientSecret' ] && [ -z '${OBSERVABILITY_RHSSO_LOGS_SECRET}' ]) && cat ./secrets/rhsso-logs.clientSecret || echo '${OBSERVABILITY_RHSSO_LOGS_SECRET}')" \
+		-p OBSERVABILITY_RHSSO_METRICS_CLIENT_ID="$(shell ([ -s './secrets/rhsso-metrics.clientId' ] && [ -z '${OBSERVABILITY_RHSSO_METRICS_CLIENT_ID}' ]) && cat ./secrets/rhsso-metrics.clientId || echo '${OBSERVABILITY_RHSSO_METRICS_CLIENT_ID}')" \
+		-p OBSERVABILITY_RHSSO_METRICS_SECRET="$(shell ([ -s './secrets/rhsso-metrics.clientSecret' ] && [ -z '${OBSERVABILITY_RHSSO_METRICS_SECRET}' ]) && cat ./secrets/rhsso-metrics.clientSecret || echo '${OBSERVABILITY_RHSSO_METRICS_SECRET}')" \
+		-p OBSERVABILITY_RHSSO_GRAFANA_CLIENT_ID="${OBSERVABILITY_RHSSO_GRAFANA_CLIENT_ID}" \
+		-p OBSERVABILITY_RHSSO_GRAFANA_CLIENT_SECRET="${OBSERVABILITY_RHSSO_GRAFANA_CLIENT_SECRET}" \
 		| oc apply -f - -n $(NAMESPACE)
+.PHONY: deploy/secrets
+
+deploy/envoy:
 	@oc apply -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
+.PHONY: deploy/envoy
+
+deploy/route:
+	@oc process -f ./templates/route-template.yml | oc apply -f - -n $(NAMESPACE)
+.PHONY: deploy/route
+
+# deploy service via templates to an OpenShift cluster
+deploy: IMAGE_REGISTRY ?= $(image_registry)
+deploy: IMAGE_REPOSITORY ?= $(image_repository)
+deploy: IMAGE_TAG ?= $(image_tag)
+deploy: OCM_URL ?= "https://api.stage.openshift.com"
+deploy: MAS_SSO_BASE_URL ?= "https://identity.api.stage.openshift.com"
+deploy: MAS_SSO_REALM ?= "rhoas"
+deploy: OSD_IDP_MAS_SSO_REALM ?= "rhoas-kafka-sre"
+deploy: SERVICE_PUBLIC_HOST_URL ?= "https://api.openshift.com"
+deploy: REPLICAS ?= "1"
+deploy: ENABLE_DB_DEBUG ?= "false"
+deploy: deploy/db
+deploy: deploy/secrets deploy/envoy deploy/token-refresher deploy/route
 	@oc process -f ./templates/connectors-quota-configuration.yml | oc apply -f - -n $(NAMESPACE)
 	@oc create -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE) || true
 	@oc process -f ./templates/service-template.yml \
@@ -409,9 +442,6 @@ deploy: deploy/db
 		-p SERVICE_PUBLIC_HOST_URL="$(SERVICE_PUBLIC_HOST_URL)" \
 		-p REPLICAS="$(REPLICAS)" \
 		| oc apply -f - -n $(NAMESPACE)
-	@oc process -f ./templates/route-template.yml | oc apply -f - -n $(NAMESPACE)
-	@echo IMAGE_REGISTRY=$(IMAGE_REGISTRY) IMAGE_REPOSITORY=$(IMAGE_REPOSITORY) IMAGE_TAG=$(IMAGE_TAG)
-
 .PHONY: deploy
 
 # remove service deployments from an OpenShift cluster
