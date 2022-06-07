@@ -32,7 +32,7 @@ spec:
             name: cos-fleet-manager-config
         # catalogs
         - name: connector-catalog
-          emptyDir: { }
+          emptyDir: {}
       initContainers:
         - name: catalog
           image: "quay.io/rhoas/cos-fleet-catalog-camel:latest"
@@ -107,6 +107,11 @@ spec:
             - --enable-deny-list=false
             - --health-check-server-bindaddress=:8083
             - --connector-catalog=/config/connector-catalog
+            - --connector-enable-unassigned-connectors=false
+            - --connector-eval-duration=48h
+            - --connector-eval-organizations=13888347
+            - --connector-namespace-lifecycle-api=false
+            - --connectors-eval-namespace-quota-profile=evaluation-profile
             - -v=10
           ports:
             - name: http
