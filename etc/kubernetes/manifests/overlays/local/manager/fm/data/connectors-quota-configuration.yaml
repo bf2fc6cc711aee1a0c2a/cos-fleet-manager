@@ -1,0 +1,10 @@
+- profile-name: default-profile
+
+- profile-name: evaluation-profile
+  quotas:
+    namespace-quota:
+      connectors: 4
+      memory-requests: "1Gi"
+      memory-limits: "2Gi"
+      cpu-requests: "1"
+      cpu-limits: "2"

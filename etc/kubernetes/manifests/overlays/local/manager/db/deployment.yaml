@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cos-fleet-manager-db
+  labels:
+    app: cos-fleet-manager-db
+spec:
+  selector:
+    matchLabels:
+      app: cos-fleet-manager-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cos-fleet-manager-db
+    spec:
+      volumes:
+      - name: cos-fleet-manager-db-volume
+        persistentVolumeClaim:
+          claimName: cos-fleet-manager-db-volume-claim
+      containers:
+      - name: cos-fleet-manager-db
+        image: "postgres:13"
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: cos-fleet-manager-db
+              key: db.user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cos-fleet-manager-db
+              key: db.password
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: cos-fleet-manager-db
+              key: db.name
+        volumeMounts:
+        - name: cos-fleet-manager-db-volume
+          mountPath: /var/lib/postgresql
+          subPath: data
