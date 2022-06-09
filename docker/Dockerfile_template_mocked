@@ -17,6 +17,8 @@ ENV MAS_SSO_CLIENT_ID <mas_sso_client_id>
 ENV MAS_SSO_CLIENT_SECRET <mas_sso_client_secret>
 ENV OSD_IDP_MAS_SSO_CLIENT_ID <osd_idp_mas_sso_client_id>
 ENV OSD_IDP_MAS_SSO_CLIENT_SECRET <osd_idp_mas_sso_client_secret>
+ENV SSO_CLIENT_ID <sso_client_id>
+ENV SSO_CLIENT_SECRET <sso_client_secret>
 ENV ROUTE53_ACCESS_KEY <aws_route53_access_key>
 ENV ROUTE53_SECRET_ACCESS_KEY <aws_route53_secret_access_key>
 ENV KAFKA_TLS_CERT <kafka_tls_cert>
@@ -65,6 +67,7 @@ WORKDIR /uhc/src/github.com/bf2fc6cc711aee1a0c2a/cos-fleet-manager
 RUN make aws/setup
 RUN make ocm/setup
 RUN make keycloak/setup
+RUN make redhatsso/setup
 RUN make kafkacert/setup
 RUN make observatorium/setup
 

@@ -25,21 +25,26 @@ A service for provisioning and managing fleets of connector instances.
     make keycloak/setup MAS_SSO_CLIENT_ID=<mas_sso_client_id> MAS_SSO_CLIENT_SECRET=<mas_sso_client_secret>
     ```
    > Values for the above variables can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/MK-Control-Plane-CI/integration-tests). Log in using the Github token created earlier.
-5. Touch 3 files just to mock them
+5. Setup RedHat SSO secrets
+   ```
+   make redhatsso/setup SSO_CLIENT_ID=<redhat_sso_client_id> SSO_CLIENT_SECRET=<redhat_sso_client_secret>
+   ```
+   > Values for the above variables can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/MK-Control-Plane-CI/integration-tests). Log in using the Github token created earlier.
+6. Touch 3 files just to mock them
    ```
    touch secrets/ocm-service.clientId
    touch secrets/ocm-service.clientSecret
    touch secrets/ocm-service.token
    ```
-6. Set up database
+7. Set up database
     ```
     OCM_ENV=integration make db/setup
     ```
-7. Run integration tests
+8. Run integration tests
     ```
     OCM_ENV=integration make test/integration/connector
     ```
-8. Tear down test database (Optional)
+9. Tear down test database (Optional)
     ```
     OCM_ENV=integration make db/teardown
     ```
@@ -58,7 +63,11 @@ A service for provisioning and managing fleets of connector instances.
     ```
     make keycloak/setup MAS_SSO_CLIENT_ID=<mas_sso_client_id> MAS_SSO_CLIENT_SECRET=<mas_sso_client_secret>
     ```
-   > Values for the above variables can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/MK-Control-Plane-CI/integration-tests). Log in using the Github token created earlier.
+   Or, if using SSO_PROVIDER=redhat_sso setup Redhat SSO Client ID and Secret
+    ```
+    make redhat/sso SSO_CLIENT_ID=<redhat_sso_client_id> SSO_CLIENT_SECRET=<redhat_sso_client_secret>
+    ```
+    > Values for the above variables can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/MK-Control-Plane-CI/integration-tests). Log in using the Github token created earlier.
 5. Touch files just to mock them
    ```
    touch secrets/ocm-service.clientId

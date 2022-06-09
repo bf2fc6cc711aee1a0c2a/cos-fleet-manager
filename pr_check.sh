@@ -65,6 +65,15 @@ else
   sed -i "s/<osd_idp_mas_sso_client_secret>/${OSD_IDP_MAS_SSO_CLIENT_SECRET}/g" Dockerfile_integration_tests
 fi
 
+if [[ -z "${SSO_CLIENT_ID}" ]] || [[ -z "${SSO_CLIENT_SECRET}" ]];
+then
+   echo "Required redhat sso env var: client id & client secret is not provided"
+   exit 1
+else
+  sed -i "s/<sso_client_id>/${SSO_CLIENT_ID}/g" Dockerfile_integration_tests
+  sed -i "s/<sso_client_secret>/${SSO_CLIENT_SECRET}/g" Dockerfile_integration_tests
+fi
+
 docker login -u "${QUAY_USER}" -p "${QUAY_TOKEN}" quay.io
 docker build -t "$IMAGE_NAME" -f Dockerfile_integration_tests .
 docker run -i "$IMAGE_NAME"
