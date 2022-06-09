@@ -214,6 +214,54 @@ parameters:
   description: MAS SSO realm for OSD Cluster Identity Provider Clients
   value: "interim-test-realm"
 
+- name: TENANT_USERNAME_CLAIM
+  displayName: Token claims username key
+  description: Token claims key to retrieve the corresponding user principal.
+  value: "username"
+
+- name: TENANT_ID_CLAIM
+  displayName: Token claims organisation ID key
+  description: Token claims key to retrieve the corresponding organisation ID.
+  value: "org_id"
+
+- name: TENANT_ORG_ADMIN_CLAIM
+  displayName: Token claims organisation admin access key
+  description: Token claims key to retrieve the corresponding organisation admin role.
+  value: "is_org_admin"
+
+- name: ALTERNATE_TENANT_USERNAME_CLAIM
+  displayName: Token claims alternative username key
+  description: Token claims key to retrieve the corresponding user principal using an alternative claim.
+  value: "preferred_username"
+
+- name: TENANT_USER_ID_CLAIM
+  displayName: Token claims Account ID key
+  description: Token claims key to retrieve the corresponding Account ID.
+  value: "account_id"
+
+- name: ALTERNATE_TENANT_ID_CLAIM
+  displayName: Token claims alternative organisation ID key.
+  description: Token claims key to retrieve the corresponding organisation ID using an alternative claim.
+  value: "rh-org-id"
+
+- name: SSO_PROVIDER_TYPE
+  description: Option to choose between sso providers i.e, mas_sso or redhat_sso, mas_sso by default
+  value: "mas_sso"
+
+- name: REDHAT_SSO_BASE_URL
+  description: redhat_sso base url
+  value:  "https://sso.redhat.com"
+
+- name: TOKEN_ISSUER_URL
+  displayName: A token issuer url
+  description: A token issuer url used to validate if JWT token used are coming from the given issuer
+  value: "https://sso.redhat.com/auth/realms/redhat-external"
+
+- name: SSO_SPECIAL_MANAGEMENT_ORG_ID
+  displayName: Speical Management Organization ID
+  description: Special Management Organization ID used for creating internal Service accounts
+  value: "13640203"
+
 - name: OBSERVABILITY_CONFIG_REPO
   displayName: Observability configuration repo URL
   description: URL of the observability configuration repo
@@ -539,6 +587,12 @@ objects:
             - --mas-sso-debug=${MAS_SSO_DEBUG}
             - --mas-sso-enable-auth=${MAS_SSO_ENABLE_AUTH}
             - --mas-sso-realm=${MAS_SSO_REALM}
+            - --sso-provider-type=${SSO_PROVIDER_TYPE}
+            - --redhat-sso-client-id-file=/secrets/service/redhatsso-service.clientId
+            - --redhat-sso-client-secret-file=/secrets/service/redhatsso-service.clientSecret
+            - --redhat-sso-base-url=${REDHAT_SSO_BASE_URL}
+            - --token-issuer-url=${TOKEN_ISSUER_URL}
+            - --sso-special-management-org-id=${SSO_SPECIAL_MANAGEMENT_ORG_ID}
             - --max-limit-for-sso-get-clients=${MAX_LIMIT_FOR_SSO_GET_CLIENTS}
             - --metrics-server-bindaddress=${METRICS_SERVER_BINDADDRESS}
 #            - --observability-config-access-token-file=/secrets/service/observability-config-access.token
@@ -559,6 +613,12 @@ objects:
             - --osd-idp-mas-sso-client-id-file=/secrets/service/osd-idp-keycloak-service.clientId
             - --osd-idp-mas-sso-client-secret-file=/secrets/service/osd-idp-keycloak-service.clientSecret
             - --osd-idp-mas-sso-realm=${OSD_IDP_MAS_SSO_REALM}
+            - --tenant-username-claim=${TENANT_USERNAME_CLAIM}
+            - --tenant-id-claim=${TENANT_ID_CLAIM}
+            - --tenant-org-admin-claim=${TENANT_ORG_ADMIN_CLAIM}
+            - --alternate-tenant-username-claim=${ALTERNATE_TENANT_USERNAME_CLAIM}
+            - --tenant-user-id-claim=${TENANT_USER_ID_CLAIM}
+            - --alternate-tenant-id-claim=${ALTERNATE_TENANT_ID_CLAIM}
             - --public-host-url=${SERVICE_PUBLIC_HOST_URL}
             - --self-token-file=/secrets/service/ocm-service.token
             - --sentry-key-file=/secrets/service/sentry.key

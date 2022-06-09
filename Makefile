@@ -45,8 +45,11 @@ DOCKER_CONFIG="${PWD}/.docker"
 ENABLE_OCM_MOCK ?= false
 OCM_MOCK_MODE ?= emulate-server
 JWKS_URL ?= "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/certs"
-MAS_SSO_BASE_URL ?="https://identity.api.stage.openshift.com"
-MAS_SSO_REALM ?="rhoas"
+MAS_SSO_BASE_URL ?= "https://identity.api.stage.openshift.com"
+MAS_SSO_REALM ?= "rhoas"
+REDHAT_SSO_BASE_URL ?= "https://sso.redhat.com"
+SSO_PROVIDER_TYPE ?= "mas_sso"
+SSO_SPECIAL_MANAGEMENT_ORG_ID ?= "13640203"
 VAULT_KIND ?= tmp
 CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS ?= "false"
 CONNECTOR_EVAL_DURATION ?= "48h"
@@ -143,8 +146,9 @@ help:
 	@echo "make clean                	delete temporary generated files"
 	@echo "make setup/git/hooks      	setup git hooks"
 	@echo "make keycloak/setup     	    setup mas sso clientId, clientSecret & crt"
-	@echo "make kafkacert/setup     	    setup the kafka certificate used for Kafka Brokers"
-	@echo "make observatorium/setup"       setup observatorium secret used by CI
+	@echo "make redhatsso/setup         setup redhat sso clientId, clientSecret & crt"
+	@echo "make kafkacert/setup         setup the kafka certificate used for Kafka Brokers"
+	@echo "make observatorium/setup     setup observatorium secret used by CI"
 	@echo "make docker/login/internal	login to an openshift cluster image registry"
 	@echo "make image/build/push/internal  build and push image to an openshift cluster image registry."
 	@echo "make deploy               	deploy the service via templates to an openshift cluster"
@@ -273,6 +277,10 @@ image/build: binary
 	docker --config="${DOCKER_CONFIG}" build -t "$(external_image_registry)/$(image_repository):$(image_tag)" .
 .PHONY: image/build
 
+image/build/dev: binary
+	docker --config="${DOCKER_CONFIG}" build -t "quay.io/rhoas/cos-fleet-manager:latest" .
+.PHONY: image/build/dev
+
 # Build and push the image
 image/push: image/build
 	docker --config="${DOCKER_CONFIG}" push "$(external_image_registry)/$(image_repository):$(image_tag)"
@@ -327,6 +335,11 @@ keycloak/setup:
 	@echo -n "$(OSD_IDP_MAS_SSO_CLIENT_ID)" > secrets/osd-idp-keycloak-service.clientId
 	@echo -n "$(OSD_IDP_MAS_SSO_CLIENT_SECRET)" > secrets/osd-idp-keycloak-service.clientSecret
 .PHONY:keycloak/setup
+
+redhatsso/setup:
+	@echo -n "$(SSO_CLIENT_ID)" > secrets/redhatsso-service.clientId
+	@echo -n "$(SSO_CLIENT_SECRET)" > secrets/redhatsso-service.clientSecret
+.PHONY:redhatsso/setup
 
 # OCM login
 ocm/login:
@@ -384,6 +397,8 @@ deploy/secrets:
 		-p MAS_SSO_CLIENT_ID="${MAS_SSO_CLIENT_ID}" \
 		-p MAS_SSO_CLIENT_SECRET="${MAS_SSO_CLIENT_SECRET}" \
 		-p MAS_SSO_CRT="${MAS_SSO_CRT}" \
+		-p SSO_CLIENT_ID="${SSO_CLIENT_ID}" \
+		-p SSO_CLIENT_SECRET="${SSO_CLIENT_SECRET}" \
 		-p ROUTE53_ACCESS_KEY="$(ROUTE53_ACCESS_KEY)" \
 		-p ROUTE53_SECRET_ACCESS_KEY="$(ROUTE53_SECRET_ACCESS_KEY)" \
 		-p VAULT_ACCESS_KEY="$(VAULT_ACCESS_KEY)" \
@@ -433,6 +448,9 @@ deploy: deploy/secrets deploy/envoy deploy/token-refresher deploy/route
 		-p MAS_SSO_BASE_URL="$(MAS_SSO_BASE_URL)" \
 		-p MAS_SSO_REALM="$(MAS_SSO_REALM)" \
 		-p OSD_IDP_MAS_SSO_REALM="$(OSD_IDP_MAS_SSO_REALM)" \
+		-p REDHAT_SSO_BASE_URL="$(REDHAT_SSO_BASE_URL)" \
+		-p SSO_PROVIDER_TYPE="$(SSO_PROVIDER_TYPE)" \
+		-p SSO_SPECIAL_MANAGEMENT_ORG_ID="$(SSO_SPECIAL_MANAGEMENT_ORG_ID)" \
 		-p VAULT_KIND=$(VAULT_KIND) \
 		-p CONNECTOR_EVAL_ORGANIZATIONS=$(CONNECTOR_EVAL_ORGANIZATIONS) \
 		-p CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS=$(CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS) \

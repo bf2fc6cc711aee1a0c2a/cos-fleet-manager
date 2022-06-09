@@ -1,0 +1,4 @@
+resources:
+  - db-pvc.yaml
+  - db-service.yaml
+  - deployment.yaml
