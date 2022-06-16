@@ -418,6 +418,9 @@ objects:
           - name: connector-catalog-camel-gcp
             configMap:
               name: connector-catalog-camel-gcp
+          - name: connector-catalog-camel-itops
+            configMap:
+              name: connector-catalog-camel-itops
           - name: connector-catalog-camel-misc
             configMap:
               name: connector-catalog-camel-misc
@@ -508,6 +511,8 @@ objects:
               mountPath: /config/connector-catalog/camel-azure
             - name: connector-catalog-camel-gcp
               mountPath: /config/connector-catalog/camel-gcp
+            - name: connector-catalog-camel-itops
+              mountPath: /config/connector-catalog/camel-itops
             - name: connector-catalog-camel-misc
               mountPath: /config/connector-catalog/camel-misc
             - name: connector-catalog-camel-sql
@@ -542,6 +547,7 @@ objects:
             - --connector-catalog=/config/connector-catalog/camel-aws
             - --connector-catalog=/config/connector-catalog/camel-azure
             - --connector-catalog=/config/connector-catalog/camel-gcp
+            - --connector-catalog=/config/connector-catalog/camel-itops
             - --connector-catalog=/config/connector-catalog/camel-misc
             - --connector-catalog=/config/connector-catalog/camel-social
             - --connector-catalog=/config/connector-catalog/camel-sql
