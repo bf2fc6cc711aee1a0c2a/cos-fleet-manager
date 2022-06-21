@@ -44,10 +44,10 @@ DOCKER_CONFIG="${PWD}/.docker"
 # Default Variables
 ENABLE_OCM_MOCK ?= false
 OCM_MOCK_MODE ?= emulate-server
-JWKS_URL ?= "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/certs"
+JWKS_URL ?= "https://sso.stage.redhat.com/auth/realms/redhat-external/protocol/openid-connect/certs"
 MAS_SSO_BASE_URL ?= "https://identity.api.stage.openshift.com"
 MAS_SSO_REALM ?= "rhoas"
-REDHAT_SSO_BASE_URL ?= "https://sso.redhat.com"
+REDHAT_SSO_BASE_URL ?= "https://sso.stage.redhat.com"
 SSO_PROVIDER_TYPE ?= "mas_sso"
 SSO_SPECIAL_MANAGEMENT_ORG_ID ?= "13640203"
 VAULT_KIND ?= tmp
