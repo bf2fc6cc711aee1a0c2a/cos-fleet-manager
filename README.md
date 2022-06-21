@@ -196,7 +196,8 @@ make deploy OCM_SERVICE_TOKEN=<offline-token> IMAGE_TAG=<image-tag>
 - `AWS_SECRET_ACCESS_KEY`: AWS secret access key. This is only required if you wish to create CCS clusters using the service.
 - `ENABLE_OCM_MOCK`: Enables mock ocm client. Defaults to false.
 - `OCM_MOCK_MODE`: The type of mock to use when ocm mock is enabled. Defaults to 'emulate-server'.
-- `JWKS_URL`: JWK Token Certificate URL. Defaults to https://api.openshift.com/.well-known/jwks.json.
+- `JWKS_URL`: JWK Token Certificate URL.
+- `TOKEN_ISSUER_URL`: A token issuer url used to validate if JWT token used are coming from the given issuer. Defaults to `https://sso.redhat.com/auth/realms/redhat-external`.
 - `ROUTE53_ACCESS_KEY`: AWS route 53 access key for creating CNAME records
 - `ROUTE53_SECRET_ACCESS_KEY`: AWS route 53 secret access key for creating CNAME records
 - `KAFKA_TLS_CERT`: Kafka TLS external certificate.
