@@ -10,19 +10,19 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-mongodb-1.9.0.Alpha2.json: |-
+    debezium-mongodb-1.9.3.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-mongodb-1.9.0.Alpha2",
+          "id" : "debezium-mongodb-1.9.3.Final",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mongodb-1.9.0.Alpha2",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mongodb-1.9.3.Final",
           "name" : "Debezium MongoDB Connector",
-          "version" : "1.9.0.Alpha2",
+          "version" : "1.9.3.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "mongodb", "1.9.0.Alpha2" ],
+          "labels" : [ "source", "debezium", "mongodb", "1.9.3.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-mongodb-1.9.0.Alpha2.png",
+          "icon_href" : "http://example.com/images/debezium-mongodb-1.9.3.Final.png",
           "schema" : {
             "title" : "Debezium MongoDB Connector",
             "required" : [ "mongodb.name" ],
@@ -179,7 +179,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "mongodb",
-            "x-version" : "1.9.0.Alpha2",
+            "x-version" : "1.9.3.Final",
             "x-className" : "io.debezium.connector.mongodb.MongoDbConnector",
             "$defs" : {
               "serializer" : {
@@ -200,7 +200,7 @@ objects:
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.mongodb.MongoDbConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-mongodb@sha256:d762988cad64037ded02183d4a86c8bb6af35dfd6e04e282d86210ec05536425"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-mongodb@sha256:a88babca7a0d694e376df85b80436c1c42121ec58b543b319af4743748fbe06e"
             }
           }
         }
@@ -212,19 +212,19 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-mysql-1.9.0.Alpha2.json: |-
+    debezium-mysql-1.9.3.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-mysql-1.9.0.Alpha2",
+          "id" : "debezium-mysql-1.9.3.Final",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mysql-1.9.0.Alpha2",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mysql-1.9.3.Final",
           "name" : "Debezium MySQL Connector",
-          "version" : "1.9.0.Alpha2",
+          "version" : "1.9.3.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "mysql", "1.9.0.Alpha2" ],
+          "labels" : [ "source", "debezium", "mysql", "1.9.3.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-mysql-1.9.0.Alpha2.png",
+          "icon_href" : "http://example.com/images/debezium-mysql-1.9.3.Final.png",
           "schema" : {
             "title" : "Debezium MySQL Connector",
             "required" : [ "database.hostname", "database.user", "database.server.name", "database.server.id" ],
@@ -241,8 +241,7 @@ objects:
               "database.server.id" : {
                 "format" : "int64",
                 "title" : "Cluster ID",
-                "description" : "A numeric ID of this database client, which must be unique across all currently-running database processes in the cluster. This connector joins the MySQL database cluster as another server (with this unique ID) so it can read the binlog. By default, a random number is generated between 5400 and 6400.",
-                "default" : 6327,
+                "description" : "A numeric ID of this database client, which must be unique across all currently running database processes in the cluster. This connector joins the MySQL database cluster as another server (with this unique ID) so it can read the binlog.",
                 "type" : "integer",
                 "nullable" : false,
                 "x-name" : "database.server.id",
@@ -412,7 +411,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "mysql",
-            "x-version" : "1.9.0.Alpha2",
+            "x-version" : "1.9.3.Final",
             "x-className" : "io.debezium.connector.mysql.MySqlConnector",
             "$defs" : {
               "serializer" : {
@@ -433,7 +432,7 @@ objects:
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.mysql.MySqlConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-mysql@sha256:7ac245041861abe49e1dbc1fd4b3559aa9c25f5f8a29091839fe8dcb2d6accba"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-mysql@sha256:f2c51bab96c378f0142c6770103fce8cd1bc35e7570696a98717275ef9d0fdb0"
             }
           }
         }
@@ -445,19 +444,19 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-postgres-1.9.0.Alpha2.json: |-
+    debezium-postgres-1.9.3.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-postgres-1.9.0.Alpha2",
+          "id" : "debezium-postgres-1.9.3.Final",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-postgres-1.9.0.Alpha2",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-postgres-1.9.3.Final",
           "name" : "Debezium PostgreSQL Connector",
-          "version" : "1.9.0.Alpha2",
+          "version" : "1.9.3.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "postgres", "1.9.0.Alpha2" ],
+          "labels" : [ "source", "debezium", "postgres", "1.9.3.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-postgres-1.9.0.Alpha2.png",
+          "icon_href" : "http://example.com/images/debezium-postgres-1.9.3.Final.png",
           "schema" : {
             "title" : "Debezium PostgreSQL Connector",
             "required" : [ "database.server.name", "database.hostname", "database.user", "database.dbname" ],
@@ -668,7 +667,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "postgres",
-            "x-version" : "1.9.0.Alpha2",
+            "x-version" : "1.9.3.Final",
             "x-className" : "io.debezium.connector.postgresql.PostgresConnector",
             "$defs" : {
               "serializer" : {
@@ -689,7 +688,7 @@ objects:
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.postgresql.PostgresConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-postgres@sha256:b67d0ef4d4638bd5b6e71e2ccc30d5f7d5f74738db94dae53504077de7df5cff"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-postgres@sha256:0f21817399c84e9d724a8b59d005020897e02a4e929f441413afbad5bc0caad3"
             }
           }
         }
@@ -701,19 +700,19 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-sqlserver-1.9.0.Alpha2.json: |-
+    debezium-sqlserver-1.9.3.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-sqlserver-1.9.0.Alpha2",
+          "id" : "debezium-sqlserver-1.9.3.Final",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-sqlserver-1.9.0.Alpha2",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-sqlserver-1.9.3.Final",
           "name" : "Debezium SqlSever Connector",
-          "version" : "1.9.0.Alpha2",
+          "version" : "1.9.3.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "sqlserver", "1.9.0.Alpha2" ],
+          "labels" : [ "source", "debezium", "sqlserver", "1.9.3.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-sqlserver-1.9.0.Alpha2.png",
+          "icon_href" : "http://example.com/images/debezium-sqlserver-1.9.3.Final.png",
           "schema" : {
             "title" : "Debezium SqlSever Connector",
             "required" : [ "database.server.name", "database.dbname", "database.hostname" ],
@@ -882,7 +881,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "sqlserver",
-            "x-version" : "1.9.0.Alpha2",
+            "x-version" : "1.9.3.Final",
             "x-className" : "io.debezium.connector.sqlserver.SqlServerConnector",
             "$defs" : {
               "serializer" : {
@@ -903,7 +902,7 @@ objects:
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.sqlserver.SqlServerConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-sqlserver@sha256:eec3042ae553d8222a9c187c1f71b29dc3e9da7fce2a8256b798c8e395d06c14"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-sqlserver@sha256:2bc36340ffadc63bb3e3dd742392a6aeade2dab7c10d0efb37f35b64d146a4b0"
             }
           }
         }
