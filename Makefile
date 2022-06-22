@@ -44,10 +44,11 @@ DOCKER_CONFIG="${PWD}/.docker"
 # Default Variables
 ENABLE_OCM_MOCK ?= false
 OCM_MOCK_MODE ?= emulate-server
-JWKS_URL ?= "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/certs"
+JWKS_URL ?= "https://sso.stage.redhat.com/auth/realms/redhat-external/protocol/openid-connect/certs"
+TOKEN_ISSUER_URL ?= "https://sso.stage.redhat.com/auth/realms/redhat-external"
 MAS_SSO_BASE_URL ?= "https://identity.api.stage.openshift.com"
 MAS_SSO_REALM ?= "rhoas"
-REDHAT_SSO_BASE_URL ?= "https://sso.redhat.com"
+REDHAT_SSO_BASE_URL ?= "https://sso.stage.redhat.com"
 SSO_PROVIDER_TYPE ?= "mas_sso"
 SSO_SPECIAL_MANAGEMENT_ORG_ID ?= "13640203"
 VAULT_KIND ?= tmp
@@ -445,6 +446,7 @@ deploy: deploy/secrets deploy/envoy deploy/token-refresher deploy/route
 		-p OCM_MOCK_MODE=$(OCM_MOCK_MODE) \
 		-p OCM_URL="$(OCM_URL)" \
 		-p JWKS_URL="$(JWKS_URL)" \
+		-p TOKEN_ISSUER_URL="${TOKEN_ISSUER_URL}" \
 		-p MAS_SSO_BASE_URL="$(MAS_SSO_BASE_URL)" \
 		-p MAS_SSO_REALM="$(MAS_SSO_REALM)" \
 		-p OSD_IDP_MAS_SSO_REALM="$(OSD_IDP_MAS_SSO_REALM)" \
