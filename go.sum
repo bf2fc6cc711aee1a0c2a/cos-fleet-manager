@@ -92,6 +92,8 @@ github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a/go.mod h1:l
 github.com/auth0/go-jwt-middleware v0.0.0-20190805220309-36081240882b h1:CvoEHGmxWl5kONC5icxwqV899dkf4VjOScbxLpllEnw=
 github.com/auth0/go-jwt-middleware v0.0.0-20190805220309-36081240882b/go.mod h1:LWMyo4iOLWXHGdBki7NIht1kHru/0wM179h+d3g8ATM=
 github.com/aws/aws-sdk-go v1.19.23/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
+github.com/aws/aws-sdk-go v1.36.5 h1:SouM2ar1A8f+3DYWW622sDdqkkZAO3ha4j8GQjiPLFg=
+github.com/aws/aws-sdk-go v1.36.5/go.mod h1:hcU610XS61/+aQV88ixoOzUoG7v3b31pl2zKMmprdro=
 github.com/aws/aws-sdk-go v1.44.43 h1:gILXnQAOkfAV9dhdXOUlnVTGM3AiOQFqwQmJJ9R7rUE=
 github.com/aws/aws-sdk-go v1.44.43/go.mod h1:y4AeaBuwd2Lk+GepC1E9v0qOiTws0MIWAX4oIKwKHZo=
 github.com/aws/aws-secretsmanager-caching-go v1.1.0 h1:vcV94XGJ9KouXKYBTMqgrBw96Tae8JKLmoUZ5SbaXNo=
@@ -103,6 +105,8 @@ github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24
 github.com/beorn7/perks v1.0.0/go.mod h1:KWe93zE9D1o94FZ5RNwFwVgaQK1VOXiVxmqh+CedLV8=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
+github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20220629092955-256cc51cceb9 h1:XPc603IASMNknSkdx1ziEEc72QfIbaU+UWy2lw3QbXk=
+github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20220629092955-256cc51cceb9/go.mod h1:NtAfYElHVvyEVBmkQu4hVndZ/f7hD54jBrpTW+UqDPM=
 github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20220629180100-1c8bfcd4aa85 h1:AgE7sZNQ/AekyhZD1bsdpEpGlwv/Vfbgdc2MKquHmi8=
 github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20220629180100-1c8bfcd4aa85/go.mod h1:Q/QcSQWLKasxAlKENYOgLrFNv6vXDlOvRLYlbUWqCE0=
 github.com/bgentry/speakeasy v0.1.0/go.mod h1:+zsyZBPWlz7T6j88CTgSN5bM796AkVf0kBD4zp0CCIs=
@@ -955,6 +959,7 @@ golang.org/x/net v0.0.0-20200625001655-4c5254603344/go.mod h1:/O7V0waA8r7cgGh81R
 golang.org/x/net v0.0.0-20200707034311-ab3426394381/go.mod h1:/O7V0waA8r7cgGh81Ro3o1hOxt32SMVPicZroKQ2sZA=
 golang.org/x/net v0.0.0-20200822124328-c89045814202/go.mod h1:/O7V0waA8r7cgGh81Ro3o1hOxt32SMVPicZroKQ2sZA=
 golang.org/x/net v0.0.0-20201021035429-f5854403a974/go.mod h1:sp8m0HH+o8qH0wwXwYZr8TS3Oi6o0r6Gce1SSxlDquU=
+golang.org/x/net v0.0.0-20201110031124-69a78807bb2b/go.mod h1:sp8m0HH+o8qH0wwXwYZr8TS3Oi6o0r6Gce1SSxlDquU=
 golang.org/x/net v0.0.0-20210224082022-3d97a244fca7/go.mod h1:m0MpNAwzfU5UDzcl9v0D8zg8gWTRqZa9RBIspLL5mdg=
 golang.org/x/net v0.0.0-20210226172049-e18ecbb05110/go.mod h1:m0MpNAwzfU5UDzcl9v0D8zg8gWTRqZa9RBIspLL5mdg=
 golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4/go.mod h1:p54w0d4576C0XHj96bSt6lcn1PtDYWL6XObtHCRCNQM=
