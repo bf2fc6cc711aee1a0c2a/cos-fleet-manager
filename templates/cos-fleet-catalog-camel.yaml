@@ -20,8 +20,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-cloudwatch:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-cloudwatch:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -46,7 +46,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon CloudWatch Metrics sink",
+          "description" : "Send data to Amazon CloudWatch metrics.",
           "icon_href" : "TODO",
           "id" : "aws_cloudwatch_sink_0.1",
           "kind" : "ConnectorType",
@@ -190,7 +190,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -210,8 +210,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -236,7 +236,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon DynamoDB sink",
+          "description" : "Send data to Amazon DynamoDB NoSQL database service. The sent data inserts, updates, or deletes an item in the specified Amazon DynamoDB table.",
           "icon_href" : "TODO",
           "id" : "aws_ddb_sink_0.1",
           "kind" : "ConnectorType",
@@ -393,7 +393,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -413,8 +413,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb-streams:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb-streams:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -439,7 +439,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon DynamoDB Stream source",
+          "description" : "Receive data from Amazon DynamoDB Streams.",
           "icon_href" : "TODO",
           "id" : "aws_ddb_streams_source_0.1",
           "kind" : "ConnectorType",
@@ -595,7 +595,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -615,8 +615,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -641,7 +641,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Kinesis sink",
+          "description" : "Send data to Amazon Kinesis.",
           "icon_href" : "TODO",
           "id" : "aws_kinesis_sink_0.1",
           "kind" : "ConnectorType",
@@ -800,7 +800,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -820,8 +820,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -846,7 +846,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Kinesis source",
+          "description" : "Receive data from Amazon Kinesis.",
           "icon_href" : "TODO",
           "id" : "aws_kinesis_source_0.1",
           "kind" : "ConnectorType",
@@ -1010,7 +1010,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -1030,8 +1030,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-lambda:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-lambda:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1056,7 +1056,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Lambda sink",
+          "description" : "Send data to an Amazon Lambda function.",
           "icon_href" : "TODO",
           "id" : "aws_lambda_sink_0.1",
           "kind" : "ConnectorType",
@@ -1189,7 +1189,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -1209,8 +1209,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1235,7 +1235,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon S3 sink",
+          "description" : "Send data to an Amazon S3 bucket.",
           "icon_href" : "TODO",
           "id" : "aws_s3_sink_0.1",
           "kind" : "ConnectorType",
@@ -1390,7 +1390,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -1410,8 +1410,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1436,7 +1436,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon S3 source",
+          "description" : "Receive data from an Amazon S3 bucket.",
           "icon_href" : "TODO",
           "id" : "aws_s3_source_0.1",
           "kind" : "ConnectorType",
@@ -1616,7 +1616,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -1636,8 +1636,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ses:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ses:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1662,7 +1662,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Simple Email Service sink",
+          "description" : "Send email through the Amazon Simple Email Service (SES).",
           "icon_href" : "TODO",
           "id" : "aws_ses_sink_0.1",
           "kind" : "ConnectorType",
@@ -1796,7 +1796,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -1816,8 +1816,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sns:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sns:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1842,7 +1842,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Simple Notification Service sink",
+          "description" : "Send data to an Amazon Simple Notification Service (SNS) topic.",
           "icon_href" : "TODO",
           "id" : "aws_sns_sink_0.1",
           "kind" : "ConnectorType",
@@ -1992,7 +1992,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -2012,8 +2012,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2038,7 +2038,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Simple Queue Service sink",
+          "description" : "Send data to Amazon Simple Queue Service (SQS).",
           "icon_href" : "TODO",
           "id" : "aws_sqs_sink_0.1",
           "kind" : "ConnectorType",
@@ -2201,7 +2201,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -2221,8 +2221,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2247,7 +2247,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Simple Queue Service source",
+          "description" : "Receive data from Amazon Simple Queue Service (SQS).",
           "icon_href" : "TODO",
           "id" : "aws_sqs_source_0.1",
           "kind" : "ConnectorType",
@@ -2427,7 +2427,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -2454,14 +2454,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "azure-eventhubs-sink",
+                  "name" : "cos-azure-eventhubs-sink",
                   "prefix" : "azure"
                 },
                 "kafka" : {
@@ -2480,7 +2480,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Event Hubs sink",
+          "description" : "Send data to Azure Event Hubs.",
           "icon_href" : "TODO",
           "id" : "azure_eventhubs_sink_0.1",
           "kind" : "ConnectorType",
@@ -2603,7 +2603,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -2623,8 +2623,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -2649,7 +2649,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Event Hubs source",
+          "description" : "Receive data from Azure Event Hubs.",
           "icon_href" : "TODO",
           "id" : "azure_eventhubs_source_0.1",
           "kind" : "ConnectorType",
@@ -2796,7 +2796,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -2816,8 +2816,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob-changefeed:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob-changefeed:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2842,7 +2842,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Blob Storage change feed source",
+          "description" : "Receive data from Azure Blob storage change feed.",
           "icon_href" : "TODO",
           "id" : "azure_storage_blob_changefeed_source_0.1",
           "kind" : "ConnectorType",
@@ -2961,7 +2961,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -2981,8 +2981,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3007,7 +3007,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Blob Storage sink",
+          "description" : "Send data to Azure Blob storage.",
           "icon_href" : "TODO",
           "id" : "azure_storage_blob_sink_0.1",
           "kind" : "ConnectorType",
@@ -3131,7 +3131,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -3151,8 +3151,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3177,7 +3177,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Blob Storage source",
+          "description" : "Receive data from Azure Blob storage.",
           "icon_href" : "TODO",
           "id" : "azure_storage_blob_source_0.1",
           "kind" : "ConnectorType",
@@ -3301,7 +3301,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -3321,8 +3321,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3347,7 +3347,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Queue Storage sink",
+          "description" : "Send data to Azure Queue Storage.",
           "icon_href" : "TODO",
           "id" : "azure_storage_queue_sink_0.1",
           "kind" : "ConnectorType",
@@ -3465,7 +3465,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -3485,8 +3485,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3511,7 +3511,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Azure Queue Storage source",
+          "description" : "Receive data from Azure Queue Storage.",
           "icon_href" : "TODO",
           "id" : "azure_storage_queue_source_0.1",
           "kind" : "ConnectorType",
@@ -3635,7 +3635,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -3662,8 +3662,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-bigquery:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-bigquery:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -3688,7 +3688,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google BigQuery sink",
+          "description" : "Send data to a Google Big Query table.",
           "icon_href" : "TODO",
           "id" : "google_bigquery_sink_0.1",
           "kind" : "ConnectorType",
@@ -3802,7 +3802,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -3822,8 +3822,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3848,7 +3848,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Functions sink",
+          "description" : "Send data to Google Functions.",
           "icon_href" : "TODO",
           "id" : "google_functions_sink_0.1",
           "kind" : "ConnectorType",
@@ -3962,7 +3962,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -3982,8 +3982,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4008,7 +4008,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Pub/Sub sink",
+          "description" : "Send data to Google Cloud Pub/Sub.",
           "icon_href" : "TODO",
           "id" : "google_pubsub_sink_0.1",
           "kind" : "ConnectorType",
@@ -4118,7 +4118,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -4138,8 +4138,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4164,7 +4164,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Pub/Sub source",
+          "description" : "Receive data from Google Cloud Pub/Sub.",
           "icon_href" : "TODO",
           "id" : "google_pubsub_source_0.1",
           "kind" : "ConnectorType",
@@ -4292,7 +4292,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -4312,8 +4312,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4338,7 +4338,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Storage sink",
+          "description" : "Upload data to Google Cloud Storage.",
           "icon_href" : "TODO",
           "id" : "google_storage_sink_0.1",
           "kind" : "ConnectorType",
@@ -4449,7 +4449,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -4469,8 +4469,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4495,7 +4495,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Google Cloud Storage source",
+          "description" : "Send messages to Google Pubsub.",
           "icon_href" : "TODO",
           "id" : "google_storage_source_0.1",
           "kind" : "ConnectorType",
@@ -4612,7 +4612,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -4639,8 +4639,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ansible-tower:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-ansible-tower:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -4800,7 +4800,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -4827,8 +4827,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-http:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-http:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4853,7 +4853,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "HTTP sink",
+          "description" : "Send data to a HTTP endpoint.",
           "icon_href" : "TODO",
           "id" : "http_sink_0.1",
           "kind" : "ConnectorType",
@@ -4959,7 +4959,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -4979,8 +4979,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5005,7 +5005,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "JMS AMQP 1.0 sink",
+          "description" : "Send data to any AMQP 1.0 compliant message broker by using the Apache Qpid JMS client.",
           "icon_href" : "TODO",
           "id" : "jms_amqp_10_sink_0.1",
           "kind" : "ConnectorType",
@@ -5115,7 +5115,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -5135,8 +5135,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5161,7 +5161,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "JMS AMQP 1.0 source",
+          "description" : "Receive data from any AMQP 1.0 compliant message broker by using the Apache Qpid JMS client.",
           "icon_href" : "TODO",
           "id" : "jms_amqp_10_source_0.1",
           "kind" : "ConnectorType",
@@ -5271,7 +5271,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -5291,8 +5291,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5317,7 +5317,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "JMS Apache Artemis sink",
+          "description" : "Send data to an Apache Artemis message broker by using JMS.",
           "icon_href" : "TODO",
           "id" : "jms_apache_artemis_sink_0.1",
           "kind" : "ConnectorType",
@@ -5428,7 +5428,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -5448,8 +5448,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5474,7 +5474,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "JMS Apache Artemis source",
+          "description" : "Receive data from an Apache Artemis message broker by using JMS.",
           "icon_href" : "TODO",
           "id" : "jms_apache_artemis_source_0.1",
           "kind" : "ConnectorType",
@@ -5584,7 +5584,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -5604,8 +5604,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-rest-openapi:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-rest-openapi:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5630,7 +5630,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "OpenAPI sink",
+          "description" : "Load an OpenAPI specification from a specified URI and call an operation on the HTTP service.",
           "icon_href" : "TODO",
           "id" : "rest_openapi_sink_0.1",
           "kind" : "ConnectorType",
@@ -5735,7 +5735,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -5762,8 +5762,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-data-generator:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-data-generator:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5788,7 +5788,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Data Generator source",
+          "description" : "A data generator (for development and testing purposes).",
           "icon_href" : "TODO",
           "id" : "data_generator_0.1",
           "kind" : "ConnectorType",
@@ -5899,7 +5899,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -5926,8 +5926,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -5952,7 +5952,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Apache Cassandra sink",
+          "description" : "Send data to an Apache Cassandra cluster.",
           "icon_href" : "TODO",
           "id" : "cassandra_sink_0.1",
           "kind" : "ConnectorType",
@@ -6100,7 +6100,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -6120,8 +6120,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6146,7 +6146,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Apache Cassandra source",
+          "description" : "Retrieve data by sending a query to an Apache Cassandra cluster table.",
           "icon_href" : "TODO",
           "id" : "cassandra_source_0.1",
           "kind" : "ConnectorType",
@@ -6294,7 +6294,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -6314,8 +6314,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-elasticsearch:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-elasticsearch:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6340,7 +6340,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Elasticsearch sink",
+          "description" : "Store JSON-formatted data into ElasticSearch.",
           "icon_href" : "TODO",
           "id" : "elasticsearch_sink_0.1",
           "kind" : "ConnectorType",
@@ -6477,7 +6477,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -6497,8 +6497,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6523,7 +6523,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MongoDB sink",
+          "description" : "Send data to MongoDB.",
           "icon_href" : "TODO",
           "id" : "mongodb_sink_0.1",
           "kind" : "ConnectorType",
@@ -6662,7 +6662,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -6682,8 +6682,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6708,7 +6708,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MongoDB source",
+          "description" : "Retrieve data from MongoDB.",
           "icon_href" : "TODO",
           "id" : "mongodb_source_0.1",
           "kind" : "ConnectorType",
@@ -6847,7 +6847,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -6874,8 +6874,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jira:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-jira:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6900,7 +6900,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Jira source",
+          "description" : "Receive notifications about new issues from Jira.",
           "icon_href" : "TODO",
           "id" : "jira_source_0.1",
           "kind" : "ConnectorType",
@@ -6928,7 +6928,7 @@ objects:
                 "x-group" : "credentials",
                 "oneOf" : [ {
                   "title" : "Password",
-                  "description" : "The password to access Jira",
+                  "description" : "The password or the API Token to access Jira",
                   "type" : "string",
                   "format" : "password"
                 }, {
@@ -7025,7 +7025,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -7045,8 +7045,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7071,7 +7071,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Salesforce Create sink",
+          "description" : "Create an object in Salesforce.",
           "icon_href" : "TODO",
           "id" : "salesforce_create_sink_0.1",
           "kind" : "ConnectorType",
@@ -7216,7 +7216,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -7236,8 +7236,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7262,7 +7262,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Salesforce Delete sink",
+          "description" : "Delete an object in Salesforce.",
           "icon_href" : "TODO",
           "id" : "salesforce_delete_sink_0.1",
           "kind" : "ConnectorType",
@@ -7401,7 +7401,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -7421,8 +7421,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7447,7 +7447,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Salesforce Streaming source",
+          "description" : "Receive updates from Salesforce.",
           "icon_href" : "TODO",
           "id" : "salesforce_streaming_source_0.1",
           "kind" : "ConnectorType",
@@ -7591,7 +7591,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -7611,8 +7611,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7637,7 +7637,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Salesforce Update sink",
+          "description" : "Update an object in Salesforce.",
           "icon_href" : "TODO",
           "id" : "salesforce_update_sink_0.1",
           "kind" : "ConnectorType",
@@ -7787,7 +7787,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -7814,8 +7814,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -7840,7 +7840,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Slack sink",
+          "description" : "Send messages to a Slack channel.",
           "icon_href" : "TODO",
           "id" : "slack_sink_0.1",
           "kind" : "ConnectorType",
@@ -7968,7 +7968,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -7988,8 +7988,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "consumes_class" : "com.slack.api.model.Message",
@@ -8015,7 +8015,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Slack source",
+          "description" : "Receive messages from a Slack channel.",
           "icon_href" : "TODO",
           "id" : "slack_source_0.1",
           "kind" : "ConnectorType",
@@ -8134,7 +8134,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -8154,8 +8154,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -8180,7 +8180,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Telegram sink",
+          "description" : "Send a message to a Telegram chat using your Telegram bot as sender. To create a bot, use your Telegram app to contact the @botfather account.",
           "icon_href" : "TODO",
           "id" : "telegram_sink_0.1",
           "kind" : "ConnectorType",
@@ -8292,7 +8292,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -8312,8 +8312,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8338,7 +8338,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Telegram source",
+          "description" : "Receive all messages that people send to your Telegram bot.",
           "icon_href" : "TODO",
           "id" : "telegram_source_0.1",
           "kind" : "ConnectorType",
@@ -8445,7 +8445,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -8472,8 +8472,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8498,7 +8498,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Redshift sink",
+          "description" : "Send data to an Amazon Redshift Database.",
           "icon_href" : "TODO",
           "id" : "aws_redshift_sink_0.1",
           "kind" : "ConnectorType",
@@ -8634,7 +8634,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -8654,8 +8654,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8680,7 +8680,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Amazon Redshift source",
+          "description" : "Query data from an Amazon Redshift Database.",
           "icon_href" : "TODO",
           "id" : "aws_redshift_source_0.1",
           "kind" : "ConnectorType",
@@ -8828,7 +8828,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -8848,8 +8848,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8874,7 +8874,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MariaDB sink",
+          "description" : "Send data to a MariaDB Database.",
           "icon_href" : "TODO",
           "id" : "mariadb_sink_0.1",
           "kind" : "ConnectorType",
@@ -9010,7 +9010,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -9030,8 +9030,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9056,7 +9056,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MariaDB source",
+          "description" : "Query data from a MariaDB Database.",
           "icon_href" : "TODO",
           "id" : "mariadb_source_0.1",
           "kind" : "ConnectorType",
@@ -9198,7 +9198,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -9218,8 +9218,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9244,7 +9244,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MySQL sink",
+          "description" : "Send data to a MySQL Database.",
           "icon_href" : "TODO",
           "id" : "mysql_sink_0.1",
           "kind" : "ConnectorType",
@@ -9380,7 +9380,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -9400,8 +9400,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9426,7 +9426,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MySQL source",
+          "description" : "Query data from a MySQL Database.",
           "icon_href" : "TODO",
           "id" : "mysql_source_0.1",
           "kind" : "ConnectorType",
@@ -9568,7 +9568,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -9588,8 +9588,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9614,7 +9614,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "PostgreSQL sink",
+          "description" : "Send data to a PostgreSQL Database.",
           "icon_href" : "TODO",
           "id" : "postgresql_sink_0.1",
           "kind" : "ConnectorType",
@@ -9750,7 +9750,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -9770,8 +9770,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9796,7 +9796,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "PostgreSQL source",
+          "description" : "Query data from a PostgreSQL Database.",
           "icon_href" : "TODO",
           "id" : "postgresql_source_0.1",
           "kind" : "ConnectorType",
@@ -9938,7 +9938,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -9958,8 +9958,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9984,7 +9984,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "SQL Server sink",
+          "description" : "Send data to a SQL Server Database.",
           "icon_href" : "TODO",
           "id" : "sqlserver_sink_0.1",
           "kind" : "ConnectorType",
@@ -10120,7 +10120,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -10140,8 +10140,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10166,7 +10166,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "SQL Server source",
+          "description" : "Query data from a SQL Server Database.",
           "icon_href" : "TODO",
           "id" : "sqlserver_source_0.1",
           "kind" : "ConnectorType",
@@ -10308,7 +10308,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -10335,8 +10335,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -10361,7 +10361,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "FTPS sink",
+          "description" : "Send data to an FTPS Server.",
           "icon_href" : "TODO",
           "id" : "ftps_sink_0.1",
           "kind" : "ConnectorType",
@@ -10502,7 +10502,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -10522,8 +10522,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -10548,7 +10548,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "FTPS source",
+          "description" : "Retrieve data from an FTPS Server.",
           "icon_href" : "TODO",
           "id" : "ftps_source_0.1",
           "kind" : "ConnectorType",
@@ -10695,7 +10695,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -10715,8 +10715,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -10741,7 +10741,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MinIO sink",
+          "description" : "Send data to MinIO.",
           "icon_href" : "TODO",
           "id" : "minio_sink_0.1",
           "kind" : "ConnectorType",
@@ -10879,7 +10879,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -10899,8 +10899,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10925,7 +10925,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "MinIO source",
+          "description" : "Retrieve data from MinIO.",
           "icon_href" : "TODO",
           "id" : "minio_source_0.1",
           "kind" : "ConnectorType",
@@ -11069,7 +11069,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -11089,8 +11089,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -11115,7 +11115,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "SFTP sink",
+          "description" : "Send data to an SFTP Server.",
           "icon_href" : "TODO",
           "id" : "sftp_sink_0.1",
           "kind" : "ConnectorType",
@@ -11256,7 +11256,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
@@ -11276,8 +11276,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128m",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.31",
-              "connector_revision" : "31",
+              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.33",
+              "connector_revision" : 33,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -11302,7 +11302,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "SFTP source",
+          "description" : "Retrieve data from an SFTP Server.",
           "icon_href" : "TODO",
           "id" : "sftp_source_0.1",
           "kind" : "ConnectorType",
@@ -11449,7 +11449,7 @@ objects:
                     "topic" : {
                       "type" : "string",
                       "title" : "Dead Letter Topic Name",
-                      "description" : "The name of the Kafka topic used as dead letter queue"
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
                     }
                   }
                 }
