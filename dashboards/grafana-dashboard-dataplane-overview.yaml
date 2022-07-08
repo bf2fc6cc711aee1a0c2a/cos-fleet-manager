@@ -27,20 +27,21 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 382,
-      "iteration": 1654087261402,
+      "id": 402,
       "links": [],
       "liveNow": false,
       "panels": [
         {
+          "collapsed": false,
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
             "y": 0
           },
-          "id": 4,
-          "title": "Network",
+          "id": 13,
+          "panels": [],
+          "title": "Quick Facts",
           "type": "row"
         },
         {
@@ -48,6 +49,212 @@ data:
             "type": "prometheus",
             "uid": "PE1475E734F4285D2"
           },
+          "description": "Total unique Clusters in the selected time range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 5,
+            "x": 0,
+            "y": 1
+          },
+          "id": 2,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(count by (cluster_id) (count_over_time(container_network_receive_bytes_total{name=~\".*_mctr-.*\"}[24h])))",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Total Clusters (selected time)",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Table with the current clusters details.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cluster_id"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Cluster"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #B"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Number of Connectors"
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  },
+                  {
+                    "id": "noValue",
+                    "value": "0"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 10,
+            "x": 5,
+            "y": 1
+          },
+          "id": 19,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 1,
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "container_network_receive_bytes_total{name=~\".*_mctr-.*\"}",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(up{container=\"integration\"}) by (cluster_id)",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "range": false,
+              "refId": "B"
+            }
+          ],
+          "title": "Current Clusters",
+          "transformations": [
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "cluster_id"
+              }
+            },
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                    "cluster_id",
+                    "Value #B"
+                  ]
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Clusters count in the time series.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -58,7 +265,7 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 3,
+                "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -75,7 +282,7 @@ data:
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
-                  "mode": "normal"
+                  "mode": "none"
                 },
                 "thresholdsStyle": {
                   "mode": "off"
@@ -94,18 +301,630 @@ data:
                     "value": 80
                   }
                 ]
-              },
-              "unit": "decbytes"
+              }
             },
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
-            "w": 24,
-            "x": 0,
+            "h": 6,
+            "w": 9,
+            "x": 15,
             "y": 1
           },
-          "id": 2,
+          "id": 24,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count( count(container_network_receive_bytes_total{name=~\".*_mctr-.*\"}) by (cluster_id) )",
+              "instant": false,
+              "legendFormat": "Clusters",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total Clusters",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Total unique Namespaces in the selected time range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 5,
+            "x": 0,
+            "y": 7
+          },
+          "id": 20,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(count by (namespace) (count_over_time(container_network_receive_bytes_total{name=~\".*_mctr-.*\"}[$__range])))",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "B"
+            }
+          ],
+          "title": "Total Namespaces (selected time)",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Table with the detail of the current name. Click on the namespace name to see the detailed view.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cluster_id"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Cluster"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 200
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #B"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Number of Connectors"
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 165
+                  },
+                  {
+                    "id": "noValue",
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "namespace"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "URL",
+                        "url": "/d/ov28Nbrnz/data-plane-cluster-view?orgId=1&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Namespace"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Cluster"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 199
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 10,
+            "x": 5,
+            "y": 7
+          },
+          "id": 18,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 0,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "Cluster"
+              }
+            ]
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "container_network_receive_bytes_total{name=~\".*_mctr-.*\"}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(up{container=\"integration\"}) by (namespace)",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "range": false,
+              "refId": "B"
+            }
+          ],
+          "title": "Current Namespaces",
+          "transformations": [
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "namespace"
+              }
+            },
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                    "namespace",
+                    "cluster_id",
+                    "Value #B"
+                  ]
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Namespaces count in the time series.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 9,
+            "x": 15,
+            "y": 7
+          },
+          "id": 25,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count( count(container_network_receive_bytes_total{name=~\".*_mctr-.*\"}) by (namespace) )",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Namespace",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Total Namespaces",
+          "type": "timeseries"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 13
+          },
+          "id": 15,
+          "panels": [],
+          "title": "Connectors",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Total Connectors, CamelK Connectors vs Debezium Connectors running in the selected time range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 14
+          },
+          "id": 7,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(up{container=\"integration\"}[$__range]))",
+              "instant": true,
+              "legendFormat": "Total Connectors",
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(max_over_time(application_camel_context_status{camelContext=\"camel-1\"}[$__range]))",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "CamelK Connectors",
+              "range": false,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(up{container=\"integration\"}[$__range])) - count(max_over_time(application_camel_context_status{camelContext=\"camel-1\"}[$__range]))",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Debezium connectors",
+              "range": false,
+              "refId": "C"
+            }
+          ],
+          "title": "Connectors Count (selected time)",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "The percentage of time that the Connectors are available in the selected time range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 95
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 8,
+            "y": 14
+          },
+          "id": 10,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "expr": "sum(avg_over_time(up{container=\"integration\"}[$__range])) / sum(max_over_time(up{container=\"integration\"}[$__range])) * 100",
+              "refId": "A"
+            }
+          ],
+          "title": "Connectors Availability (selected time)",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "CamelK Connectors, Debezium Connectors, and crashing Connectors over time.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 14
+          },
+          "id": 17,
           "options": {
             "legend": {
               "calcs": [],
@@ -124,11 +943,8 @@ data:
                 "uid": "PE1475E734F4285D2"
               },
               "editorMode": "code",
-              "exemplar": false,
-              "expr": "rate(container_network_receive_bytes_total{cluster_id=\"$cluster_id\", name=~\".*_mctr-.*\", namespace=\"$namespace\"}[10m])",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{pod}}",
+              "expr": "count(increase(kube_pod_container_status_restarts_total{container=\"integration\"}[10m]) >3)",
+              "legendFormat": "Connectors Failing",
               "range": true,
               "refId": "A"
             },
@@ -138,88 +954,318 @@ data:
                 "uid": "PE1475E734F4285D2"
               },
               "editorMode": "code",
-              "expr": "-rate(container_network_transmit_bytes_total{cluster_id=\"$cluster_id\", name=~\".*_mctr-.*\", namespace=\"$namespace\"}[10m])",
+              "expr": "count(application_camel_context_status{camelContext=\"camel-1\"})",
               "hide": false,
-              "legendFormat": "{{pod}}",
+              "legendFormat": "CamelK Connectors",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "expr": "sum(up{container=\"integration\"}) - count(application_camel_context_status{camelContext=\"camel-1\"})",
+              "hide": false,
+              "legendFormat": "Debezium Connectors",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Connectors Running / Crashing",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Total, Completed, Failed, and Currently Inflight Exchanges for all the CamelK Connectors.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 20
+          },
+          "id": 21,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(application_camel_context_exchanges_total[$__range]))",
+              "instant": true,
+              "legendFormat": "Total",
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(application_camel_context_exchanges_completed_total[$__range]))",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Completed",
+              "range": false,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(application_camel_context_exchanges_failed_total[$__range]))",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Failed",
+              "range": false,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(application_camel_context_exchanges_inflight_count)",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Inflight Currently",
+              "range": false,
+              "refId": "D"
+            }
+          ],
+          "title": "Exchanges Count (selected time)",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Percentage of exchanges completed in the selected time range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 95
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 8,
+            "y": 20
+          },
+          "id": 11,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(application_camel_context_exchanges_completed_total[$__range])) / sum(max_over_time(application_camel_context_exchanges_total[$__range])) * 100",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Exchanges Processed (selected time)",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Exchanges Quantitative Information over time",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 20
+          },
+          "id": 23,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "expr": "sum(application_camel_context_exchanges_total)",
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "expr": "sum(application_camel_context_exchanges_completed_total)",
+              "hide": false,
+              "legendFormat": "Completed",
               "range": true,
               "refId": "B"
             }
           ],
-          "title": "Network I/O Pressure",
+          "title": "No. of Exchanges",
           "type": "timeseries"
         }
       ],
+      "refresh": false,
       "schemaVersion": 36,
       "style": "dark",
       "tags": [],
       "templating": {
-        "list": [
-          {
-            "current": {
-              "selected": false,
-              "text": "rhoc-stage",
-              "value": "rhoc-stage"
-            },
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PE1475E734F4285D2"
-            },
-            "definition": "label_values(cluster_version{}, cluster_id)",
-            "hide": 0,
-            "includeAll": false,
-            "multi": false,
-            "name": "cluster_id",
-            "options": [],
-            "query": {
-              "query": "label_values(cluster_version{}, cluster_id)",
-              "refId": "StandardVariableQuery"
-            },
-            "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          },
-          {
-            "current": {
-              "selected": false,
-              "text": [
-                "All"
-              ],
-              "value": [
-                "$__all"
-              ]
-            },
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PE1475E734F4285D2"
-            },
-            "definition": "label_values(container_network_receive_bytes_total{cluster_id=\"$cluster_id\", name=~\".*_mctr-.*\"}, namespace)",
-            "hide": 0,
-            "includeAll": true,
-            "multi": true,
-            "name": "namespace",
-            "options": [],
-            "query": {
-              "query": "label_values(container_network_receive_bytes_total{cluster_id=\"$cluster_id\", name=~\".*_mctr-.*\"}, namespace)",
-              "refId": "StandardVariableQuery"
-            },
-            "refresh": 1,
-            "regex": "/redhat-openshift-connectors-.*/",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          }
-        ]
+        "list": []
       },
       "time": {
-        "from": "now-6h",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
-      "title": "Data Plane | Cluster view",
-      "uid": "ov28Nbrnz",
-      "version": 9,
+      "title": "Data Plane | Overview",
+      "uid": "3lmqGVq7z",
+      "version": 12,
       "weekStart": ""
     }
