@@ -34,7 +34,7 @@ spec:
         - name: connector-catalog
           emptyDir: {}
       initContainers:
-        - name: catalog
+        - name: catalog-camel
           image: "quay.io/rhoas/cos-fleet-catalog-camel:latest"
           imagePullPolicy: Never
           volumeMounts:
@@ -45,6 +45,17 @@ spec:
             - -r
             - /etc/connectors
             - /config/connector-catalog/camel
+        - name: catalog-debezium
+          image: "quay.io/rhoas/cos-fleet-catalog-debezium:latest"
+          imagePullPolicy: Never
+          volumeMounts:
+            - mountPath: /config/connector-catalog
+              name: connector-catalog
+          command:
+            - cp
+            - -r
+            - /etc/connectors
+            - /config/connector-catalog/debezium
         - name: migration
           image: "quay.io/rhoas/cos-fleet-manager:latest"
           imagePullPolicy: Never
