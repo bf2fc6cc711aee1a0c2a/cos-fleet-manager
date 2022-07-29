@@ -6,23 +6,20 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
       - '*.md'
-      - 'build_deploy.sh'
       - '.github/*.md'
-      - '.github/workflows/*.yaml'
+      - '.github/workflows/bump_*.yaml'
       - '.github/CODEOWNERS'
-      - 'templates/**'
       - '.openapi-generator-ignore'
       - 'docs/**'
-
   push:
     branches:
       - main
     paths-ignore:
       - '*.md'
-      - 'build_deploy.sh'
       - '.github/*.md'
-      - '.github/workflows/*.yaml'
+      - '.github/workflows/bump_*.yaml'
       - '.github/CODEOWNERS'
+      - '.openapi-generator-ignore'
       - 'docs/**'
 env:
   # set ocm env to integration
