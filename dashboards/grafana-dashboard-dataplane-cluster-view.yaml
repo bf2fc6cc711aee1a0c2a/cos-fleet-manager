@@ -28,7 +28,7 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 382,
-      "iteration": 1657284195808,
+      "iteration": 1659425297229,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -120,7 +120,7 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 7,
+            "w": 5,
             "x": 0,
             "y": 1
           },
@@ -139,7 +139,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -187,6 +187,68 @@ data:
             "type": "prometheus",
             "uid": "PE1475E734F4285D2"
           },
+          "description": "Count of the types of CamelK Connectors for a specific cluster's namespace.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 5,
+            "y": 1
+          },
+          "id": 36,
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "builder",
+              "expr": "count by(connector_type) (application_camel_context_status{cluster_id=\"$cluster_id\", namespace=\"$namespace\"})",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "CamelK Connectors Types",
+          "transformations": [],
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
           "description": "The percentage of time that the Connectors are available in the selected time range.",
           "fieldConfig": {
             "defaults": {
@@ -213,8 +275,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 4,
-            "x": 7,
+            "w": 3,
+            "x": 9,
             "y": 1
           },
           "id": 6,
@@ -231,7 +293,7 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -309,8 +371,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 13,
-            "x": 11,
+            "w": 12,
+            "x": 12,
             "y": 1
           },
           "id": 12,
@@ -453,7 +515,7 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 7,
+            "w": 9,
             "x": 0,
             "y": 8
           },
@@ -472,7 +534,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -558,8 +620,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 4,
-            "x": 7,
+            "w": 3,
+            "x": 9,
             "y": 8
           },
           "id": 14,
@@ -576,7 +638,7 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -654,8 +716,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 13,
-            "x": 11,
+            "w": 12,
+            "x": 12,
             "y": 8
           },
           "id": 27,
@@ -703,7 +765,7 @@ data:
             "type": "prometheus",
             "uid": "PE1475E734F4285D2"
           },
-          "description": "CamelK Connectors, their respective Namespace, and their time since creation. Click on the connector to see that connector's detailed dashboard. Filter column using the Filter option next to the column header.",
+          "description": "CamelK Connectors, their respective Cluster, Namespace, other connector-specific details, and their time since creation. Click on the Connector/Connector ID field to see that connector's detailed dashboard. Filter column using the Filter option next to the column header.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -777,7 +839,7 @@ data:
                       {
                         "targetBlank": true,
                         "title": "URL",
-                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-pod=${__data.fields.pod}"
+                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-connector_id=${__data.fields.connector_id}&var-pod=${__data.fields.pod}"
                       }
                     ]
                   },
@@ -785,6 +847,73 @@ data:
                     "id": "color",
                     "value": {
                       "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "connector_id"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Connector ID"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "URL",
+                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-connector_id=${__data.fields.connector_id}&var-pod=${__data.fields.pod}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "connector_type"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Connector Type"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "deployment_id"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Deployment ID"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "orange",
                       "mode": "fixed"
                     }
                   }
@@ -807,9 +936,10 @@ data:
               ],
               "show": false
             },
-            "showHeader": true
+            "showHeader": true,
+            "sortBy": []
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -855,8 +985,11 @@ data:
                   "names": [
                     "pod",
                     "cluster_id 1",
+                    "connector_id 1",
+                    "connector_type 1",
                     "namespace 1",
-                    "Value #B"
+                    "Value #B",
+                    "deployment_id 1"
                   ]
                 }
               }
@@ -998,8 +1131,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1088,8 +1220,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1293,8 +1424,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1399,8 +1529,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1505,8 +1634,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1611,8 +1739,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1729,8 +1856,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1823,8 +1949,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1899,9 +2024,9 @@ data:
           },
           {
             "current": {
-              "selected": true,
-              "text": "rhoc-stage",
-              "value": "rhoc-stage"
+              "selected": false,
+              "text": "rhoc-dev",
+              "value": "rhoc-dev"
             },
             "datasource": {
               "type": "prometheus",
@@ -1925,9 +2050,9 @@ data:
           },
           {
             "current": {
-              "selected": true,
-              "text": "redhat-openshift-connectors-c95j6h66ar2c9mtr5vjg",
-              "value": "redhat-openshift-connectors-c95j6h66ar2c9mtr5vjg"
+              "selected": false,
+              "text": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0",
+              "value": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0"
             },
             "datasource": {
               "type": "prometheus",
@@ -1959,6 +2084,6 @@ data:
       "timezone": "",
       "title": "Data Plane | Cluster view",
       "uid": "ov28Nbrnz",
-      "version": 35,
+      "version": 38,
       "weekStart": ""
     }
