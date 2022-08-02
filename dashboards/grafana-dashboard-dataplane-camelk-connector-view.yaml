@@ -28,7 +28,7 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 398,
-      "iteration": 1657284216817,
+      "iteration": 1659426670543,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -95,7 +95,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -158,7 +158,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -202,7 +202,7 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 8,
+            "w": 9,
             "x": 10,
             "y": 1
           },
@@ -221,7 +221,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -304,8 +304,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 4,
-            "x": 18,
+            "w": 5,
+            "x": 19,
             "y": 1
           },
           "id": 7,
@@ -323,7 +323,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -338,12 +338,284 @@ data:
           "type": "stat"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Connector Type of the Connector.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 5,
+            "x": 0,
+            "y": 7
+          },
+          "id": 32,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^connector_type$/",
+              "values": true
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Connector Type",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Connector Id for the connector.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 5,
+            "x": 5,
+            "y": 7
+          },
+          "id": 33,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^connector_id$/",
+              "values": true
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Connector ID",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Namespace the Connector belongs to.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 9,
+            "x": 10,
+            "y": 7
+          },
+          "id": 34,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^namespace$/",
+              "values": true
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Namespace",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
+          "description": "Deployment ID for the Connector.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 5,
+            "x": 19,
+            "y": 7
+          },
+          "id": 35,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^deployment_id$/",
+              "values": true
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Deployment ID",
+          "type": "stat"
+        },
+        {
           "collapsed": false,
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 7
+            "y": 12
           },
           "id": 11,
           "panels": [],
@@ -408,9 +680,9 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 7,
+            "w": 8,
             "x": 0,
-            "y": 8
+            "y": 13
           },
           "id": 14,
           "options": {
@@ -498,9 +770,9 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 7,
-            "x": 7,
-            "y": 8
+            "w": 8,
+            "x": 8,
+            "y": 13
           },
           "id": 13,
           "options": {
@@ -589,8 +861,8 @@ data:
           "gridPos": {
             "h": 7,
             "w": 8,
-            "x": 14,
-            "y": 8
+            "x": 16,
+            "y": 13
           },
           "id": 15,
           "options": {
@@ -626,7 +898,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 15
+            "y": 20
           },
           "id": 17,
           "panels": [],
@@ -691,9 +963,9 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 7,
+            "w": 8,
             "x": 0,
-            "y": 16
+            "y": 21
           },
           "id": 19,
           "options": {
@@ -781,9 +1053,9 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 7,
-            "x": 7,
-            "y": 16
+            "w": 8,
+            "x": 8,
+            "y": 21
           },
           "id": 21,
           "options": {
@@ -872,8 +1144,8 @@ data:
           "gridPos": {
             "h": 7,
             "w": 8,
-            "x": 14,
-            "y": 16
+            "x": 16,
+            "y": 21
           },
           "id": 20,
           "options": {
@@ -909,7 +1181,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 23
+            "y": 28
           },
           "id": 23,
           "panels": [],
@@ -960,7 +1232,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -973,9 +1246,9 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 7,
+            "w": 8,
             "x": 0,
-            "y": 24
+            "y": 29
           },
           "id": 24,
           "options": {
@@ -1061,7 +1334,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1074,9 +1348,9 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 7,
-            "x": 7,
-            "y": 24
+            "w": 8,
+            "x": 8,
+            "y": 29
           },
           "id": 26,
           "options": {
@@ -1162,7 +1436,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1176,8 +1451,8 @@ data:
           "gridPos": {
             "h": 7,
             "w": 8,
-            "x": 14,
-            "y": 24
+            "x": 16,
+            "y": 29
           },
           "id": 25,
           "options": {
@@ -1237,7 +1512,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 31
+            "y": 36
           },
           "id": 28,
           "panels": [],
@@ -1288,7 +1563,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1301,9 +1577,9 @@ data:
           },
           "gridPos": {
             "h": 8,
-            "w": 22,
+            "w": 24,
             "x": 0,
-            "y": 32
+            "y": 37
           },
           "id": 30,
           "options": {
@@ -1355,8 +1631,8 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "rhoc-stage",
-              "value": "rhoc-stage"
+              "text": "rhoc-dev",
+              "value": "rhoc-dev"
             },
             "datasource": {
               "type": "prometheus",
@@ -1381,8 +1657,8 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "redhat-openshift-connectors-c95j6h66ar2c9mtr5vjg",
-              "value": "redhat-openshift-connectors-c95j6h66ar2c9mtr5vjg"
+              "text": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0",
+              "value": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0"
             },
             "datasource": {
               "type": "prometheus",
@@ -1407,21 +1683,48 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "mctr-catidbdl8sff4d6vi13g-77d59b5d76-w97th",
-              "value": "mctr-catidbdl8sff4d6vi13g-77d59b5d76-w97th"
+              "text": "cb6nd9k4brotmsrcf1c0",
+              "value": "cb6nd9k4brotmsrcf1c0"
             },
             "datasource": {
               "type": "prometheus",
               "uid": "PE1475E734F4285D2"
             },
-            "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}, pod)",
+            "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}, connector_id)",
+            "hide": 0,
+            "includeAll": false,
+            "label": "Connector ID",
+            "multi": false,
+            "name": "connector_id",
+            "options": [],
+            "query": {
+              "query": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}, connector_id)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "mctr-cb6nd9s4brotmsrcf1e0-86666dfb66-b69ml",
+              "value": "mctr-cb6nd9s4brotmsrcf1e0-86666dfb66-b69ml"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PE1475E734F4285D2"
+            },
+            "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}, pod)",
             "hide": 0,
             "includeAll": false,
             "multi": false,
             "name": "pod",
             "options": [],
             "query": {
-              "query": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}, pod)",
+              "query": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}, pod)",
               "refId": "StandardVariableQuery"
             },
             "refresh": 1,
@@ -1440,6 +1743,6 @@ data:
       "timezone": "",
       "title": "CamelK Specific Connectors",
       "uid": "uln0BXC7z",
-      "version": 12,
+      "version": 16,
       "weekStart": ""
     }

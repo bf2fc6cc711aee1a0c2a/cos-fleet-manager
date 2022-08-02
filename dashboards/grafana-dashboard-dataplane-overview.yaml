@@ -93,7 +93,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -197,7 +197,7 @@ data:
             "showHeader": true,
             "sortBy": []
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -243,6 +243,17 @@ data:
                     "cluster_id",
                     "Value #B"
                   ]
+                }
+              }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "cluster_id": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  }
                 }
               }
             }
@@ -391,7 +402,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -543,7 +554,7 @@ data:
               }
             ]
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -591,6 +602,21 @@ data:
                     "cluster_id",
                     "Value #B"
                   ]
+                }
+              }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "cluster_id": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "namespace": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  }
                 }
               }
             }
@@ -716,6 +742,7 @@ data:
                 "mode": "thresholds"
               },
               "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -753,7 +780,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -805,6 +832,69 @@ data:
             "type": "prometheus",
             "uid": "PE1475E734F4285D2"
           },
+          "description": "Count of the types of CamelK Connectors.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 3,
+            "x": 8,
+            "y": 14
+          },
+          "id": 27,
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE1475E734F4285D2"
+              },
+              "editorMode": "builder",
+              "expr": "count by(connector_type) (application_camel_context_status)",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "CamelK Connectors Types",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1475E734F4285D2"
+          },
           "description": "The percentage of time that the Connectors are available in the selected time range.",
           "fieldConfig": {
             "defaults": {
@@ -831,8 +921,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 4,
-            "x": 8,
+            "w": 3,
+            "x": 11,
             "y": 14
           },
           "id": 10,
@@ -848,7 +938,7 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -920,8 +1010,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 12,
-            "x": 12,
+            "w": 10,
+            "x": 14,
             "y": 14
           },
           "id": 17,
@@ -1002,7 +1092,7 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 8,
+            "w": 11,
             "x": 0,
             "y": 20
           },
@@ -1021,7 +1111,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -1113,8 +1203,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 4,
-            "x": 8,
+            "w": 3,
+            "x": 11,
             "y": 20
           },
           "id": 11,
@@ -1130,7 +1220,7 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -1188,6 +1278,7 @@ data:
                 }
               },
               "mappings": [],
+              "noValue": "-",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1206,8 +1297,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 12,
-            "x": 12,
+            "w": 10,
+            "x": 14,
             "y": 20
           },
           "id": 23,
@@ -1259,13 +1350,13 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-6h",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
       "title": "Data Plane | Overview",
       "uid": "3lmqGVq7z",
-      "version": 12,
+      "version": 14,
       "weekStart": ""
     }
