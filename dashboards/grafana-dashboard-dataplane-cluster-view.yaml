@@ -28,7 +28,7 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 382,
-      "iteration": 1659425297229,
+      "iteration": 1659964878704,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -48,7 +48,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Total Connectors, CamelK Connectors vs Debezium Connectors running in the selected time range.",
           "fieldConfig": {
@@ -144,7 +144,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(max_over_time(up{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
@@ -155,7 +155,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "count(max_over_time(application_camel_context_status{camelContext=\"camel-1\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
@@ -167,7 +167,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -185,7 +185,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Count of the types of CamelK Connectors for a specific cluster's namespace.",
           "fieldConfig": {
@@ -231,10 +231,10 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "builder",
-              "expr": "count by(connector_type) (application_camel_context_status{cluster_id=\"$cluster_id\", namespace=\"$namespace\"})",
+              "expr": "count by(connector_type) (max_over_time(application_camel_context_status{cluster_id=\"$cluster_id\", namespace=\"$namespace\"}[$__interval]))",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -247,7 +247,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "The percentage of time that the Connectors are available in the selected time range.",
           "fieldConfig": {
@@ -298,7 +298,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -315,7 +315,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "CamelK Connectors, Debezium Connectors, and crashing Connectors over time. Crashing connectors are only shown when they are crashing(connectors that successfully got created previously and now crashing). ",
           "fieldConfig": {
@@ -391,7 +391,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "count(increase(kube_pod_container_status_restarts_total{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[10m]) >3)",
@@ -402,7 +402,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "count(application_camel_context_status{camelContext=\"camel-1\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -414,7 +414,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(up{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}) - count(application_camel_context_status{camelContext=\"camel-1\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -443,7 +443,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Total, Completed, Failed, and Currently Inflight Exchanges for all the CamelK Connectors.",
           "fieldConfig": {
@@ -539,7 +539,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(max_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
@@ -550,7 +550,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(max_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
@@ -562,7 +562,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -576,7 +576,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(application_camel_context_exchanges_inflight_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -592,7 +592,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Percentage of exchanges completed in the selected time range.",
           "fieldConfig": {
@@ -643,7 +643,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -660,7 +660,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Exchanges Quantitative Information over time.",
           "fieldConfig": {
@@ -736,7 +736,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -747,7 +747,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -763,9 +763,9 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
-          "description": "CamelK Connectors, their respective Cluster, Namespace, other connector-specific details, and their time since creation. Click on the Connector/Connector ID field to see that connector's detailed dashboard. Filter column using the Filter option next to the column header.",
+          "description": "CamelK Connectors, their respective Namespace, and their time since creation. Click on the connector to see that connector's detailed dashboard. Filter column using the Filter option next to the column header.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -839,7 +839,7 @@ data:
                       {
                         "targetBlank": true,
                         "title": "URL",
-                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-connector_id=${__data.fields.connector_id}&var-pod=${__data.fields.pod}"
+                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&${Datasource:queryparam}&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-pod=${__data.fields.pod}\n"
                       }
                     ]
                   },
@@ -875,7 +875,7 @@ data:
                       {
                         "targetBlank": true,
                         "title": "URL",
-                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-connector_id=${__data.fields.connector_id}&var-pod=${__data.fields.pod}"
+                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&${Datasource:queryparam}&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-pod=${__data.fields.pod}\n"
                       }
                     ]
                   }
@@ -944,7 +944,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -957,7 +957,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "builder",
               "exemplar": false,
@@ -1000,7 +1000,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "The average rate of increase of the time series for the KameletBindings.",
           "fieldConfig": {
@@ -1075,7 +1075,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"KameletBinding\",cluster_id=\"$cluster_id\",exported_namespace=\"$namespace\"}[5m])\n)",
@@ -1090,7 +1090,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "The average rate of increase of the time series for the IntegrationKit.",
           "fieldConfig": {
@@ -1164,7 +1164,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"IntegrationKit\",cluster_id=\"$cluster_id\",exported_namespace=\"$namespace\"}[5m])\n)",
@@ -1179,7 +1179,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "The average rate of increase of the time series for the Integration.",
           "fieldConfig": {
@@ -1253,7 +1253,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"Integration\",cluster_id=\"$cluster_id\",exported_namespace=\"$namespace\"}[5m])\n)",
@@ -1266,7 +1266,7 @@ data:
           "type": "timeseries"
         },
         {
-          "collapsed": true,
+          "collapsed": false,
           "gridPos": {
             "h": 1,
             "w": 24,
@@ -1274,98 +1274,97 @@ data:
             "y": 44
           },
           "id": 24,
-          "panels": [
+          "panels": [],
+          "title": "Debezium Connectors",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 45
+          },
+          "id": 20,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "palette-classic"
-                  },
-                  "custom": {
-                    "axisLabel": "",
-                    "axisPlacement": "auto",
-                    "barAlignment": 0,
-                    "drawStyle": "line",
-                    "fillOpacity": 0,
-                    "gradientMode": "none",
-                    "hideFrom": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": false
-                    },
-                    "lineInterpolation": "linear",
-                    "lineWidth": 1,
-                    "pointSize": 5,
-                    "scaleDistribution": {
-                      "type": "linear"
-                    },
-                    "showPoints": "auto",
-                    "spanNulls": false,
-                    "stacking": {
-                      "group": "A",
-                      "mode": "none"
-                    },
-                    "thresholdsStyle": {
-                      "mode": "off"
-                    }
-                  },
-                  "mappings": [],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green"
-                      },
-                      {
-                        "color": "red",
-                        "value": 80
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              },
-              "gridPos": {
-                "h": 7,
-                "w": 12,
-                "x": 0,
-                "y": 35
-              },
-              "id": 20,
-              "options": {
-                "legend": {
-                  "calcs": [],
-                  "displayMode": "list",
-                  "placement": "bottom"
-                },
-                "tooltip": {
-                  "mode": "single",
-                  "sort": "none"
-                }
-              },
-              "targets": [
-                {
-                  "datasource": {
-                    "type": "prometheus",
-                    "uid": "PE1475E734F4285D2"
-                  },
-                  "editorMode": "code",
-                  "expr": "sum(increase(strimzi_reconciliations_failed_total{cluster_id=\"$cluster_id\"}[1h])) by (kind)",
-                  "legendFormat": "{{kind}}",
-                  "range": true,
-                  "refId": "A"
-                }
-              ],
-              "title": "Debezium / Failed Reconciliation per hour",
-              "type": "timeseries"
+              "editorMode": "code",
+              "expr": "sum(increase(strimzi_reconciliations_failed_total{cluster_id=\"$cluster_id\"}[1h])) by (kind)",
+              "legendFormat": "{{kind}}",
+              "range": true,
+              "refId": "A"
             }
           ],
-          "title": "Debezium Connectors",
-          "type": "row"
+          "title": "Debezium / Failed Reconciliation per hour",
+          "type": "timeseries"
         },
         {
           "collapsed": false,
@@ -1373,7 +1372,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 45
+            "y": 52
           },
           "id": 4,
           "panels": [],
@@ -1383,7 +1382,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Sum of Network packets received vs transmitted for all the Connectors.",
           "fieldConfig": {
@@ -1440,7 +1439,7 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 46
+            "y": 53
           },
           "id": 2,
           "options": {
@@ -1458,7 +1457,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1472,7 +1471,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "- sum(rate(container_network_transmit_bytes_total{name=~\".*_mctr-.*\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[10m]))",
@@ -1488,7 +1487,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Sum of used Memory vs Committed (Non-Heap) for all the Connectors.",
           "fieldConfig": {
@@ -1545,7 +1544,7 @@ data:
             "h": 9,
             "w": 7,
             "x": 0,
-            "y": 54
+            "y": 61
           },
           "id": 28,
           "options": {
@@ -1563,7 +1562,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1577,7 +1576,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(vendor_memory_committedNonHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -1593,7 +1592,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Sum of used Memory vs Committed (Heap) for all the Connectors.",
           "fieldConfig": {
@@ -1650,7 +1649,7 @@ data:
             "h": 9,
             "w": 8,
             "x": 7,
-            "y": 54
+            "y": 61
           },
           "id": 29,
           "options": {
@@ -1668,7 +1667,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1682,7 +1681,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(vendor_memoryPool_usage_max_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -1698,7 +1697,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Sum of Used vs Committed vs Maximum Memory for all the Connectors.",
           "fieldConfig": {
@@ -1755,7 +1754,7 @@ data:
             "h": 9,
             "w": 9,
             "x": 15,
-            "y": 54
+            "y": 61
           },
           "id": 34,
           "options": {
@@ -1773,7 +1772,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1787,7 +1786,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(base_memory_committedHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -1799,7 +1798,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(base_memory_maxHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
@@ -1815,7 +1814,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Sum of the CPU Utilization for all the Connectors.",
           "fieldConfig": {
@@ -1872,7 +1871,7 @@ data:
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 63
+            "y": 70
           },
           "id": 30,
           "options": {
@@ -1890,7 +1889,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1908,7 +1907,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Sum of the CPU Utilization for all the Connectors.",
           "fieldConfig": {
@@ -1965,7 +1964,7 @@ data:
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 63
+            "y": 70
           },
           "id": 31,
           "options": {
@@ -1983,7 +1982,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -2006,14 +2005,14 @@ data:
         "list": [
           {
             "current": {
-              "selected": false,
-              "text": "rhoc-observatorium-stage",
-              "value": "rhoc-observatorium-stage"
+              "selected": true,
+              "text": "rhoc-observatorium-production",
+              "value": "rhoc-observatorium-production"
             },
             "hide": 0,
             "includeAll": false,
             "multi": false,
-            "name": "Environment",
+            "name": "Datasource",
             "options": [],
             "query": "prometheus",
             "queryValue": "",
@@ -2084,6 +2083,6 @@ data:
       "timezone": "",
       "title": "Data Plane | Cluster view",
       "uid": "ov28Nbrnz",
-      "version": 38,
+      "version": 44,
       "weekStart": ""
     }
