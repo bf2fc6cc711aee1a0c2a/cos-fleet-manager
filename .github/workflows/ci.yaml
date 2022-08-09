@@ -5,22 +5,22 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
-      - '*.md'
-      - '.github/*.md'
-      - '.github/workflows/bump_*.yaml'
-      - '.github/CODEOWNERS'
-      - '.openapi-generator-ignore'
-      - 'docs/**'
+      - "*.md"
+      - ".github/*.md"
+      - ".github/workflows/bump_*.yaml"
+      - ".github/CODEOWNERS"
+      - ".openapi-generator-ignore"
+      - "docs/**"
   push:
     branches:
       - main
     paths-ignore:
-      - '*.md'
-      - '.github/*.md'
-      - '.github/workflows/bump_*.yaml'
-      - '.github/CODEOWNERS'
-      - '.openapi-generator-ignore'
-      - 'docs/**'
+      - "*.md"
+      - ".github/*.md"
+      - ".github/workflows/bump_*.yaml"
+      - ".github/CODEOWNERS"
+      - ".openapi-generator-ignore"
+      - "docs/**"
 env:
   # set ocm env to integration
   OCM_ENV: integration
@@ -40,7 +40,7 @@ env:
   SSO_CLIENT_SECRET: ${{ secrets.SSO_CLIENT_SECRET }}
   OSD_IDP_MAS_SSO_CLIENT_ID: ${{ secrets.OSD_IDP_MAS_SSO_CLIENT_ID }}
   OSD_IDP_MAS_SSO_CLIENT_SECRET: ${{ secrets.OSD_IDP_MAS_SSO_CLIENT_SECRET }}
-  # Dummy AWS credentials 
+  # Dummy AWS credentials
   AWS_ACCOUNT_ID: aws_accountid
   AWS_ACCESS_KEY: aws_accesskey
   AWS_SECRET_ACCESS_KEY: aws_secretaccesskey
@@ -72,7 +72,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-     
+
     steps:
       - name: Cancel Previous Runs
         uses: n1hility/cancel-previous-runs@v2
@@ -150,6 +150,12 @@ jobs:
           CONNECTOR_EVAL_DURATION: ${{ secrets.CONNECTOR_EVAL_DURATION }}
           CONNECTOR_NAMESPACE_LIFECYCLE_API: ${{ secrets.CONNECTOR_NAMESPACE_LIFECYCLE_API }}
           CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE: ${{ secrets.CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE }}
+          CONNECTORS_CATALOG_CAMEL_IMAGE_REGISTRY: "quay.io"
+          CONNECTORS_CATALOG_CAMEL_IMAGE_REPOSITORY: "${{ secrets.IMAGE_REPO_NAMESPACE }}/cos-fleet-catalog-camel"
+          CONNECTORS_CATALOG_CAMEL_IMAGE_TAG: ${{ secrets.IMAGE_TAG }}
+          CONNECTORS_CATALOG_DEBEZIUM_IMAGE_REGISTRY: "quay.io"
+          CONNECTORS_CATALOG_DEBEZIUM_IMAGE_REPOSITORY: "${{ secrets.IMAGE_REPO_NAMESPACE }}/cos-fleet-catalog-debezium"
+          CONNECTORS_CATALOG_DEBEZIUM_IMAGE_TAG: ${{ secrets.IMAGE_TAG }}
         run: |
           make deploy
           oc rollout restart deployment/cos-fleet-manager

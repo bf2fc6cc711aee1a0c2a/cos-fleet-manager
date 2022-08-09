@@ -344,6 +344,27 @@ parameters:
   description: Name of quota profile for evaluation namespaces
   value: "evaluation-profile"
 
+- name: CONNECTORS_CATALOG_CAMEL_IMAGE_REGISTRY
+  displayName: Camel Connectors Catalog Image Registry
+  required: true
+- name: CONNECTORS_CATALOG_CAMEL_IMAGE_REPOSITORY
+  displayName: Camel Connectors Catalog Image Repository
+  required: true
+- name: CONNECTORS_CATALOG_CAMEL_IMAGE_TAG
+  displayName: Camel Connectors Catalog Image Tag
+  required: true
+
+- name: CONNECTORS_CATALOG_DEBEZIUM_IMAGE_REGISTRY
+  displayName: Debezium Connectors Catalog Image Registry
+  required: true
+- name: CONNECTORS_CATALOG_DEBEZIUM_IMAGE_REPOSITORY
+  displayName: Debezium Connectors Catalog Image Repository
+  required: true
+- name: CONNECTORS_CATALOG_DEBEZIUM_IMAGE_TAG
+  displayName: Debezium Connectors Catalog Image Tag
+  required: true
+
+
 objects:
   - kind: ConfigMap
     apiVersion: v1
@@ -453,51 +474,6 @@ objects:
           - name: connectors-quota-configuration
             configMap:
               name: connectors-quota-configuration
-          - name: connector-catalog-camel-aws
-            configMap:
-              name: connector-catalog-camel-aws
-          - name: connector-catalog-camel-azure
-            configMap:
-              name: connector-catalog-camel-azure
-          - name: connector-catalog-camel-gcp
-            configMap:
-              name: connector-catalog-camel-gcp
-          - name: connector-catalog-camel-itops
-            configMap:
-              name: connector-catalog-camel-itops
-          - name: connector-catalog-camel-misc
-            configMap:
-              name: connector-catalog-camel-misc
-          - name: connector-catalog-camel-social
-            configMap:
-              name: connector-catalog-camel-social
-          - name: connector-catalog-camel-sql
-            configMap:
-              name: connector-catalog-camel-sql
-          - name: connector-catalog-camel-nosql
-            configMap:
-              name: connector-catalog-camel-nosql
-          - name: connector-catalog-camel-storage
-            configMap:
-              name: connector-catalog-camel-storage
-          - name: connector-catalog-camel-saas
-            configMap:
-              name: connector-catalog-camel-saas
-          - name: connector-catalog-camel-messaging
-            configMap:
-              name: connector-catalog-camel-messaging
-          - name: connector-catalog-debezium-mongodb
-            configMap:
-              name: connector-catalog-debezium-mongodb
-          - name: connector-catalog-debezium-mysql
-            configMap:
-              name: connector-catalog-debezium-mysql
-          - name: connector-catalog-debezium-postgres
-            configMap:
-              name: connector-catalog-debezium-postgres
-          - name: connector-catalog-debezium-sqlserver
-            configMap:
-              name: connector-catalog-debezium-sqlserver
           - name: connector-metadata-camel
             configMap:
               name: connector-metadata-camel
@@ -513,7 +489,31 @@ objects:
           - name: envoy-unix-sockets
             emptyDir:
               medium: Memory
+          - name: connector-catalog
+            emptyDir: {}
           initContainers:
+          - name: catalog-camel
+            image: ${CONNECTORS_CATALOG_CAMEL_IMAGE_REGISTRY}/${CONNECTORS_CATALOG_CAMEL_IMAGE_REPOSITORY}:${CONNECTORS_CATALOG_CAMEL_IMAGE_TAG}
+            imagePullPolicy: Never
+            volumeMounts:
+              - mountPath: /config/connector-catalog
+                name: connector-catalog
+            command:
+              - cp
+              - -r
+              - /etc/connectors
+              - /config/connector-catalog/camel
+          - name: catalog-debezium
+            image: ${CONNECTORS_CATALOG_DEBEZIUM_IMAGE_REGISTRY}/${CONNECTORS_CATALOG_DEBEZIUM_IMAGE_REPOSITORY}:${CONNECTORS_CATALOG_DEBEZIUM_IMAGE_TAG}
+            imagePullPolicy: Never
+            volumeMounts:
+              - mountPath: /config/connector-catalog
+                name: connector-catalog
+            command:
+              - cp
+              - -r
+              - /etc/connectors
+              - /config/connector-catalog/debezium
           - name: migration
             image: ${IMAGE_REGISTRY}/${IMAGE_REPOSITORY}:${IMAGE_TAG}
             imagePullPolicy: Always
@@ -559,40 +559,8 @@ objects:
               mountPath: /config/admin-authz
             - name: connectors-quota-configuration
               mountPath: /config/connectors-quota
-            - name: connector-catalog-camel-aws
-              mountPath: /config/connector-catalog/camel-aws
-            - name: connector-catalog-camel-azure
-              mountPath: /config/connector-catalog/camel-azure
-            - name: connector-catalog-camel-gcp
-              mountPath: /config/connector-catalog/camel-gcp
-            - name: connector-catalog-camel-itops
-              mountPath: /config/connector-catalog/camel-itops
-            - name: connector-catalog-camel-misc
-              mountPath: /config/connector-catalog/camel-misc
-            - name: connector-catalog-camel-sql
-              mountPath: /config/connector-catalog/camel-sql
-            - name: connector-catalog-camel-social
-              mountPath: /config/connector-catalog/camel-social
-            - name: connector-catalog-camel-nosql
-              mountPath: /config/connector-catalog/camel-nosql
-            - name: connector-catalog-camel-storage
-              mountPath: /config/connector-catalog/camel-storage
-            - name: connector-catalog-camel-saas
-              mountPath: /config/connector-catalog/camel-saas
-            - name: connector-catalog-camel-messaging
-              mountPath: /config/connector-catalog/camel-messaging
-            - name: connector-catalog-debezium-mongodb
-              mountPath: /config/connector-catalog/debezium-mongodb
-            - name: connector-catalog-debezium-mysql
-              mountPath: /config/connector-catalog/debezium-mysql
-            - name: connector-catalog-debezium-postgres
-              mountPath: /config/connector-catalog/debezium-postgres
-            - name: connector-catalog-debezium-sqlserver
-              mountPath: /config/connector-catalog/debezium-sqlserver
-            - name: connector-metadata-camel
-              mountPath: /config/connector-metadata/camel
-            - name: connector-metadata-debezium
-              mountPath: /config/connector-metadata/debezium
+            - name: connector-catalog
+              mountPath: /config/connector-catalog
             env:
               - name: "OCM_ENV"
                 value: "${ENVIRONMENT}"
@@ -602,21 +570,7 @@ objects:
             - serve
             - --alsologtostderr
             - --api-server-bindaddress=${API_SERVER_BINDADDRESS}
-            - --connector-catalog=/config/connector-catalog/camel-aws
-            - --connector-catalog=/config/connector-catalog/camel-azure
-            - --connector-catalog=/config/connector-catalog/camel-gcp
-            - --connector-catalog=/config/connector-catalog/camel-itops
-            - --connector-catalog=/config/connector-catalog/camel-misc
-            - --connector-catalog=/config/connector-catalog/camel-social
-            - --connector-catalog=/config/connector-catalog/camel-sql
-            - --connector-catalog=/config/connector-catalog/camel-nosql
-            - --connector-catalog=/config/connector-catalog/camel-storage
-            - --connector-catalog=/config/connector-catalog/camel-saas
-            - --connector-catalog=/config/connector-catalog/camel-messaging
-            - --connector-catalog=/config/connector-catalog/debezium-mongodb
-            - --connector-catalog=/config/connector-catalog/debezium-mysql
-            - --connector-catalog=/config/connector-catalog/debezium-postgres
-            - --connector-catalog=/config/connector-catalog/debezium-sqlserver
+            - --connector-catalog=/config/connector-catalog
             - --connector-metadata=/config/connector-metadata/camel
             - --connector-metadata=/config/connector-metadata/debezium
             - --connector-enable-unassigned-connectors=${CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS}
@@ -857,4 +811,3 @@ objects:
       - port: 9000
         targetPort: 9000
         name: metrics-envoy
-

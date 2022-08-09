@@ -447,7 +447,6 @@ deploy: ENABLE_DB_DEBUG ?= "false"
 deploy: deploy/db
 deploy: deploy/secrets deploy/envoy deploy/metadata deploy/token-refresher deploy/route
 	@oc process -f ./templates/connectors-quota-configuration.yml | oc apply -f - -n $(NAMESPACE)
-	@oc create -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE) || true
 	@oc process -f ./templates/service-template.yml \
 		-p ENVIRONMENT="$(OCM_ENV)" \
 		-p IMAGE_REGISTRY=$(IMAGE_REGISTRY) \
