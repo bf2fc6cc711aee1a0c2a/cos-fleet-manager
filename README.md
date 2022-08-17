@@ -20,33 +20,30 @@ A service for provisioning and managing fleets of connector instances.
     ```
     echo "" | openssl s_client -servername identity.api.stage.openshift.com -connect identity.api.stage.openshift.com:443 -prexit 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p' > secrets/keycloak-service.crt
     ```
-4. Setup MAS SSO Client ID and Secret
+4. Setup local keycloak
     ```
-    make keycloak/setup MAS_SSO_CLIENT_ID=<mas_sso_client_id> MAS_SSO_CLIENT_SECRET=<mas_sso_client_secret>
+    make sso/setup
+    make sso/config
+    make keycloak/setup MAS_SSO_CLIENT_ID=kas-fleet-manager MAS_SSO_CLIENT_SECRET=kas-fleet-manager OSD_IDP_MAS_SSO_CLIENT_ID=kas-fleet-manager OSD_IDP_MAS_SSO_CLIENT_SECRET=kas-fleet-manager
     ```
-   > Values for the above variables can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/MK-Control-Plane-CI/integration-tests). Log in using the Github token created earlier.
-5. Setup RedHat SSO secrets
-   ```
-   make redhatsso/setup SSO_CLIENT_ID=<redhat_sso_client_id> SSO_CLIENT_SECRET=<redhat_sso_client_secret>
-   ```
-   > Values for the above variables can be found in [Vault](https://vault.devshift.net/ui/vault/secrets/managed-services-ci/show/MK-Control-Plane-CI/integration-tests). Log in using the Github token created earlier.
-6. Touch 3 files just to mock them
+5. Touch 3 files to mock them
    ```
    touch secrets/ocm-service.clientId
    touch secrets/ocm-service.clientSecret
    touch secrets/ocm-service.token
    ```
-7. Set up database
+6. Set up database
     ```
     OCM_ENV=integration make db/setup
     ```
-8. Run integration tests
+7. Run integration tests
     ```
     OCM_ENV=integration make test/integration/connector
     ```
-9. Tear down test database (Optional)
+8. When done, tear down test database and keycloak
     ```
     OCM_ENV=integration make db/teardown
+    make sso/teardown
     ```
 
 ## Setup for running the Service locally
