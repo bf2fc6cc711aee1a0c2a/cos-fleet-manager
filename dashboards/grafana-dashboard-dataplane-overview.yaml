@@ -28,6 +28,7 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 402,
+      "iteration": 1659941873601,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -93,7 +94,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -115,7 +116,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Table with the current clusters details.",
           "fieldConfig": {
@@ -197,12 +198,12 @@ data:
             "showHeader": true,
             "sortBy": []
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -215,7 +216,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -245,6 +246,17 @@ data:
                   ]
                 }
               }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "cluster_id": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  }
+                }
+              }
             }
           ],
           "type": "table"
@@ -252,7 +264,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Clusters count in the time series.",
           "fieldConfig": {
@@ -328,7 +340,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -345,7 +357,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Total unique Namespaces in the selected time range.",
           "fieldConfig": {
@@ -391,12 +403,12 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -495,7 +507,7 @@ data:
                       {
                         "targetBlank": true,
                         "title": "URL",
-                        "url": "/d/ov28Nbrnz/data-plane-cluster-view?orgId=1&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}"
+                        "url": "/d/ov28Nbrnz/data-plane-cluster-view?orgId=1&${Datasource:queryparam}&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}"
                       }
                     ]
                   },
@@ -543,7 +555,7 @@ data:
               }
             ]
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
@@ -593,6 +605,21 @@ data:
                   ]
                 }
               }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "cluster_id": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "namespace": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  }
+                }
+              }
             }
           ],
           "type": "table"
@@ -600,7 +627,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Namespaces count in the time series.",
           "fieldConfig": {
@@ -676,7 +703,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -707,7 +734,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Total Connectors, CamelK Connectors vs Debezium Connectors running in the selected time range.",
           "fieldConfig": {
@@ -716,6 +743,7 @@ data:
                 "mode": "thresholds"
               },
               "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -753,12 +781,12 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -771,7 +799,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -785,7 +813,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -803,7 +831,70 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
+          },
+          "description": "Count of the types of CamelK Connectors.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 3,
+            "x": 8,
+            "y": 14
+          },
+          "id": 27,
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "builder",
+              "expr": "count by(connector_type) (max_over_time(application_camel_context_status[$__interval]))",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "CamelK Connectors Types",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
           },
           "description": "The percentage of time that the Connectors are available in the selected time range.",
           "fieldConfig": {
@@ -831,8 +922,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 4,
-            "x": 8,
+            "w": 3,
+            "x": 11,
             "y": 14
           },
           "id": 10,
@@ -848,12 +939,12 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "expr": "sum(avg_over_time(up{container=\"integration\"}[$__range])) / sum(max_over_time(up{container=\"integration\"}[$__range])) * 100",
               "refId": "A"
@@ -865,7 +956,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "CamelK Connectors, Debezium Connectors, and crashing Connectors over time.",
           "fieldConfig": {
@@ -920,8 +1011,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 12,
-            "x": 12,
+            "w": 10,
+            "x": 14,
             "y": 14
           },
           "id": 17,
@@ -940,7 +1031,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "count(increase(kube_pod_container_status_restarts_total{container=\"integration\"}[10m]) >3)",
@@ -951,7 +1042,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "count(application_camel_context_status{camelContext=\"camel-1\"})",
@@ -963,7 +1054,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(up{container=\"integration\"}) - count(application_camel_context_status{camelContext=\"camel-1\"})",
@@ -979,7 +1070,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Total, Completed, Failed, and Currently Inflight Exchanges for all the CamelK Connectors.",
           "fieldConfig": {
@@ -1002,7 +1093,7 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 8,
+            "w": 11,
             "x": 0,
             "y": 20
           },
@@ -1021,12 +1112,12 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1039,7 +1130,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1053,7 +1144,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1067,7 +1158,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1085,7 +1176,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Percentage of exchanges completed in the selected time range.",
           "fieldConfig": {
@@ -1113,8 +1204,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 4,
-            "x": 8,
+            "w": 3,
+            "x": 11,
             "y": 20
           },
           "id": 11,
@@ -1130,12 +1221,12 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "9.0.1",
+          "pluginVersion": "9.0.3",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1151,7 +1242,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Exchanges Quantitative Information over time",
           "fieldConfig": {
@@ -1188,6 +1279,7 @@ data:
                 }
               },
               "mappings": [],
+              "noValue": "-",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1206,8 +1298,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 12,
-            "x": 12,
+            "w": 10,
+            "x": 14,
             "y": 20
           },
           "id": 23,
@@ -1226,7 +1318,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(application_camel_context_exchanges_total)",
@@ -1237,7 +1329,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "expr": "sum(application_camel_context_exchanges_completed_total)",
@@ -1256,16 +1348,35 @@ data:
       "style": "dark",
       "tags": [],
       "templating": {
-        "list": []
+        "list": [
+          {
+            "current": {
+              "selected": true,
+              "text": "rhoc-observatorium-production",
+              "value": "rhoc-observatorium-production"
+            },
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "Datasource",
+            "options": [],
+            "query": "prometheus",
+            "queryValue": "",
+            "refresh": 1,
+            "regex": "/.*rhoc.*/",
+            "skipUrlSync": false,
+            "type": "datasource"
+          }
+        ]
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-5m",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
       "title": "Data Plane | Overview",
       "uid": "3lmqGVq7z",
-      "version": 12,
+      "version": 23,
       "weekStart": ""
     }
