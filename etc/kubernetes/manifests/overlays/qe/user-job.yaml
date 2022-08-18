@@ -1,0 +1,68 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: read-route
+rules:
+- apiGroups:
+  - "route.openshift.io"
+  resources:
+  - routes
+  verbs:
+  - get
+- apiGroups:
+  - "apps"
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: user-job
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: user-job-read-route
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-route
+subjects:
+- kind: ServiceAccount
+  name: user-job
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: user-job
+  labels:
+    app: user-job
+spec:
+  ttlSecondsAfterFinished: 3600
+  template:
+    metadata:
+      labels:
+        app: user-job
+    spec:
+      restartPolicy: Never
+      serviceAccountName: user-job
+      containers:
+        - name: user-job
+          command:
+            - bash
+            - /opt/script/create-user.sh
+          image: bitnami/kubectl:latest
+          volumeMounts:
+            - name: user-job-script
+              mountPath: /opt/script
+      volumes:
+        - name: user-job-script
+          configMap:
+            defaultMode: 420
+            optional: false
+            name: user-job-script
+
