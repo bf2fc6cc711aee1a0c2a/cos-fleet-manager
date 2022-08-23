@@ -1380,3 +1380,10 @@ data:
       "version": 23,
       "weekStart": ""
     }
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-dataplane-overview
+  labels:
+    grafana_dashboard: "true"
+  annotations:
+    grafana-folder: /grafana-dashboard-definitions/RHOC
