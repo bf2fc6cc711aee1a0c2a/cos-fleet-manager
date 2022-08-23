@@ -2086,3 +2086,10 @@ data:
       "version": 44,
       "weekStart": ""
     }
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-dataplane-cluster-view
+  labels:
+    grafana_dashboard: "true"
+  annotations:
+    grafana-folder: /grafana-dashboard-definitions/RHOC

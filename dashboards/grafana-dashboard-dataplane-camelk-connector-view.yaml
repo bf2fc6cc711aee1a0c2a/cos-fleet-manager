@@ -1764,3 +1764,10 @@ data:
       "version": 19,
       "weekStart": ""
     }
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-dataplane-camelk-connector-view
+  labels:
+    grafana_dashboard: "true"
+  annotations:
+    grafana-folder: /grafana-dashboard-definitions/RHOC

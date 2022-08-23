@@ -1,0 +1,109 @@
+namespace: redhat-openshift-connectors
+
+resources:
+  - ../local
+  - kc-route.yaml
+  - manager-route.yaml
+  - user-job.yaml
+
+images:
+  - name: quay.io/rhoas/cos-fleet-manager
+    newTag: latest
+  - name: quay.io/rhoas/cos-fleet-catalog-camel
+    newTag: latest
+  - name: quay.io/rhoas/cos-fleet-catalog-debezium
+    newTag: latest
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: cos-fleet-manager-service
+    env: secret.properties
+
+configMapGenerator:
+  - name: cos-fleet-manager-route
+    env: route.properties
+  - name: user-job-script
+    files:
+      - scripts/create-user.sh
+
+patchesStrategicMerge:
+  - |-
+    $patch: delete
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: redhat-openshift-connectors
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: cos-fleet-manager-kc
+    spec:
+      template:
+        spec:
+          containers:
+          - name: keycloak
+            env:
+              - name: KC_HOSTNAME
+                $patch: delete
+              - name: KC_PROXY
+                value: "edge"
+
+patchesJson6902:
+  - target:
+      group: apps
+      kind: Deployment
+      name: cos-fleet-manager
+      version: v1
+    patch: |-
+      # add aws creds
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value:
+          name: service
+          secret:
+            secretName: cos-fleet-manager-service
+            defaultMode: 420
+      - op: add
+        path: /spec/template/spec/containers/0/volumeMounts/-
+        value:
+          name: service
+          mountPath: /secrets/service
+      - op: add
+        path: /spec/template/spec/containers/0/command/-
+        value: '--vault-access-key-file=/secrets/service/AWS_ACCESS_KEY'
+      - op: add
+        path: /spec/template/spec/containers/0/command/-
+        value: '--vault-secret-access-key-file=/secrets/service/AWS_SECRET_ACCESS_KEY'
+      - op: add
+        path: /spec/template/spec/containers/0/command/-
+        value: '--vault-kind=aws'
+
+      # set the sso base url to external route
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: BASE_INGRESS
+          valueFrom:
+            configMapKeyRef:
+              name: cos-fleet-manager-route
+              key: BASE_INGRESS
+      - op: add
+        path: /spec/template/spec/containers/0/command/-
+        value: '--mas-sso-base-url=https://cos-fleet-manager-kc-redhat-openshift-connectors.$(BASE_INGRESS)'
+
+      # pull the images (by default pull policy Never)
+      - op: replace
+        path: /spec/template/spec/containers/0/imagePullPolicy
+        value: "IfNotPresent"
+      - op: replace
+        path: /spec/template/spec/initContainers/0/imagePullPolicy
+        value: "IfNotPresent"
+      - op: replace
+        path: /spec/template/spec/initContainers/1/imagePullPolicy
+        value: "IfNotPresent"
+      - op: replace
+        path: /spec/template/spec/initContainers/2/imagePullPolicy
+        value: "IfNotPresent"

@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: cos-fleet-manager
+spec:
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: cos-fleet-manager
+    weight: 100
+  wildcardPolicy: None
