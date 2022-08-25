@@ -27,8 +27,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 402,
-      "iteration": 1659941873601,
+      "iteration": 1661438180978,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -48,7 +47,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Total unique Clusters in the selected time range.",
           "fieldConfig": {
@@ -99,7 +98,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -426,7 +425,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1475E734F4285D2"
+            "uid": "${Datasource}"
           },
           "description": "Table with the detail of the current name. Click on the namespace name to see the detailed view.",
           "fieldConfig": {
@@ -560,7 +559,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -574,7 +573,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PE1475E734F4285D2"
+                "uid": "${Datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1377,7 +1376,7 @@ data:
       "timezone": "",
       "title": "Data Plane | Overview",
       "uid": "3lmqGVq7z",
-      "version": 23,
+      "version": 24,
       "weekStart": ""
     }
 kind: ConfigMap
