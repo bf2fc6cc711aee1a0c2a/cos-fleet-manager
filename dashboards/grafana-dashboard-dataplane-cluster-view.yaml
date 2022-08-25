@@ -27,8 +27,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 382,
-      "iteration": 1659964878704,
+      "iteration": 1661438605849,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -1131,7 +1130,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1220,7 +1220,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1321,7 +1322,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1423,7 +1425,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1528,7 +1531,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1633,7 +1637,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1738,7 +1743,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1855,7 +1861,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1948,7 +1955,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2024,12 +2032,12 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "rhoc-dev",
-              "value": "rhoc-dev"
+              "text": "None",
+              "value": ""
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PE1475E734F4285D2"
+              "uid": "${Datasource}"
             },
             "definition": "label_values(container_network_receive_bytes_total{name=~\".*_mctr-.*\"}, cluster_id)",
             "hide": 0,
@@ -2050,12 +2058,12 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0",
-              "value": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0"
+              "text": "None",
+              "value": ""
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PE1475E734F4285D2"
+              "uid": "${Datasource}"
             },
             "definition": "label_values(container_network_receive_bytes_total{cluster_id=\"$cluster_id\", name=~\".*_mctr-.*\"}, namespace)",
             "hide": 0,
@@ -2083,7 +2091,7 @@ data:
       "timezone": "",
       "title": "Data Plane | Cluster view",
       "uid": "ov28Nbrnz",
-      "version": 44,
+      "version": 45,
       "weekStart": ""
     }
 kind: ConfigMap

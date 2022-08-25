@@ -27,8 +27,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 398,
-      "iteration": 1659902970971,
+      "iteration": 1661440174647,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -1232,7 +1231,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1333,7 +1333,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1434,7 +1435,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1560,7 +1562,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1644,14 +1647,13 @@ data:
           },
           {
             "current": {
-              "isNone": true,
               "selected": false,
               "text": "None",
               "value": ""
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PE1475E734F4285D2"
+              "uid": "${Datasource}"
             },
             "definition": "label_values(container_network_receive_bytes_total{name=~\".*_mctr-.*\"}, cluster_id)",
             "hide": 0,
@@ -1671,14 +1673,13 @@ data:
           },
           {
             "current": {
-              "isNone": true,
               "selected": false,
               "text": "None",
               "value": ""
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PE1475E734F4285D2"
+              "uid": "${Datasource}"
             },
             "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\"}, namespace)",
             "hide": 0,
@@ -1698,14 +1699,13 @@ data:
           },
           {
             "current": {
-              "isNone": true,
               "selected": false,
               "text": "None",
               "value": ""
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PE1475E734F4285D2"
+              "uid": "${Datasource}"
             },
             "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}, connector_id)",
             "hide": 0,
@@ -1726,14 +1726,13 @@ data:
           },
           {
             "current": {
-              "isNone": true,
               "selected": false,
               "text": "None",
               "value": ""
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PE1475E734F4285D2"
+              "uid": "${Datasource}"
             },
             "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}, pod)",
             "hide": 0,
@@ -1761,7 +1760,7 @@ data:
       "timezone": "",
       "title": "CamelK Specific Connectors",
       "uid": "uln0BXC7z",
-      "version": 19,
+      "version": 20,
       "weekStart": ""
     }
 kind: ConfigMap
