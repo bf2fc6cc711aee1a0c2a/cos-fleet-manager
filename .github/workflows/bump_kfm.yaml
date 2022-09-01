@@ -8,15 +8,27 @@ jobs:
     name: 'Bump K-F-M version'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Set up Go 1.19
+        uses: actions/setup-go@v3
         with:
-          ref: main
+          go-version: "1.19"
       - name: Configure git for private modules
         env:
           TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           TOKEN_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
         run: |
           git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Cache go module
+        uses: actions/cache@v3
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Run make bump-kfm
         run: make bump-kfm
       - name: Create Pull Request
