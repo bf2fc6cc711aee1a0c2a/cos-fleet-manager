@@ -290,6 +290,14 @@ parameters:
   description: The type of vault to use to store secrets
   value: tmp
 
+- name: VAULT_SECRET_PREFIX_ENABLE
+  description: Enable use of a prefix for all managed connectors secret names in AWS vault, default false
+  value: false
+
+- name: VAULT_SECRET_PREFIX
+  description: Prefix to use for all managed connectors secret names in AWS vault
+  value: managed-connectors
+
 - name: CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS
   displayName: Disable Connector Cascade Delete
   description: Enable support for 'unassigned' state for connectors
@@ -633,6 +641,8 @@ objects:
             - --sentry-url=${SENTRY_URL}
             - --vault-access-key-file=/secrets/service/vault.accesskey
             - --vault-kind=${VAULT_KIND}
+            - --vault-secret-prefix-enable=${VAULT_SECRET_PREFIX_ENABLE}
+            - --vault-secret-prefix=${VAULT_SECRET_PREFIX}
             - --vault-secret-access-key-file=/secrets/service/vault.secretaccesskey
             - -v=${GLOG_V}
             resources:
