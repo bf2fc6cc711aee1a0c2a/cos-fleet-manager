@@ -292,7 +292,7 @@ parameters:
 
 - name: VAULT_SECRET_PREFIX_ENABLE
   description: Enable use of a prefix for all managed connectors secret names in AWS vault, default false
-  value: false
+  value: "false"
 
 - name: VAULT_SECRET_PREFIX
   description: Prefix to use for all managed connectors secret names in AWS vault
