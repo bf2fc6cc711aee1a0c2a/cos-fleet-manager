@@ -17,8 +17,12 @@ jobs:
         env:
           TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           TOKEN_USER: ${{ secrets.PERSONAL_ACCESS_TOKEN_USER }}
+          USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+          USER_NAME: ${{ secrets.GIT_USER_NAME }}
         run: |
           git config --global url."https://${TOKEN_USER}:${TOKEN}@github.com".insteadOf "https://github.com"
+          git config --global user.email "${USER_EMAIL}"
+          git config --global user.name "${USER_NAME}"
       - name: Git merge from main
         run: |
           git merge origin/main --no-squash -m 'chore: bumped stage branch from main'
