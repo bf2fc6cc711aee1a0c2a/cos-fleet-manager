@@ -276,7 +276,7 @@ docker/login/internal:
 .PHONY: docker/login/internal
 
 # Build the binary and image
-image/build: binary
+image/build:
 	docker --config="${DOCKER_CONFIG}" build -t "$(external_image_registry)/$(image_repository):$(image_tag)" .
 .PHONY: image/build
 
