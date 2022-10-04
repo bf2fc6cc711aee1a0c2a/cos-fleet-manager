@@ -17,11 +17,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-cloudwatch:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-cloudwatch:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -94,8 +94,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_uri_endpoint_override" : {
                 "title" : "Overwrite Endpoint URI",
@@ -167,6 +166,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -207,11 +207,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -284,8 +284,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_operation" : {
                 "title" : "Operation",
@@ -370,6 +369,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -410,11 +410,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb-streams:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb-streams:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -487,8 +487,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_stream_iterator_type" : {
                 "title" : "Stream Iterator Type",
@@ -514,8 +513,8 @@ objects:
                 "default" : 500
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -572,6 +571,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -612,11 +612,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -689,8 +689,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_uri_endpoint_override" : {
                 "title" : "Overwrite Endpoint URI",
@@ -765,6 +764,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -777,6 +777,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -817,11 +818,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -914,8 +915,8 @@ objects:
                 "default" : 500
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -975,6 +976,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -987,6 +989,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -1027,11 +1030,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-lambda:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-lambda:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1104,8 +1107,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "kafka_topic" : {
                 "title" : "Topic Names",
@@ -1166,6 +1168,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -1206,11 +1209,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1283,8 +1286,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_auto_create_bucket" : {
                 "title" : "Autocreate Bucket",
@@ -1367,6 +1369,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -1407,11 +1410,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1490,8 +1493,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_auto_create_bucket" : {
                 "title" : "Autocreate Bucket",
@@ -1535,8 +1537,8 @@ objects:
                 "default" : 500
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -1593,6 +1595,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -1633,11 +1636,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ses:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ses:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1711,8 +1714,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "kafka_topic" : {
                 "title" : "Topic Names",
@@ -1773,6 +1775,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -1813,11 +1816,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sns:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sns:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1890,8 +1893,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_auto_create_topic" : {
                 "title" : "Autocreate Topic",
@@ -1969,6 +1971,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -2009,11 +2012,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2086,8 +2089,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_auto_create_queue" : {
                 "title" : "Autocreate Queue",
@@ -2178,6 +2180,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -2218,11 +2221,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2301,8 +2304,7 @@ objects:
                 "title" : "AWS Region",
                 "description" : "The AWS region to access.",
                 "type" : "string",
-                "example" : "eu-west-1",
-                "enum" : [ "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ca-central-1", "eu-central-1", "eu-north-1", "eu-south-1", "eu-west-1", "eu-west-2", "eu-west-3", "fips-us-east-1", "fips-us-east-2", "fips-us-west-1", "fips-us-west-2", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1", "us-gov-east-1", "us-gov-west-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1" ]
+                "enum" : [ "ap-south-1", "eu-south-1", "us-gov-east-1", "me-central-1", "ca-central-1", "eu-central-1", "us-iso-west-1", "us-west-1", "us-west-2", "af-south-1", "eu-north-1", "eu-west-3", "eu-west-2", "eu-west-1", "ap-northeast-3", "ap-northeast-2", "ap-northeast-1", "me-south-1", "sa-east-1", "ap-east-1", "cn-north-1", "us-gov-west-1", "ap-southeast-1", "ap-southeast-2", "us-iso-east-1", "ap-southeast-3", "us-east-1", "us-east-2", "cn-northwest-1", "us-isob-east-1", "aws-global", "aws-cn-global", "aws-us-gov-global", "aws-iso-global", "aws-iso-b-global" ]
               },
               "aws_auto_create_queue" : {
                 "title" : "Autocreate Queue",
@@ -2346,8 +2348,8 @@ objects:
                 "default" : 500
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -2404,6 +2406,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -2451,11 +2454,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2580,6 +2583,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -2620,11 +2624,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -2715,8 +2719,8 @@ objects:
                 } ]
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -2773,6 +2777,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -2813,11 +2818,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-functions:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-functions:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2939,6 +2944,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -2979,11 +2985,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob-changefeed:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob-changefeed:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3046,8 +3052,8 @@ objects:
                 } ]
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -3104,6 +3110,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -3144,11 +3151,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3274,6 +3281,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -3314,11 +3322,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3386,8 +3394,8 @@ objects:
                 } ]
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -3444,6 +3452,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -3484,11 +3493,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3608,6 +3617,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -3648,11 +3658,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3720,8 +3730,8 @@ objects:
                 "default" : 1
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -3778,6 +3788,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -3825,11 +3836,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-bigquery:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-bigquery:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -3945,6 +3956,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -3985,11 +3997,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4113,6 +4125,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -4153,11 +4166,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4276,6 +4289,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -4316,11 +4330,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4399,8 +4413,8 @@ objects:
                 "default" : 1
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -4457,6 +4471,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -4497,11 +4512,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4621,6 +4636,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -4661,11 +4677,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4711,7 +4727,7 @@ objects:
                 "x-group" : "credentials",
                 "oneOf" : [ {
                   "title" : "Service Account Key",
-                  "description" : "TThe service account key to use as credentials for Google Cloud Storage access. You must encode this value in base64.",
+                  "description" : "The service account key to use as credentials for Google Cloud Storage access. You must encode this value in base64.",
                   "type" : "string",
                   "format" : "password"
                 }, {
@@ -4733,8 +4749,8 @@ objects:
                 "default" : false
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -4791,6 +4807,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -4838,11 +4855,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ansible-tower:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-ansible-tower:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -4867,7 +4884,7 @@ objects:
         "connector_type" : {
           "capabilities" : [ "data_shape", "error_handler", "processors" ],
           "channels" : [ "stable" ],
-          "description" : "Ansible Tower source",
+          "description" : "Ansible Tower sink",
           "icon_href" : "TODO",
           "id" : "ansible_tower_job_template_launch_sink_0.1",
           "kind" : "ConnectorType",
@@ -4921,8 +4938,8 @@ objects:
                 } ]
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -4979,6 +4996,218 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
+                      "default" : "application/json",
+                      "enum" : [ "application/json" ]
+                    }
+                  }
+                }
+              },
+              "error_handler" : {
+                "log" : {
+                  "type" : "object",
+                  "additionalProperties" : false
+                },
+                "stop" : {
+                  "type" : "object",
+                  "additionalProperties" : false
+                },
+                "dead_letter_queue" : {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "topic" ],
+                  "properties" : {
+                    "topic" : {
+                      "type" : "string",
+                      "title" : "Dead Letter Topic Name",
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "version" : "0.1"
+        }
+      }
+    splunk_0.1.json: |-
+      {
+        "channels" : {
+          "stable" : {
+            "shard_metadata" : {
+              "annotations" : {
+                "trait.camel.apache.org/container.request-cpu" : "0.20",
+                "trait.camel.apache.org/container.request-memory" : "128M",
+                "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
+              },
+              "connector_image" : "quay.io/rhoas/cos-connector-splunk:0.1.46",
+              "connector_revision" : 46,
+              "connector_type" : "sink",
+              "consumes" : "application/json",
+              "error_handler_strategy" : "stop",
+              "kamelets" : {
+                "adapter" : {
+                  "name" : "splunk-sink",
+                  "prefix" : "splunk"
+                },
+                "kafka" : {
+                  "name" : "cos-kafka-sink",
+                  "prefix" : "kafka"
+                }
+              },
+              "operators" : [ {
+                "type" : "camel-connector-operator",
+                "version" : "[1.0.0,2.0.0)"
+              } ],
+              "produces" : "application/json"
+            }
+          }
+        },
+        "connector_type" : {
+          "capabilities" : [ "data_shape", "error_handler", "processors" ],
+          "channels" : [ "stable" ],
+          "description" : "Send data to Splunk.",
+          "icon_href" : "TODO",
+          "id" : "splunk_0.1",
+          "kind" : "ConnectorType",
+          "labels" : [ "sink" ],
+          "name" : "Splunk sink",
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : false,
+            "required" : [ "splunk_server_hostname", "splunk_username", "splunk_password", "kafka_topic" ],
+            "properties" : {
+              "splunk_server_hostname" : {
+                "title" : "Splunk Server Address",
+                "description" : "The address of your Splunk server.",
+                "type" : "string",
+                "example" : "my_server_splunk.com"
+              },
+              "splunk_server_port" : {
+                "title" : "Splunk Server Port",
+                "description" : "The address of your Splunk server.",
+                "type" : "integer",
+                "default" : 8089
+              },
+              "splunk_username" : {
+                "title" : "Username",
+                "description" : "The username to authenticate to Splunk Server.",
+                "type" : "string"
+              },
+              "splunk_password" : {
+                "title" : "Password",
+                "x-group" : "credentials",
+                "oneOf" : [ {
+                  "title" : "Password",
+                  "description" : "The password to authenticate to Splunk Server.",
+                  "type" : "string",
+                  "format" : "password"
+                }, {
+                  "description" : "An opaque reference to the splunk_password",
+                  "type" : "object",
+                  "properties" : { }
+                } ]
+              },
+              "splunk_index" : {
+                "title" : "Index",
+                "description" : "Splunk index to write to.",
+                "type" : "string"
+              },
+              "splunk_protocol" : {
+                "title" : "Protocol",
+                "description" : "Connection Protocol to Splunk server.",
+                "type" : "string",
+                "default" : "https",
+                "enum" : [ "http", "https" ]
+              },
+              "splunk_source" : {
+                "title" : "Source",
+                "description" : "The source named field of the data.",
+                "type" : "string"
+              },
+              "splunk_source_type" : {
+                "title" : "Source Type",
+                "description" : "The source named field of the data.",
+                "type" : "string"
+              },
+              "splunk_app" : {
+                "title" : "Splunk App",
+                "description" : "The app name in Splunk.",
+                "type" : "string"
+              },
+              "splunk_connection_timeout" : {
+                "title" : "Connection Timeout",
+                "description" : "Timeout in milliseconds when connecting to Splunk server",
+                "type" : "integer",
+                "default" : 5000
+              },
+              "splunk_mode" : {
+                "title" : "Mode",
+                "description" : "The mode to publish events to Splunk.",
+                "type" : "string",
+                "default" : "stream",
+                "enum" : [ "submit", "stream" ]
+              },
+              "kafka_topic" : {
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
+                "type" : "string"
+              },
+              "data_shape" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "consumes" : {
+                    "$ref" : "#/$defs/data_shape/consumes"
+                  }
+                }
+              },
+              "error_handler" : {
+                "type" : "object",
+                "oneOf" : [ {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "log" ],
+                  "properties" : {
+                    "log" : {
+                      "$ref" : "#/$defs/error_handler/log"
+                    }
+                  }
+                }, {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "stop" ],
+                  "properties" : {
+                    "stop" : {
+                      "$ref" : "#/$defs/error_handler/stop"
+                    }
+                  }
+                }, {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "dead_letter_queue" ],
+                  "properties" : {
+                    "dead_letter_queue" : {
+                      "$ref" : "#/$defs/error_handler/dead_letter_queue"
+                    }
+                  }
+                } ],
+                "default" : {
+                  "stop" : { }
+                }
+              },
+              "processors" : { }
+            },
+            "$defs" : {
+              "data_shape" : {
+                "consumes" : {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "format" ],
+                  "properties" : {
+                    "format" : {
+                      "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -5026,17 +5255,17 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-http:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-http:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "http-sink",
+                  "name" : "cos-http-sink",
                   "prefix" : "http"
                 },
                 "kafka" : {
@@ -5138,6 +5367,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -5178,11 +5408,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5294,6 +5524,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -5334,11 +5565,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5392,8 +5623,8 @@ objects:
                 "example" : "amqp://my-host:31616"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -5450,6 +5681,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -5490,11 +5722,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5607,6 +5839,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -5647,11 +5880,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5705,8 +5938,8 @@ objects:
                 "example" : "tcp://k3s-node-master.usersys.redhat.com:31616"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -5763,6 +5996,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -5803,11 +6037,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-rest-openapi:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-rest-openapi:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5914,6 +6148,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -5961,11 +6196,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-data-generator:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-data-generator:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -6020,8 +6255,8 @@ objects:
                 "default" : "text/plain"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -6078,6 +6313,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -6125,11 +6361,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6279,6 +6515,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -6319,11 +6556,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6415,8 +6652,8 @@ objects:
                 "type" : "string"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -6473,6 +6710,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -6513,11 +6751,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-elasticsearch:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-elasticsearch:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6656,6 +6894,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -6696,11 +6935,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6841,6 +7080,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -6881,11 +7121,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6958,7 +7198,7 @@ objects:
               },
               "mongodb_persistent_tail_tracking" : {
                 "title" : "MongoDB Persistent Tail Tracking",
-                "description" : "Specifies to enable persistent tail tracking, which is a mechanism to keep track of the last consumed data across system restarts. The next time the system is up, the endpoint recovers the cursor from the point where it last stopped consuimg data.",
+                "description" : "Specifies to enable persistent tail tracking, which is a mechanism to keep track of the last consumed data across system restarts. The next time the system is up, the endpoint recovers the cursor from the point where it last stopped consuimg data. This option will only work on capped collections.",
                 "type" : "boolean",
                 "default" : false
               },
@@ -6968,8 +7208,8 @@ objects:
                 "type" : "string"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -7026,6 +7266,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -7066,6 +7307,338 @@ objects:
 -
   apiVersion: v1
   data:
+    jira_add_comment_sink_0.1.json: |-
+      {
+        "channels" : {
+          "stable" : {
+            "shard_metadata" : {
+              "annotations" : {
+                "trait.camel.apache.org/container.request-cpu" : "0.20",
+                "trait.camel.apache.org/container.request-memory" : "128M",
+                "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
+              },
+              "connector_image" : "quay.io/rhoas/cos-connector-jira:0.1.46",
+              "connector_revision" : 46,
+              "connector_type" : "sink",
+              "consumes" : "application/json",
+              "error_handler_strategy" : "stop",
+              "kamelets" : {
+                "adapter" : {
+                  "name" : "jira-add-comment-sink",
+                  "prefix" : "jira"
+                },
+                "kafka" : {
+                  "name" : "cos-kafka-source",
+                  "prefix" : "kafka"
+                }
+              },
+              "operators" : [ {
+                "type" : "camel-connector-operator",
+                "version" : "[1.0.0,2.0.0)"
+              } ],
+              "produces" : "application/json"
+            }
+          }
+        },
+        "connector_type" : {
+          "capabilities" : [ "data_shape", "error_handler", "processors" ],
+          "channels" : [ "stable" ],
+          "description" : "Add a new comment to an existing issue in Jira.",
+          "icon_href" : "TODO",
+          "id" : "jira_add_comment_sink_0.1",
+          "kind" : "ConnectorType",
+          "labels" : [ "sink" ],
+          "name" : "Jira Add Comment sink",
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : false,
+            "required" : [ "jira_jira_url", "jira_username", "jira_password", "kafka_topic" ],
+            "properties" : {
+              "jira_jira_url" : {
+                "title" : "Jira URL",
+                "description" : "The URL of your instance of Jira",
+                "type" : "string",
+                "example" : "http://my_jira.com:8081"
+              },
+              "jira_username" : {
+                "title" : "Username",
+                "description" : "The username to access Jira",
+                "type" : "string",
+                "x-group" : "credentials"
+              },
+              "jira_password" : {
+                "title" : "Password",
+                "x-group" : "credentials",
+                "oneOf" : [ {
+                  "title" : "Password",
+                  "description" : "The password or the API Token to access Jira",
+                  "type" : "string",
+                  "format" : "password"
+                }, {
+                  "description" : "An opaque reference to the jira_password",
+                  "type" : "object",
+                  "properties" : { }
+                } ]
+              },
+              "kafka_topic" : {
+                "title" : "Topic Names",
+                "description" : "A comma-separated list of Kafka topic names.",
+                "type" : "string"
+              },
+              "data_shape" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "consumes" : {
+                    "$ref" : "#/$defs/data_shape/consumes"
+                  }
+                }
+              },
+              "error_handler" : {
+                "type" : "object",
+                "oneOf" : [ {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "log" ],
+                  "properties" : {
+                    "log" : {
+                      "$ref" : "#/$defs/error_handler/log"
+                    }
+                  }
+                }, {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "stop" ],
+                  "properties" : {
+                    "stop" : {
+                      "$ref" : "#/$defs/error_handler/stop"
+                    }
+                  }
+                }, {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "dead_letter_queue" ],
+                  "properties" : {
+                    "dead_letter_queue" : {
+                      "$ref" : "#/$defs/error_handler/dead_letter_queue"
+                    }
+                  }
+                } ],
+                "default" : {
+                  "stop" : { }
+                }
+              },
+              "processors" : { }
+            },
+            "$defs" : {
+              "data_shape" : {
+                "consumes" : {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "format" ],
+                  "properties" : {
+                    "format" : {
+                      "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
+                      "default" : "application/json",
+                      "enum" : [ "application/json" ]
+                    }
+                  }
+                }
+              },
+              "error_handler" : {
+                "log" : {
+                  "type" : "object",
+                  "additionalProperties" : false
+                },
+                "stop" : {
+                  "type" : "object",
+                  "additionalProperties" : false
+                },
+                "dead_letter_queue" : {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "topic" ],
+                  "properties" : {
+                    "topic" : {
+                      "type" : "string",
+                      "title" : "Dead Letter Topic Name",
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "version" : "0.1"
+        }
+      }
+    jira_add_issue_sink_0.1.json: |-
+      {
+        "channels" : {
+          "stable" : {
+            "shard_metadata" : {
+              "annotations" : {
+                "trait.camel.apache.org/container.request-cpu" : "0.20",
+                "trait.camel.apache.org/container.request-memory" : "128M",
+                "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
+              },
+              "connector_image" : "quay.io/rhoas/cos-connector-jira:0.1.46",
+              "connector_revision" : 46,
+              "connector_type" : "sink",
+              "consumes" : "application/json",
+              "error_handler_strategy" : "stop",
+              "kamelets" : {
+                "adapter" : {
+                  "name" : "jira-add-issue-sink",
+                  "prefix" : "jira"
+                },
+                "kafka" : {
+                  "name" : "cos-kafka-source",
+                  "prefix" : "kafka"
+                }
+              },
+              "operators" : [ {
+                "type" : "camel-connector-operator",
+                "version" : "[1.0.0,2.0.0)"
+              } ],
+              "produces" : "application/json"
+            }
+          }
+        },
+        "connector_type" : {
+          "capabilities" : [ "data_shape", "error_handler", "processors" ],
+          "channels" : [ "stable" ],
+          "description" : "Add a new issue to Jira.",
+          "icon_href" : "TODO",
+          "id" : "jira_add_issue_sink_0.1",
+          "kind" : "ConnectorType",
+          "labels" : [ "sink" ],
+          "name" : "Jira Add Issue sink",
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : false,
+            "required" : [ "jira_jira_url", "jira_username", "jira_password", "kafka_topic" ],
+            "properties" : {
+              "jira_jira_url" : {
+                "title" : "Jira URL",
+                "description" : "The URL of your instance of Jira",
+                "type" : "string",
+                "example" : "http://my_jira.com:8081"
+              },
+              "jira_username" : {
+                "title" : "Username",
+                "description" : "The username to access Jira",
+                "type" : "string",
+                "x-group" : "credentials"
+              },
+              "jira_password" : {
+                "title" : "Password",
+                "x-group" : "credentials",
+                "oneOf" : [ {
+                  "title" : "Password",
+                  "description" : "The password or the API Token to access Jira",
+                  "type" : "string",
+                  "format" : "password"
+                }, {
+                  "description" : "An opaque reference to the jira_password",
+                  "type" : "object",
+                  "properties" : { }
+                } ]
+              },
+              "kafka_topic" : {
+                "title" : "Topic Names",
+                "description" : "A comma-separated list of Kafka topic names.",
+                "type" : "string"
+              },
+              "data_shape" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "consumes" : {
+                    "$ref" : "#/$defs/data_shape/consumes"
+                  }
+                }
+              },
+              "error_handler" : {
+                "type" : "object",
+                "oneOf" : [ {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "log" ],
+                  "properties" : {
+                    "log" : {
+                      "$ref" : "#/$defs/error_handler/log"
+                    }
+                  }
+                }, {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "stop" ],
+                  "properties" : {
+                    "stop" : {
+                      "$ref" : "#/$defs/error_handler/stop"
+                    }
+                  }
+                }, {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "dead_letter_queue" ],
+                  "properties" : {
+                    "dead_letter_queue" : {
+                      "$ref" : "#/$defs/error_handler/dead_letter_queue"
+                    }
+                  }
+                } ],
+                "default" : {
+                  "stop" : { }
+                }
+              },
+              "processors" : { }
+            },
+            "$defs" : {
+              "data_shape" : {
+                "consumes" : {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "format" ],
+                  "properties" : {
+                    "format" : {
+                      "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
+                      "default" : "application/json",
+                      "enum" : [ "application/json" ]
+                    }
+                  }
+                }
+              },
+              "error_handler" : {
+                "log" : {
+                  "type" : "object",
+                  "additionalProperties" : false
+                },
+                "stop" : {
+                  "type" : "object",
+                  "additionalProperties" : false
+                },
+                "dead_letter_queue" : {
+                  "type" : "object",
+                  "additionalProperties" : false,
+                  "required" : [ "topic" ],
+                  "properties" : {
+                    "topic" : {
+                      "type" : "string",
+                      "title" : "Dead Letter Topic Name",
+                      "description" : "The name of the Kafka topic that serves as a destination for messages which were not processed correctly due to an error."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "version" : "0.1"
+        }
+      }
     jira_source_0.1.json: |-
       {
         "channels" : {
@@ -7073,11 +7646,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jira:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-jira:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7146,8 +7719,8 @@ objects:
                 "example" : "project=MyProject"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -7204,6 +7777,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -7244,11 +7818,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7395,6 +7969,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -7435,11 +8010,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7580,6 +8155,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -7620,11 +8196,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7712,8 +8288,8 @@ objects:
                 } ]
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -7770,6 +8346,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -7810,11 +8387,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -7966,6 +8543,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -8013,11 +8591,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -8147,6 +8725,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -8187,11 +8766,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-slack:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "consumes_class" : "com.slack.api.model.Message",
@@ -8255,8 +8834,8 @@ objects:
                 "example" : "1s"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -8313,6 +8892,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -8353,11 +8933,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -8471,6 +9051,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -8511,11 +9092,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-telegram:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8566,8 +9147,8 @@ objects:
                 } ]
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -8624,6 +9205,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -8671,11 +9253,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8813,6 +9395,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -8853,11 +9436,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8949,8 +9532,8 @@ objects:
                 "default" : 500
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -9007,6 +9590,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -9047,11 +9631,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9189,6 +9773,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -9229,11 +9814,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9319,8 +9904,8 @@ objects:
                 "example" : "DELETE FROM accounts where user_id = :#user_id"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -9377,6 +9962,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -9417,11 +10003,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9559,6 +10145,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -9599,11 +10186,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-mysql:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9689,8 +10276,8 @@ objects:
                 "example" : "DELETE FROM accounts where user_id = :#user_id"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -9747,6 +10334,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -9787,11 +10375,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -9929,6 +10517,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -9969,11 +10558,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10059,8 +10648,8 @@ objects:
                 "example" : "DELETE FROM accounts where user_id = :#user_id"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -10117,6 +10706,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -10157,11 +10747,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10299,6 +10889,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -10339,11 +10930,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10429,8 +11020,8 @@ objects:
                 "example" : "DELETE FROM accounts where user_id = :#user_id"
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -10487,6 +11078,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/json",
                       "enum" : [ "application/json" ]
                     }
@@ -10534,11 +11126,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -10681,6 +11273,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -10721,11 +11314,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-ftps:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -10816,8 +11409,8 @@ objects:
                 "default" : true
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -10874,6 +11467,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -10914,11 +11508,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -11058,6 +11652,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -11098,13 +11693,13 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-minio:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
-              "consumes" : "application/json",
+              "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
@@ -11120,7 +11715,7 @@ objects:
                 "type" : "camel-connector-operator",
                 "version" : "[1.0.0,2.0.0)"
               } ],
-              "produces" : "application/json"
+              "produces" : "application/octet-stream"
             }
           }
         },
@@ -11190,8 +11785,8 @@ objects:
                 "default" : false
               },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -11248,8 +11843,9 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
-                      "default" : "application/json",
-                      "enum" : [ "application/json" ]
+                      "description" : "The format of the data that the source connector sends to Kafka.",
+                      "default" : "application/octet-stream",
+                      "enum" : [ "application/octet-stream" ]
                     }
                   }
                 }
@@ -11288,11 +11884,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -11435,6 +12031,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that Kafka sends to the sink connector.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
@@ -11475,11 +12072,11 @@ objects:
             "shard_metadata" : {
               "annotations" : {
                 "trait.camel.apache.org/container.request-cpu" : "0.20",
-                "trait.camel.apache.org/container.request-memory" : "128m",
+                "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.35",
-              "connector_revision" : 35,
+              "connector_image" : "quay.io/rhoas/cos-connector-sftp:0.1.46",
+              "connector_revision" : 46,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -11569,9 +12166,15 @@ objects:
                 "type" : "boolean",
                 "default" : true
               },
+              "sftp_ignore_file_not_found_or_permission_error" : {
+                "title" : "Ignore File Not Found Or Permission Error",
+                "description" : "Whether to ignore when (trying to list files in directories or when downloading a file), which does not exist or due to permission error. By default when a directory or file does not exists or insufficient permission, then an exception is thrown. Setting this option to true allows to ignore that instead.",
+                "type" : "boolean",
+                "default" : false
+              },
               "kafka_topic" : {
-                "title" : "Topic Names",
-                "description" : "A comma-separated list of Kafka topic names.",
+                "title" : "Topic Name",
+                "description" : "The name of the Kafka Topic to use.",
                 "type" : "string"
               },
               "data_shape" : {
@@ -11628,6 +12231,7 @@ objects:
                   "properties" : {
                     "format" : {
                       "type" : "string",
+                      "description" : "The format of the data that the source connector sends to Kafka.",
                       "default" : "application/octet-stream",
                       "enum" : [ "application/octet-stream" ]
                     }
