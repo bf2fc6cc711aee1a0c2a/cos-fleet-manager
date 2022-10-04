@@ -10,19 +10,19 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-mongodb-1.9.4.Final.json: |-
+    debezium-mongodb-1.9.6.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-mongodb-1.9.4.Final",
+          "id" : "debezium-mongodb-1.9.6.Final",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mongodb-1.9.4.Final",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mongodb-1.9.6.Final",
           "name" : "Debezium MongoDB Connector",
-          "version" : "1.9.4.Final",
+          "version" : "1.9.6.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "mongodb", "1.9.4.Final" ],
+          "labels" : [ "source", "debezium", "mongodb", "1.9.6.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-mongodb-1.9.4.Final.png",
+          "icon_href" : "http://example.com/images/debezium-mongodb-1.9.6.Final.png",
           "schema" : {
             "title" : "Debezium MongoDB Connector",
             "required" : [ "mongodb.name" ],
@@ -179,7 +179,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "mongodb",
-            "x-version" : "1.9.4.Final",
+            "x-version" : "1.9.6.Final",
             "x-className" : "io.debezium.connector.mongodb.MongoDbConnector",
             "$defs" : {
               "serializer" : {
@@ -200,7 +200,7 @@ objects:
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.mongodb.MongoDbConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-mongodb@sha256:6827b643af8fc539b509dd92d1904e643671e01ac06589050786e416a17023d8"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-mongodb@sha256:896e3093e647bd9985b8a9fe1ea64009fd77890b89417501ffada7af00cbd394"
             }
           }
         }
@@ -212,19 +212,19 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-mysql-1.9.4.Final.json: |-
+    debezium-mysql-1.9.6.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-mysql-1.9.4.Final",
+          "id" : "debezium-mysql-1.9.6.Final",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mysql-1.9.4.Final",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mysql-1.9.6.Final",
           "name" : "Debezium MySQL Connector",
-          "version" : "1.9.4.Final",
+          "version" : "1.9.6.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "mysql", "1.9.4.Final" ],
+          "labels" : [ "source", "debezium", "mysql", "1.9.6.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-mysql-1.9.4.Final.png",
+          "icon_href" : "http://example.com/images/debezium-mysql-1.9.6.Final.png",
           "schema" : {
             "title" : "Debezium MySQL Connector",
             "required" : [ "database.hostname", "database.user", "database.server.name", "database.server.id" ],
@@ -411,7 +411,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "mysql",
-            "x-version" : "1.9.4.Final",
+            "x-version" : "1.9.6.Final",
             "x-className" : "io.debezium.connector.mysql.MySqlConnector",
             "$defs" : {
               "serializer" : {
@@ -432,7 +432,7 @@ objects:
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.mysql.MySqlConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-mysql@sha256:da3ba6d1b56f13b743d0200258901ac62973c6c2402854a8c5a442f7179818bd"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-mysql@sha256:c7356abaf874518b608d5af456a5d89f6bd0fac28904104d91a6046a29b9bc8a"
             }
           }
         }
@@ -444,19 +444,19 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-postgres-1.9.4.Final.json: |-
+    debezium-postgres-1.9.6.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-postgres-1.9.4.Final",
+          "id" : "debezium-postgres-1.9.6.Final",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-postgres-1.9.4.Final",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-postgres-1.9.6.Final",
           "name" : "Debezium PostgreSQL Connector",
-          "version" : "1.9.4.Final",
+          "version" : "1.9.6.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "postgres", "1.9.4.Final" ],
+          "labels" : [ "source", "debezium", "postgres", "1.9.6.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-postgres-1.9.4.Final.png",
+          "icon_href" : "http://example.com/images/debezium-postgres-1.9.6.Final.png",
           "schema" : {
             "title" : "Debezium PostgreSQL Connector",
             "required" : [ "database.server.name", "database.hostname", "database.user", "database.dbname" ],
@@ -667,7 +667,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "postgres",
-            "x-version" : "1.9.4.Final",
+            "x-version" : "1.9.6.Final",
             "x-className" : "io.debezium.connector.postgresql.PostgresConnector",
             "$defs" : {
               "serializer" : {
@@ -688,7 +688,7 @@ objects:
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.postgresql.PostgresConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-postgres@sha256:d64ee218a912c27b06350290fad003acf196b7739c5a3ba16426a3cdef0b21f2"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-postgres@sha256:f99d7ba9b3c15a1d4fedfaa57874a3922e730af41c7cbd4508b50b4164b1139f"
             }
           }
         }
@@ -700,19 +700,19 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-sqlserver-1.9.4.Final.json: |-
+    debezium-sqlserver-1.9.6.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-sqlserver-1.9.4.Final",
+          "id" : "debezium-sqlserver-1.9.6.Final",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-sqlserver-1.9.4.Final",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-sqlserver-1.9.6.Final",
           "name" : "Debezium SQLServer Connector",
-          "version" : "1.9.4.Final",
+          "version" : "1.9.6.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "sqlserver", "1.9.4.Final" ],
+          "labels" : [ "source", "debezium", "sqlserver", "1.9.6.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-sqlserver-1.9.4.Final.png",
+          "icon_href" : "http://example.com/images/debezium-sqlserver-1.9.6.Final.png",
           "schema" : {
             "title" : "Debezium SQLServer Connector",
             "required" : [ "database.server.name", "database.dbname", "database.hostname" ],
@@ -881,7 +881,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "sqlserver",
-            "x-version" : "1.9.4.Final",
+            "x-version" : "1.9.6.Final",
             "x-className" : "io.debezium.connector.sqlserver.SqlServerConnector",
             "$defs" : {
               "serializer" : {
@@ -902,7 +902,7 @@ objects:
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.sqlserver.SqlServerConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-sqlserver@sha256:d18fcc26aa36f52709e5b02d069e17f6c2cafcaa3ec96efbacefa6ffd5442204"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-sqlserver@sha256:d0eff3cd5cc28b48ae7b93b7ccab95754e9e9508d1ac514185d328b333d78ce3"
             }
           }
         }
