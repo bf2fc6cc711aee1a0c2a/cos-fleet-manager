@@ -202,6 +202,11 @@ make deploy OCM_SERVICE_TOKEN=<offline-token> IMAGE_TAG=<image-tag>
 - `OBSERVATORIUM_SERVICE_TOKEN`: Token for observatorium service.
 - `MAS_SSO_BASE_URL`: MAS SSO base url.
 - `MAS_SSO_REALM`: MAS SSO realm url.
+- `SSO_PROVIDER_TYPE`: Option to choose between sso providers i.e, mas_sso or redhat_sso, mas_sso by default.
+- `ADMIN_AUTHZ_CONFIG`: Configuration file containing endpoints and roles mappings used to grant access to admin API endpoints, Defaults to`"[{method: GET, roles: [cos-fleet-manager-admin-read, cos-fleet-manager-admin-write, cos-fleet-manager-admin-full]}, {method: PATCH, roles: [cos-fleet-manager-admin-write, cos-fleet-manager-admin-full]}, {method: PUT, roles: [cos-fleet-manager-admin-write, cos-fleet-manager-admin-full]}, {method: POST, roles: [cos-fleet-manager-admin-full]}, {method: DELETE, roles: [cos-fleet-manager-admin-full]}]"`
+- `ADMIN_API_SSO_BASE_URL`: Base URL of admin API endpints SSO. Defaults to `"https://auth.redhat.com"`
+- `ADMIN_API_SSO_ENDPOINT_URI`: admin API SSO endpoint URI. defaults to `"/auth/realms/EmployeeIDP"`
+- `ADMIN_API_SSO_REALM`: admin API SSO realm. Defaults to `"EmployeeIDP"`
 - `CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS`: Enable support for `unassigned` state for connectors
 - `CONNECTOR_EVAL_DURATION`: Connector evaluation namespace expiry duration in Golang duration format, default is 48h
 - `CONNECTOR_EVAL_ORGANIZATIONS`: Organization IDs for clusters to be used to create evaluation namespaces
