@@ -541,8 +541,7 @@ objects:
             - name: cos-fleet-manager
               mountPath: /config
             - name: cos-fleet-manager-admin-authz-config
-              mountPath: /config/admin-authz-configuration.yaml
-              subPath: admin-authz-configuration.yaml
+              mountPath: /config/admin-authz
             - name: connectors-quota-configuration
               mountPath: /config/connectors-quota
             - name: connector-catalog-camel-aws
@@ -642,7 +641,7 @@ objects:
             - --admin-api-sso-base-url=${ADMIN_API_SSO_BASE_URL}
             - --admin-api-sso-endpoint-uri=${ADMIN_API_SSO_ENDPOINT_URI}
             - --admin-api-sso-realm=${ADMIN_API_SSO_REALM}
-            - --admin-authz-config-file=/config/admin-authz-configuration.yaml
+            - --admin-authz-config-file=/config/admin-authz/admin-authz-configuration.yaml
             - --max-limit-for-sso-get-clients=${MAX_LIMIT_FOR_SSO_GET_CLIENTS}
             - --metrics-server-bindaddress=${METRICS_SERVER_BINDADDRESS}
 #            - --observability-config-access-token-file=/secrets/service/observability-config-access.token
