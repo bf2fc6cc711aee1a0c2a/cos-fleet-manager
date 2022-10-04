@@ -1,8 +1,22 @@
-FROM registry.access.redhat.com/ubi8/ubi-minimal:8.6
+FROM registry.access.redhat.com/ubi9-minimal:9.0.0 AS builder
+ 
+RUN microdnf install -y tar gzip make which git
 
-COPY \
-    cos-fleet-manager \
-    /usr/local/bin/
+# install go 1.19.1
+RUN curl -O -J https://dl.google.com/go/go1.19.1.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.19.1.linux-amd64.tar.gz
+RUN ln -s /usr/local/go/bin/go /usr/local/bin/go
+
+WORKDIR /workspace
+
+COPY . ./
+
+RUN go mod vendor 
+RUN make binary
+
+FROM registry.access.redhat.com/ubi9-minimal:9.0.0
+
+COPY --from=builder /workspace/cos-fleet-manager /usr/local/bin/
 
 EXPOSE 8000
 
@@ -13,3 +27,4 @@ LABEL name="cos-fleet-manager" \
       version="0.0.1" \
       summary="CosFleetManager" \
       description="Connector Service Fleet Manager"
+      
