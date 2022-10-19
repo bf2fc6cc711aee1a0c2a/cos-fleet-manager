@@ -27,7 +27,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1663245672261,
+      "iteration": 1665736261320,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -765,7 +765,7 @@ data:
             "x": 0,
             "y": 14
           },
-          "id": 7,
+          "id": 28,
           "options": {
             "colorMode": "value",
             "graphMode": "none",
@@ -789,7 +789,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(max_over_time(up{container=\"integration\"}[$__range]))",
+              "expr": "count(min_over_time(cos_fleetshard_sync_connector_state[$__range]) == 1)",
               "instant": true,
               "legendFormat": "Total Connectors",
               "range": false,
@@ -802,7 +802,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "count(max_over_time(application_camel_context_status{camelContext=\"camel-1\"}[$__range]))",
+              "expr": "count(min_over_time(cos_fleetshard_sync_connector_state{cos_connector_type_id!~\"debezium-.*\"}[$__range]) == 1)",
               "hide": false,
               "instant": true,
               "legendFormat": "CamelK Connectors",
@@ -816,7 +816,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(max_over_time(up{container=\"integration\"}[$__range])) - count(max_over_time(application_camel_context_status{camelContext=\"camel-1\"}[$__range]))",
+              "expr": "count(min_over_time(cos_fleetshard_sync_connector_state{cos_connector_type_id=~\"debezium-.*\"}[$__range]) == 1)",
               "hide": false,
               "instant": true,
               "legendFormat": "Debezium connectors",
@@ -824,7 +824,7 @@ data:
               "refId": "C"
             }
           ],
-          "title": "Connectors Count (selected time)",
+          "title": "Successful Connectors Count (selected time)",
           "type": "stat"
         },
         {
@@ -832,7 +832,7 @@ data:
             "type": "prometheus",
             "uid": "${Datasource}"
           },
-          "description": "Count of the types of CamelK Connectors.",
+          "description": "Count of the types of Connectors.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -858,7 +858,7 @@ data:
           "id": 27,
           "options": {
             "legend": {
-              "displayMode": "list",
+              "displayMode": "hidden",
               "placement": "bottom"
             },
             "pieType": "pie",
@@ -880,14 +880,14 @@ data:
                 "type": "prometheus",
                 "uid": "${Datasource}"
               },
-              "editorMode": "builder",
-              "expr": "count by(connector_type) (max_over_time(application_camel_context_status[$__interval]))",
+              "editorMode": "code",
+              "expr": "count by(cos_connector_type_id) (min_over_time(cos_fleetshard_sync_connector_state[$__range]) == 1)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "CamelK Connectors Types",
+          "title": "Successful Connectors Types",
           "type": "piechart"
         },
         {
@@ -960,7 +960,7 @@ data:
             "type": "prometheus",
             "uid": "${Datasource}"
           },
-          "description": "CamelK Connectors, Debezium Connectors, and crashing Connectors over time.",
+          "description": "CamelK/Debezium Connectors crashing vs running \n vs stopped over time.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -995,21 +995,66 @@ data:
                 }
               },
               "mappings": [],
+              "min": 0,
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
                     "color": "green",
                     "value": null
-                  },
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Crashing"
+                },
+                "properties": [
                   {
-                    "color": "red",
-                    "value": 80
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Running"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Stopped"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -1017,7 +1062,7 @@ data:
             "x": 14,
             "y": 14
           },
-          "id": 17,
+          "id": 32,
           "options": {
             "legend": {
               "calcs": [],
@@ -1025,8 +1070,8 @@ data:
               "placement": "bottom"
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -1036,8 +1081,8 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "count(increase(kube_pod_container_status_restarts_total{container=\"integration\"}[10m]) >3)",
-              "legendFormat": "Connectors Failing",
+              "expr": "count(cos_fleetshard_sync_connector_state == 2)",
+              "legendFormat": "Crashing",
               "range": true,
               "refId": "A"
             },
@@ -1047,9 +1092,9 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "count(application_camel_context_status{camelContext=\"camel-1\"})",
+              "expr": "count(cos_fleetshard_sync_connector_state == 1)",
               "hide": false,
-              "legendFormat": "CamelK Connectors",
+              "legendFormat": "Running",
               "range": true,
               "refId": "B"
             },
@@ -1059,14 +1104,14 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(up{container=\"integration\"}) - count(application_camel_context_status{camelContext=\"camel-1\"})",
+              "expr": "count(cos_fleetshard_sync_connector_state == 4)",
               "hide": false,
-              "legendFormat": "Debezium Connectors",
+              "legendFormat": "Stopped",
               "range": true,
               "refId": "C"
             }
           ],
-          "title": "Connectors Running / Crashing",
+          "title": "Connectors Running / Crashing / Stopped",
           "type": "timeseries"
         },
         {
@@ -1382,7 +1427,7 @@ data:
       "timezone": "",
       "title": "Data Plane | Overview",
       "uid": "3lmqGVq7z",
-      "version": 25,
+      "version": 1,
       "weekStart": ""
     }
 kind: ConfigMap
