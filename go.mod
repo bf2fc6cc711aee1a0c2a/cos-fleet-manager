@@ -3,7 +3,7 @@ module github.com/bf2fc6cc711aee1a0c2a/cos-fleet-manager
 go 1.19
 
 require (
-	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20221018082520-22379c84de14
+	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20221028074013-03c75b853dae
 	github.com/golang/glog v1.0.0
 	github.com/onsi/gomega v1.22.1
 	github.com/spf13/cobra v1.6.0
@@ -63,7 +63,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_golang v1.13.0 // indirect
-	github.com/prometheus/client_model v0.2.0 // indirect
+	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/redhat-developer/app-services-sdk-go/serviceaccounts v0.4.0 // indirect
