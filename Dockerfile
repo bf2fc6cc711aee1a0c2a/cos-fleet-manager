@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9-minimal:9.0.0 AS builder
+FROM registry.access.redhat.com/ubi8-minimal:8.6 AS builder
  
 RUN microdnf install -y tar gzip make which git
 
@@ -14,7 +14,7 @@ COPY . ./
 RUN go mod vendor 
 RUN make binary
 
-FROM registry.access.redhat.com/ubi9-minimal:9.0.0
+FROM registry.access.redhat.com/ubi8-minimal:8.6
 
 COPY --from=builder /workspace/cos-fleet-manager /usr/local/bin/
 
