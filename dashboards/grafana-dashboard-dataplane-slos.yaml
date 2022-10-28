@@ -1,0 +1,493 @@
+apiVersion: v1
+data:
+  rhoc-dataplane-slos.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 22034,
+      "iteration": 1666874210031,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "tuHy3WB7z"
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 24,
+          "options": {
+            "content": "## Availability\n* This panel shows the Availability for each individual Connector cluster, including the cluster id and SLO percentage.\n* Note that a Connector instance is evaluated for its availability only if it has been successfully configured and is able to startup once.\n* Can be filtered by Connector SLO percenatges, cluster Id and rolling window.\n* The SLO threshold is 99.5%, which is indicated by the horizontal red line.\n* You can click on an individual Connector cluster in the legend to filter the view to just that Connector cluster.\n\n## Remaining Error Budget (Availability)\n* This panel shows the Remaining Error Budget for each individual Connector cluster, including the cluster id.\n* Can be filtered by Remaining Error Budget percenatges, cluster Id and rolling window.\n* You can click on an individual Connector cluster in the legend to filter the view to just that Connector cluster.\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.0.3",
+          "title": "Data Plane SLO Panel guides",
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "tuHy3WB7z"
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 25,
+          "options": {
+            "content": "## Data Success Rate\n* This panel shows a Exchanges Success rate for each individual Connector cluster, including the cluster id and SLO percentage.\n* The rate is calculated using the data (sent or retrieved) to or from a third-party system.\n* Can be filtered by Connector SLO percenatges, cluster Id and rolling window.\n* The SLO threshold is 99.5%, which is indicated by the horizontal red line.\n* You can click on an individual Connector cluster in the legend to filter the view to just that Connector cluster.\n\n## Remaining Error Budget (Data)\n* This panel shows the Remaining Error Budget for each individual Connector cluster, including the cluster id.\n* Can be filtered by Remaining error budget percenatges, cluster Id and rolling window.\n* You can click on an individual Connector cluster in the legend to filter the view to just that Connector cluster.\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.0.3",
+          "title": "Data Plane SLO Panel guides",
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "Availability",
+                "axisPlacement": "auto",
+                "axisSoftMax": 100,
+                "axisSoftMin": 93.9,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "line"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 99.5
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 12,
+            "x": 0,
+            "y": 9
+          },
+          "id": 17,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"ready\"}[28d])) by (cluster_id) /\n( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"ready\"}[28d])) by (cluster_id) + sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"failed_but_ready\"}[28d])) by (cluster_id) ) ) * 100",
+              "legendFormat": "Cluster ID: {{cluster_id}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Availability",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 12,
+            "x": 12,
+            "y": 9
+          },
+          "id": 19,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "clamp_min(( ( ( 0.005 * ( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"ready\"}[28d])) by (cluster_id) + sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"failed_but_ready\"}[28d])) by (cluster_id) ) ) - sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"failed_but_ready\"}[28d])) by (cluster_id) ) / ( 0.005 * ( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"ready\"}[28d])) by (cluster_id) + sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"failed_but_ready\"}[28d])) by (cluster_id) ) ) ) * 100, 0)",
+              "legendFormat": "Cluster ID: {{cluster_id}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Remaining Error Budget (Availability)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "Success Rate",
+                "axisPlacement": "auto",
+                "axisSoftMax": 100,
+                "axisSoftMin": 99,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "line"
+                }
+              },
+              "decimals": 2,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 99.5
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 12,
+            "x": 0,
+            "y": 22
+          },
+          "id": 21,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "\n( sum(rate(application_camel_context_exchanges_completed_total[28d])) by (cluster_id)\n/\n sum(rate(application_camel_context_exchanges_total[28d])) by (cluster_id) \n) * 100",
+              "instant": false,
+              "legendFormat": "Cluster ID:{{cluster_id}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Data Success Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 2,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 99.5
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 12,
+            "x": 12,
+            "y": 22
+          },
+          "id": 22,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "clamp_min(( ( (sum(rate(application_camel_context_exchanges_total[28d])) by (cluster_id) * 0.005) - sum(rate(application_camel_context_exchanges_failed_total[28d])) by (cluster_id) ) / (sum(rate(application_camel_context_exchanges_total[28d])) by (cluster_id) * 0.005) ) * 100, 0)",
+              "instant": false,
+              "legendFormat": "Cluster ID:{{cluster_id}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Remaining Error Budget (Data)",
+          "type": "timeseries"
+        }
+      ],
+      "refresh": false,
+      "schemaVersion": 36,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "selected": true,
+              "text": "rhoc-observatorium-production",
+              "value": "rhoc-observatorium-production"
+            },
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "Datasource",
+            "options": [],
+            "query": "prometheus",
+            "queryValue": "",
+            "refresh": 1,
+            "regex": "/.*rhoc.*/",
+            "skipUrlSync": false,
+            "type": "datasource"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-28d",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Data-plane SLO",
+      "uid": "Epo9T6IVk",
+      "version": 9,
+      "weekStart": ""
+    }
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-dataplane-slos
+  labels:
+    grafana_dashboard: "true"
+  annotations:
+    grafana-folder: /grafana-dashboard-definitions/RHOC
