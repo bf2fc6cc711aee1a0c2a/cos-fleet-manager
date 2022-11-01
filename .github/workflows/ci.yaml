@@ -139,7 +139,8 @@ jobs:
           OCM_SERVICE_TOKEN: ${{ secrets.OCM_SERVICE_TOKEN }}
           ADMIN_AUTHZ_CONFIG: "[{method: GET, roles: [cos-fleet-manager-admin-read-stage, cos-fleet-manager-admin-write-stage, cos-fleet-manager-admin-full-stage]}, {method: PATCH, roles: [cos-fleet-manager-admin-write-stage, cos-fleet-manager-admin-full-stage]}, {method: PUT, roles: [cos-fleet-manager-admin-write-stage, cos-fleet-manager-admin-full-stage]}, {method: POST, roles: [cos-fleet-manager-admin-full-stage]}, {method: DELETE, roles: [cos-fleet-manager-admin-full-stage]}]"
           VAULT_KIND: "aws"
-          VAULT_SECRET_PREFIX_ENABLE: "false"
+          VAULT_REGION: "us-east-1"
+          VAULT_SECRET_PREFIX_ENABLE: "true"
           VAULT_SECRET_PREFIX: "managed-connectors"
           VAULT_ACCESS_KEY: ${{ secrets.VAULT_ACCESS_KEY }}
           VAULT_SECRET_ACCESS_KEY: ${{ secrets.VAULT_SECRET_ACCESS_KEY }}

@@ -307,6 +307,10 @@ parameters:
   description: The type of vault to use to store secrets
   value: tmp
 
+- name: VAULT_REGION
+  description: The AWS region of vault to use to store secrets
+  value: "us-east-1"
+
 - name: VAULT_SECRET_PREFIX_ENABLE
   description: Enable use of a prefix for all managed connectors secret names in AWS vault, default false
   value: "false"
@@ -437,6 +441,9 @@ objects:
           - name: rds
             secret:
               secretName: cos-fleet-manager-rds
+          - name: vault
+            secret:
+              secretName: managed-connectors-vault
           - name: cos-fleet-manager
             configMap:
               name: cos-fleet-manager
@@ -538,6 +545,8 @@ objects:
               mountPath: /secrets/service
             - name: rds
               mountPath: /secrets/rds
+            - name: vault
+              mountPath: /secrets/vault
             - name: cos-fleet-manager
               mountPath: /config
             - name: cos-fleet-manager-admin-authz-config
@@ -674,11 +683,12 @@ objects:
             - --sentry-project=${SENTRY_PROJECT}
             - --sentry-timeout=${SENTRY_TIMEOUT}
             - --sentry-url=${SENTRY_URL}
-            - --vault-access-key-file=/secrets/service/vault.accesskey
+            - --vault-access-key-file=/secrets/vault/aws_access_key_id
             - --vault-kind=${VAULT_KIND}
+            - --vault-region=${VAULT_REGION}
             - --vault-secret-prefix-enable=${VAULT_SECRET_PREFIX_ENABLE}
             - --vault-secret-prefix=${VAULT_SECRET_PREFIX}
-            - --vault-secret-access-key-file=/secrets/service/vault.secretaccesskey
+            - --vault-secret-access-key-file=/secrets/vault/aws_secret_access_key
             - -v=${GLOG_V}
             resources:
               requests:
