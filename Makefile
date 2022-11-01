@@ -52,6 +52,7 @@ REDHAT_SSO_BASE_URL ?= "https://sso.redhat.com"
 SSO_PROVIDER_TYPE ?= "redhat_sso"
 SSO_SPECIAL_MANAGEMENT_ORG_ID ?= "13640203"
 VAULT_KIND ?= tmp
+VAULT_REGION ?= "us-east-1"
 VAULT_SECRET_PREFIX_ENABLE ?= false
 VAULT_SECRET_PREFIX ?= "managed-connectors"
 CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS ?= "false"
@@ -325,8 +326,8 @@ aws/setup:
 	@echo -n "$(AWS_ACCOUNT_ID)" > secrets/aws.accountid
 	@echo -n "$(AWS_ACCESS_KEY)" > secrets/aws.accesskey
 	@echo -n "$(AWS_SECRET_ACCESS_KEY)" > secrets/aws.secretaccesskey
-	@echo -n "$(VAULT_ACCESS_KEY)" > secrets/vault.accesskey
-	@echo -n "$(VAULT_SECRET_ACCESS_KEY)" > secrets/vault.secretaccesskey
+	@echo -n "$(VAULT_ACCESS_KEY)" > secrets/vault/aws_access_key_id
+	@echo -n "$(VAULT_SECRET_ACCESS_KEY)" > secrets/vault/aws_secret_access_key
 	@echo -n "$(ROUTE53_ACCESS_KEY)" > secrets/aws.route53accesskey
 	@echo -n "$(ROUTE53_SECRET_ACCESS_KEY)" > secrets/aws.route53secretaccesskey
 .PHONY: aws/setup
@@ -464,6 +465,7 @@ deploy: deploy/secrets deploy/envoy deploy/token-refresher deploy/route
 		-p ADMIN_API_SSO_REALM="${ADMIN_API_SSO_REALM}" \
 		-p ADMIN_AUTHZ_CONFIG="${ADMIN_AUTHZ_CONFIG}" \
 		-p VAULT_KIND=$(VAULT_KIND) \
+		-p VAULT_REGION=$(VAULT_REGION) \
 		-p VAULT_SECRET_PREFIX_ENABLE=$(VAULT_SECRET_PREFIX_ENABLE) \
 		-p VAULT_SECRET_PREFIX=$(VAULT_SECRET_PREFIX) \
 		-p CONNECTOR_EVAL_ORGANIZATIONS=$(CONNECTOR_EVAL_ORGANIZATIONS) \
