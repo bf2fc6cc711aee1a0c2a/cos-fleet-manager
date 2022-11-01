@@ -516,8 +516,6 @@ objects:
               mountPath: /secrets/service
             - name: rds
               mountPath: /secrets/rds
-            - name: vault
-              mountPath: /secrets/vault
             env:
               - name: "OCM_ENV"
                 value: "${ENVIRONMENT}"
@@ -547,6 +545,8 @@ objects:
               mountPath: /secrets/service
             - name: rds
               mountPath: /secrets/rds
+            - name: vault
+              mountPath: /secrets/vault
             - name: cos-fleet-manager
               mountPath: /config
             - name: cos-fleet-manager-admin-authz-config
