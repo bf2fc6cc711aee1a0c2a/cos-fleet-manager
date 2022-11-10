@@ -27,17 +27,197 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1663248444521,
+      "iteration": 1667982157779,
       "links": [],
       "liveNow": false,
       "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "Total new Connectors requested vs the successful and the failure count within the selected time range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Successful"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Failed"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 15,
+            "x": 0,
+            "y": 0
+          },
+          "id": 51,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}) - count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} offset $__range)",
+              "legendFormat": "Connectors Requested",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "count((min_over_time(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range]) == 1) unless cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} offset $__range)",
+              "hide": false,
+              "legendFormat": "Successful",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "count((min_over_time(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range]) == 2) unless cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} offset $__range)",
+              "hide": false,
+              "legendFormat": "Failed",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Connectors Requested (selected time)",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "Count of the types of Connectors requested on the selected time range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 9,
+            "x": 15,
+            "y": 0
+          },
+          "id": 53,
+          "options": {
+            "legend": {
+              "displayMode": "hidden",
+              "placement": "bottom"
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "count by(cos_connector_type_id) ( cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} unless cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} offset $__range )",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Requested Connectors Types (selected time)",
+          "type": "piechart"
+        },
         {
           "collapsed": false,
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 0
+            "y": 7
           },
           "id": 8,
           "panels": [],
@@ -56,6 +236,7 @@ data:
                 "mode": "thresholds"
               },
               "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -66,64 +247,15 @@ data:
                 ]
               }
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Failed"
-                },
-                "properties": [
-                  {
-                    "id": "thresholds",
-                    "value": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "green",
-                          "value": null
-                        },
-                        {
-                          "color": "red",
-                          "value": 1
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Inflight"
-                },
-                "properties": [
-                  {
-                    "id": "thresholds",
-                    "value": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "green",
-                          "value": null
-                        },
-                        {
-                          "color": "yellow",
-                          "value": 1
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 6,
             "w": 5,
             "x": 0,
-            "y": 1
+            "y": 8
           },
-          "id": 25,
+          "id": 43,
           "options": {
             "colorMode": "value",
             "graphMode": "none",
@@ -146,9 +278,11 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(max_over_time(up{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
+              "exemplar": false,
+              "expr": "count(min_over_time(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range]) == 1)",
+              "instant": true,
               "legendFormat": "Total Connectors",
-              "range": true,
+              "range": false,
               "refId": "A"
             },
             {
@@ -157,10 +291,12 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "count(max_over_time(application_camel_context_status{camelContext=\"camel-1\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
+              "exemplar": false,
+              "expr": "count(min_over_time(cos_fleetshard_sync_connector_state{cos_connector_type_id!~\"debezium-.*\",cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range]) == 1)",
               "hide": false,
+              "instant": true,
               "legendFormat": "CamelK Connectors",
-              "range": true,
+              "range": false,
               "refId": "B"
             },
             {
@@ -170,15 +306,15 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(max_over_time(up{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range])) - count(max_over_time(application_camel_context_status{camelContext=\"camel-1\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
+              "expr": "count(min_over_time(cos_fleetshard_sync_connector_state{cos_connector_type_id=~\"debezium-.*\",cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range]) == 1)",
               "hide": false,
-              "instant": false,
+              "instant": true,
               "legendFormat": "Debezium connectors",
-              "range": true,
+              "range": false,
               "refId": "C"
             }
           ],
-          "title": "Connectors Count (selected time)",
+          "title": "Successful Connectors Count (selected time)",
           "type": "stat"
         },
         {
@@ -207,12 +343,12 @@ data:
             "h": 6,
             "w": 4,
             "x": 5,
-            "y": 1
+            "y": 8
           },
-          "id": 36,
+          "id": 38,
           "options": {
             "legend": {
-              "displayMode": "list",
+              "displayMode": "hidden",
               "placement": "bottom"
             },
             "pieType": "pie",
@@ -232,8 +368,8 @@ data:
                 "type": "prometheus",
                 "uid": "${Datasource}"
               },
-              "editorMode": "builder",
-              "expr": "count by(connector_type) (max_over_time(application_camel_context_status{cluster_id=\"$cluster_id\", namespace=\"$namespace\"}[$__interval]))",
+              "editorMode": "code",
+              "expr": "count by (cos_connector_type_id) (min_over_time(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range]) == 1)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -248,7 +384,7 @@ data:
             "type": "prometheus",
             "uid": "${Datasource}"
           },
-          "description": "The percentage of time that the Connectors are available in the selected time range.",
+          "description": "The percentage of time that the Connectors are available in the selected time range. Expected SLO 99.5%",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -267,7 +403,7 @@ data:
                   },
                   {
                     "color": "green",
-                    "value": 95
+                    "value": 99.5
                   }
                 ]
               },
@@ -279,9 +415,9 @@ data:
             "h": 6,
             "w": 3,
             "x": 9,
-            "y": 1
+            "y": 8
           },
-          "id": 6,
+          "id": 39,
           "options": {
             "orientation": "auto",
             "reduceOptions": {
@@ -304,7 +440,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(avg_over_time(up{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range])) / sum(max_over_time(up{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range])) * 100",
+              "expr": "( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"ready\",cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range])) /\n( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"ready\",cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range])) + ( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"failed_but_ready\",cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range])) OR on() vector(0) ) ) ) * 100",
               "instant": false,
               "interval": "",
               "range": true,
@@ -319,7 +455,7 @@ data:
             "type": "prometheus",
             "uid": "${Datasource}"
           },
-          "description": "CamelK Connectors, Debezium Connectors, and crashing Connectors over time. Crashing connectors are only shown when they are crashing(connectors that successfully got created previously and now crashing). ",
+          "description": "CamelK/Debezium Connectors crashing vs running \n vs stopped over time.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -354,6 +490,7 @@ data:
                 }
               },
               "mappings": [],
+              "min": 0,
               "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
@@ -361,23 +498,66 @@ data:
                   {
                     "color": "green",
                     "value": null
-                  },
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Crashing"
+                },
+                "properties": [
                   {
-                    "color": "red",
-                    "value": 80
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Running"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Stopped"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 1
+            "y": 8
           },
-          "id": 12,
+          "id": 54,
           "options": {
             "legend": {
               "calcs": [],
@@ -386,7 +566,7 @@ data:
             },
             "tooltip": {
               "mode": "multi",
-              "sort": "none"
+              "sort": "desc"
             }
           },
           "targets": [
@@ -396,8 +576,8 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "count(increase(kube_pod_container_status_restarts_total{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[10m]) >3)",
-              "legendFormat": "Connectors Failing",
+              "expr": "count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} == 2)",
+              "legendFormat": "Crashing",
               "range": true,
               "refId": "A"
             },
@@ -407,9 +587,9 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "count(application_camel_context_status{camelContext=\"camel-1\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} == 1)",
               "hide": false,
-              "legendFormat": "CamelK Connectors",
+              "legendFormat": "Running",
               "range": true,
               "refId": "B"
             },
@@ -419,14 +599,14 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(up{container=\"integration\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}) - count(application_camel_context_status{camelContext=\"camel-1\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} == 4)",
               "hide": false,
-              "legendFormat": "Debezium Connectors",
+              "legendFormat": "Stopped",
               "range": true,
               "refId": "C"
             }
           ],
-          "title": "Connectors Running / Crashing",
+          "title": "Connectors Running / Crashing / Stopped",
           "type": "timeseries"
         },
         {
@@ -435,7 +615,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 7
+            "y": 14
           },
           "id": 22,
           "panels": [],
@@ -492,7 +672,7 @@ data:
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "Inflight"
+                  "options": "Inflight Currently"
                 },
                 "properties": [
                   {
@@ -512,6 +692,21 @@ data:
                     }
                   }
                 ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -519,7 +714,7 @@ data:
             "h": 6,
             "w": 9,
             "x": 0,
-            "y": 8
+            "y": 15
           },
           "id": 13,
           "options": {
@@ -544,7 +739,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(max_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
+              "expr": "sum(max_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range]))",
               "legendFormat": "Total",
               "range": true,
               "refId": "A"
@@ -555,7 +750,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(max_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
+              "expr": "sum(max_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range]))",
               "hide": false,
               "legendFormat": "Completed",
               "range": true,
@@ -568,7 +763,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(max_over_time(application_camel_context_exchanges_failed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_failed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range]))",
+              "expr": "sum(max_over_time(application_camel_context_exchanges_failed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range]))- sum(min_over_time(application_camel_context_exchanges_failed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range]))",
               "hide": false,
               "instant": false,
               "legendFormat": "Failed",
@@ -581,7 +776,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(application_camel_context_exchanges_inflight_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(application_camel_context_exchanges_inflight_count{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "hide": false,
               "legendFormat": "Inflight Currently",
               "range": true,
@@ -596,7 +791,7 @@ data:
             "type": "prometheus",
             "uid": "${Datasource}"
           },
-          "description": "Percentage of exchanges completed in the selected time range.",
+          "description": "Percentage of exchanges Processed  in the selected time range. Expected SLO 99.5%",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -615,7 +810,7 @@ data:
                   },
                   {
                     "color": "green",
-                    "value": 95
+                    "value": 99.5
                   }
                 ]
               },
@@ -627,9 +822,9 @@ data:
             "h": 6,
             "w": 3,
             "x": 9,
-            "y": 8
+            "y": 15
           },
-          "id": 14,
+          "id": 45,
           "options": {
             "orientation": "auto",
             "reduceOptions": {
@@ -640,8 +835,7 @@ data:
               "values": false
             },
             "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "text": {}
+            "showThresholdMarkers": true
           },
           "pluginVersion": "9.0.3",
           "targets": [
@@ -652,9 +846,8 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(max_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range])) / sum(max_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[$__range])) * 100",
+              "expr": "(\n( sum(max_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range])) )\n/\n( sum(max_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[$__range])) ) \n) * 100",
               "instant": false,
-              "interval": "",
               "range": true,
               "refId": "A"
             }
@@ -723,7 +916,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 8
+            "y": 15
           },
           "id": 27,
           "options": {
@@ -744,7 +937,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "legendFormat": "Total",
               "range": true,
               "refId": "A"
@@ -755,7 +948,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "hide": false,
               "legendFormat": "Completed",
               "range": true,
@@ -770,11 +963,11 @@ data:
             "type": "prometheus",
             "uid": "${Datasource}"
           },
-          "description": "CamelK Connectors, their respective Namespace, and their time since creation. Click on the connector to see that connector's detailed dashboard. Filter column using the Filter option next to the column header.",
+          "description": "CamelK Connectors, their respective State, and their time since creation. Click on the Connector  ID to see that connector's detailed dashboard. Filter column using the Filter option next to the column header.",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "thresholds"
+                "mode": "fixed"
               },
               "custom": {
                 "align": "auto",
@@ -782,7 +975,6 @@ data:
                 "filterable": true,
                 "inspect": false
               },
-              "displayName": "Time Since Creation",
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -793,7 +985,7 @@ data:
                   }
                 ]
               },
-              "unit": "s"
+              "unit": "none"
             },
             "overrides": [
               {
@@ -815,7 +1007,7 @@ data:
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "namespace"
+                  "options": "cos_namespace"
                 },
                 "properties": [
                   {
@@ -831,36 +1023,7 @@ data:
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "pod"
-                },
-                "properties": [
-                  {
-                    "id": "displayName",
-                    "value": "Connector"
-                  },
-                  {
-                    "id": "links",
-                    "value": [
-                      {
-                        "targetBlank": true,
-                        "title": "URL",
-                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&${Datasource:queryparam}&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-pod=${__data.fields.pod}\n"
-                      }
-                    ]
-                  },
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "connector_id"
+                  "options": "cos_connector_id"
                 },
                 "properties": [
                   {
@@ -880,7 +1043,7 @@ data:
                       {
                         "targetBlank": true,
                         "title": "URL",
-                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&${Datasource:queryparam}&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.namespace}&var-pod=${__data.fields.pod}\n"
+                        "url": "/d/uln0BXC7z/camelk-specific-connectors?orgId=1&${Datasource:queryparam}&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.cos_namespace}&var-connector_id=${__data.fields.cos_connector_id}"
                       }
                     ]
                   }
@@ -889,7 +1052,7 @@ data:
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "connector_type"
+                  "options": "cos_connector_type_id"
                 },
                 "properties": [
                   {
@@ -899,7 +1062,7 @@ data:
                   {
                     "id": "color",
                     "value": {
-                      "fixedColor": "yellow",
+                      "fixedColor": "orange",
                       "mode": "fixed"
                     }
                   }
@@ -908,7 +1071,7 @@ data:
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "deployment_id"
+                  "options": "cos_deployment_id"
                 },
                 "properties": [
                   {
@@ -918,9 +1081,71 @@ data:
                   {
                     "id": "color",
                     "value": {
-                      "fixedColor": "orange",
+                      "fixedColor": "purple",
                       "mode": "fixed"
                     }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #B"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Uptime"
+                  },
+                  {
+                    "id": "unit",
+                    "value": "s"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #A"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Current State"
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "1": {
+                            "color": "green",
+                            "index": 0,
+                            "text": "Running"
+                          },
+                          "2": {
+                            "color": "red",
+                            "index": 1,
+                            "text": "Failed"
+                          },
+                          "3": {
+                            "index": 2,
+                            "text": "Deleted"
+                          },
+                          "4": {
+                            "color": "orange",
+                            "index": 3,
+                            "text": "Stoped"
+                          },
+                          "5": {
+                            "color": "yellow",
+                            "index": 4,
+                            "text": "Provisioning"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
                   }
                 ]
               }
@@ -930,9 +1155,9 @@ data:
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 14
+            "y": 21
           },
-          "id": 26,
+          "id": 49,
           "options": {
             "footer": {
               "fields": "",
@@ -942,7 +1167,12 @@ data:
               "show": false
             },
             "showHeader": true,
-            "sortBy": []
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "Current State"
+              }
+            ]
           },
           "pluginVersion": "9.0.3",
           "targets": [
@@ -953,7 +1183,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "application_camel_context_status{camelContext=\"camel-1\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}",
+              "expr": "cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\", cos_connector_type_id!~\"debezium.*\", cos_namespace=~\"$namespace\"}",
               "format": "table",
               "instant": true,
               "range": false,
@@ -964,9 +1194,9 @@ data:
                 "type": "prometheus",
                 "uid": "${Datasource}"
               },
-              "editorMode": "builder",
+              "editorMode": "code",
               "exemplar": false,
-              "expr": "application_camel_context_uptime_seconds{cluster_id=\"$cluster_id\", namespace=\"$namespace\"}",
+              "expr": "label_replace(application_camel_context_uptime_seconds{cluster_id=\"$cluster_id\", namespace=~\"$namespace\"}, \"cos_connector_id\", \"$1\", \"connector_id\", \"(.*)\")",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -975,12 +1205,12 @@ data:
               "refId": "B"
             }
           ],
-          "title": "Running CamelK Connectors",
+          "title": "CamelK Connectors",
           "transformations": [
             {
               "id": "seriesToColumns",
               "options": {
-                "byField": "pod"
+                "byField": "cos_connector_id"
               }
             },
             {
@@ -988,13 +1218,13 @@ data:
               "options": {
                 "include": {
                   "names": [
-                    "pod",
+                    "cos_connector_id",
                     "cluster_id 1",
-                    "connector_id 1",
-                    "connector_type 1",
-                    "namespace 1",
-                    "Value #B",
-                    "deployment_id 1"
+                    "cos_connector_type_id",
+                    "cos_deployment_id",
+                    "cos_namespace",
+                    "Value #A",
+                    "Value #B"
                   ]
                 }
               }
@@ -1062,7 +1292,7 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 20
+            "y": 27
           },
           "id": 16,
           "options": {
@@ -1083,7 +1313,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"KameletBinding\",cluster_id=\"$cluster_id\",exported_namespace=\"$namespace\"}[5m])\n)",
+              "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"KameletBinding\",cluster_id=\"$cluster_id\",exported_namespace=~\"$namespace\"}[5m])\n)",
               "legendFormat": "{{result}}",
               "range": true,
               "refId": "A"
@@ -1152,7 +1382,7 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 28
+            "y": 35
           },
           "id": 32,
           "options": {
@@ -1173,7 +1403,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"IntegrationKit\",cluster_id=\"$cluster_id\",exported_namespace=\"$namespace\"}[5m])\n)",
+              "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"IntegrationKit\",cluster_id=\"$cluster_id\",exported_namespace=~\"$namespace\"}[5m])\n)",
               "legendFormat": "{{result}}",
               "range": true,
               "refId": "A"
@@ -1242,7 +1472,7 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 36
+            "y": 43
           },
           "id": 33,
           "options": {
@@ -1263,7 +1493,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"Integration\",cluster_id=\"$cluster_id\",exported_namespace=\"$namespace\"}[5m])\n)",
+              "expr": "sum by (result) (\n  rate(camel_k_reconciliation_duration_seconds_count{kind=\"Integration\",cluster_id=\"$cluster_id\",exported_namespace=~\"$namespace\"}[5m])\n)",
               "legendFormat": "{{result}}",
               "range": true,
               "refId": "A"
@@ -1278,7 +1508,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 44
+            "y": 51
           },
           "id": 24,
           "panels": [],
@@ -1342,9 +1572,9 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 12,
+            "w": 24,
             "x": 0,
-            "y": 45
+            "y": 52
           },
           "id": 20,
           "options": {
@@ -1380,7 +1610,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 52
+            "y": 59
           },
           "id": 4,
           "panels": [],
@@ -1431,7 +1661,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1447,7 +1678,7 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 53
+            "y": 60
           },
           "id": 2,
           "options": {
@@ -1469,7 +1700,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(rate(container_network_receive_bytes_total{name=~\".*_mctr-.*\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[10m]))",
+              "expr": "sum(rate(container_network_receive_bytes_total{name=~\".*_mctr-.*\",cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[10m]))",
               "instant": false,
               "interval": "",
               "legendFormat": "Received",
@@ -1482,7 +1713,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "- sum(rate(container_network_transmit_bytes_total{name=~\".*_mctr-.*\",cluster_id=\"$cluster_id\",namespace=\"$namespace\"}[10m]))",
+              "expr": "- sum(rate(container_network_transmit_bytes_total{name=~\".*_mctr-.*\",cluster_id=\"$cluster_id\",namespace=~\"$namespace\"}[10m]))",
               "hide": false,
               "legendFormat": "Sent",
               "range": true,
@@ -1536,7 +1767,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1552,7 +1784,7 @@ data:
             "h": 9,
             "w": 7,
             "x": 0,
-            "y": 61
+            "y": 68
           },
           "id": 28,
           "options": {
@@ -1574,7 +1806,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(vendor_memory_usedNonHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(vendor_memory_usedNonHeap_bytes{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "instant": false,
               "interval": "",
               "legendFormat": "Used",
@@ -1587,7 +1819,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(vendor_memory_committedNonHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(vendor_memory_committedNonHeap_bytes{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "hide": false,
               "legendFormat": "Committed",
               "range": true,
@@ -1641,7 +1873,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1657,7 +1890,7 @@ data:
             "h": 9,
             "w": 8,
             "x": 7,
-            "y": 61
+            "y": 68
           },
           "id": 29,
           "options": {
@@ -1679,7 +1912,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(vendor_memoryPool_usage_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(vendor_memoryPool_usage_bytes{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "instant": false,
               "interval": "",
               "legendFormat": "Used",
@@ -1692,7 +1925,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(vendor_memoryPool_usage_max_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(vendor_memoryPool_usage_max_bytes{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "hide": false,
               "legendFormat": "Max",
               "range": true,
@@ -1746,7 +1979,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1762,7 +1996,7 @@ data:
             "h": 9,
             "w": 9,
             "x": 15,
-            "y": 61
+            "y": 68
           },
           "id": 34,
           "options": {
@@ -1784,7 +2018,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(base_memory_usedHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(base_memory_usedHeap_bytes{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "instant": false,
               "interval": "",
               "legendFormat": "Used",
@@ -1797,7 +2031,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(base_memory_committedHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(base_memory_committedHeap_bytes{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "hide": false,
               "legendFormat": "Committed",
               "range": true,
@@ -1809,7 +2043,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(base_memory_maxHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(base_memory_maxHeap_bytes{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "hide": false,
               "legendFormat": "Max",
               "range": true,
@@ -1863,7 +2097,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1879,7 +2114,7 @@ data:
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 70
+            "y": 77
           },
           "id": 30,
           "options": {
@@ -1901,7 +2136,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(vendor_cpu_systemCpuLoad_percent{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(vendor_cpu_systemCpuLoad_percent{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "instant": false,
               "interval": "",
               "legendFormat": "System Load Percent",
@@ -1956,7 +2191,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1972,7 +2208,7 @@ data:
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 70
+            "y": 77
           },
           "id": 31,
           "options": {
@@ -1994,7 +2230,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(base_cpu_processCpuLoad_percent{cluster_id=\"$cluster_id\",namespace=\"$namespace\"})",
+              "expr": "sum(base_cpu_processCpuLoad_percent{cluster_id=\"$cluster_id\",namespace=~\"$namespace\"})",
               "instant": false,
               "interval": "",
               "legendFormat": "Process Load Percent",
@@ -2006,6 +2242,7 @@ data:
           "type": "timeseries"
         }
       ],
+      "refresh": false,
       "schemaVersion": 36,
       "style": "dark",
       "tags": [],
@@ -2032,8 +2269,8 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "None",
-              "value": ""
+              "text": "rhoc-dev",
+              "value": "rhoc-dev"
             },
             "datasource": {
               "type": "prometheus",
@@ -2058,8 +2295,8 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "None",
-              "value": ""
+              "text": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0",
+              "value": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0"
             },
             "datasource": {
               "type": "prometheus",
@@ -2091,7 +2328,7 @@ data:
       "timezone": "",
       "title": "Data Plane | Cluster view",
       "uid": "ov28Nbrnz",
-      "version": 46,
+      "version": 1,
       "weekStart": ""
     }
 kind: ConfigMap

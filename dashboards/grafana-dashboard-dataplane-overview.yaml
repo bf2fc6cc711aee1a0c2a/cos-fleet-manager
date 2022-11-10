@@ -27,7 +27,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1666273377591,
+      "iteration": 1667981305470,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -105,7 +105,7 @@ data:
             "x": 0,
             "y": 1
           },
-          "id": 34,
+          "id": 37,
           "options": {
             "displayMode": "gradient",
             "minVizHeight": 10,
@@ -128,7 +128,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "count(last_over_time(cos_fleetshard_sync_connector_state[$__range])) - count(cos_fleetshard_sync_connector_state offset $__range)",
+              "expr": "count(cos_fleetshard_sync_connector_state) - count(cos_fleetshard_sync_connector_state offset $__range)",
               "legendFormat": "Connectors Requested",
               "range": true,
               "refId": "A"
@@ -215,7 +215,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "count by(cos_connector_type_id) ( (last_over_time(cos_fleetshard_sync_connector_state[$__range])) unless cos_fleetshard_sync_connector_state offset $__range )",
+              "expr": "count by(cos_connector_type_id) ( cos_fleetshard_sync_connector_state unless cos_fleetshard_sync_connector_state offset $__range )",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -1607,7 +1607,7 @@ data:
       "timezone": "",
       "title": "Data Plane | Overview",
       "uid": "3lmqGVq7z",
-      "version": 1,
+      "version": 2,
       "weekStart": ""
     }
 kind: ConfigMap
