@@ -3,16 +3,16 @@ module github.com/bf2fc6cc711aee1a0c2a/cos-fleet-manager
 go 1.19
 
 require (
-	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20221031225816-fd7936fb52c6
+	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20221110183002-6a1647c2e9b9
 	github.com/golang/glog v1.0.0
-	github.com/onsi/gomega v1.22.1
-	github.com/spf13/cobra v1.6.0
+	github.com/onsi/gomega v1.24.0
+	github.com/spf13/cobra v1.6.1
 )
 
 require (
 	github.com/Nerzal/gocloak/v11 v11.2.0 // indirect
 	github.com/antihax/optional v1.0.0 // indirect
-	github.com/aws/aws-sdk-go v1.44.116 // indirect
+	github.com/aws/aws-sdk-go v1.44.131 // indirect
 	github.com/aws/aws-secretsmanager-caching-go v1.1.0 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -79,10 +79,10 @@ require (
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 	golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be // indirect
-	golang.org/x/net v0.0.0-20221002022538-bcab6841153b // indirect
+	golang.org/x/net v0.1.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20220411215720-9780585627b5 // indirect
-	golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/text v0.4.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

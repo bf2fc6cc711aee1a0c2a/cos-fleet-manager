@@ -27,7 +27,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1661440174647,
+      "iteration": 1668090357955,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -75,7 +75,7 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 5,
+            "w": 4,
             "x": 0,
             "y": 1
           },
@@ -101,7 +101,7 @@ data:
                 "type": "prometheus",
                 "uid": "${Datasource}"
               },
-              "expr": "application_camel_context_uptime_seconds{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "expr": "application_camel_context_uptime_seconds{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}",
               "refId": "A"
             }
           ],
@@ -132,14 +132,15 @@ data:
                     "value": 80
                   }
                 ]
-              }
+              },
+              "unit": "percent"
             },
             "overrides": []
           },
           "gridPos": {
             "h": 6,
-            "w": 5,
-            "x": 5,
+            "w": 3,
+            "x": 4,
             "y": 1
           },
           "id": 4,
@@ -164,12 +165,152 @@ data:
                 "type": "prometheus",
                 "uid": "${Datasource}"
               },
-              "expr": "sum(vendor_memoryPool_usage_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"})*100/sum(vendor_memoryPool_usage_max_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"})",
+              "expr": "sum(vendor_memoryPool_usage_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"})*100/sum(vendor_memoryPool_usage_max_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"})",
               "refId": "A"
             }
           ],
           "title": "Memory Used",
           "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "The percentage of time that the Connectors are available in the selected time range. Expected SLO 99.5%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 99.5
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 3,
+            "x": 7,
+            "y": 1
+          },
+          "id": 37,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "text": {}
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"ready\",cluster_id=\"$cluster_id\",cos_namespace=\"$namespace\",cos_connector_id=\"$connector_id\"}[$__range])) /\n( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"ready\",cluster_id=\"$cluster_id\",cos_namespace=\"$namespace\",cos_connector_id=\"$connector_id\"}[$__range])) + ( sum(rate(cos_fleetshard_sync_connector_state_count_total{cos_connector_state=\"failed_but_ready\",cluster_id=\"$cluster_id\",cos_namespace=\"$namespace\",cos_connector_id=\"$connector_id\"}[$__range])) OR on() vector(0) ) ) ) * 100",
+              "instant": false,
+              "interval": "",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Connectors Availability (selected time)",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "Percentage of exchanges Processed  in the selected time range. Expected SLO 99.5%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 99.5
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 3,
+            "x": 10,
+            "y": 1
+          },
+          "id": 39,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "(\n( sum(max_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\",connector_id=\"$connector_id\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\",connector_id=\"$connector_id\"}[$__range])) )\n/\n( sum(max_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\",connector_id=\"$connector_id\"}[$__range])) - sum(min_over_time(application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=~\"$namespace\",connector_id=\"$connector_id\"}[$__range])) ) \n) * 100",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Exchanges Processed (selected time)",
+          "type": "gauge"
         },
         {
           "datasource": {
@@ -187,22 +328,64 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
+                    "color": "yellow",
                     "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
                   }
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Exchanges Total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Exchanges Completed"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Exchanges Failed"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
             "h": 6,
-            "w": 9,
-            "x": 10,
+            "w": 8,
+            "x": 13,
             "y": 1
           },
           "id": 6,
@@ -228,7 +411,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "application_camel_context_exchanges_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "legendFormat": "Exchanges Total",
               "range": true,
               "refId": "A"
@@ -239,7 +422,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "hide": false,
               "legendFormat": "Exchanges Completed",
               "range": true,
@@ -251,7 +434,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "application_camel_context_exchanges_failed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "application_camel_context_exchanges_failed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "hide": false,
               "legendFormat": "Exchanges Failed",
               "range": true,
@@ -263,7 +446,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "application_camel_context_exchanges_inflight_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "application_camel_context_exchanges_inflight_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "hide": false,
               "legendFormat": "Exchanges Inflight",
               "range": true,
@@ -303,8 +486,8 @@ data:
           },
           "gridPos": {
             "h": 6,
-            "w": 5,
-            "x": 19,
+            "w": 3,
+            "x": 21,
             "y": 1
           },
           "id": 7,
@@ -329,7 +512,7 @@ data:
                 "type": "prometheus",
                 "uid": "${Datasource}"
               },
-              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}",
               "refId": "A"
             }
           ],
@@ -394,7 +577,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}",
               "format": "table",
               "instant": true,
               "range": false,
@@ -462,7 +645,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}",
               "format": "table",
               "instant": true,
               "range": false,
@@ -530,7 +713,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}",
               "format": "table",
               "instant": true,
               "range": false,
@@ -598,7 +781,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "expr": "application_camel_route_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}",
               "format": "table",
               "instant": true,
               "range": false,
@@ -702,7 +885,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "increase(application_camel_exchange_processing_seconds_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}[60m])",
+              "expr": "increase(application_camel_exchange_processing_seconds_count{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}[60m])",
               "legendFormat": "Rate of increase in Exchange Processing Time",
               "range": true,
               "refId": "A"
@@ -792,7 +975,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "increase(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}[60m])",
+              "expr": "increase(application_camel_context_exchanges_completed_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}[60m])",
               "legendFormat": "{{camelContext}}",
               "range": true,
               "refId": "A"
@@ -882,7 +1065,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "application_camel_exchange_processing_rate_per_second{cluster_id=\"$cluster_id\",namespace=\"$namespace\",pod=\"$pod\"}",
+              "expr": "application_camel_exchange_processing_rate_per_second{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}",
               "legendFormat": "Exchange processing rate per second",
               "range": true,
               "refId": "A"
@@ -985,7 +1168,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "vendor_cpu_systemCpuLoad_percent{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "vendor_cpu_systemCpuLoad_percent{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "legendFormat": "System Load Percent",
               "range": true,
               "refId": "A"
@@ -1075,7 +1258,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "base_cpu_processCpuLoad_percent{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "base_cpu_processCpuLoad_percent{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "legendFormat": "Process Load Percent",
               "range": true,
               "refId": "A"
@@ -1165,7 +1348,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "base_cpu_systemLoadAverage{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "base_cpu_systemLoadAverage{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "legendFormat": "System Load Average",
               "range": true,
               "refId": "A"
@@ -1268,7 +1451,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "vendor_memory_usedNonHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "vendor_memory_usedNonHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "legendFormat": "Used",
               "range": true,
               "refId": "A"
@@ -1370,7 +1553,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(vendor_memoryPool_usage_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"})",
+              "expr": "sum(vendor_memoryPool_usage_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"})",
               "legendFormat": "Used",
               "range": true,
               "refId": "A"
@@ -1472,7 +1655,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "base_memory_usedHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\"}",
+              "expr": "base_memory_usedHeap_bytes{cluster_id=\"$cluster_id\",namespace=\"$namespace\", connector_id=\"$connector_id\"}",
               "legendFormat": "Used",
               "range": true,
               "refId": "A"
@@ -1599,7 +1782,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(rate(container_network_receive_bytes_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\", name=~\".*_mctr-.*\"}[10m]))",
+              "expr": "sum(rate(container_network_receive_bytes_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=~\"$integration-.*\", name=~\".*_mctr-.*\"}[10m]))",
               "legendFormat": "Received",
               "range": true,
               "refId": "A"
@@ -1610,7 +1793,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "- sum(rate(container_network_transmit_bytes_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=\"$pod\", name=~\".*_mctr-.*\"}[10m]))",
+              "expr": "- sum(rate(container_network_transmit_bytes_total{cluster_id=\"$cluster_id\",namespace=\"$namespace\", pod=~\"$integration-.*\", name=~\".*_mctr-.*\"}[10m]))",
               "hide": false,
               "legendFormat": "Sent",
               "range": true,
@@ -1710,7 +1893,7 @@ data:
             "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\"}, connector_id)",
             "hide": 0,
             "includeAll": false,
-            "label": "Connector ID",
+            "label": "",
             "multi": false,
             "name": "connector_id",
             "options": [],
@@ -1734,14 +1917,14 @@ data:
               "type": "prometheus",
               "uid": "${Datasource}"
             },
-            "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}, pod)",
+            "definition": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}, integration)",
             "hide": 0,
             "includeAll": false,
             "multi": false,
-            "name": "pod",
+            "name": "integration",
             "options": [],
             "query": {
-              "query": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}, pod)",
+              "query": "label_values(application_camel_context_status{cluster_id=\"$cluster_id\",namespace=\"$namespace\",connector_id=\"$connector_id\"}, integration)",
               "refId": "StandardVariableQuery"
             },
             "refresh": 1,
@@ -1753,14 +1936,14 @@ data:
         ]
       },
       "time": {
-        "from": "now-6h",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
       "title": "CamelK Specific Connectors",
       "uid": "uln0BXC7z",
-      "version": 20,
+      "version": 1,
       "weekStart": ""
     }
 kind: ConfigMap

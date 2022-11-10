@@ -3,7 +3,7 @@
 # Pull debezium and camel catalogs
 
 DEBEZIUM_CATALOG=https://raw.githubusercontent.com/bf2fc6cc711aee1a0c2a/cos-fleet-catalog-debezium/main/templates/cos-fleet-catalog-debezium.yaml
-CAMEL_CATALOGS=https://raw.githubusercontent.com/bf2fc6cc711aee1a0c2a/cos-fleet-catalog-camel/main/templates/cos-fleet-catalog-camel.yaml
+CAMEL_CATALOGS=https://raw.githubusercontent.com/bf2fc6cc711aee1a0c2a/cos-manifests/main/connectors/cos-fleet-catalog-camel.yaml
 
 clear
 
