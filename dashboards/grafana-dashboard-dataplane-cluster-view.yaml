@@ -27,7 +27,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1667982157779,
+      "iteration": 1668156499133,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -79,6 +79,27 @@ data:
                     "id": "color",
                     "value": {
                       "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Still Provisioning"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
                       "mode": "fixed"
                     }
                   }
@@ -143,6 +164,30 @@ data:
               "legendFormat": "Failed",
               "range": true,
               "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "count((min_over_time(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range]) == 3) unless cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} offset $__range)",
+              "hide": false,
+              "legendFormat": "Immediately Deleted",
+              "range": true,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "count((min_over_time(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}[$__range]) == 5) unless cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} offset $__range)",
+              "hide": false,
+              "legendFormat": "Still Provisioning",
+              "range": true,
+              "refId": "E"
             }
           ],
           "title": "Connectors Requested (selected time)",
@@ -375,7 +420,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "CamelK Connectors Types",
+          "title": "Successful Connectors Types (selected time)",
           "transformations": [],
           "type": "piechart"
         },
@@ -2294,9 +2339,9 @@ data:
           },
           {
             "current": {
-              "selected": false,
-              "text": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0",
-              "value": "redhat-openshift-connectors-ca34tr1nnj5k851srhk0"
+              "selected": true,
+              "text": "All",
+              "value": "$__all"
             },
             "datasource": {
               "type": "prometheus",
@@ -2328,7 +2373,7 @@ data:
       "timezone": "",
       "title": "Data Plane | Cluster view",
       "uid": "ov28Nbrnz",
-      "version": 1,
+      "version": 5,
       "weekStart": ""
     }
 kind: ConfigMap
