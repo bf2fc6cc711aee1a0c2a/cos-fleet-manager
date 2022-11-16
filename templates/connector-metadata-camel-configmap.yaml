@@ -1,0 +1,213 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: connector-metadata-camel
+  annotations:
+    qontract.recycle: "true"
+    openshift.io/display-name: Cos Fleet Manager Camel Connectors Metadata
+    description: List of available camel connectors metadata
+data:
+  connector-metadata-camel.yaml: |-
+    ---
+    - id: aws_cloudwatch_sink_0.1
+      labels:
+        - sink
+    - id: aws_ddb_sink_0.1
+      labels:
+        - sink
+    - id: aws_ddb_streams_source_0.1
+      labels:
+        - source
+    - id: aws_kinesis_sink_0.1
+      labels:
+        - sink
+    - id: aws_kinesis_source_0.1
+      labels:
+        - source
+    - id: aws_lambda_sink_0.1
+      labels:
+        - sink
+    - id: aws_s3_sink_0.1
+      labels:
+        - sink
+    - id: aws_s3_source_0.1
+      labels:
+        - source
+    - id: aws_ses_sink_0.1
+      labels:
+        - sink
+    - id: aws_sns_sink_0.1
+      labels:
+        - sink
+    - id: aws_sqs_sink_0.1
+      labels:
+        - sink
+    - id: aws_sqs_source_0.1
+      labels:
+        - source
+    - id: azure_eventhubs_sink_0.1
+      labels:
+        - sink
+    - id: azure_eventhubs_source_0.1
+      labels:
+        - source
+    - id: azure_functions_sink_0.1
+      labels:
+        - sink
+    - id: azure_storage_blob_changefeed_source_0.1
+      labels:
+        - source
+    - id: azure_storage_blob_sink_0.1
+      labels:
+        - sink
+    - id: azure_storage_blob_source_0.1
+      labels:
+        - source
+    - id: azure_storage_queue_sink_0.1
+      labels:
+        - sink
+    - id: azure_storage_queue_source_0.1
+      labels:
+        - source
+    - id: google_bigquery_sink_0.1
+      labels:
+        - sink
+    - id: google_functions_sink_0.1
+      labels:
+        - sink
+    - id: google_pubsub_sink_0.1
+      labels:
+        - sink
+    - id: google_pubsub_source_0.1
+      labels:
+        - source
+    - id: google_storage_sink_0.1
+      labels:
+        - sink
+    - id: google_storage_source_0.1
+      labels:
+        - source
+    - id: ansible_tower_job_template_launch_sink_0.1
+      labels:
+        - sink
+    - id: splunk_0.1
+      labels:
+        - sink
+    - id: http_sink_0.1
+      labels:
+        - sink
+    - id: jms_amqp_10_sink_0.1
+      labels:
+        - sink
+    - id: jms_amqp_10_source_0.1
+      labels:
+        - source
+    - id: jms_apache_artemis_sink_0.1
+      labels:
+        - sink
+    - id: jms_apache_artemis_source_0.1
+      labels:
+        - source
+    - id: rest_openapi_sink_0.1
+      labels:
+        - sink
+    - id: data_generator_source_0.1
+      labels:
+        - source
+    - id: cassandra_sink_0.1
+      labels:
+        - sink
+    - id: cassandra_source_0.1
+      labels:
+        - source
+    - id: elasticsearch_sink_0.1
+      labels:
+        - sink
+    - id: mongodb_sink_0.1
+      labels:
+        - sink
+    - id: mongodb_source_0.1
+      labels:
+        - source
+    - id: jira_add_comment_sink_0.1
+      labels:
+        - sink
+    - id: jira_add_issue_sink_0.1
+      labels:
+        - sink
+    - id: jira_source_0.1
+      labels:
+        - source
+    - id: salesforce_create_sink_0.1
+      labels:
+        - sink
+    - id: salesforce_delete_sink_0.1
+      labels:
+        - sink
+    - id: salesforce_streaming_source_0.1
+      labels:
+        - source
+    - id: salesforce_update_sink_0.1
+      labels:
+        - sink
+    - id: slack_sink_0.1
+      labels:
+        - sink
+    - id: slack_source_0.1
+      labels:
+        - source
+    - id: telegram_sink_0.1
+      labels:
+        - sink
+    - id: telegram_source_0.1
+      labels:
+        - source
+    - id: aws_redshift_sink_0.1
+      labels:
+        - sink
+    - id: aws_redshift_source_0.1
+      labels:
+        - source
+    - id: mariadb_sink_0.1
+      labels:
+        - sink
+    - id: mariadb_source_0.1
+      labels:
+        - source
+    - id: mysql_sink_0.1
+      labels:
+        - sink
+    - id: mysql_source_0.1
+      labels:
+        - source
+    - id: postgresql_sink_0.1
+      labels:
+        - sink
+    - id: postgresql_source_0.1
+      labels:
+        - source
+    - id: sqlserver_sink_0.1
+      labels:
+        - sink
+    - id: sqlserver_source_0.1
+      labels:
+        - source
+    - id: ftps_sink_0.1
+      labels:
+        - sink
+    - id: ftps_source_0.1
+      labels:
+        - source
+    - id: minio_sink_0.1
+      labels:
+        - sink
+    - id: minio_source_0.1
+      labels:
+        - source
+    - id: sftp_sink_0.1
+      labels:
+        - sink
+    - id: sftp_source_0.1
+      labels:
+        - source

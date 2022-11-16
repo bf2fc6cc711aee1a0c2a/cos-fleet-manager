@@ -498,6 +498,12 @@ objects:
           - name: connector-catalog-debezium-sqlserver
             configMap:
               name: connector-catalog-debezium-sqlserver
+          - name: connector-metadata-camel
+            configMap:
+              name: connector-metadata-camel
+          - name: connector-metadata-debezium
+            configMap:
+              name: connector-metadata-debezium
           - name: envoy-config
             configMap:
               name: cos-fleet-manager-envoy-config
@@ -583,6 +589,10 @@ objects:
               mountPath: /config/connector-catalog/debezium-postgres
             - name: connector-catalog-debezium-sqlserver
               mountPath: /config/connector-catalog/debezium-sqlserver
+            - name: connector-metadata-camel
+              mountPath: /config/connector-metadata/camel
+            - name: connector-metadata-debezium
+              mountPath: /config/connector-metadata/debezium
             env:
               - name: "OCM_ENV"
                 value: "${ENVIRONMENT}"
@@ -607,6 +617,8 @@ objects:
             - --connector-catalog=/config/connector-catalog/debezium-mysql
             - --connector-catalog=/config/connector-catalog/debezium-postgres
             - --connector-catalog=/config/connector-catalog/debezium-sqlserver
+            - --connector-metadata=/config/connector-metadata/camel
+            - --connector-metadata=/config/connector-metadata/debezium
             - --connector-enable-unassigned-connectors=${CONNECTOR_ENABLE_UNASSIGNED_CONNECTORS}
             - --connector-eval-duration=${CONNECTOR_EVAL_DURATION}
             - --connector-eval-organizations=${CONNECTOR_EVAL_ORGANIZATIONS}
