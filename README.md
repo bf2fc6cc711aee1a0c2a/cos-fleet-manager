@@ -86,6 +86,7 @@ A service for provisioning and managing fleets of connector instances.
     ```
     make db/setup && sleep 1 && make db/migrate
     ```
+   > **NOTE**: `make db/migrate` might fail with `SIGSEGV` if your environment points to minikube docker-env. Make sure you haven't run the command `eval $(minikube docker-env)`.
 9. (Optional) Verify tables and records are created
     ```
     make db/login
