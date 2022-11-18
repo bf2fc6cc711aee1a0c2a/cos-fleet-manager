@@ -27,7 +27,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1667981305470,
+      "iteration": 1668156474867,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -96,6 +96,35 @@ data:
                     }
                   }
                 ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Still Provisioning"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Immediately Deleted"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "fixed"
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -129,7 +158,7 @@ data:
               },
               "editorMode": "code",
               "expr": "count(cos_fleetshard_sync_connector_state) - count(cos_fleetshard_sync_connector_state offset $__range)",
-              "legendFormat": "Connectors Requested",
+              "legendFormat": "Connectors Created",
               "range": true,
               "refId": "A"
             },
@@ -156,6 +185,30 @@ data:
               "legendFormat": "Failed",
               "range": true,
               "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "count((min_over_time(cos_fleetshard_sync_connector_state[$__range]) == 3) unless cos_fleetshard_sync_connector_state offset $__range)",
+              "hide": false,
+              "legendFormat": "Immediately Deleted",
+              "range": true,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "count((min_over_time(cos_fleetshard_sync_connector_state[$__range]) == 5) unless cos_fleetshard_sync_connector_state offset $__range)",
+              "hide": false,
+              "legendFormat": "Still Provisioning",
+              "range": true,
+              "refId": "E"
             }
           ],
           "title": "Connectors Requested (selected time)",
@@ -308,17 +361,20 @@ data:
                 "displayMode": "auto",
                 "inspect": false
               },
+              "links": [
+                {
+                  "targetBlank": true,
+                  "title": "URL",
+                  "url": "/d/ov28Nbrnz/data-plane-cluster-view?orgId=1&${Datasource:queryparam}&var-cluster_id=${__data.fields.cluster_id}&var-namespace=All"
+                }
+              ],
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
+                    "color": "blue",
                     "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
                   }
                 ]
               }
@@ -1316,7 +1372,53 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Failed"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Inflight Currently"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -1607,7 +1709,7 @@ data:
       "timezone": "",
       "title": "Data Plane | Overview",
       "uid": "3lmqGVq7z",
-      "version": 2,
+      "version": 6,
       "weekStart": ""
     }
 kind: ConfigMap

@@ -30,6 +30,23 @@ This template deploys a simple postgresl-9.4 database deployment with a TLS-enab
 
 This template deploys the `cos-fleet-manager` secret with all of the necessary secret key/value pairs.
 
+## Connector Catalog templates
+
+`templates/cos-fleet-catalog-*.yaml`
+
+These template files are populated by the `fetch_catalogs.sh` script. These templates deploy config maps that contain json config for connector catalogs.
+
+These connector config maps are referenced via the command line option `--connector-catalog` in `service-template.yml`.
+
+## Connector Metadata templates
+
+`templates/connector-metadata-*-configmap.yaml`
+
+These template files deploy config maps that contain metadata configuration yaml files. The metadata in these templates is manually edited and maintained.
+The metadata must be kept in sync with the connector catalog to make sure every connector id has associated metadata and any deleted/renamed connector ids are also updated in the metadata config.
+
+These metadata config maps are referenced via the command line option `--connector-metadata` in `service-template.yml`.
+
 ## Envoy Config template
 
 `templates/envoy-config-template.yml`

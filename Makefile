@@ -420,6 +420,11 @@ deploy/envoy:
 	@oc apply -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
 .PHONY: deploy/envoy
 
+deploy/metadata:
+	@oc apply -f ./templates/connector-metadata-camel-configmap.yaml -n $(NAMESPACE)
+	@oc apply -f ./templates/connector-metadata-debezium-configmap.yaml -n $(NAMESPACE)
+.PHONY: deploy/metadata
+
 deploy/route:
 	@oc process -f ./templates/route-template.yml | oc apply -f - -n $(NAMESPACE)
 .PHONY: deploy/route
@@ -440,7 +445,7 @@ deploy: SERVICE_PUBLIC_HOST_URL ?= "https://api.openshift.com"
 deploy: REPLICAS ?= "1"
 deploy: ENABLE_DB_DEBUG ?= "false"
 deploy: deploy/db
-deploy: deploy/secrets deploy/envoy deploy/token-refresher deploy/route
+deploy: deploy/secrets deploy/envoy deploy/metadata deploy/token-refresher deploy/route
 	@oc process -f ./templates/connectors-quota-configuration.yml | oc apply -f - -n $(NAMESPACE)
 	@oc create -f ./templates/connector-catalog-configmap.yml -n $(NAMESPACE) || true
 	@oc process -f ./templates/service-template.yml \
@@ -486,6 +491,8 @@ undeploy:
 	@-oc process -f ./templates/secrets-template.yml | oc delete -f - -n $(NAMESPACE)
 	@-oc process -f ./templates/route-template.yml | oc delete -f - -n $(NAMESPACE)
 	@-oc delete -f ./templates/envoy-config-configmap.yml -n $(NAMESPACE)
+	@-oc delete -f ./templates/connector-metadata-camel-configmap.yml -n $(NAMESPACE)
+	@-oc delete -f ./templates/connector-metadata-debezium-configmap.yml -n $(NAMESPACE)
 	@-oc process -f ./templates/connectors-quota-configuration.yml | oc delete -f - -n $(NAMESPACE)
 	@-oc process -f ./templates/service-template.yml \
 		-p IMAGE_REGISTRY=$(IMAGE_REGISTRY) \
