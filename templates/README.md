@@ -40,7 +40,7 @@ These connector config maps are referenced via the command line option `--connec
 
 ## Connector Metadata templates
 
-`templates/connector-metadata-*-configmap.yaml`
+`templates/connector-metadata-*-template.yaml`
 
 These template files deploy config maps that contain metadata configuration yaml files. The metadata in these templates is manually edited and maintained.
 The metadata must be kept in sync with the connector catalog to make sure every connector id has associated metadata and any deleted/renamed connector ids are also updated in the metadata config.
