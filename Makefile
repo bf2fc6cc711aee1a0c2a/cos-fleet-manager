@@ -421,8 +421,8 @@ deploy/envoy:
 .PHONY: deploy/envoy
 
 deploy/metadata:
-	@oc apply -f ./templates/connector-metadata-camel-configmap.yaml -n $(NAMESPACE)
-	@oc apply -f ./templates/connector-metadata-debezium-configmap.yaml -n $(NAMESPACE)
+	@oc process -f ./templates/connector-metadata-camel-template.yaml | oc apply -f - -n $(NAMESPACE)
+	@oc process -f ./templates/connector-metadata-debezium-template.yaml | oc apply -f - -n $(NAMESPACE)
 .PHONY: deploy/metadata
 
 deploy/route:
