@@ -1,0 +1,52 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+name: connector-metadata-debezium
+metadata:
+  name: connector-metadata-debezium
+  annotations:
+    openshift.io/display-name: Cos Fleet Manager Debezium Connectors Metadata
+    description: List of available debezium connectors metadata
+objects:
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: connector-metadata-debezium
+      annotations:
+        qontract.recycle: "true"
+        openshift.io/display-name: Cos Fleet Manager Debezium Connectors Metadata
+        description: List of available debezium connectors metadata
+    data:
+      connector-metadata-debezium.yaml: |-
+        ---
+        - id: debezium-mongodb-1.9.6.Final
+          labels:
+            - source
+            - debezium
+            - mongodb
+            - 1.9.6.Final
+            - category-database
+            - category-change-data-capture
+        - id: debezium-mysql-1.9.6.Final
+          labels:
+            - source
+            - debezium
+            - mysql
+            - 1.9.6.Final
+            - category-database
+            - category-change-data-capture
+        - id: debezium-postgres-1.9.6.Final
+          labels:
+            - source
+            - debezium
+            - postgres
+            - 1.9.6.Final
+            - category-database
+            - category-change-data-capture
+        - id: debezium-sqlserver-1.9.6.Final
+          labels:
+            - source
+            - debezium
+            - sqlserver
+            - 1.9.6.Final
+            - category-database
+            - category-change-data-capture
