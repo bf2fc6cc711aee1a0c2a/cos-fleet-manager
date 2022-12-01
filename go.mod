@@ -3,7 +3,7 @@ module github.com/bf2fc6cc711aee1a0c2a/cos-fleet-manager
 go 1.19
 
 require (
-	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20221121181509-830200aad63f
+	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20221130233116-58d43369957d
 	github.com/golang/glog v1.0.0
 	github.com/onsi/gomega v1.24.1
 	github.com/spf13/cobra v1.6.1
@@ -12,7 +12,7 @@ require (
 require (
 	github.com/Nerzal/gocloak/v11 v11.2.0 // indirect
 	github.com/antihax/optional v1.0.0 // indirect
-	github.com/aws/aws-sdk-go v1.44.142 // indirect
+	github.com/aws/aws-sdk-go v1.44.146 // indirect
 	github.com/aws/aws-secretsmanager-caching-go v1.1.0 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -57,7 +57,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
-	github.com/openshift-online/ocm-sdk-go v0.1.293 // indirect
+	github.com/openshift-online/ocm-sdk-go v0.1.296 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
