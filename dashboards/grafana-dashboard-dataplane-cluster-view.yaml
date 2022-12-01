@@ -136,7 +136,7 @@ data:
                 "uid": "${Datasource}"
               },
               "editorMode": "code",
-              "expr": "count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}) - count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} offset $__range)",
+              "expr": "abs(count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"}) - count(cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\",cos_namespace=~\"$namespace\"} offset $__range))",
               "legendFormat": "Connectors Requested",
               "range": true,
               "refId": "A"
@@ -304,7 +304,7 @@ data:
           "options": {
             "colorMode": "value",
             "graphMode": "none",
-            "justifyMode": "auto",
+            "justifyMode": "center",
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
@@ -765,7 +765,7 @@ data:
           "options": {
             "colorMode": "value",
             "graphMode": "none",
-            "justifyMode": "auto",
+            "justifyMode": "center",
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
@@ -1565,6 +1565,557 @@ data:
             "type": "prometheus",
             "uid": "${Datasource}"
           },
+          "description": "Total, Filtered, and Erroneous events seen for the  Debezium Connectors",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Erroneous Events"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Filtered Events"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total Events Seen"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 11,
+            "x": 0,
+            "y": 52
+          },
+          "id": 57,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "center",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                  "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(debezium_metrics_TotalNumberOfEventsSeen{context=\"streaming\"}[$__range])) - sum(min_over_time(debezium_metrics_TotalNumberOfEventsSeen{context=\"streaming\"}[$__range]))",
+              "instant": true,
+              "legendFormat": "Total Events Seen",
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(debezium_metrics_NumberOfEventsFiltered{context=\"streaming\"}[$__range])) - sum(min_over_time(debezium_metrics_NumberOfEventsFiltered{context=\"streaming\"}[$__range]))",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Filtered Events",
+              "range": false,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(max_over_time(debezium_metrics_NumberOfErroneousEvents{context=\"streaming\"}[$__range])) - sum(min_over_time(debezium_metrics_NumberOfErroneousEvents{context=\"streaming\"}[$__range]))",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Erroneous Events",
+              "range": false,
+              "refId": "C"
+            }
+          ],
+          "title": "Debezium Event Count (selected time)",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "Percentage of events completed in the selected time range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 95
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 3,
+            "x": 11,
+            "y": 52
+          },
+          "id": 59,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                  "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "(\n( sum(max_over_time(debezium_metrics_TotalNumberOfEventsSeen{context=\"streaming\"}[$__range])) - sum(min_over_time(debezium_metrics_TotalNumberOfEventsSeen{context=\"streaming\"}[$__range])))\n/\n( sum(max_over_time(debezium_metrics_SnapshotDurationInSeconds{context=\"streaming\"}[$__range])) - sum(min_over_time(debezium_metrics_SnapshotDurationInSeconds{context=\"streaming\"}[$__range])))\n) \n* 100",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Debezium Events Processed (selected time)",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "The total number of events that this connector has seen since the last start or metrics reset",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "noValue": "-",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 10,
+            "x": 14,
+            "y": 52
+          },
+          "id": 61,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "expr": "sum(debezium_metrics_TotalNumberOfEventsSeen{context=\"streaming\"})",
+              "legendFormat": "Total Events Seen",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Number of Debezium Events",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "description": "Debezium connectors specifics and their respective state, Click on the Connector  ID to see that connector's detailed dashboard. Filter the column using the Filter option next to the column header.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "fixed"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "color-text",
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cluster_id"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Cluster"
+                  },
+                  {
+                    "id": "custom.displayMode",
+                    "value": "auto"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cos_namespace"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Namespace"
+                  },
+                  {
+                    "id": "custom.displayMode",
+                    "value": "auto"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cos_connector_id"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Connector ID"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "URL",
+                        "url": "/d/r7wVVJMVk/debezium-specific-connectors?orgId=1&${Datasource:queryparam}&var-cluster_id=${__data.fields.cluster_id}&var-namespace=${__data.fields.cos_namespace}&var-connector_id=${__data.fields.cos_connector_id}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cos_connector_type_id"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Connector Type"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cos_deployment_id"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Deployment ID"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Current State"
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "1": {
+                            "color": "green",
+                            "index": 0,
+                            "text": "Running"
+                          },
+                          "2": {
+                            "color": "red",
+                            "index": 1,
+                            "text": "Failed"
+                          },
+                          "3": {
+                            "index": 2,
+                            "text": "Deleted"
+                          },
+                          "4": {
+                            "color": "orange",
+                            "index": 3,
+                            "text": "Stoped"
+                          },
+                          "5": {
+                            "color": "yellow",
+                            "index": 4,
+                            "text": "Provisioning"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 58
+          },
+          "id": 55,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                  "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "Current State"
+              }
+            ]
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "cos_fleetshard_sync_connector_state{cluster_id=\"$cluster_id\", cos_connector_type_id=~\"debezium.*\", cos_namespace=~\"$namespace\"}",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${Datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "label_replace(debezium_metrics_Connected{cluster_id=\"$cluster_id\", namespace=~\"$namespace\"}, \"cos_connector_id\", \"$1\", \"connector_id\", \"(.*)\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "B"
+            }
+          ],
+          "title": "Debezium Connectors",
+          "transformations": [
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "cos_connector_id"
+              }
+            },
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                      "cluster_id",
+                      "cos_connector_id",
+                      "cos_connector_type_id",
+                      "cos_deployment_id",
+                      "cos_namespace",
+                      "Value"
+                  ]
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1619,7 +2170,7 @@ data:
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 52
+            "y": 64
           },
           "id": 20,
           "options": {
@@ -1655,7 +2206,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 59
+            "y": 71
           },
           "id": 4,
           "panels": [],
@@ -1723,7 +2274,7 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 60
+            "y": 72
           },
           "id": 2,
           "options": {
@@ -1829,7 +2380,7 @@ data:
             "h": 9,
             "w": 7,
             "x": 0,
-            "y": 68
+            "y": 80
           },
           "id": 28,
           "options": {
@@ -1935,7 +2486,7 @@ data:
             "h": 9,
             "w": 8,
             "x": 7,
-            "y": 68
+            "y": 80
           },
           "id": 29,
           "options": {
@@ -2041,7 +2592,7 @@ data:
             "h": 9,
             "w": 9,
             "x": 15,
-            "y": 68
+            "y": 80
           },
           "id": 34,
           "options": {
@@ -2159,7 +2710,7 @@ data:
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 77
+            "y": 89
           },
           "id": 30,
           "options": {
@@ -2253,7 +2804,7 @@ data:
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 77
+            "y": 89
           },
           "id": 31,
           "options": {
@@ -2373,7 +2924,7 @@ data:
       "timezone": "",
       "title": "Data Plane | Cluster view",
       "uid": "ov28Nbrnz",
-      "version": 5,
+      "version": 6,
       "weekStart": ""
     }
 kind: ConfigMap
