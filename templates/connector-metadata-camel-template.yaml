@@ -242,6 +242,7 @@ objects:
             - sink
             - category-developer-tools
             - category-integration-and-delivery
+            - category-featured
           annotations:
             cos.bf2.org/pricing-tier: essentials
         - id: jms_amqp_10_sink_0.1
@@ -281,6 +282,7 @@ objects:
           labels:
             - source
             - category-developer-tools
+            - category-featured
           annotations:
             cos.bf2.org/pricing-tier: free
         - id: cassandra_sink_0.1
@@ -366,6 +368,7 @@ objects:
           labels:
             - sink
             - category-streaming-and-messaging
+            - category-featured
           annotations:
             cos.bf2.org/pricing-tier: essentials
         - id: slack_source_0.1
@@ -373,6 +376,7 @@ objects:
           labels:
             - source
             - category-streaming-and-messaging
+            - category-featured
           annotations:
             cos.bf2.org/pricing-tier: essentials
         - id: telegram_sink_0.1
