@@ -23,6 +23,8 @@ objects:
             - sink
             - category-monitoring
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_ddb_sink_0.1
           labels:
             - sink
@@ -30,6 +32,8 @@ objects:
             - category-storage
             - category-streaming-and-messaging
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_ddb_streams_source_0.1
           labels:
             - source
@@ -37,23 +41,31 @@ objects:
             - category-storage
             - category-streaming-and-messaging
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_kinesis_sink_0.1
           labels:
             - sink
             - category-big-data
             - category-streaming-and-messaging
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_kinesis_source_0.1
           labels:
             - source
             - category-big-data
             - category-streaming-and-messaging
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_lambda_sink_0.1
           labels:
             - sink
             - category-serverless
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_s3_sink_0.1
           labels:
             - sink
@@ -61,6 +73,8 @@ objects:
             - category-database
             - category-storage
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_s3_source_0.1
           labels:
             - source
@@ -68,43 +82,59 @@ objects:
             - category-database
             - category-storage
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_ses_sink_0.1
           labels:
             - sink
             - category-streaming-and-messaging
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_sns_sink_0.1
           labels:
             - sink
             - category-streaming-and-messaging
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_sqs_sink_0.1
           labels:
             - sink
             - category-streaming-and-messaging
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_sqs_source_0.1
           labels:
             - source
             - category-streaming-and-messaging
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: azure_eventhubs_sink_0.1
           labels:
             - sink
             - category-integration-and-delivery
             - category-streaming-and-messaging
             - category-azure
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: azure_eventhubs_source_0.1
           labels:
             - source
             - category-integration-and-delivery
             - category-streaming-and-messaging
             - category-azure
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: azure_functions_sink_0.1
           labels:
             - sink
             - category-serverless
             - category-azure
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: azure_storage_blob_changefeed_source_0.1
           labels:
             - source
@@ -112,6 +142,8 @@ objects:
             - category-big-data
             - category-storage
             - category-azure
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: azure_storage_blob_sink_0.1
           labels:
             - sink
@@ -119,6 +151,8 @@ objects:
             - category-big-data
             - category-storage
             - category-azure
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: azure_storage_blob_source_0.1
           labels:
             - source
@@ -126,6 +160,8 @@ objects:
             - category-big-data
             - category-storage
             - category-azure
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: azure_storage_queue_sink_0.1
           labels:
             - sink
@@ -133,6 +169,8 @@ objects:
             - category-big-data
             - category-storage
             - category-azure
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: azure_storage_queue_source_0.1
           labels:
             - source
@@ -140,6 +178,8 @@ objects:
             - category-big-data
             - category-storage
             - category-azure
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: google_bigquery_sink_0.1
           labels:
             - sink
@@ -147,147 +187,215 @@ objects:
             - category-serverless
             - category-big-data
             - category-google
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: google_functions_sink_0.1
           labels:
             - sink
             - category-ai-machine-learning
             - category-google
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: google_pubsub_sink_0.1
           labels:
             - sink
             - category-streaming-and-messaging
             - category-google
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: google_pubsub_source_0.1
           labels:
             - source
             - category-streaming-and-messaging
             - category-google
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: google_storage_sink_0.1
           labels:
             - sink
             - category-big-data
             - category-storage
             - category-google
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: google_storage_source_0.1
           labels:
             - source
             - category-big-data
             - category-storage
             - category-google
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: ansible_tower_job_template_launch_sink_0.1
           labels:
             - sink
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: splunk_0.1
           labels:
             - sink
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: http_sink_0.1
           featured-rank: 10
           labels:
             - sink
             - category-developer-tools
             - category-integration-and-delivery
+            - category-featured
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: jms_amqp_10_sink_0.1
           labels:
             - sink
             - category-integration-and-delivery
             - category-streaming-and-messaging
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: jms_amqp_10_source_0.1
           labels:
             - source
             - category-integration-and-delivery
             - category-streaming-and-messaging
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: jms_apache_artemis_sink_0.1
           labels:
             - sink
             - category-streaming-and-messaging
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: jms_apache_artemis_source_0.1
           labels:
             - source
             - category-streaming-and-messaging
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: rest_openapi_sink_0.1
           labels:
             - sink
             - category-integration-and-delivery
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: data_generator_source_0.1
           featured-rank: 10
           labels:
             - source
             - category-developer-tools
+            - category-featured
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: cassandra_sink_0.1
           labels:
             - sink
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: cassandra_source_0.1
           labels:
             - source
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: elasticsearch_sink_0.1
           labels:
             - sink
             - category-big-data
             - category-database
             - category-logging
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: mongodb_sink_0.1
           labels:
             - sink
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: mongodb_source_0.1
           labels:
             - source
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: jira_add_comment_sink_0.1
           labels:
             - sink
             - category-integration-and-delivery
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: jira_add_issue_sink_0.1
           labels:
             - sink
             - category-integration-and-delivery
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: jira_source_0.1
           labels:
             - source
             - category-integration-and-delivery
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: salesforce_create_sink_0.1
           labels:
             - sink
             - category-crm
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: salesforce_delete_sink_0.1
           labels:
             - sink
             - category-crm
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: salesforce_streaming_source_0.1
           labels:
             - source
             - category-crm
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: salesforce_update_sink_0.1
           labels:
             - sink
             - category-crm
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: slack_sink_0.1
           featured-rank: 10
           labels:
             - sink
             - category-streaming-and-messaging
+            - category-featured
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: slack_source_0.1
           featured-rank: 10
           labels:
             - source
             - category-streaming-and-messaging
+            - category-featured
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: telegram_sink_0.1
           labels:
             - sink
             - category-streaming-and-messaging
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: telegram_source_0.1
           labels:
             - source
             - category-streaming-and-messaging
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: aws_redshift_sink_0.1
           labels:
             - sink
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: aws_redshift_source_0.1
           labels:
             - source
@@ -295,67 +403,97 @@ objects:
             - category-database
             - category-storage
             - category-amazon
+          annotations:
+            cos.bf2.org/pricing-tier: free
         - id: mariadb_sink_0.1
           labels:
             - sink
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: mariadb_source_0.1
           labels:
             - source
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: mysql_sink_0.1
           labels:
             - sink
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: mysql_source_0.1
           labels:
             - source
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: postgresql_sink_0.1
           labels:
             - sink
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: postgresql_source_0.1
           labels:
             - source
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: sqlserver_sink_0.1
           labels:
             - sink
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: sqlserver_source_0.1
           labels:
             - source
             - category-database
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: ftps_sink_0.1
           labels:
             - sink
             - category-integration-and-delivery
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: ftps_source_0.1
           labels:
             - source
             - category-integration-and-delivery
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: minio_sink_0.1
           labels:
             - sink
             - category-ai-machine-learning
             - category-database
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: minio_source_0.1
           labels:
             - source
             - category-ai-machine-learning
             - category-database
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: sftp_sink_0.1
           labels:
             - sink
             - category-integration-and-delivery
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
         - id: sftp_source_0.1
           labels:
             - source
             - category-integration-and-delivery
             - category-storage
+          annotations:
+            cos.bf2.org/pricing-tier: essentials
