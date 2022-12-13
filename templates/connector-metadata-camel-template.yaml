@@ -229,11 +229,15 @@ objects:
         - id: ansible_tower_job_template_launch_sink_0.1
           labels:
             - sink
+            - category-developer-tools
+            - category-integration-and-delivery
           annotations:
             cos.bf2.org/pricing-tier: essentials
         - id: splunk_0.1
           labels:
             - sink
+            - category-big-data
+            - category-monitoring
           annotations:
             cos.bf2.org/pricing-tier: essentials
         - id: http_sink_0.1
@@ -394,13 +398,17 @@ objects:
         - id: aws_redshift_sink_0.1
           labels:
             - sink
+            - category-ai-machine-learning
+            - category-big-data
+            - category-storage
+            - category-amazon
           annotations:
             cos.bf2.org/pricing-tier: free
         - id: aws_redshift_source_0.1
           labels:
             - source
             - category-ai-machine-learning
-            - category-database
+            - category-big-data
             - category-storage
             - category-amazon
           annotations:
