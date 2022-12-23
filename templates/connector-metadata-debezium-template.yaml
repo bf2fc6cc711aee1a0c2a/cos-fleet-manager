@@ -58,3 +58,43 @@ objects:
             - category-change-data-capture
           annotations:
             cos.bf2.org/pricing-tier: plus
+        - id: debezium-mongodb-2.0.1.Final
+          labels:
+            - source
+            - debezium
+            - mongodb
+            - 2.0.1.Final
+            - category-database
+            - category-change-data-capture
+          annotations:
+            cos.bf2.org/pricing-tier: plus
+        - id: debezium-mysql-2.0.1.Final
+          labels:
+            - source
+            - debezium
+            - mysql
+            - 2.0.1.Final
+            - category-database
+            - category-change-data-capture
+          annotations:
+            cos.bf2.org/pricing-tier: plus
+        - id: debezium-postgres-2.0.1.Final
+          labels:
+            - source
+            - debezium
+            - postgres
+            - 2.0.1.Final
+            - category-database
+            - category-change-data-capture
+          annotations:
+            cos.bf2.org/pricing-tier: plus
+        - id: debezium-sqlserver-2.0.1.Final
+          labels:
+            - source
+            - debezium
+            - sqlserver
+            - 2.0.1.Final
+            - category-database
+            - category-change-data-capture
+          annotations:
+            cos.bf2.org/pricing-tier: plus
