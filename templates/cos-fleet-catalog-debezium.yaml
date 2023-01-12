@@ -10,30 +10,30 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-mongodb-1.9.6.Final.json: |-
+    debezium-mongodb-2.0.1.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-mongodb-1.9.6.Final",
+          "id" : "debezium-mongodb",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mongodb-1.9.6.Final",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mongodb-2.0.1.Final",
           "name" : "Debezium MongoDB Connector",
-          "version" : "1.9.6.Final",
+          "version" : "2.0.1.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "mongodb", "1.9.6.Final" ],
+          "labels" : [ "source", "debezium", "mongodb", "2.0.1.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-mongodb-1.9.6.Final.png",
+          "icon_href" : "http://example.com/images/debezium-mongodb-2.0.1.Final.png",
           "schema" : {
             "title" : "Debezium MongoDB Connector",
-            "required" : [ "mongodb.name" ],
+            "required" : [ "topic.prefix" ],
             "type" : "object",
             "properties" : {
-              "mongodb.name" : {
-                "title" : "Namespace",
-                "description" : "Unique name that identifies the MongoDB replica set or cluster and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct MongoDB installation should have a separate namespace and monitored by at most one Debezium connector.",
+              "topic.prefix" : {
+                "title" : "Topic prefix",
+                "description" : "Topic prefix that identifies and provides a namespace for the particular database server/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
                 "type" : "string",
                 "nullable" : false,
-                "x-name" : "mongodb.name",
+                "x-name" : "topic.prefix",
                 "x-category" : "CONNECTION"
               },
               "mongodb.hosts" : {
@@ -132,7 +132,7 @@ objects:
               "query.fetch.size" : {
                 "format" : "int32",
                 "title" : "Query fetch size",
-                "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
+                "description" : "The maximum number of records that should be loaded into memory while streaming. A value of '0' uses the default JDBC fetch size.",
                 "default" : 0,
                 "type" : "integer",
                 "x-name" : "query.fetch.size",
@@ -179,7 +179,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "mongodb",
-            "x-version" : "1.9.6.Final",
+            "x-version" : "2.0.1.Final",
             "x-className" : "io.debezium.connector.mongodb.MongoDbConnector",
             "$defs" : {
               "serializer" : {
@@ -193,14 +193,14 @@ objects:
         "channels" : {
           "stable" : {
             "shard_metadata" : {
-              "connector_revision" : 1,
+              "connector_revision" : 2,
               "operators" : [ {
                 "type" : "debezium-connector-operator",
                 "version" : "[1.0.0,2.0.0)"
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.mongodb.MongoDbConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-mongodb@sha256:896e3093e647bd9985b8a9fe1ea64009fd77890b89417501ffada7af00cbd394"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-mongodb@sha256:343bb1f834d1a7424e1ff52f773bce77b1d0672724f005546d76c5b202e5b333"
             }
           }
         }
@@ -212,36 +212,36 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-mysql-1.9.6.Final.json: |-
+    debezium-mysql-2.0.1.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-mysql-1.9.6.Final",
+          "id" : "debezium-mysql",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mysql-1.9.6.Final",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-mysql-2.0.1.Final",
           "name" : "Debezium MySQL Connector",
-          "version" : "1.9.6.Final",
+          "version" : "2.0.1.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "mysql", "1.9.6.Final" ],
+          "labels" : [ "source", "debezium", "mysql", "2.0.1.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-mysql-1.9.6.Final.png",
+          "icon_href" : "http://example.com/images/debezium-mysql-2.0.1.Final.png",
           "schema" : {
             "title" : "Debezium MySQL Connector",
-            "required" : [ "database.hostname", "database.user", "database.server.name", "database.server.id" ],
+            "required" : [ "topic.prefix", "database.hostname", "database.user", "database.server.id" ],
             "type" : "object",
             "properties" : {
-              "database.server.name" : {
-                "title" : "Namespace",
-                "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
+              "topic.prefix" : {
+                "title" : "Topic prefix",
+                "description" : "Topic prefix that identifies and provides a namespace for the particular database server/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
                 "type" : "string",
                 "nullable" : false,
-                "x-name" : "database.server.name",
+                "x-name" : "topic.prefix",
                 "x-category" : "CONNECTION"
               },
               "database.server.id" : {
                 "format" : "int64",
                 "title" : "Cluster ID",
-                "description" : "A numeric ID of this database client, which must be unique across all currently running database processes in the cluster. This connector joins the MySQL database cluster as another server (with this unique ID) so it can read the binlog.",
+                "description" : "A numeric ID of this database client, which must be unique across all currently-running database processes in the cluster. This connector joins the MySQL database cluster as another server (with this unique ID) so it can read the binlog.",
                 "type" : "integer",
                 "nullable" : false,
                 "x-name" : "database.server.id",
@@ -347,7 +347,7 @@ objects:
               },
               "decimal.handling.mode" : {
                 "title" : "Decimal Handling",
-                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
+                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including: 'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
                 "default" : "precise",
                 "enum" : [ "string", "double", "precise" ],
                 "type" : "string",
@@ -356,7 +356,7 @@ objects:
               },
               "message.key.columns" : {
                 "title" : "Columns PK mapping",
-                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>', where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector, and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key. Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
                 "type" : "string",
                 "x-name" : "message.key.columns",
                 "x-category" : "CONNECTOR_ADVANCED"
@@ -364,7 +364,7 @@ objects:
               "query.fetch.size" : {
                 "format" : "int32",
                 "title" : "Query fetch size",
-                "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
+                "description" : "The maximum number of records that should be loaded into memory while streaming. A value of '0' uses the default JDBC fetch size.",
                 "default" : 0,
                 "type" : "integer",
                 "x-name" : "query.fetch.size",
@@ -411,7 +411,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "mysql",
-            "x-version" : "1.9.6.Final",
+            "x-version" : "2.0.1.Final",
             "x-className" : "io.debezium.connector.mysql.MySqlConnector",
             "$defs" : {
               "serializer" : {
@@ -425,14 +425,14 @@ objects:
         "channels" : {
           "stable" : {
             "shard_metadata" : {
-              "connector_revision" : 1,
+              "connector_revision" : 2,
               "operators" : [ {
                 "type" : "debezium-connector-operator",
                 "version" : "[1.0.0,2.0.0)"
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.mysql.MySqlConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-mysql@sha256:c7356abaf874518b608d5af456a5d89f6bd0fac28904104d91a6046a29b9bc8a"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-mysql@sha256:cda0265dcf72acf824542da5744f36877e09680af1f4ad2b1f2f1f2163765126"
             }
           }
         }
@@ -444,30 +444,30 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-postgres-1.9.6.Final.json: |-
+    debezium-postgres-2.0.1.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-postgres-1.9.6.Final",
+          "id" : "debezium-postgres",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-postgres-1.9.6.Final",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-postgres-2.0.1.Final",
           "name" : "Debezium PostgreSQL Connector",
-          "version" : "1.9.6.Final",
+          "version" : "2.0.1.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "postgres", "1.9.6.Final" ],
+          "labels" : [ "source", "debezium", "postgres", "2.0.1.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-postgres-1.9.6.Final.png",
+          "icon_href" : "http://example.com/images/debezium-postgres-2.0.1.Final.png",
           "schema" : {
             "title" : "Debezium PostgreSQL Connector",
-            "required" : [ "database.server.name", "database.hostname", "database.user", "database.dbname" ],
+            "required" : [ "topic.prefix", "database.hostname", "database.user", "database.dbname" ],
             "type" : "object",
             "properties" : {
-              "database.server.name" : {
-                "title" : "Namespace",
-                "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
+              "topic.prefix" : {
+                "title" : "Topic prefix",
+                "description" : "Topic prefix that identifies and provides a namespace for the particular database server/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
                 "type" : "string",
                 "nullable" : false,
-                "x-name" : "database.server.name",
+                "x-name" : "topic.prefix",
                 "x-category" : "CONNECTION"
               },
               "database.hostname" : {
@@ -521,7 +521,7 @@ objects:
               },
               "slot.name" : {
                 "title" : "Slot",
-                "description" : "The name of the Postgres logical decoding slot created for streaming changes from a plugin.Defaults to 'debezium",
+                "description" : "The name of the Postgres logical decoding slot created for streaming changes from a plugin. Defaults to 'debezium",
                 "default" : "debezium",
                 "type" : "string",
                 "x-name" : "slot.name",
@@ -529,7 +529,7 @@ objects:
               },
               "publication.name" : {
                 "title" : "Publication",
-                "description" : "The name of the Postgres 10+ publication used for streaming changes from a plugin.Defaults to 'dbz_publication'",
+                "description" : "The name of the Postgres 10+ publication used for streaming changes from a plugin. Defaults to 'dbz_publication'",
                 "default" : "dbz_publication",
                 "type" : "string",
                 "x-name" : "publication.name",
@@ -596,14 +596,14 @@ objects:
                 "title" : "Snapshot mode",
                 "description" : "The criteria for running a snapshot upon startup of the connector. Options include: 'always' to specify that the connector run a snapshot each time it starts up; 'initial' (the default) to specify the connector can run a snapshot only when no offsets are available for the logical server name; 'initial_only' same as 'initial' except the connector should stop after completing the snapshot and before it would normally start emitting changes;'never' to specify the connector should never run a snapshot and that upon first startup the connector should read from the last position (LSN) recorded by the server; and'exported' deprecated, use 'initial' instead; 'custom' to specify a custom class with 'snapshot.custom_class' which will be loaded and used to determine the snapshot, see docs for more details.",
                 "default" : "initial",
-                "enum" : [ "always", "exported", "never", "initial_only", "initial", "custom" ],
+                "enum" : [ "always", "never", "initial_only", "initial", "custom" ],
                 "type" : "string",
                 "x-name" : "snapshot.mode",
                 "x-category" : "CONNECTOR_SNAPSHOT"
               },
               "decimal.handling.mode" : {
                 "title" : "Decimal Handling",
-                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
+                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including: 'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
                 "default" : "precise",
                 "enum" : [ "string", "double", "precise" ],
                 "type" : "string",
@@ -612,7 +612,7 @@ objects:
               },
               "message.key.columns" : {
                 "title" : "Columns PK mapping",
-                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>', where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector, and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key. Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
                 "type" : "string",
                 "x-name" : "message.key.columns",
                 "x-category" : "CONNECTOR_ADVANCED"
@@ -620,7 +620,7 @@ objects:
               "query.fetch.size" : {
                 "format" : "int32",
                 "title" : "Query fetch size",
-                "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
+                "description" : "The maximum number of records that should be loaded into memory while streaming. A value of '0' uses the default JDBC fetch size.",
                 "default" : 0,
                 "type" : "integer",
                 "x-name" : "query.fetch.size",
@@ -667,7 +667,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "postgres",
-            "x-version" : "1.9.6.Final",
+            "x-version" : "2.0.1.Final",
             "x-className" : "io.debezium.connector.postgresql.PostgresConnector",
             "$defs" : {
               "serializer" : {
@@ -681,14 +681,14 @@ objects:
         "channels" : {
           "stable" : {
             "shard_metadata" : {
-              "connector_revision" : 1,
+              "connector_revision" : 2,
               "operators" : [ {
                 "type" : "debezium-connector-operator",
                 "version" : "[1.0.0,2.0.0)"
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.postgresql.PostgresConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-postgres@sha256:f99d7ba9b3c15a1d4fedfaa57874a3922e730af41c7cbd4508b50b4164b1139f"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-postgres@sha256:81b1354c9a52b604715507952929a794f46d391807437bc0bd4d31eaeeba9d2b"
             }
           }
         }
@@ -700,30 +700,30 @@ objects:
 -
   apiVersion: v1
   data:
-    debezium-sqlserver-1.9.6.Final.json: |-
+    debezium-sqlserver-2.0.1.Final.json: |-
       {
         "connector_type" : {
-          "id" : "debezium-sqlserver-1.9.6.Final",
+          "id" : "debezium-sqlserver",
           "kind" : "ConnectorType",
-          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-sqlserver-1.9.6.Final",
+          "href" : "/api/connector_mgmt/v1/kafka_connector_types/debezium-sqlserver-2.0.1.Final",
           "name" : "Debezium SQLServer Connector",
-          "version" : "1.9.6.Final",
+          "version" : "2.0.1.Final",
           "channels" : [ "stable" ],
           "description" : null,
-          "labels" : [ "source", "debezium", "sqlserver", "1.9.6.Final" ],
+          "labels" : [ "source", "debezium", "sqlserver", "2.0.1.Final" ],
           "capabilities" : [ "data_shape" ],
-          "icon_href" : "http://example.com/images/debezium-sqlserver-1.9.6.Final.png",
+          "icon_href" : "http://example.com/images/debezium-sqlserver-2.0.1.Final.png",
           "schema" : {
             "title" : "Debezium SQLServer Connector",
-            "required" : [ "database.server.name", "database.dbname", "database.hostname" ],
+            "required" : [ "topic.prefix", "database.hostname" ],
             "type" : "object",
             "properties" : {
-              "database.server.name" : {
-                "title" : "Namespace",
-                "description" : "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
+              "topic.prefix" : {
+                "title" : "Topic prefix",
+                "description" : "Topic prefix that identifies and provides a namespace for the particular database server/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
                 "type" : "string",
                 "nullable" : false,
-                "x-name" : "database.server.name",
+                "x-name" : "topic.prefix",
                 "x-category" : "CONNECTION"
               },
               "database.hostname" : {
@@ -764,14 +764,6 @@ objects:
                   "additionalProperties" : true
                 } ],
                 "x-name" : "database.password",
-                "x-category" : "CONNECTION"
-              },
-              "database.dbname" : {
-                "title" : "Database",
-                "description" : "The name of the database from which the connector should capture changes",
-                "type" : "string",
-                "nullable" : false,
-                "x-name" : "database.dbname",
                 "x-category" : "CONNECTION"
               },
               "table.include.list" : {
@@ -817,7 +809,7 @@ objects:
               },
               "decimal.handling.mode" : {
                 "title" : "Decimal Handling",
-                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
+                "description" : "Specify how DECIMAL and NUMERIC columns should be represented in change events, including: 'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
                 "default" : "precise",
                 "enum" : [ "string", "double", "precise" ],
                 "type" : "string",
@@ -826,7 +818,7 @@ objects:
               },
               "message.key.columns" : {
                 "title" : "Columns PK mapping",
-                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+                "description" : "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern '<fully-qualified table name>:<key columns>', where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector, and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key. Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
                 "type" : "string",
                 "x-name" : "message.key.columns",
                 "x-category" : "CONNECTOR_ADVANCED"
@@ -834,7 +826,7 @@ objects:
               "query.fetch.size" : {
                 "format" : "int32",
                 "title" : "Query fetch size",
-                "description" : "The maximum number of records that should be loaded into memory while streaming.  A value of `0` uses the default JDBC fetch size.",
+                "description" : "The maximum number of records that should be loaded into memory while streaming. A value of '0' uses the default JDBC fetch size.",
                 "default" : 0,
                 "type" : "integer",
                 "x-name" : "query.fetch.size",
@@ -881,7 +873,7 @@ objects:
             },
             "additionalProperties" : true,
             "x-connector-id" : "sqlserver",
-            "x-version" : "1.9.6.Final",
+            "x-version" : "2.0.1.Final",
             "x-className" : "io.debezium.connector.sqlserver.SqlServerConnector",
             "$defs" : {
               "serializer" : {
@@ -895,14 +887,14 @@ objects:
         "channels" : {
           "stable" : {
             "shard_metadata" : {
-              "connector_revision" : 1,
+              "connector_revision" : 2,
               "operators" : [ {
                 "type" : "debezium-connector-operator",
                 "version" : "[1.0.0,2.0.0)"
               } ],
               "connector_type" : "source",
               "connector_class" : "io.debezium.connector.sqlserver.SqlServerConnector",
-              "container_image" : "quay.io/rhoas/cos-connector-debezium-sqlserver@sha256:d0eff3cd5cc28b48ae7b93b7ccab95754e9e9508d1ac514185d328b333d78ce3"
+              "container_image" : "quay.io/rhoas/cos-connector-debezium-sqlserver@sha256:7537bf11243ff83c5d650b0421b294a71fa81a270c41da81315f1c405aede7c7"
             }
           }
         }
