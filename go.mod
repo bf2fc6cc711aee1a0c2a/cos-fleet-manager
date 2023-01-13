@@ -3,7 +3,7 @@ module github.com/bf2fc6cc711aee1a0c2a/cos-fleet-manager
 go 1.19
 
 require (
-	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230112131150-97b4c7771bed
+	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230113180219-e060e085f597
 	github.com/golang/glog v1.0.0
 	github.com/onsi/gomega v1.24.2
 	github.com/spf13/cobra v1.6.1
