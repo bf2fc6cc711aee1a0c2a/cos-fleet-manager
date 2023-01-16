@@ -18,42 +18,38 @@ objects:
     data:
       connector-metadata-debezium.yaml: |-
         ---
-        - id: debezium-mongodb-1.9.6.Final
+        - id: debezium-mongodb
           labels:
             - source
             - debezium
             - mongodb
-            - 1.9.6.Final
             - category-database
             - category-change-data-capture
           annotations:
             cos.bf2.org/pricing-tier: plus
-        - id: debezium-mysql-1.9.6.Final
+        - id: debezium-mysql
           labels:
             - source
             - debezium
             - mysql
-            - 1.9.6.Final
             - category-database
             - category-change-data-capture
           annotations:
             cos.bf2.org/pricing-tier: plus
-        - id: debezium-postgres-1.9.6.Final
+        - id: debezium-postgres
           labels:
             - source
             - debezium
             - postgres
-            - 1.9.6.Final
             - category-database
             - category-change-data-capture
           annotations:
             cos.bf2.org/pricing-tier: plus
-        - id: debezium-sqlserver-1.9.6.Final
+        - id: debezium-sqlserver
           labels:
             - source
             - debezium
             - sqlserver
-            - 1.9.6.Final
             - category-database
             - category-change-data-capture
           annotations:
