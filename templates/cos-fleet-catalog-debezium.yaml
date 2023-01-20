@@ -459,7 +459,7 @@ objects:
           "icon_href" : "http://example.com/images/debezium-postgres-2.0.1.Final.png",
           "schema" : {
             "title" : "Debezium PostgreSQL Connector",
-            "required" : [ "topic.prefix", "database.hostname", "database.user", "database.dbname" ],
+            "required" : [ "topic.prefix", "database.hostname", "database.user" ],
             "type" : "object",
             "properties" : {
               "topic.prefix" : {
@@ -509,14 +509,6 @@ objects:
                   "additionalProperties" : true
                 } ],
                 "x-name" : "database.password",
-                "x-category" : "CONNECTION"
-              },
-              "database.dbname" : {
-                "title" : "Database",
-                "description" : "The name of the database from which the connector should capture changes",
-                "type" : "string",
-                "nullable" : false,
-                "x-name" : "database.dbname",
                 "x-category" : "CONNECTION"
               },
               "slot.name" : {
@@ -764,6 +756,14 @@ objects:
                   "additionalProperties" : true
                 } ],
                 "x-name" : "database.password",
+                "x-category" : "CONNECTION"
+              },
+              "database.names" : {
+                "format" : "list,regex",
+                "title" : "Databases",
+                "description" : "The names of the databases from which the connector should capture changes",
+                "type" : "string",
+                "x-name" : "database.names",
                 "x-category" : "CONNECTION"
               },
               "table.include.list" : {
