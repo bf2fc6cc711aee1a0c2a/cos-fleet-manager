@@ -64,8 +64,8 @@ github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24
 github.com/beorn7/perks v1.0.0/go.mod h1:KWe93zE9D1o94FZ5RNwFwVgaQK1VOXiVxmqh+CedLV8=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
-github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230119172541-bd122a2006ad h1:wpMGfqykg9bTWZqr3O8cQMvNsta0T2fVQQTgL/Fm+5Y=
-github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230119172541-bd122a2006ad/go.mod h1:r9zWJH/3fwIoF8NUnkV8uKhYInM+q0o0om6UT7L3NE4=
+github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230120171214-d0c418df2eee h1:JyODgN2ssImkQK037S0qjaxZQseeF/MP2LcvlCGYCRQ=
+github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230120171214-d0c418df2eee/go.mod h1:r9zWJH/3fwIoF8NUnkV8uKhYInM+q0o0om6UT7L3NE4=
 github.com/blang/semver/v4 v4.0.0 h1:1PFHFE6yCCTv8C1TeyNNarDzntLi7wMI5i/pzqYIsAM=
 github.com/blang/semver/v4 v4.0.0/go.mod h1:IbckMUScFkM3pff0VJDNKRiT6TG/YpiHIM2yvyW5YoQ=
 github.com/cenkalti/backoff/v4 v4.1.3 h1:cFAlzYUlVYDysBEH2T5hyJZMh3+5+WCBvSnK6Q8UtC4=
