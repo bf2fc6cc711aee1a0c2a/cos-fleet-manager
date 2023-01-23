@@ -135,15 +135,6 @@ objects:
             - category-azure
           annotations:
             cos.bf2.org/pricing-tier: free
-        - id: azure_storage_blob_changefeed_source_0.1
-          labels:
-            - source
-            - category-ai-machine-learning
-            - category-big-data
-            - category-storage
-            - category-azure
-          annotations:
-            cos.bf2.org/pricing-tier: free
         - id: azure_storage_blob_sink_0.1
           labels:
             - sink
@@ -226,13 +217,6 @@ objects:
             - category-google
           annotations:
             cos.bf2.org/pricing-tier: free
-        - id: ansible_tower_job_template_launch_sink_0.1
-          labels:
-            - sink
-            - category-developer-tools
-            - category-integration-and-delivery
-          annotations:
-            cos.bf2.org/pricing-tier: essentials
         - id: splunk_0.1
           labels:
             - sink
@@ -273,12 +257,6 @@ objects:
           labels:
             - source
             - category-streaming-and-messaging
-          annotations:
-            cos.bf2.org/pricing-tier: essentials
-        - id: rest_openapi_sink_0.1
-          labels:
-            - sink
-            - category-integration-and-delivery
           annotations:
             cos.bf2.org/pricing-tier: essentials
         - id: data_generator_source_0.1

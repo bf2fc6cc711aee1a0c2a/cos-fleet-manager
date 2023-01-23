@@ -3,7 +3,7 @@ module github.com/bf2fc6cc711aee1a0c2a/cos-fleet-manager
 go 1.19
 
 require (
-	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230116111827-c902a9ad86dd
+	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230120171214-d0c418df2eee
 	github.com/golang/glog v1.0.0
 	github.com/onsi/gomega v1.24.2
 	github.com/spf13/cobra v1.6.1
@@ -50,7 +50,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/lib/pq v1.10.7 // indirect
-	github.com/looplab/fsm v0.3.0 // indirect
+	github.com/looplab/fsm v1.0.0 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.21 // indirect
