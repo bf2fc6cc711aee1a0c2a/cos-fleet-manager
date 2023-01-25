@@ -6585,8 +6585,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:main-ef5397983139e073f946d06d951355c3ab88e942",
-              "connector_revision" : 82,
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:main-d3d3b4ea87321f820b4f0331399e5ad5d055dd8c",
+              "connector_revision" : 83,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6786,14 +6786,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:main-ef5397983139e073f946d06d951355c3ab88e942",
-              "connector_revision" : 82,
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:main-d3d3b4ea87321f820b4f0331399e5ad5d055dd8c",
+              "connector_revision" : 83,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "mongodb-source",
+                  "name" : "cos-mongodb-source",
                   "prefix" : "mongodb"
                 },
                 "kafka" : {
@@ -6852,6 +6852,18 @@ objects:
                 "description" : "The username for accessing MongoDB. The username must be present in the MongoDB's authentication database (`authenticationDatabase`). By default, the MongoDB `authenticationDatabase` is 'admin'.",
                 "type" : "string",
                 "x-group" : "credentials"
+              },
+              "mongodb_ssl" : {
+                "title" : "Enable ssl for mongodb connection",
+                "description" : "whether to enable ssl connection to mongodb",
+                "type" : "boolean",
+                "default" : true
+              },
+              "mongodb_ssl_validation_enabled" : {
+                "title" : "Enables ssl certificates validation and host name checks.",
+                "description" : "IMPORTANT this should be disabled only in test environment since can pose security issues.",
+                "type" : "boolean",
+                "default" : true
               },
               "mongodb_database" : {
                 "title" : "MongoDB Database",
