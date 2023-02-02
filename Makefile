@@ -245,7 +245,7 @@ db/setup:
 		-e POSTGRES_USER=$(shell cat secrets/db.user) \
 		-e POSTGRES_DB=$(shell cat secrets/db.name) \
 		-p $(shell cat secrets/db.port):5432 \
-		-d postgres:13
+		-d postgres:12.13
 .PHONY: db/setup
 
 db/teardown:
