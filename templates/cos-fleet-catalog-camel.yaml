@@ -3764,8 +3764,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-bigquery:main-a438d578f6cd28b824263faee25fa851cda5b6b6",
-              "connector_revision" : 81,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-bigquery:main-b60802c58569e6890bb3a4d184773467d3ac80c0",
+              "connector_revision" : 82,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -3825,9 +3825,8 @@ objects:
                   "type" : "string",
                   "format" : "password"
                 }, {
-                  "description" : "An opaque reference to the aws_access_key",
-                  "type" : "object",
-                  "additionalProperties" : false
+                  "description" : "An opaque reference to the gcp_service_account_key",
+                  "type" : "object"
                 } ]
               },
               "kafka_topic" : {
@@ -3936,8 +3935,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:main-a438d578f6cd28b824263faee25fa851cda5b6b6",
-              "connector_revision" : 81,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:main-b60802c58569e6890bb3a4d184773467d3ac80c0",
+              "connector_revision" : 82,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3997,9 +3996,8 @@ objects:
                   "type" : "string",
                   "format" : "password"
                 }, {
-                  "description" : "An opaque reference to the aws_access_key",
-                  "type" : "object",
-                  "additionalProperties" : false
+                  "description" : "An opaque reference to the gcp_service_account_key",
+                  "type" : "object"
                 } ]
               },
               "kafka_topic" : {
@@ -4108,8 +4106,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:main-a438d578f6cd28b824263faee25fa851cda5b6b6",
-              "connector_revision" : 81,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:main-b60802c58569e6890bb3a4d184773467d3ac80c0",
+              "connector_revision" : 82,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4164,9 +4162,8 @@ objects:
                   "type" : "string",
                   "format" : "password"
                 }, {
-                  "description" : "An opaque reference to the aws_access_key",
-                  "type" : "object",
-                  "additionalProperties" : false
+                  "description" : "An opaque reference to the gcp_service_account_key",
+                  "type" : "object"
                 } ]
               },
               "kafka_topic" : {
@@ -4275,8 +4272,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:main-a438d578f6cd28b824263faee25fa851cda5b6b6",
-              "connector_revision" : 81,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:main-b60802c58569e6890bb3a4d184773467d3ac80c0",
+              "connector_revision" : 82,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4331,9 +4328,8 @@ objects:
                   "type" : "string",
                   "format" : "password"
                 }, {
-                  "description" : "An opaque reference to the aws_access_key",
-                  "type" : "object",
-                  "additionalProperties" : false
+                  "description" : "An opaque reference to the gcp_service_account_key",
+                  "type" : "object"
                 } ]
               },
               "gcp_synchronous_pull" : {
@@ -4460,8 +4456,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:main-a438d578f6cd28b824263faee25fa851cda5b6b6",
-              "connector_revision" : 81,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:main-b60802c58569e6890bb3a4d184773467d3ac80c0",
+              "connector_revision" : 82,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4511,9 +4507,8 @@ objects:
                   "type" : "string",
                   "format" : "password"
                 }, {
-                  "description" : "An opaque reference to the aws_access_key",
-                  "type" : "object",
-                  "additionalProperties" : false
+                  "description" : "An opaque reference to the gcp_service_account_key",
+                  "type" : "object"
                 } ]
               },
               "gcp_auto_create_bucket" : {
@@ -4628,8 +4623,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:main-a438d578f6cd28b824263faee25fa851cda5b6b6",
-              "connector_revision" : 81,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:main-b60802c58569e6890bb3a4d184773467d3ac80c0",
+              "connector_revision" : 82,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -4679,9 +4674,8 @@ objects:
                   "type" : "string",
                   "format" : "password"
                 }, {
-                  "description" : "An opaque reference to the aws_access_key",
-                  "type" : "object",
-                  "additionalProperties" : false
+                  "description" : "An opaque reference to the gcp_service_account_key",
+                  "type" : "object"
                 } ]
               },
               "gcp_delete_after_read" : {
