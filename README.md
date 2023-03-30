@@ -213,6 +213,7 @@ make deploy OCM_SERVICE_TOKEN=<offline-token> IMAGE_TAG=<image-tag>
 - `CONNECTOR_EVAL_ORGANIZATIONS`: Organization IDs for clusters to be used to create evaluation namespaces
 - `CONNECTOR_NAMESPACE_LIFECYCLE_API`: Enable support for public APIs to create and delete non-evaluation namespaces
 - `CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE`: Name of quota profile for evaluation namespaces
+- `CONNECTORS_SUPPORTED_CHANNELS`: Connector channels that are visible, default is all channels
 - `STRIMZI_OPERATOR_ADDON_ID`: The id of the Strimzi operator addon.
 
 The service can be accessed by via the host of the route created by the service deployment.

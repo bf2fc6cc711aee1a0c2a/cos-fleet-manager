@@ -344,6 +344,11 @@ parameters:
   description: Name of quota profile for evaluation namespaces
   value: "evaluation-profile"
 
+- name: CONNECTORS_SUPPORTED_CHANNELS
+  displayName: Connectors Supported Channels
+  description: Connector channels that are visible, default is all channels
+  value: ""
+
 objects:
   - kind: ConfigMap
     apiVersion: v1
@@ -625,6 +630,7 @@ objects:
             - --connector-namespace-lifecycle-api=${CONNECTOR_NAMESPACE_LIFECYCLE_API}
             - --connectors-eval-namespace-quota-profile=${CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE}
             - --connectors-quota-config-file=/config/connectors-quota/connectors-quota-configuration.yaml
+            - --connectors-supported-channels=${CONNECTORS_SUPPORTED_CHANNELS}
             - --db-host-file=/secrets/rds/db.host
             - --db-port-file=/secrets/rds/db.port
             - --db-user-file=/secrets/rds/db.user
