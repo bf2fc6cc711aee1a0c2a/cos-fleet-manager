@@ -150,6 +150,7 @@ jobs:
           CONNECTOR_EVAL_DURATION: ${{ secrets.CONNECTOR_EVAL_DURATION }}
           CONNECTOR_NAMESPACE_LIFECYCLE_API: ${{ secrets.CONNECTOR_NAMESPACE_LIFECYCLE_API }}
           CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE: ${{ secrets.CONNECTORS_EVAL_NAMESPACE_QUOTA_PROFILE }}
+          CONNECTORS_SUPPORTED_CHANNELS: ""
         run: |
           make deploy
           oc rollout restart deployment/cos-fleet-manager
