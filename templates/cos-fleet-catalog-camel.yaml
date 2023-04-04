@@ -20,14 +20,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-cloudwatch:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-cloudwatch:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-cloudwatch-sink",
+                  "name" : "cos-aws-cloudwatch-sink",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -55,7 +55,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_cw_namespace", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_cw_namespace", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_cw_namespace" : {
                 "title" : "Cloud Watch Namespace",
@@ -213,8 +213,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -248,7 +248,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_table", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_table", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_table" : {
                 "title" : "Table",
@@ -413,14 +413,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb-streams:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ddb-streams:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-ddb-streams-source",
+                  "name" : "cos-aws-ddb-streams-source",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -448,7 +448,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_table", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_table", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_table" : {
                 "title" : "Table",
@@ -618,14 +618,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-kinesis-sink",
+                  "name" : "cos-aws-kinesis-sink",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -653,7 +653,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_stream", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_stream", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_stream" : {
                 "title" : "Stream Name",
@@ -827,14 +827,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-kinesis:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-kinesis-source",
+                  "name" : "cos-aws-kinesis-source",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -862,7 +862,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_stream", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_stream", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_stream" : {
                 "title" : "Stream Name",
@@ -1042,14 +1042,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-lambda:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-lambda:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-lambda-sink",
+                  "name" : "cos-aws-lambda-sink",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -1077,7 +1077,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_function", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_function", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_function" : {
                 "title" : "Function Name",
@@ -1224,14 +1224,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-s3-sink",
+                  "name" : "cos-aws-s3-sink",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -1259,7 +1259,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_bucket_name_or_arn", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_bucket_name_or_arn", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_bucket_name_or_arn" : {
                 "title" : "Bucket Name",
@@ -1428,8 +1428,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-s3:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -1463,7 +1463,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_bucket_name_or_arn", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_bucket_name_or_arn", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_bucket_name_or_arn" : {
                 "title" : "Bucket Name",
@@ -1651,14 +1651,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-ses:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-ses:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-ses-sink",
+                  "name" : "cos-aws-ses-sink",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -1686,7 +1686,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_from", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_from", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_from" : {
                 "title" : "From",
@@ -1834,14 +1834,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sns:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sns:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-sns-sink",
+                  "name" : "cos-aws-sns-sink",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -1869,7 +1869,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_topic_name_or_arn", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_topic_name_or_arn", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_topic_name_or_arn" : {
                 "title" : "Topic Name",
@@ -2033,14 +2033,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-sqs-sink",
+                  "name" : "cos-aws-sqs-sink",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -2068,7 +2068,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_queue_name_or_arn", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_queue_name_or_arn", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_queue_name_or_arn" : {
                 "title" : "Queue Name",
@@ -2245,14 +2245,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-sqs:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-sqs-source",
+                  "name" : "cos-aws-sqs-source",
                   "prefix" : "aws"
                 },
                 "kafka" : {
@@ -2280,7 +2280,7 @@ objects:
           "schema" : {
             "type" : "object",
             "additionalProperties" : false,
-            "required" : [ "aws_queue_name_or_arn", "aws_region", "kafka_topic", "aws_access_key", "aws_secret_key" ],
+            "required" : [ "aws_access_key", "aws_secret_key", "aws_queue_name_or_arn", "aws_region", "kafka_topic" ],
             "properties" : {
               "aws_queue_name_or_arn" : {
                 "title" : "Queue Name",
@@ -2481,8 +2481,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 89,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 90,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2654,8 +2654,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 89,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-eventhubs:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 90,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -2867,8 +2867,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-functions:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 89,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-functions:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 90,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3038,8 +3038,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 89,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 90,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3206,8 +3206,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 89,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-blob:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 90,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3386,14 +3386,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 89,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 90,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "azure-storage-queue-sink",
+                  "name" : "cos-azure-storage-queue-sink",
                   "prefix" : "azure"
                 },
                 "kafka" : {
@@ -3554,14 +3554,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 89,
+              "connector_image" : "quay.io/rhoas/cos-connector-azure-storage-queue:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 90,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "azure-storage-queue-source",
+                  "name" : "cos-azure-storage-queue-source",
                   "prefix" : "azure"
                 },
                 "kafka" : {
@@ -3735,14 +3735,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-bigquery:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-bigquery:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "google-bigquery-sink",
+                  "name" : "cos-google-bigquery-sink",
                   "prefix" : "gcp"
                 },
                 "kafka" : {
@@ -3793,11 +3793,11 @@ objects:
                 "oneOf" : [ {
                   "title" : "Service Account Key",
                   "description" : "The service account key to use as credentials for the BigQuery Service. You must encode this value in base64.",
-                  "type" : "string",
                   "format" : "password"
                 }, {
                   "description" : "An opaque reference to the gcp_service_account_key",
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : { }
                 } ]
               },
               "kafka_topic" : {
@@ -3906,8 +3906,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-functions:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -3964,11 +3964,11 @@ objects:
                 "oneOf" : [ {
                   "title" : "Service Account Key",
                   "description" : "The path to the service account key file that provides credentials for the Google Cloud Functions platform.",
-                  "type" : "string",
                   "format" : "password"
                 }, {
                   "description" : "An opaque reference to the gcp_service_account_key",
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : { }
                 } ]
               },
               "kafka_topic" : {
@@ -4077,14 +4077,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "google-pubsub-sink",
+                  "name" : "cos-google-pubsub-sink",
                   "prefix" : "gcp"
                 },
                 "kafka" : {
@@ -4130,11 +4130,11 @@ objects:
                 "oneOf" : [ {
                   "title" : "Service Account Key",
                   "description" : "The service account key to use as credentials for the Pub/Sub publisher/subscriber. You must encode this value in base64.",
-                  "type" : "string",
                   "format" : "password"
                 }, {
                   "description" : "An opaque reference to the gcp_service_account_key",
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : { }
                 } ]
               },
               "kafka_topic" : {
@@ -4243,14 +4243,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-pubsub:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "google-pubsub-source",
+                  "name" : "cos-google-pubsub-source",
                   "prefix" : "gcp"
                 },
                 "kafka" : {
@@ -4296,11 +4296,11 @@ objects:
                 "oneOf" : [ {
                   "title" : "Service Account Key",
                   "description" : "The service account key to use as credentials for the Pub/Sub publisher/subscriber. You must encode this value in base64.",
-                  "type" : "string",
                   "format" : "password"
                 }, {
                   "description" : "An opaque reference to the gcp_service_account_key",
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : { }
                 } ]
               },
               "gcp_synchronous_pull" : {
@@ -4427,14 +4427,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "google-storage-sink",
+                  "name" : "cos-google-storage-sink",
                   "prefix" : "gcp"
                 },
                 "kafka" : {
@@ -4475,11 +4475,11 @@ objects:
                 "oneOf" : [ {
                   "title" : "Service Account Key",
                   "description" : "The service account key to use as credentials for Google Cloud Storage access. You must encode this value in base64.",
-                  "type" : "string",
                   "format" : "password"
                 }, {
                   "description" : "An opaque reference to the gcp_service_account_key",
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : { }
                 } ]
               },
               "gcp_auto_create_bucket" : {
@@ -4594,14 +4594,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-google-storage:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "google-storage-source",
+                  "name" : "cos-google-storage-source",
                   "prefix" : "gcp"
                 },
                 "kafka" : {
@@ -4642,11 +4642,11 @@ objects:
                 "oneOf" : [ {
                   "title" : "Service Account Key",
                   "description" : "The service account key to use as credentials for Google Cloud Storage access. You must encode this value in base64.",
-                  "type" : "string",
                   "format" : "password"
                 }, {
                   "description" : "An opaque reference to the gcp_service_account_key",
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : { }
                 } ]
               },
               "gcp_delete_after_read" : {
@@ -4774,14 +4774,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-splunk:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-splunk:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "splunk-sink",
+                  "name" : "cos-splunk-sink",
                   "prefix" : "splunk"
                 },
                 "kafka" : {
@@ -4995,8 +4995,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-http:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-http:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -5152,14 +5152,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "jms-amqp-10-sink",
+                  "name" : "cos-jms-amqp-10-sink",
                   "prefix" : "jms_amqp"
                 },
                 "kafka" : {
@@ -5312,14 +5312,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-amqp-10:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "jms-amqp-10-source",
+                  "name" : "cos-jms-amqp-10-source",
                   "prefix" : "jms_amqp"
                 },
                 "kafka" : {
@@ -5472,14 +5472,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "jms-apache-artemis-sink",
+                  "name" : "cos-jms-apache-artemis-sink",
                   "prefix" : "jms_artemis"
                 },
                 "kafka" : {
@@ -5633,14 +5633,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-jms-apache-artemis:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "jms-apache-artemis-source",
+                  "name" : "cos-jms-apache-artemis-source",
                   "prefix" : "jms_artemis"
                 },
                 "kafka" : {
@@ -5800,14 +5800,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-data-generator:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-data-generator:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "timer-source",
+                  "name" : "cos-data-generator-source",
                   "prefix" : "timer"
                 },
                 "kafka" : {
@@ -5968,8 +5968,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6167,8 +6167,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-cassandra:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6366,14 +6366,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-elasticsearch:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-elasticsearch:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "elasticsearch-index-sink",
+                  "name" : "cos-elasticsearch-index-sink",
                   "prefix" : "elasticsearch"
                 },
                 "kafka" : {
@@ -6553,8 +6553,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6754,8 +6754,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-mongodb:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -6962,14 +6962,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jira:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-jira:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "jira-add-comment-sink",
+                  "name" : "cos-jira-add-comment-sink",
                   "prefix" : "jira"
                 },
                 "kafka" : {
@@ -7131,14 +7131,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jira:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-jira:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "jira-add-issue-sink",
+                  "name" : "cos-jira-add-issue-sink",
                   "prefix" : "jira"
                 },
                 "kafka" : {
@@ -7300,14 +7300,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-jira:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-jira:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "jira-source",
+                  "name" : "cos-jira-source",
                   "prefix" : "jira"
                 },
                 "kafka" : {
@@ -7475,14 +7475,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "salesforce-create-sink",
+                  "name" : "cos-salesforce-create-sink",
                   "prefix" : "salesforce"
                 },
                 "kafka" : {
@@ -7670,14 +7670,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "salesforce-delete-sink",
+                  "name" : "cos-salesforce-delete-sink",
                   "prefix" : "salesforce"
                 },
                 "kafka" : {
@@ -7859,8 +7859,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8053,14 +8053,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-salesforce:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "salesforce-update-sink",
+                  "name" : "cos-salesforce-update-sink",
                   "prefix" : "salesforce"
                 },
                 "kafka" : {
@@ -8260,14 +8260,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-slack:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-slack:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "slack-sink",
+                  "name" : "cos-slack-sink",
                   "prefix" : "slack"
                 },
                 "kafka" : {
@@ -8438,8 +8438,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-slack:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 86,
+              "connector_image" : "quay.io/rhoas/cos-connector-slack:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 87,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -8608,14 +8608,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-telegram:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-telegram:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "telegram-sink",
+                  "name" : "cos-telegram-sink",
                   "prefix" : "telegram"
                 },
                 "kafka" : {
@@ -8770,14 +8770,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-telegram:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-telegram:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "telegram-source",
+                  "name" : "cos-telegram-source",
                   "prefix" : "telegram"
                 },
                 "kafka" : {
@@ -8934,14 +8934,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-redshift-sink",
+                  "name" : "cos-aws-redshift-sink",
                   "prefix" : "sql"
                 },
                 "kafka" : {
@@ -9120,14 +9120,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-aws-redshift:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "aws-redshift-source",
+                  "name" : "cos-aws-redshift-source",
                   "prefix" : "sql"
                 },
                 "kafka" : {
@@ -9318,14 +9318,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "mariadb-sink",
+                  "name" : "cos-mariadb-sink",
                   "prefix" : "db"
                 },
                 "kafka" : {
@@ -9504,14 +9504,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-mariadb:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "mariadb-source",
+                  "name" : "cos-mariadb-source",
                   "prefix" : "db"
                 },
                 "kafka" : {
@@ -9696,14 +9696,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mysql:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-mysql:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "mysql-sink",
+                  "name" : "cos-mysql-sink",
                   "prefix" : "db"
                 },
                 "kafka" : {
@@ -9882,14 +9882,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-mysql:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-mysql:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "mysql-source",
+                  "name" : "cos-mysql-source",
                   "prefix" : "db"
                 },
                 "kafka" : {
@@ -10074,14 +10074,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "postgresql-sink",
+                  "name" : "cos-postgresql-sink",
                   "prefix" : "db"
                 },
                 "kafka" : {
@@ -10260,14 +10260,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-postgresql:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "postgresql-source",
+                  "name" : "cos-postgresql-source",
                   "prefix" : "db"
                 },
                 "kafka" : {
@@ -10452,8 +10452,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "sink",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10650,8 +10650,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 85,
+              "connector_image" : "quay.io/rhoas/cos-connector-sqlserver:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 86,
               "connector_type" : "source",
               "consumes" : "application/json",
               "error_handler_strategy" : "stop",
@@ -10861,8 +10861,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ftps:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-ftps:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -11065,8 +11065,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-ftps:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-ftps:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -11274,14 +11274,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-minio:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-minio:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "minio-sink",
+                  "name" : "cos-minio-sink",
                   "prefix" : "minio"
                 },
                 "kafka" : {
@@ -11462,14 +11462,14 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-minio:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-minio:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
               "kamelets" : {
                 "adapter" : {
-                  "name" : "minio-source",
+                  "name" : "cos-minio-source",
                   "prefix" : "minio"
                 },
                 "kafka" : {
@@ -11656,8 +11656,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sftp:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-sftp:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "sink",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
@@ -11860,8 +11860,8 @@ objects:
                 "trait.camel.apache.org/container.request-memory" : "128M",
                 "trait.camel.apache.org/deployment.progress-deadline-seconds" : "30"
               },
-              "connector_image" : "quay.io/rhoas/cos-connector-sftp:main-2640a57a8f405483261d0f1d4ac1a035f5ff978b",
-              "connector_revision" : 87,
+              "connector_image" : "quay.io/rhoas/cos-connector-sftp:main-1e334780eb3a4197768b6bf7184a578eca43258c",
+              "connector_revision" : 88,
               "connector_type" : "source",
               "consumes" : "application/octet-stream",
               "error_handler_strategy" : "stop",
