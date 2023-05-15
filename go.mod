@@ -3,7 +3,7 @@ module github.com/bf2fc6cc711aee1a0c2a/cos-fleet-manager
 go 1.19
 
 require (
-	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230417113850-0cfd412e2314
+	github.com/bf2fc6cc711aee1a0c2a/kas-fleet-manager v0.0.0-20230515084102-d537424537fb
 	github.com/golang/glog v1.1.1
 	github.com/onsi/gomega v1.27.6
 	github.com/spf13/cobra v1.7.0
@@ -12,14 +12,14 @@ require (
 require (
 	github.com/Nerzal/gocloak/v11 v11.2.0 // indirect
 	github.com/antihax/optional v1.0.0 // indirect
-	github.com/aws/aws-sdk-go v1.44.239 // indirect
+	github.com/aws/aws-sdk-go v1.44.253 // indirect
 	github.com/aws/aws-secretsmanager-caching-go v1.1.0 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.1.3 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
-	github.com/docker/distribution v2.8.1+incompatible // indirect
+	github.com/docker/distribution v2.8.2+incompatible // indirect
 	github.com/docker/go-healthcheck v0.1.0 // indirect
 	github.com/dustinkirkland/golang-petname v0.0.0-20191129215211-8e5a1ed0cff0 // indirect
 	github.com/evanphx/json-patch v5.6.0+incompatible // indirect
