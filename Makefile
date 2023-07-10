@@ -1,6 +1,7 @@
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 PROJECT_PATH := $(patsubst %/,%,$(dir $(MKFILE_PATH)))
 DOCS_DIR := $(PROJECT_PATH)/docs
+OCP_TEMPLATES_DIR :=$(PROJECT_PATH)/templates
 
 .DEFAULT_GOAL := help
 SHELL = bash
@@ -105,6 +106,8 @@ else
         PGHOST:="172.18.0.22"
 endif
 
+OC ?= oc
+
 ### Environment-sourced variables with defaults
 # Can be overriden by setting environment var before running
 # Example:
@@ -137,26 +140,29 @@ help:
 	@echo ""
 	@echo "Kafka Service Fleet Manager make targets"
 	@echo ""
-	@echo "make verify               	verify source code"
-	@echo "make lint                 	run golangci-lint"
-	@echo "make binary               	compile binaries"
-	@echo "make install              	compile binaries and install in GOPATH bin"
-	@echo "make run                  	run the application"
-	@echo "make test                 	run unit tests"
-	@echo "make code/fix             	format files"
-	@echo "make image                	build docker image"
-	@echo "make push                 	push docker image"
-	@echo "make project              	create and use the cos-fleet-manager project"
-	@echo "make clean                	delete temporary generated files"
-	@echo "make setup/git/hooks      	setup git hooks"
-	@echo "make keycloak/setup     	    setup mas sso clientId, clientSecret & crt"
-	@echo "make redhatsso/setup         setup redhat sso clientId, clientSecret & crt"
-	@echo "make kafkacert/setup         setup the kafka certificate used for Kafka Brokers"
-	@echo "make observatorium/setup     setup observatorium secret used by CI"
-	@echo "make docker/login/internal	login to an openshift cluster image registry"
-	@echo "make image/build/push/internal  build and push image to an openshift cluster image registry."
-	@echo "make deploy               	deploy the service via templates to an openshift cluster"
-	@echo "make undeploy             	remove the service deployments from an openshift cluster"
+	@echo "make verify                                             verify source code"
+	@echo "make lint                                               run golangci-lint"
+	@echo "make binary                                             compile binaries"
+	@echo "make install                                            compile binaries and install in GOPATH bin"
+	@echo "make run                                                run the application"
+	@echo "make test                                               run unit tests"
+	@echo "make code/fix                                           format files"
+	@echo "make image                                              build docker image"
+	@echo "make push                                               push docker image"
+	@echo "make project                                            create and use the cos-fleet-manager project"
+	@echo "make clean                                              delete temporary generated files"
+	@echo "make setup/git/hooks                                    setup git hooks"
+	@echo "make keycloak/setup                                     setup mas sso clientId, clientSecret & crt"
+	@echo "make redhatsso/setup                                    setup redhat sso clientId, clientSecret & crt"
+	@echo "make kafkacert/setup                                    setup the kafka certificate used for Kafka Brokers"
+	@echo "make observatorium/setup                                setup observatorium secret used by CI"
+	@echo "make docker/login/internal                              login to an openshift cluster image registry"
+	@echo "make image/build/push/internal                          build and push image to an openshift cluster image registry."
+	@echo "make deploy                                             deploy the service via templates to an openshift cluster"
+	@echo "make deploy/observability-remote-write-proxy            deploys an Observability Remote Write Proxy on an OpenShift cluster"
+	@echo "make deploy/observability-remote-write-proxy/secrets    setup and deploy the needed secrets for Observability Remote Write Proxy"
+	@echo "make deploy/observability-remote-write-proxy/route      deploys the OCP Route used for Observability Remote Write Proxy access"
+	@echo "make undeploy                                           remove the service deployments from an openshift cluster"
 	@echo "$(fake)"
 .PHONY: help
 
@@ -386,6 +392,37 @@ deploy/token-refresher:
 		-p OBSERVATORIUM_TOKEN_REFRESHER_IMAGE_TAG=${OBSERVATORIUM_TOKEN_REFRESHER_IMAGE_TAG} \
 		 | oc apply -f - -n $(NAMESPACE)
 .PHONY: deploy/token-refresher
+
+deploy/observability-remote-write-proxy/route:
+	@$(OC) process -f $(OCP_TEMPLATES_DIR)/observability-remote-write-proxy-route.yml | $(OC) apply -f - -n $(NAMESPACE)
+
+deploy/observability-remote-write-proxy/secrets: OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_CONFIG_FILEPATH ?= ""
+deploy/observability-remote-write-proxy/secrets:
+	@if [ -z "$(OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_CONFIG_FILEPATH)" ]; then echo "OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_CONFIG_FILEPATH is required"; exit 1; fi
+	@if [ ! -f $(OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_CONFIG_FILEPATH) ]; then echo "'${OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_CONFIG_FILEPATH}' file cannot be found"; exit 1; fi
+
+	@$(OC) process -f $(OCP_TEMPLATES_DIR)/observability-remote-write-proxy-oidc-secret.yml \
+	-p OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_CONFIG="$(shell cat $(OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_CONFIG_FILEPATH) | base64 -w 0)" \
+	| $(OC) apply -f - -n $(NAMESPACE)
+.PHONY: deploy/observability-remote-write-proxy
+
+deploy/observability-remote-write-proxy: OBSERVABILITY_REMOTE_WRITE_PROXY_FORWARD_URL ?= ""
+deploy/observability-remote-write-proxy: OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_ENABLED ?= "true"
+deploy/observability-remote-write-proxy: OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_URL ?= ""
+deploy/observability-remote-write-proxy: OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_ENABLED ?= "true"
+deploy/observability-remote-write-proxy: OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_SERVICE_SERVING_CA_ENABLED ?= "false"
+deploy/observability-remote-write-proxy:
+	@if [ -z "$(OBSERVABILITY_REMOTE_WRITE_PROXY_FORWARD_URL)" ]; then echo "OBSERVABILITY_REMOTE_WRITE_PROXY_FORWARD_URL is required"; exit 1; fi
+	@if [ ! -z "$(OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_ENABLED)" ] && [ "$(OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_ENABLED)" == "true" ] && [ -z "$(OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_URL)" ]; then echo "OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_URL is required"; exit 1; fi
+
+	@-$(OC) process -f $(OCP_TEMPLATES_DIR)/observability-remote-write-proxy.yml \
+		-p OBSERVABILITY_REMOTE_WRITE_PROXY_FORWARD_URL=${OBSERVABILITY_REMOTE_WRITE_PROXY_FORWARD_URL} \
+		-p OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_ENABLED=${OBSERVABILITY_REMOTE_WRITE_PROXY_OIDC_ENABLED} \
+		-p OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_ENABLED=${OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_ENABLED} \
+		-p OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_URL=${OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_URL} \
+		-p OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_SERVICE_SERVING_CA_ENABLED=${OBSERVABILITY_REMOTE_WRITE_PROXY_TOKEN_VERIFICATION_SERVICE_SERVING_CA_ENABLED} \
+		 | $(OC) apply -f - -n $(NAMESPACE)
+.PHONY: deploy/observability-remote-write-proxy
 
 # deploys the secrets required by the service to an OpenShift cluster
 deploy/secrets:
